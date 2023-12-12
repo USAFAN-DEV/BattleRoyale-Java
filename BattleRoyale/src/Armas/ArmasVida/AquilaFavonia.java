@@ -2,9 +2,9 @@ package Armas.ArmasVida;
 
 import Armas.Armas;
 
-public class SkywardBlade extends Armas{
+public class AquilaFavonia extends Armas{
     
-    public SkywardBlade(){
+    public AquilaFavonia(){
 
         super(20, 0.50, "VidaPorcentual", 5);
 
