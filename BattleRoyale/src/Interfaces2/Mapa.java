@@ -3,7 +3,7 @@ package Interfaces2;
 import javax.swing.JPanel;
 import java.awt.*;
 import Personaje.Jugador;
-import Personaje.PersonajeDefensa.YunJin;
+//import Personaje.PersonajeDefensa.YunJin;
 import Personaje.PersonajeDefensa.Zhongli;
 
 public class Mapa extends JPanel implements Runnable{

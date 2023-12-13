@@ -254,4 +254,5 @@ public class Jugador {
         g2.drawImage(characterImage, x, y, mapa.CuadriculaSizeEscalada, mapa.CuadriculaSizeEscalada, null);
 
     }
+
 }
