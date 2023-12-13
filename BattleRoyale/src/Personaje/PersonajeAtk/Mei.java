@@ -6,7 +6,7 @@ import java.util.Random;
 public class Mei extends Jugador{
     //rellenamos los datos del perseonaje correspondiendo con su tipo y el nombre
     public Mei(){
-        super(100,100,25,0,100,0.5,0.25,"Atk","Mei","Musou Shinsetsu");
+        super(100,100,25,0,100,0.5,0.25,"Atk","Raiden Mei","Musou Shinsetsu");
     }
     public void usarHabilidad(Jugador equipoEnemigo[],int indiceJugador){
         Random random=new Random();

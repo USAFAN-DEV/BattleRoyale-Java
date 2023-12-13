@@ -15,6 +15,6 @@ public class YunJin extends Jugador{
         }
     }
     public void descripcionHabilidad(){
-        System.out.printf("",);
+        System.out.println("Nanosexo");
     }
 }
