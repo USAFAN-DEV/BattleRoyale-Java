@@ -53,7 +53,6 @@ public class Zhongli extends Jugador{
         try {
 
             System.out.println("Image loading started");
-<<<<<<< HEAD
             characterImage = ImageIO.read(new File("BattleRoyale/images/player/zhongli.png"));
             /* 
             up2 = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\boy_up_2.png"));
@@ -64,9 +63,6 @@ public class Zhongli extends Jugador{
             right1 = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\boy_right_1.png"));
             right2 = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\boy_right_2.png"));
             */
-=======
-            characterImage = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.png"));
->>>>>>> f4c29817219f248e2a80b758d255c30bd804364a
             System.out.println("Image loading ended");
 
         } catch (IOException e) {
