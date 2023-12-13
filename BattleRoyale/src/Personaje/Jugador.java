@@ -37,7 +37,7 @@ public class Jugador {
     //Declaracion atributos para el mapa
     int x, y, speed;
 
-    //KeyHandler: movimiento personaje
+    //KeyHandler: movimiento personaje y Mapa. Se declaran en los hijos
     protected Mapa mapa;
     protected KeyHandler keyHandler;
 
@@ -83,11 +83,6 @@ public class Jugador {
     
     //declaracion de getters y setter de cada uno de los atributos de la clase Jugador
 
-    public void setX(int x){
-
-        this.x = x;
-
-    }
     //Arma 
     public void setArma(Armas arma){
         this.arma=arma;
@@ -167,36 +162,69 @@ public class Jugador {
     public String getTipo(){
         return this.tipo;
     }
-    
-    
+
+    //Atributos para el mapa
+    public void setX(int x){
+        this.x = x;
+    }
+    public void setY(int y){
+        this.y = y;
+    }
+    public void setSpeed(int speed){
+        this.speed = speed;
+    }
+    public int getX(){
+        return this.x;
+    }
+    public int getY(){
+        return this.y;
+    }
+    public int getSpeed(){
+        return this.speed;
+    }
     
     //METODOS
 
     //sube de nivel la habilidad y cada vez que se aumenta, aumenta la estadistica de la habilidad.
     public int aumentarNivelHabilidad(){
+
         int resultado=0;
+
         if(getNivelHabilidad()<3){
+
             setNivelHabilidad(getNivelHabilidad()+1);
             setEstadisticaHabilidad(getEstadisticaHabilidad()+0.05);
+
         }
+
         else{
+
             resultado=1;
+
         }
+
         return resultado;
     }
 
     public void descripcionHabilidad(){
        
     }
+
+    public void getPlayerImage(){
+
+
+    }
     
     //Print de las estadisticas 
     public void imprimeInfo(){
+
         System.out.printf("%s: Personaje de tipo %s\n", getNombre(), getTipo());
         System.out.printf("Estadísticas:\n\tVida: %d\n\tVida Maxima: %d\n\tAtaque: %d\n\tEscudo: %d\n\tEscudo Maximo: %d\n\tCritRate: %.2f", getVida(), getVidaMaxima(), getAtk(), getEscudo(), getEscudoMaximo(), getCrit());
         System.out.printf("\nHabilidad: %s\n\tNivel: %d\n\t",getNombreHabilidad(), getNivelHabilidad());
         descripcionHabilidad();
         getArma().imprimeInfo();
         System.out.println();
+
     }
    
     public void update(){
