@@ -1,13 +1,14 @@
-package Interfaces2;
-
 import javax.swing.JFrame;
+
+import Interfaces2.Mapa;
+
 
 public class Main {
     
     public static void main(String[] args) {
         
         JFrame window = new JFrame();
-        Ciudad interfaz = new Ciudad();
+        Mapa interfaz = new Mapa();
         window.add(interfaz);
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Para que cuando el usuario le de a la x se cierre la ventana
@@ -20,9 +21,6 @@ public class Main {
         window.setVisible(true);
 
         interfaz.startGameThread();
-
-        
-        
 
     }
 }

@@ -2,14 +2,19 @@ package Interfaces2;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import Personaje.Jugador;
+import Personaje.PersonajeDefensa.YunJin;
+import Personaje.PersonajeDefensa.Zhongli;
 
-public class Ciudad extends JPanel implements Runnable{
+public class Mapa extends JPanel implements Runnable{
+
+    //array jugadores en el mapa
     
     //Constantes
     final int CuadriculaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
     final int escala = 3; 
 
-    final int CuadriculaSizeEscalada = CuadriculaSize * escala; //Asi los personajes son 48x48
+    public final int CuadriculaSizeEscalada = CuadriculaSize * escala; //Asi los personajes son 48x48
     final int maxInterfazColumnas = 20;
     final int maxInterfazFilas = 15; //Ratio 4x3;
     final int maxInterfazWidht = CuadriculaSizeEscalada * maxInterfazColumnas; //48 * 20 = 960pixels
@@ -21,14 +26,12 @@ public class Ciudad extends JPanel implements Runnable{
 
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
+    Jugador player1 = new Zhongli(this, keyHandler);
+    //Jugador player2 = new YunJin(this, keyHandler);
+    
+    
 
-    //Posicion default del personaje
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
-
-
-    public Ciudad(){
+    public Mapa(){
 
         this.setPreferredSize(new Dimension(maxInterfazWidht, maxInterfazHeight));
         this.setBackground(Color.black);
@@ -87,26 +90,8 @@ public class Ciudad extends JPanel implements Runnable{
 
     public void update(){
 
-        if(keyHandler.PressedUp == true){
-
-            playerY -= playerSpeed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
-        }
-        else if(keyHandler.PressedLeft == true){
-
-            playerX -= playerSpeed;
-
-        }
-        else if(keyHandler.PressedDown == true){
-
-            playerY += playerSpeed;
-
-        }
-        else if(keyHandler.PressedRight == true){
- 
-            playerX += playerSpeed;
-
-        }
-
+        player1.update();
+        //player2.update(keyHandler);
 
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
@@ -114,8 +99,10 @@ public class Ciudad extends JPanel implements Runnable{
         super.paintComponent(g); //Pintar en el parent class (JPanel)
 
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
-        g2.setColor(Color.white);
-        g2.fillRect(playerX, playerY, CuadriculaSizeEscalada, CuadriculaSizeEscalada);
+
+        player1.draw(g2);
+        //player2.draw(g2);
+        
         g2.dispose();
     }
 
