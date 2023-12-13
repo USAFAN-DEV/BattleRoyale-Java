@@ -68,7 +68,7 @@ public class Mapa extends JPanel implements Runnable{
 
             if(delta >= 1){ //Si la diferencia entre currentTime(Tiempo actual) y lastTime(tiempo antes de que se ejecutara el anterior update() y repaint()), es decir el tiempo que ha pasado desde la ultima vez que actualizamos y dibujamos la informacion, supera o iguala el drawInterval, podemos volvemos a ejecutar update() y repaint()
 
-                 //Actualizar: actualizar informacion como la posicion del personaje
+                //Actualizar: actualizar informacion como la posicion del personaje
                 update();
                 //Dibujar: dibujar la informacion actualizada
                 repaint();

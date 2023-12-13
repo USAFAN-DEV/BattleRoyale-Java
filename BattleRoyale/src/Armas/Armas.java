@@ -29,63 +29,39 @@ public abstract class Armas {
 
     //Setters y getters
     public void setStatPrincipal(int statPrincipal){
-
         this.statPrincipal = statPrincipal;
-
     }
     public int getStatPrincipal(){
-
         return this.statPrincipal;
-
     }
     public String getTipoStatPrincipal(){
-
         return this.tipoStatPrincipal;
-
     }
     public void setStatSecundaria(double statSecundaria){
-
         this.statSecundaria = statSecundaria;
-
     }
     public double getStatSecundaria(){
-
         return this.statSecundaria;
-
     }
     public void setTipoStatSecundaria(String tipoStatSecundaria){
-
         this.tipoStatSecundaria = tipoStatSecundaria;
-
     }
     public String getTipoStatSecundaria(){
-
         return this.tipoStatSecundaria;
-
     }
     public int getEstrellasArma(){
-
         return this.estrellasArma;
-
     }
     public void setEstrellasArma(int estrellasArma){
-
         this.estrellasArma = estrellasArma;
-
     }
     public void setNombreArma(String nombreArma){
-
         this.nombreArma = nombreArma;
-
     }
     public String getNombreArma(){
-
         return this.nombreArma;
-
     }
    
-    
-
     //Metodos
     public void imprimeInfo(){
 
