@@ -18,35 +18,36 @@ public class Jugador {
     //declaracion de los getters y setter, y ToString method
     public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad){
         setVida(vida);
+        setVidaMaxima(vidaMaxima);
         setAtk(atk);
         setCrit(crit);
         setEscudo(escudo);
+        setEscudoMaximo(escudoMaximo);
         setNombre(nombre);
         setEstadisticaHabilidad(estadisticaHabilidad);
         setTipo(tipo);
-        setNombre(nombre);
         this.nombreHabilidad=nombreHabilidad;
         arma=null;
         setNivelHabilidad(1);;
     }
     //declaracion de getters y setter de cada uno de los atributos de la clase Jugador
     public int getVida(){
-        return vida;
+        return this.vida;
     }
     public int getVidaMaxima(){
-        return vidaMaxima;
+        return this.vidaMaxima;
     }
     public int getAtk(){
-        return atk;
+        return this.atk;
     }
     public int getEscudo(){
-        return escudo;
+        return this.escudo;
     }
     public int getEscudoMaximo(){
-        return escudoMaximo;
+        return this.escudoMaximo;
     }
     public double getCrit(){
-        return crit;
+        return this.crit;
     }
     public void setVida(int vida){
         this.vida=vida;
@@ -76,28 +77,28 @@ public class Jugador {
         this.nombre=nombre;
     }
     public String getNombre(){
-        return nombre;
+        return this.nombre;
     }
     public void setTipo(String tipo){
         this.tipo=tipo;
     }
     public String getTipo(){
-        return tipo;
+        return this.tipo;
     }
     public void setNivelHabilidad(int nivelHabilidad){
         this.nivelHabilidad=nivelHabilidad;
     }
     public int getNivelHabilidad(){
-        return nivelHabilidad;
+        return this.nivelHabilidad;
     }
     public String getNombreHabilidad(){
-        return nombreHabilidad;
+        return this.nombreHabilidad;
     }
     public void setArma(Armas arma){
         this.arma=arma;
     }
     public Armas getArma(){
-        return arma;
+        return this.arma;
     }
     //sube de nivel la habilidad y cada vez que se aumenta, aumenta la estadistica de la habilidad.
     public int aumentarNivelHabilidad(){
@@ -111,11 +112,19 @@ public class Jugador {
         }
         return resultado;
     }
+
+    public void descripcionHabilidad(){
+       
+    }
+    
     //Print de las estadisticas 
     public void imprimeInfo(){
-        System.out.println("Print de los datos");
-        System.out.printf("El nombre del jugador es %s y tiene tipo %s y su estadisitica de habilidad es %.2f\n",getNombre(),getTipo(),getEstadisticaHabilidad());
-        arma.imprimeInfo();
+        System.out.printf("%s: Personaje de tipo %s\n", getNombre(), getTipo());
+        System.out.printf("Estadísticas:\n\tVida: %d\n\tVida Maxima: %d\n\tAtaque: %d\n\tEscudo: %d\n\tEscudo Maximo: %d\n\tCritRate: %.2f", getVida(), getVidaMaxima(), getAtk(), getEscudo(), getEscudoMaximo(), getCrit());
+        System.out.printf("\nHabilidad: %s\n\tNivel: %d\n\t",getNombreHabilidad(), getNivelHabilidad());
+        descripcionHabilidad();
+        getArma().imprimeInfo();
+        System.out.println();
     }
    
 }
