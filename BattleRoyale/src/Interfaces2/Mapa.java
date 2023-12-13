@@ -5,25 +5,27 @@ import java.awt.*;
 import Personaje.Jugador;
 //import Personaje.PersonajeDefensa.YunJin;
 import Personaje.PersonajeDefensa.Zhongli;
+import Texturas.AdministradorDeCasillas;
 
 public class Mapa extends JPanel implements Runnable{
 
     //array jugadores en el mapa
     
     //Constantes
-    final int CuadriculaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
+    final int CasillaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
     final int escala = 3; 
 
-    public final int CuadriculaSizeEscalada = CuadriculaSize * escala; //Asi los personajes son 48x48
-    final int maxInterfazColumnas = 20;
-    final int maxInterfazFilas = 15; //Ratio 4x3;
-    final int maxInterfazWidht = CuadriculaSizeEscalada * maxInterfazColumnas; //48 * 20 = 960pixels
-    final int maxInterfazHeight = CuadriculaSizeEscalada * maxInterfazFilas; //48 * 15 = 720pixels
+    public final int CasillaSizeEscalada = CasillaSize * escala; //Asi los personajes son 48x48
+    public final int maxMapaColumnas = 20;
+    public final int maxMapaFilas = 15; //Ratio 4x3;
+    public final int maxMapaWidht = CasillaSizeEscalada * maxMapaColumnas; //48 * 20 = 960pixels
+    public final int maxMapaHeight = CasillaSizeEscalada * maxMapaFilas; //48 * 15 = 720pixels
 
     //FPS (Frames per second)
 
     int FPS = 60;
 
+    AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     Jugador player1 = new Zhongli(this, keyHandler);
@@ -33,7 +35,7 @@ public class Mapa extends JPanel implements Runnable{
 
     public Mapa(){
 
-        this.setPreferredSize(new Dimension(maxInterfazWidht, maxInterfazHeight));
+        this.setPreferredSize(new Dimension(maxMapaWidht, maxMapaHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); //Mejora el rendimiento de la renderizacion del juego
         this.addKeyListener(keyHandler); //Anadimos el keyListener
@@ -100,6 +102,7 @@ public class Mapa extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
+        administradorC.draw(g2);
         player1.draw(g2);
         //player2.draw(g2);
         

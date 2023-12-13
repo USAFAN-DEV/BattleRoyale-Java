@@ -3,8 +3,7 @@ package Personaje;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-
-import Armas.Armas;
+import Herramientas.Armas;
 import Interfaces2.Mapa;
 import Interfaces2.KeyHandler;
 
@@ -258,7 +257,7 @@ public class Jugador {
     public void draw(Graphics2D g2){
 
         //g2.setColor(Color.white);
-        //g2.fillRect(x, y, mapa.CuadriculaSizeEscalada, mapa.CuadriculaSizeEscalada);
+        //g2.fillRect(x, y, mapa.CasillaSizeEscalada, mapa.CasillaSizeEscalada);
 
         //BufferedImage image = null;
 
@@ -279,7 +278,7 @@ public class Jugador {
                 break;
         }*/
 
-        g2.drawImage(characterImage, x, y, mapa.CuadriculaSizeEscalada, mapa.CuadriculaSizeEscalada, null);
+        g2.drawImage(characterImage, x, y, mapa.CasillaSizeEscalada, mapa.CasillaSizeEscalada, null);
 
     }
 
