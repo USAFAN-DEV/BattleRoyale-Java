@@ -1,5 +1,5 @@
 package Combate;
 
-public class Vida {
+public class Combate {
     
 }
