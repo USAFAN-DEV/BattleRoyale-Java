@@ -1,4 +1,4 @@
-package Interfaz;
+/*package Interfaz;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
@@ -36,7 +36,7 @@ public class Titulo extends JFrame implements ActionListener{
         add(titulo);
         
         setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);*/
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
           
     }
 
@@ -51,4 +51,4 @@ public class Titulo extends JFrame implements ActionListener{
     }  
         
     
-}
+}*/
