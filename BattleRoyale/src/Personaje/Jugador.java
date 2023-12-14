@@ -33,8 +33,11 @@ public class Jugador {
     private String nombre;
     private String tipo;
 
-    //Declaracion atributos para el mapa
-    int x, y, speed;
+    //Donde esta el jugador en el mapa
+    int mapaX, mapaY;
+    //Donde dibujamos al jugador en la pantalla
+    public final int screenX, screenY;
+    int speed;
 
     //KeyHandler: movimiento personaje y Mapa. Se declaran en los hijos
     protected Mapa mapa;
@@ -47,7 +50,7 @@ public class Jugador {
     
     
     //Constructor
-    public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad){
+    public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY){
 
         //Arma
         arma=null; //Al principio no tiene arma
@@ -72,8 +75,14 @@ public class Jugador {
         setTipo(tipo);
 
         //Atributos para el mapa
-        x = 100;
-        y = 100;
+        //Donde esta el jugador en el mapa
+        setMapaX(mapaX);
+        setMapaY(mapaY);
+
+        //Donde dibujamos al jugador en la pantalla
+        screenX = 480  - 24; //mapaMaxWidth/2 - tamanoCasilla/2. Pequeno ajuste para que este en el centro de la pantalla. Las coordenadas son la esquina izquierda superior por la cual se empieza a dibujar
+        screenY = 360 - 24;
+
         speed = 4;
 
         //direction = "down";
@@ -163,20 +172,20 @@ public class Jugador {
     }
 
     //Atributos para el mapa
-    public void setX(int x){
-        this.x = x;
+    public void setMapaX(int mapaX){
+        this.mapaX = mapaX;
     }
-    public void setY(int y){
-        this.y = y;
+    public void setMapaY(int mapaY){
+        this.mapaY = mapaY;
     }
     public void setSpeed(int speed){
         this.speed = speed;
     }
-    public int getX(){
-        return this.x;
+    public int getMapaX(){
+        return this.mapaX;
     }
-    public int getY(){
-        return this.y;
+    public int getMapaY(){
+        return this.mapaY;
     }
     public int getSpeed(){
         return this.speed;
@@ -231,24 +240,24 @@ public class Jugador {
         if(keyHandler.PressedUp == true){
 
             //direction = "up";
-            y -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
+            mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
         }
         else if(keyHandler.PressedLeft == true){
 
             //direction = "left";
-            x -= speed;
+            mapaX -= speed;
 
         }
         else if(keyHandler.PressedDown == true){
 
             //direction = "down";
-            y += speed;
+            mapaY += speed;
 
         }
         else if(keyHandler.PressedRight == true){
  
             //direction = "right";
-            x += speed;
+            mapaX += speed;
 
         }
 
@@ -278,7 +287,7 @@ public class Jugador {
                 break;
         }*/
 
-        g2.drawImage(characterImage, x, y, mapa.CasillaSizeEscalada, mapa.CasillaSizeEscalada, null);
+        g2.drawImage(characterImage, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
 
     }
 

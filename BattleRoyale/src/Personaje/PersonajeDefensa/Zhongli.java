@@ -15,7 +15,7 @@ public class Zhongli extends Jugador{
     //Constructor
     public Zhongli(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis");
+        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 40, mapa.casillaSizeEscalada * 33);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getPlayerImage();

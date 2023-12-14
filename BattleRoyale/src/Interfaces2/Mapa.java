@@ -12,14 +12,21 @@ public class Mapa extends JPanel implements Runnable{
     //array jugadores en el mapa
     
     //Constantes
-    final int CasillaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
+    final int casillaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
     final int escala = 3; 
 
-    public final int CasillaSizeEscalada = CasillaSize * escala; //Asi los personajes son 48x48
-    public final int maxMapaColumnas = 20;
-    public final int maxMapaFilas = 15; //Ratio 4x3;
-    public final int maxMapaWidht = CasillaSizeEscalada * maxMapaColumnas; //48 * 20 = 960pixels
-    public final int maxMapaHeight = CasillaSizeEscalada * maxMapaFilas; //48 * 15 = 720pixels
+    public final int casillaSizeEscalada = casillaSize * escala; //Asi los personajes son 48x48
+    public final int maxScreenColumnas = 20;
+    public final int maxScreenFilas = 15; //Ratio 4x3;
+    public final int maxScreenWidht = casillaSizeEscalada * maxScreenColumnas; //48 * 20 = 960pixels
+    public final int maxScreenHeight = casillaSizeEscalada * maxScreenFilas; //48 * 15 = 720pixels
+
+
+    //World variables
+    public final int maxMapaColumnas = 80;
+    public final int maxMapaFilas = 65;
+    public final int mapaWidth = casillaSize * maxMapaColumnas;
+    public final int mapaHeight = casillaSize * maxMapaFilas;
 
     //FPS (Frames per second)
 
@@ -28,14 +35,14 @@ public class Mapa extends JPanel implements Runnable{
     AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
-    Jugador player1 = new Zhongli(this, keyHandler);
+    public Jugador player1 = new Zhongli(this, keyHandler);
     //Jugador player2 = new YunJin(this, keyHandler);
     
     
 
     public Mapa(){
 
-        this.setPreferredSize(new Dimension(maxMapaWidht, maxMapaHeight));
+        this.setPreferredSize(new Dimension(maxScreenWidht, maxScreenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); //Mejora el rendimiento de la renderizacion del juego
         this.addKeyListener(keyHandler); //Anadimos el keyListener

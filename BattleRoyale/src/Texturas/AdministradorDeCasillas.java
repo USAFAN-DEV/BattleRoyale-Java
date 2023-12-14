@@ -17,18 +17,18 @@ public class AdministradorDeCasillas {
     
     //Atributos
     Mapa mapa;
-    Casilla[] Casillas;
+    Casilla[] casillas;
     int mapInNumbers[][];
 
     //Constructor
     public AdministradorDeCasillas(Mapa mapa){
 
         this.mapa = mapa;
-        Casillas = new Casilla[numeroCasillasDistintas];
+        casillas = new Casilla[numeroCasillasDistintas];
         this.mapInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
 
         getCasillaImage();
-        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map01.txt");
+        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt");
 
     }
 
@@ -40,13 +40,13 @@ public class AdministradorDeCasillas {
 
         try {
 
-            String[] tiposDeCasillas = {"grass.png", "wall.jpg", "water.png"}; //Fotos de cada tipo de casilla
+            String[] tiposDeCasillas = {"grass.jpg", "sand.jpg", "water.jpg"}; //Fotos de cada tipo de casilla
 
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
-                Casillas[i] = new Casilla();
+                casillas[i] = new Casilla();
                 String imagePath = "C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\textures\\" + tiposDeCasillas[i];
-                Casillas[i].image = ImageIO.read(new File(imagePath));
+                casillas[i].image = ImageIO.read(new File(imagePath));
 
             }
 
@@ -64,7 +64,7 @@ public class AdministradorDeCasillas {
             int col = 0;
             int row = 0;
 
-            while(col < mapa.maxMapaColumnas && row < mapa.maxMapaFilas){ //Mientras col y row no superen el numero maximo de columnas y filas del mapa
+            while(col < mapa.maxMapaColumnas && row < mapa.maxMapaColumnas){ //Mientras col y row no superen el numero maximo de columnas y filas del mapa
 
                 String linea = in.readLine(); //Leemos una linea
 
@@ -97,27 +97,47 @@ public class AdministradorDeCasillas {
     public void draw(Graphics2D g2){
 
         //Variables
-        int drawedCols = 0; 
-        int drawedRows = 0;
-        int x = 0;
-        int y = 0;
+        int drawedMapaCols = 0; 
+        int drawedMapaRows = 0;
 
-        while(drawedCols < mapa.maxMapaColumnas && drawedRows < mapa.maxMapaFilas){ //Mientras que el numero de columnas dibujadas sea menor que el maximo numero de columnas del mapa y el numero de filas dibujadas sea menor que el maximo numero de filas del mapa
+        while(drawedMapaCols < mapa.maxMapaColumnas && drawedMapaRows < mapa.maxMapaFilas){ //Mientras que el numero de columnas dibujadas sea menor que el maximo numero de columnas del mapa y el numero de filas dibujadas sea menor que el maximo numero de filas del mapa
 
-            int CasillaNum = mapInNumbers[drawedCols][drawedRows];//Tipo de Casilla correspondiente a cada 
+            int casillaNum = mapInNumbers[drawedMapaCols][drawedMapaRows];//Tipo de Casilla correspondiente a cada 
 
-            g2.drawImage(Casillas[CasillaNum].image, x, y, mapa.CasillaSizeEscalada, mapa.CasillaSizeEscalada, null); //Dibujamos una Casilla
-            drawedCols++; //Incrementamos el contador de columnas dibujadas
-            x += mapa.CasillaSizeEscalada; //Aumentamos la x para posicionarnos en las coordenadas donde tenemos que dibujar la siguiente casilla
+            int mapaX = drawedMapaCols * mapa.casillaSizeEscalada; //coordenada x de la casilla en el mapa
+            int mapaY = drawedMapaRows * mapa.casillaSizeEscalada; //coordenada y de la casilla en el mapa
+            int screenX = mapaX - mapa.player1.getMapaX() + mapa.player1.screenX; //coordenada x de la casilla en la pantalla
+            int screenY = mapaY - mapa.player1.getMapaY() + mapa.player1.screenY; //coordenada y de la casilla en la pantalla
 
-            if(drawedCols == mapa.maxMapaColumnas){ //Si hemos llegado al maximo de columnas, Las reseteamos a 0 y pasamos a la siguiente fila
+            /*
+            Si el jugador esta en la posicion 500, 500:
+                La casilla [0][0], que esta en la posicion (0,0) respecto del mapa estara en la posicion (-500,-500) respecto del jugador
+                Sumamos la posicion del jugador en la pantalla porque realmente la posicion x del jugador es jugador.mapaX + screenX para que este en el centro de la pantalla por lo que
+                tambien tenemos que sumarle a la posicion x de cada casilla jugador.screenX. Pasa lo mismo con la posicion Y
+
+            Para dibujar solo las casillas que esta viendo el jugador, necesitamos 4 condiciones: 
+                Que la posicion x de la casilla en el mapa este en el rango de vision del jugador
+                    mapaX > player.mapaX - player.screenX --> Que la posicion de la casilla en el mapa sea mayor que la posicion del jugador en el mapa menos lo que "movemos" al jugador para que este en el centro de la pantalla
+                    mapaX < player.mapaX + player.screenX --> Que la posicion de la casilla en el mapa sea menor que la posicion del jugador en el mapa mas lo que "movemos" al jugador para que este en el centro de la pantalla
+
+                Que la posicion y de la casilla en el mapa este en el rango de vision del jugador estableciendo las mismas condiciones que con la coordenada X
+
+                sumamos el tamano de una casilla para que el rango de casillas que se dibujan sea un poco mas grande y nunca veamos un fondo negro
+            */
+            if((mapaX + mapa.casillaSizeEscalada > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.casillaSizeEscalada < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.casillaSizeEscalada > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.casillaSizeEscalada < mapa.player1.getMapaY() + mapa.player1.screenY)){
+
+                g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null); //Dibujamos una Casilla
+
+            }
+
+            drawedMapaCols++; //Incrementamos el contador de columnas dibujadas
+
+            if(drawedMapaCols == mapa.maxMapaColumnas){ //Si hemos llegado al maximo de columnas, Las reseteamos a 0 y pasamos a la siguiente fila
 
                 //reseteamos las columnas dibujadas y la x
-                drawedCols = 0;
-                x = 0;
+                drawedMapaCols = 0;
                 //aumentamos las filas dibujadas y la y
-                drawedRows++;
-                y += mapa.CasillaSizeEscalada;
+                drawedMapaRows++;
 
             }
         }
