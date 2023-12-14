@@ -23,8 +23,8 @@ public class Mapa extends JPanel implements Runnable{
 
 
     //World variables
-    public final int maxMapaColumnas = 80;
-    public final int maxMapaFilas = 65;
+    public final int maxMapaColumnas = 100;
+    public final int maxMapaFilas = 82;
     public final int mapaWidth = casillaSize * maxMapaColumnas;
     public final int mapaHeight = casillaSize * maxMapaFilas;
 

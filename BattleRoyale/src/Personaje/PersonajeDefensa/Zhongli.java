@@ -15,7 +15,7 @@ public class Zhongli extends Jugador{
     //Constructor
     public Zhongli(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 40, mapa.casillaSizeEscalada * 33);
+        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getPlayerImage();
@@ -53,7 +53,7 @@ public class Zhongli extends Jugador{
         try {
 
             System.out.println("Image loading started");
-            characterImage = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\prueba.png"));
+            characterImage = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongliputo.png"));
             /* 
             up2 = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\boy_up_2.png"));
             down1 = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\boy_down_1.png"));

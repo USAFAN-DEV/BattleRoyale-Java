@@ -13,7 +13,7 @@ import Interfaces2.Mapa;
 public class AdministradorDeCasillas {
 
     //Constantes
-    final int numeroCasillasDistintas = 3; //Numero de fotos de Casillas diferentes
+    final int numeroCasillasDistintas = 18; //Numero de fotos de Casillas diferentes
     
     //Atributos
     Mapa mapa;
@@ -40,12 +40,13 @@ public class AdministradorDeCasillas {
 
         try {
 
-            String[] tiposDeCasillas = {"grass.jpg", "sand.jpg", "water.jpg"}; //Fotos de cada tipo de casilla
+            String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png"}; //Fotos de cada tipo de casilla
 
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
                 casillas[i] = new Casilla();
                 String imagePath = "C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\textures\\" + tiposDeCasillas[i];
+                System.out.println(imagePath);
                 casillas[i].image = ImageIO.read(new File(imagePath));
 
             }
@@ -64,7 +65,7 @@ public class AdministradorDeCasillas {
             int col = 0;
             int row = 0;
 
-            while(col < mapa.maxMapaColumnas && row < mapa.maxMapaColumnas){ //Mientras col y row no superen el numero maximo de columnas y filas del mapa
+            while(col < mapa.maxMapaColumnas && row < mapa.maxMapaFilas){ //Mientras col y row no superen el numero maximo de columnas y filas del mapa
 
                 String linea = in.readLine(); //Leemos una linea
 
