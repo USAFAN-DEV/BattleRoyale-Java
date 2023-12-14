@@ -4,8 +4,6 @@ import java.util.Random;
 
 public class MetodoCombate {
     //declaramos los atributos que son necesarios para calcular el critico, los jugadores y el los turnos del combate
-    Random random=new Random();
-    int nRand=random.nextInt(10)+1;
     private Jugador jugador1;
     private Jugador jugador2;
     public MetodoCombate(Jugador jugador1,Jugador jugador2){
@@ -25,6 +23,8 @@ public class MetodoCombate {
         return jugador2;
     }
     public void Ataque(){
+        Random random=new Random();
+        int nRand=random.nextInt(10)+1;
         //El primer if es para cuando se produce critico de forma random que va del 1 al 10
         //declaramos el daño que va a recibir el jugador2
         //el jugador 1 es siempre el que ejecuta el daño por tanto habrá que alternar en el ActionListener a los Jugadores

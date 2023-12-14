@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -64,8 +65,13 @@ public class InterfazCombate extends JPanel implements ActionListener{
         add(vidaJugador2);
         add(escudoJugador2);
         //imagenes de los jugadores
-        //ImageIcon imagenJugador1=new ImageIcon(jugadores.getJugador1().getPlayerImage()); 
-
+        
+        //BufferedImage imagenJugador1=jugador1.characterImage;
+        //BufferedImage imagenJugador2=jugador2.characterImage;
+        //JLabel image1=new JLabel();
+        //image1.setBounds(450,60,150,50);
+        //image1.setIcon(new ImageIcon(imagenJugador1));
+        //add(image1);
 
         //Nombre de los pesonajes
         JLabel nombreJugador1=new JLabel(jugadores.getJugador1().getNombre());
@@ -86,10 +92,10 @@ public class InterfazCombate extends JPanel implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent event){
+        //falta hacer el sistema de turno para que el bot te pege una hostia
         JButton clickedButton=(JButton) event.getSource();
         String Opcion=clickedButton.getText();
         if(Opcion=="Atacar"){
-            System.out.println(jugadores.nRand);
             jugadores.Ataque();
             vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
             vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
@@ -100,7 +106,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
 
         }
         else{
-
+            //pociones
         }
     }
 
