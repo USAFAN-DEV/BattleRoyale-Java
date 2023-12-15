@@ -3,6 +3,7 @@ package Interfaces2;
 import javax.swing.JPanel;
 import java.awt.*;
 import Personaje.Jugador;
+import Personaje.PersonajeAtk.Mei;
 //import Personaje.PersonajeDefensa.YunJin;
 import Personaje.PersonajeDefensa.Zhongli;
 import Texturas.AdministradorDeCasillas;
@@ -36,7 +37,9 @@ public class Mapa extends JPanel implements Runnable{
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     public Jugador player1 = new Zhongli(this, keyHandler);
+    public Jugador player2 = new Mei(this, keyHandler);
     //Jugador player2 = new YunJin(this, keyHandler);
+
     
     
 

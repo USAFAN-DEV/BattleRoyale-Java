@@ -13,7 +13,7 @@ public class Mei extends Jugador{
     //Constructor
     public Mei(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,100,0.5,0.25,"Atk","Raiden Mei","Musou Shinsetsu");
+        super(100,100,25,0,100,0.5,0.25,"Atk","Raiden Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getPlayerImage();
