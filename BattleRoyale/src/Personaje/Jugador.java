@@ -222,6 +222,10 @@ public class Jugador {
 
 
     }
+
+    public void usarHabilidad(){
+        
+    }
     
     //Print de las estadisticas 
     public void imprimeInfo(){

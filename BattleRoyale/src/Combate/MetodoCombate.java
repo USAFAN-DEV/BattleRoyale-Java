@@ -83,10 +83,71 @@ public class MetodoCombate {
                 }
             }
         }
+        try{
+            System.out.println("Has metido una hostia de "+damage);
+            Thread.sleep(500);
+        }
+        catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        if(jugador2.getCrit()*10>=nRand){
+            damage=getJugador2().getAtk()*2;
+            //si el escudo es 0
+            if(getJugador1().getEscudo()==0){
+                //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
+                getJugador1().setVida(getJugador1().getVida()-damage);
+                //Si la vida resulta ser negativa entonces se actualiza a 0
+                if(getJugador1().getVida()<0){
+                    getJugador1().setVida(0);
+                }
+            }
+            else{
+                //Si tiene escudo
+                getJugador1().setEscudo(getJugador1().getEscudo()-damage);
+                //Si despues de recibir la hostia el escudo se queda negativo
+                if(getJugador1().getEscudo()<0){
+                    //Entonces Calculamos lo que te tiene que quedar respectivamente en la vida haciendo el resto y quitandoselo a la vida
+                    getJugador1().setVida(getJugador1().getVida()-(damage+getJugador1().getEscudo()));
+                    //Ponemos el escudo a 0
+                    getJugador1().setEscudo(0);
+                    //Si resulta que la vida es negativa lo actualizamos a 0
+                    if(getJugador1().getVida()<0){
+                        getJugador1().setVida(0);
+                    }
+                }
+            }
+        }
+        //Este es el caso en el que no pega critico que es el caso anterior, pero sin el x2
+        else{
+            damage=getJugador2().getAtk();
+            if(getJugador1().getEscudo()==0){
+                //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
+                getJugador1().setVida(getJugador1().getVida()-damage);
+                //Si la vida resulta ser negativa entonces se actualiza a 0
+                if(getJugador1().getVida()<0){
+                    getJugador1().setVida(0);
+                }
+            }
+            else{
+                //Si tiene escudo
+                getJugador1().setEscudo(getJugador1().getEscudo()-damage);
+                //Si despues de recibir la hostia el escudo se queda negativo
+                if(getJugador1().getEscudo()<0){
+                    //Entonces Calculamos lo que te tiene que quedar respectivamente en la vida haciendo el resto y quitandoselo a la vida
+                    getJugador1().setVida(getJugador1().getVida()-(damage+getJugador1().getEscudo()));
+                    //Ponemos el escudo a 0
+                    getJugador1().setEscudo(0);
+                    //Si resulta que la vida es negativa lo actualizamos a 0
+                    if(getJugador1().getVida()<0){
+                        getJugador1().setVida(0);
+                    }
+                }
+            }
+        }
     }
     //Este metodo va a utilizar las habilidades del jugador 1 sobre el jugador2, tambien habrá que hacer lo mismo con el ActionListener
     public void Habilidad(){
-        //getJugador1().usarHabilidad();
+        getJugador1().usarHabilidad();
     }
 
 

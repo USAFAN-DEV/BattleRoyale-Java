@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import Interfaces2.Mapa;
+import Interfaces2.Mapa; 
 import Combate.MetodoCombate;
 import Personaje.Jugador;
 
@@ -23,6 +23,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JTextField escudoJugador1;
     public JTextField escudoJugador2;
     public int turnos;
+    public JTextField turno;
 
     public InterfazCombate(Jugador jugador1,Jugador jugador2){
         turnos=1;
@@ -83,7 +84,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
         //turnos 
         JLabel nombreTurno=new JLabel("Turno");
         nombreTurno.setBounds(25,0,150,50);
-        JTextField turno=new JTextField(String.valueOf(turnos));
+        turno=new JTextField(String.valueOf(turnos));
         turno.setBounds(25,35,150,50);
         turno.setEditable(false);
         add(nombreTurno);
@@ -101,9 +102,32 @@ public class InterfazCombate extends JPanel implements ActionListener{
             vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
             escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
             escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
+            turnos++;
+            turno.setText(String.valueOf(turnos));
+
+            if(jugadores.getJugador2().getVida()==0){
+                System.out.println("Has ganado el combate");
+                try{
+                    Thread.sleep(5000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.exit(-1);
+            }
+            if(jugadores.getJugador1().getVida()==0){
+                System.out.println("Has perdidio el combate");
+                try{
+                    Thread.sleep(5000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.exit(-1);
+            }
         }
         else if(Opcion=="Habilidad"){
-
+            jugadores.Habilidad();
         }
         else{
             //pociones
@@ -111,16 +135,17 @@ public class InterfazCombate extends JPanel implements ActionListener{
     }
 
     public static void main(String[] args){
-        Jugador jugador1=new Jugador(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis");
-        Jugador jugador2=new Jugador(200,200,25,0,200,0.25,0.25,"Defensa","Ferrat","Dominus Lapidis");
+        Mapa mapa=new Mapa();
+
+        Jugador jugador2=new Jugador(200,200,25,0,200,0.25,0.25,"Defensa","Ferrat","Dominus Lapidis",30,30);
         //aqui hay un problema porque si tengo que pasar un zhongli, necesitaria pasarle el mapa y el keyhandler, por eso necesito la ayuda de Nicolas con su curro
-        InterfazCombate interfazC=new InterfazCombate(jugador1,jugador2);
+        InterfazCombate interfazC=new InterfazCombate(mapa.getJugador1(),jugador2);
         JFrame frameC=new JFrame();
         frameC.setResizable(false);
         frameC.add(interfazC);
         frameC.setSize(750,750);
         frameC.setTitle("Combate");
         frameC.setVisible(true);
-        //setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //frameC.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }

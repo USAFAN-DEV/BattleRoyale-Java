@@ -49,6 +49,10 @@ public class Mapa extends JPanel implements Runnable{
         this.setFocusable(true); //Interfaz puede ser "focused" para recibir key inputs
 
     }
+    //getter y setter
+    public Jugador getJugador1(){
+        return player1;
+    }
 
     public void startGameThread(){
 

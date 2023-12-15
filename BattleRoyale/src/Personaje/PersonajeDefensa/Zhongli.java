@@ -25,19 +25,11 @@ public class Zhongli extends Jugador{
     //METODOS
 
     //declaracion de la habilidad y que estadisticas va a modificar
-    public void usarHabilidad(Jugador equipo[]){
-
-        for(int i=0;i<equipo.length;i++){
-
-            equipo[i].setEscudo((int)(equipo[i].getEscudo()+super.getEstadisticaHabilidad()*super.getEscudoMaximo()));
-
-            if(equipo[i].getEscudo()>equipo[i].getEscudoMaximo()){
-
-                equipo[i].setEscudo(equipo[i].getEscudoMaximo());
-
-            }
+    public void usarHabilidad(){
+        super.setEscudo((int)(super.getEscudo()+super.getEstadisticaHabilidad()*super.getEscudoMaximo()));
+        if(super.getEscudo()>super.getEscudoMaximo()){
+            super.setEscudo(super.getEscudoMaximo());
         }
-
     } 
 
     //descripcion de la habilidad
