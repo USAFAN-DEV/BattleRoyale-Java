@@ -40,7 +40,7 @@ public class AdministradorDeCasillas {
 
         try {
 
-            String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png", "ground-water-left-snow.png", "ground-water-top-left-snow.png", "ground-water-top-snow.png", "ground-water-top-right-snow.png", "ground-water-right-snow.png", "bridge-down-left.png", "ground-water-down-snow.png", "ground-water-down-left-snow.png", "ground-water-down-right-snow.png"}; //Fotos de cada tipo de casilla
+            String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand2.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png", "ground-water-left-snow.png", "ground-water-top-left-snow.png", "ground-water-top-snow.png", "ground-water-top-right-snow.png", "ground-water-right-snow.png", "bridge-down-left.png", "ground-water-down-snow.png", "ground-water-down-left-snow.png", "ground-water-down-right-snow.png"}; //Fotos de cada tipo de casilla
 
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 

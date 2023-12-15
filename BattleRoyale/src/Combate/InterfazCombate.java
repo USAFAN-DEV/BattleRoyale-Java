@@ -73,10 +73,10 @@ public class InterfazCombate extends JPanel implements ActionListener{
         //BufferedImage imagenJugador2=jugador2.characterImage;
         JLabel image1=new JLabel();
         image1.setBounds(200,250,350,450);
-        image1.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.gif"));
+        image1.setIcon(new ImageIcon("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.gif"));
         JLabel image2=new JLabel();
         image2.setBounds(350,-30,450,450);
-        image2.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\eula.gif"));
+        image2.setIcon(new ImageIcon("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\eula.gif"));
         add(image1);
         add(image2);
 

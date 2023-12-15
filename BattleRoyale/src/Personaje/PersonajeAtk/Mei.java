@@ -29,13 +29,13 @@ public class Mei extends Jugador{
 
 
     public void getPlayerImage(){
-        try {
+        /*try {
             System.out.println("Image loading started");
-            characterImage = ImageIO.read(new File("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\mei.gif"));
+            characterImage = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\mei.gif"));
             System.out.println("Image loading ended");
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
     //declaracion de la habilidad y que estadisticas va a modificar
     public void usarHabilidad(Jugador jugador){
