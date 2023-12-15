@@ -223,7 +223,7 @@ public class Jugador {
 
     }
 
-    public void usarHabilidad(){
+    public void usarHabilidad(Jugador jugador){
         
     }
     
