@@ -44,9 +44,9 @@ public class Jugador {
     protected KeyHandler keyHandler;
 
     //images
-    //public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    //public String direction;
-    public BufferedImage characterImage;
+    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public String direction;
+    int playerFoto, contFrames;
     
     
     //Constructor
@@ -85,7 +85,9 @@ public class Jugador {
 
         speed = 4;
 
-        //direction = "down";
+        direction = "down";
+        contFrames = 0;
+        playerFoto = 1;
 
     }
     
@@ -243,25 +245,41 @@ public class Jugador {
 
         if(keyHandler.PressedUp == true){
 
-            //direction = "up";
+            contFrames++;
+            direction = "up";
             mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
         }
         else if(keyHandler.PressedLeft == true){
 
-            //direction = "left";
+            contFrames++;
+            direction = "left";
             mapaX -= speed;
 
         }
         else if(keyHandler.PressedDown == true){
 
-            //direction = "down";
+            contFrames++;
+            direction = "down";
             mapaY += speed;
 
         }
         else if(keyHandler.PressedRight == true){
  
-            //direction = "right";
+            contFrames++;
+            direction = "right";
             mapaX += speed;
+
+        }
+
+        if(contFrames > 15){
+
+            if(playerFoto == 1){
+                playerFoto = 2;
+            }
+            else {
+                playerFoto = 1;
+            }
+            contFrames = 0;
 
         }
 
@@ -272,26 +290,47 @@ public class Jugador {
         //g2.setColor(Color.white);
         //g2.fillRect(x, y, mapa.CasillaSizeEscalada, mapa.CasillaSizeEscalada);
 
-        //BufferedImage image = null;
+        
+        BufferedImage image = null;
+        if(direction.equals("up")){
 
-        /*switch (direction) {
-            case "up":
+            if(playerFoto == 1){
                 image = up1;
-                break;
-            case "down":
-                image = down1;
-                break;
-            case "left":
-                image = left1;
-                break;
-            case "right":
-                image = right1;
-                break;
-            default:
-                break;
-        }*/
+            }
+            else{
+                image = up2;
+            }
+            
+        }
+        else if(direction.equals("down")){
 
-        g2.drawImage(characterImage, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
+            if(playerFoto == 1){
+                image = down1;
+            }
+            else{
+                image = down2;
+            }
+        }
+        else if(direction.equals("left")){
+
+            if(playerFoto == 1){
+                image = left1;
+            }
+            else{
+                image = left2;
+            }
+        }
+        else if(direction.equals("right")){
+
+            if(playerFoto == 1){
+                image = right1;
+            }
+            else{
+                image = right2;
+            }
+        }
+
+        g2.drawImage(image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
 
     }
 
