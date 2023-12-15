@@ -17,6 +17,7 @@ import Combate.MetodoCombate;
 import Personaje.Jugador;
 
 public class InterfazCombate extends JPanel implements ActionListener{
+    private static final int EXIT_ON_CLOSE = 0;
     public MetodoCombate jugadores;
     public JTextField vidaJugador1;
     public JTextField vidaJugador2;
@@ -24,6 +25,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JTextField escudoJugador2;
     public int turnos;
     public JTextField turno;
+    JButton botonHabilidad;
 
     public InterfazCombate(Jugador jugador1,Jugador jugador2){
         turnos=1;
@@ -31,16 +33,16 @@ public class InterfazCombate extends JPanel implements ActionListener{
         //declaracion del boton de Ataque
         JButton botonAtaque=new JButton("Atacar");
         //botonAtaque.setBackground(Color.BLACK); 
-        botonAtaque.setBounds(450,500,250,50);
+        botonAtaque.setBounds(500,500,250,50);
         botonAtaque.addActionListener(this);
         //declaracion del boton de habilidad
-        JButton botonHabilidad=new JButton("Habilidad"); 
+        botonHabilidad=new JButton("Habilidad"); 
         //botonHabilidad.setBackground(Color.BLUE);
-        botonHabilidad.setBounds(450,550,250,50);
+        botonHabilidad.setBounds(500,550,250,50);
         botonHabilidad.addActionListener(this);
         //declaracion del boton de pocion
         JButton botonPocion=new JButton("Pocion");
-        botonPocion.setBounds(450,600,250,50);
+        botonPocion.setBounds(500,600,250,50);
         botonPocion.addActionListener(this);
         add(botonAtaque);
         add(botonHabilidad);
@@ -59,26 +61,30 @@ public class InterfazCombate extends JPanel implements ActionListener{
         //Vida y escudo del jugador 2
         vidaJugador2=new JTextField(String.valueOf(jugadores.getJugador2().getVida()));
         escudoJugador2=new JTextField(String.valueOf(jugadores.getJugador2().getEscudo()));
-        escudoJugador2.setBounds(450,60,150,50);
-        vidaJugador2.setBounds(450,110,150,50);
+        escudoJugador2.setBounds(250,60,150,50);
+        vidaJugador2.setBounds(250,110,150,50);
         escudoJugador2.setEditable(false);
         vidaJugador2.setEditable(false);
         add(vidaJugador2);
         add(escudoJugador2);
         //imagenes de los jugadores
         
-        //BufferedImage imagenJugador1=jugador1.characterImage;
+        BufferedImage imagenJugador1=jugador1.characterImage;
         //BufferedImage imagenJugador2=jugador2.characterImage;
-        //JLabel image1=new JLabel();
-        //image1.setBounds(450,60,150,50);
-        //image1.setIcon(new ImageIcon(imagenJugador1));
-        //add(image1);
+        JLabel image1=new JLabel();
+        image1.setBounds(200,250,350,450);
+        image1.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.gif"));
+        JLabel image2=new JLabel();
+        image2.setBounds(350,-30,450,450);
+        image2.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\eula.gif"));
+        add(image1);
+        add(image2);
 
         //Nombre de los pesonajes
         JLabel nombreJugador1=new JLabel(jugadores.getJugador1().getNombre());
         nombreJugador1.setBounds(75,365,150,50);
         JLabel nombreJugador2=new JLabel(jugadores.getJugador2().getNombre());
-        nombreJugador2.setBounds(450,25,150,50);
+        nombreJugador2.setBounds(250,25,150,50);
         add(nombreJugador1);
         add(nombreJugador2);
         //turnos 
@@ -127,7 +133,12 @@ public class InterfazCombate extends JPanel implements ActionListener{
             }
         }
         else if(Opcion=="Habilidad"){
-            jugadores.Habilidad();
+            jugadores.HabilidadJugador1();
+            vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
+            vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
+            escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
+            escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
+            botonHabilidad.setEnabled(false);
         }
         else{
             //pociones
@@ -136,16 +147,13 @@ public class InterfazCombate extends JPanel implements ActionListener{
 
     public static void main(String[] args){
         Mapa mapa=new Mapa();
-
-        Jugador jugador2=new Jugador(200,200,25,0,200,0.25,0.25,"Defensa","Ferrat","Dominus Lapidis",30,30);
-        //aqui hay un problema porque si tengo que pasar un zhongli, necesitaria pasarle el mapa y el keyhandler, por eso necesito la ayuda de Nicolas con su curro
-        InterfazCombate interfazC=new InterfazCombate(mapa.getJugador1(),jugador2);
+        InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2);
         JFrame frameC=new JFrame();
         frameC.setResizable(false);
         frameC.add(interfazC);
-        frameC.setSize(750,750);
+        frameC.setSize(850,750);
         frameC.setTitle("Combate");
         frameC.setVisible(true);
-        //frameC.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frameC.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
