@@ -28,9 +28,6 @@ public class AdministradorDeCasillas {
         this.mapInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
 
         getCasillaImage();
-
-        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt");
-
         loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt");
 
     }
@@ -97,8 +94,6 @@ public class AdministradorDeCasillas {
     }
 
     //Funcion para dibujar las Casillas en el mapa
-
-
     public void draw(Graphics2D g2){
 
         //Variables
@@ -132,7 +127,6 @@ public class AdministradorDeCasillas {
             if((mapaX + mapa.casillaSizeEscalada > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.casillaSizeEscalada < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.casillaSizeEscalada > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.casillaSizeEscalada < mapa.player1.getMapaY() + mapa.player1.screenY)){
 
                 g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null); //Dibujamos una Casilla
-
 
             }
 
