@@ -112,7 +112,6 @@ public class Mapa extends JPanel implements Runnable{
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
 
-        long paintStart = System.nanoTime();
         super.paintComponent(g); //Pintar en el parent class (JPanel)
 
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
@@ -120,11 +119,6 @@ public class Mapa extends JPanel implements Runnable{
         administradorC.draw(g2);
         player1.draw(g2);
         //player2.draw(g2)
-
-        long paintFinish = System.nanoTime();
-
-        long paintTime = paintFinish - paintStart;
-        System.out.println(paintTime);
         
         g2.dispose();
     }
