@@ -117,7 +117,7 @@ public class Mapa extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
-        administradorC.drawCasillas(g2);
+        administradorC.draw(g2);
         player1.draw(g2);
         //player2.draw(g2)
 
