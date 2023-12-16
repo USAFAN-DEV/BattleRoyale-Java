@@ -28,16 +28,12 @@ public class AdministradorDeCasillas {
         this.mapInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
 
         getCasillaImage();
-<<<<<<< HEAD
-        getDecorationImage();
-        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map01.txt", mapInNumbers);
-        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt", decorationsInNumbers);
-=======
+
         loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt");
->>>>>>> parent of 9b01ddd (Mejora del rendimiento)
+
+        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt");
 
     }
-
 
     //METODOS
 
@@ -101,13 +97,9 @@ public class AdministradorDeCasillas {
     }
 
     //Funcion para dibujar las Casillas en el mapa
-<<<<<<< HEAD
-    public void drawCasillas(Graphics2D g2){
 
-        
-=======
+
     public void draw(Graphics2D g2){
->>>>>>> parent of 9b01ddd (Mejora del rendimiento)
 
         //Variables
         int drawedMapaCols = 0; 
@@ -140,15 +132,7 @@ public class AdministradorDeCasillas {
             if((mapaX + mapa.casillaSizeEscalada > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.casillaSizeEscalada < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.casillaSizeEscalada > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.casillaSizeEscalada < mapa.player1.getMapaY() + mapa.player1.screenY)){
 
                 g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null); //Dibujamos una Casilla
-<<<<<<< HEAD
-                
-                if(decorationNum != -1){
 
-                    g2.drawImage(decorations[decorationNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
-
-                }
-=======
->>>>>>> parent of 9b01ddd (Mejora del rendimiento)
 
             }
 
