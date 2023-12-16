@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
@@ -105,72 +104,53 @@ public class InterfazCombate extends JPanel implements ActionListener{
         String Opcion=clickedButton.getText();
         if(Opcion=="Atacar"){
             jugadores.Ataque();
-            vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
-            vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
-            escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
-            escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
-            turnos++;
-            turno.setText(String.valueOf(turnos));
+            ActualizacionEstadisticas();
             if(cooldownHabilidad==turnos){
                 System.out.println("Vuelves a tener la habilidad activa");
                 botonHabilidad.setEnabled(true);
             }
-            if(jugadores.getJugador2().getVida()==0){
-                System.out.println("Has ganado el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
-            if(jugadores.getJugador1().getVida()==0){
-                System.out.println("Has perdidio el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
+            FinPrograma();
         }
         else if(Opcion=="Habilidad"){
             jugadores.HabilidadJugador1();
-            vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
-            vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
-            escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
-            escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
+            cooldownHabilidad=turnos+3;
+            ActualizacionEstadisticas();
             botonHabilidad.setEnabled(false);
             System.out.println("Tienes la habilidad en cooldown, 3 turnos sin habilidad");
-            cooldownHabilidad=turnos+3;
-            turnos++;
-            turno.setText(String.valueOf(turnos));
-
-            if(jugadores.getJugador2().getVida()==0){
-                System.out.println("Has ganado el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
-            if(jugadores.getJugador1().getVida()==0){
-                System.out.println("Has perdidio el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
+            FinPrograma();
         }
         else{
             //pociones
+        }
+    }
+    public void ActualizacionEstadisticas(){
+        vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
+        vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
+        escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
+        escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
+        turnos++;
+        turno.setText(String.valueOf(turnos));
+    }
+    public void FinPrograma(){
+        if(jugadores.getJugador2().getVida()==0){
+            System.out.println("Has ganado el combate");
+            try{
+                Thread.sleep(3000);
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            System.exit(-1);
+        }
+        if(jugadores.getJugador1().getVida()==0){
+            System.out.println("Has perdidio el combate");
+            try{
+                Thread.sleep(3000);
+            }
+            catch(InterruptedException e){
+                 e.printStackTrace();
+            }
+            System.exit(-1);
         }
     }
 
