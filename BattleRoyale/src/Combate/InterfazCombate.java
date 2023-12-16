@@ -17,8 +17,8 @@ import Combate.MetodoCombate;
 import Personaje.Jugador;
 
 public class InterfazCombate extends JPanel implements ActionListener{
-    private static final int EXIT_ON_CLOSE = 0;
     public MetodoCombate jugadores;
+    public int cooldownHabilidad;
     public JTextField vidaJugador1;
     public JTextField vidaJugador2;
     public JTextField escudoJugador1;
@@ -26,6 +26,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public int turnos;
     public JTextField turno;
     JButton botonHabilidad;
+
 
     public InterfazCombate(Jugador jugador1,Jugador jugador2){
         turnos=1;
@@ -69,14 +70,14 @@ public class InterfazCombate extends JPanel implements ActionListener{
         add(escudoJugador2);
         //imagenes de los jugadores
         
-        BufferedImage imagenJugador1=jugador1.characterImage;
+        //BufferedImage imagenJugador1=jugador1.characterImage;
         //BufferedImage imagenJugador2=jugador2.characterImage;
         JLabel image1=new JLabel();
         image1.setBounds(200,250,350,450);
-        image1.setIcon(new ImageIcon("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.gif"));
+        image1.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.gif"));
         JLabel image2=new JLabel();
         image2.setBounds(350,-30,450,450);
-        image2.setIcon(new ImageIcon("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\eula.gif"));
+        image2.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\eula.gif"));
         add(image1);
         add(image2);
 
@@ -110,11 +111,14 @@ public class InterfazCombate extends JPanel implements ActionListener{
             escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
             turnos++;
             turno.setText(String.valueOf(turnos));
-
+            if(cooldownHabilidad==turnos){
+                System.out.println("Vuelves a tener la habilidad activa");
+                botonHabilidad.setEnabled(true);
+            }
             if(jugadores.getJugador2().getVida()==0){
                 System.out.println("Has ganado el combate");
                 try{
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                 }
                 catch(InterruptedException e){
                     e.printStackTrace();
@@ -124,7 +128,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
             if(jugadores.getJugador1().getVida()==0){
                 System.out.println("Has perdidio el combate");
                 try{
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                 }
                 catch(InterruptedException e){
                     e.printStackTrace();
@@ -139,6 +143,31 @@ public class InterfazCombate extends JPanel implements ActionListener{
             escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
             escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
             botonHabilidad.setEnabled(false);
+            System.out.println("Tienes la habilidad en cooldown, 3 turnos sin habilidad");
+            cooldownHabilidad=turnos+3;
+            turnos++;
+            turno.setText(String.valueOf(turnos));
+
+            if(jugadores.getJugador2().getVida()==0){
+                System.out.println("Has ganado el combate");
+                try{
+                    Thread.sleep(3000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.exit(-1);
+            }
+            if(jugadores.getJugador1().getVida()==0){
+                System.out.println("Has perdidio el combate");
+                try{
+                    Thread.sleep(3000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.exit(-1);
+            }
         }
         else{
             //pociones
@@ -154,6 +183,6 @@ public class InterfazCombate extends JPanel implements ActionListener{
         frameC.setSize(850,750);
         frameC.setTitle("Combate");
         frameC.setVisible(true);
-        frameC.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frameC.setDefaultCloseOperation(0);
     }
 }
