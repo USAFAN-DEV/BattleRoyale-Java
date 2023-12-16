@@ -48,6 +48,8 @@ public class Jugador {
     public String direction;
     int playerFoto, contFrames;
     
+    //CooldownHabilidad
+    private int cooldownHabilidad;
     
     //Constructor
     public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY){
@@ -89,6 +91,8 @@ public class Jugador {
         contFrames = 0;
         playerFoto = 1;
 
+        //cooldown Habilidad
+        cooldownHabilidad=0;
     }
     
     //declaracion de getters y setter de cada uno de los atributos de la clase Jugador
@@ -125,6 +129,12 @@ public class Jugador {
     }
     public int getEscudoMaximo(){
         return this.escudoMaximo;
+    }
+    public void setCooldownHabilidad(int cooldownHabilidad){
+        this.cooldownHabilidad=cooldownHabilidad;
+    }
+    public int getCooldownHabilidad(){
+        return this.cooldownHabilidad;
     }
 
     //Ataque y %critico
