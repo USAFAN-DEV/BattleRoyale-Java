@@ -13,24 +13,32 @@ import Interfaces2.Mapa;
 public class AdministradorDeCasillas {
 
     //Constantes
-    final int numeroCasillasDistintas = 27; //Numero de fotos de Casillas diferentes
+    final int numeroCasillasDistintas = 32; //Numero de fotos de Casillas diferentes
+    final int numeroDecorationsDistintas = 14;
     
     //Atributos
     Mapa mapa;
     Casilla[] casillas;
+    Casilla[] decorations;
     int mapInNumbers[][];
+    int decorationsInNumbers[][];
 
     //Constructor
     public AdministradorDeCasillas(Mapa mapa){
 
         this.mapa = mapa;
         casillas = new Casilla[numeroCasillasDistintas];
+        decorations = new Casilla[numeroDecorationsDistintas];
         this.mapInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
+        this.decorationsInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
 
         getCasillaImage();
-        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt");
+        getDecorationImage();
+        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map01.txt", mapInNumbers);
+        loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt", decorationsInNumbers);
 
     }
+
 
     //METODOS
 
@@ -39,7 +47,7 @@ public class AdministradorDeCasillas {
 
         try {
 
-            String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand2.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png", "ground-water-left-snow.png", "ground-water-top-left-snow.png", "ground-water-top-snow.png", "ground-water-top-right-snow.png", "ground-water-right-snow.png", "bridge-down-left.png", "ground-water-down-snow.png", "ground-water-down-left-snow.png", "ground-water-down-right-snow.png"}; //Fotos de cada tipo de casilla
+            String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand2.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png", "ground-water-left-snow.png", "ground-water-top-left-snow.png", "ground-water-top-snow.png", "ground-water-top-right-snow.png", "ground-water-right-snow.png", "bridge-down-left.png", "ground-water-down-snow.png", "ground-water-down-left-snow.png", "ground-water-down-right-snow.png", "ground-water-down-left-sand.png", "ground-water-left-sand.png", "ground-water-top-left-sand.png", "ground-water-top-sand.png", "ground-water-down-sand.png"}; //Fotos de cada tipo de casilla
 
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
@@ -56,7 +64,28 @@ public class AdministradorDeCasillas {
 
     }
 
-    public void loadMap(String filePath){
+    public void getDecorationImage(){
+
+         try {
+
+            String[] tiposDeDecorations = {"tree-winter.png", "tree-winter-cut.png", "house.png", "castle-topleft.png", "castle-topright.png", "castle-bottomleft.png", "castle-bottomright.png", "bridge-topleft.png", "bridge-topright.png", "bridge-centerleft.png", "bridge-centerright.png", "bridge-bottomleft.png", "bridge-bottomright.png", "bridge-center.png"}; //Fotos de cada tipo de decoracion
+
+            for(int i = 0; i < numeroDecorationsDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
+
+                decorations[i] = new Casilla();
+                String imagePath = "C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\decorations\\" + tiposDeDecorations[i];
+                System.out.println(imagePath);
+                decorations[i].image = ImageIO.read(new File(imagePath));
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadMap(String filePath, int[][] fileInNumbers){
 
         try {
             
@@ -72,7 +101,7 @@ public class AdministradorDeCasillas {
 
                     String numbers[] = linea.split(" ");
                     int num = Integer.parseInt(numbers[col]);
-                    mapInNumbers[col][row] = num;
+                    fileInNumbers[col][row] = num;
                     col++;
 
                 }
@@ -96,6 +125,8 @@ public class AdministradorDeCasillas {
     //Funcion para dibujar las Casillas en el mapa
     public void draw(Graphics2D g2){
 
+        
+
         //Variables
         int drawedMapaCols = 0; 
         int drawedMapaRows = 0;
@@ -103,6 +134,7 @@ public class AdministradorDeCasillas {
         while(drawedMapaCols < mapa.maxMapaColumnas && drawedMapaRows < mapa.maxMapaFilas){ //Mientras que el numero de columnas dibujadas sea menor que el maximo numero de columnas del mapa y el numero de filas dibujadas sea menor que el maximo numero de filas del mapa
 
             int casillaNum = mapInNumbers[drawedMapaCols][drawedMapaRows];//Tipo de Casilla correspondiente a cada 
+            int decorationNum = decorationsInNumbers[drawedMapaCols][drawedMapaRows];//Tipo de Casilla correspondiente a cada 
 
             int mapaX = drawedMapaCols * mapa.casillaSizeEscalada; //coordenada x de la casilla en el mapa
             int mapaY = drawedMapaRows * mapa.casillaSizeEscalada; //coordenada y de la casilla en el mapa
@@ -127,6 +159,12 @@ public class AdministradorDeCasillas {
             if((mapaX + mapa.casillaSizeEscalada > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.casillaSizeEscalada < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.casillaSizeEscalada > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.casillaSizeEscalada < mapa.player1.getMapaY() + mapa.player1.screenY)){
 
                 g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null); //Dibujamos una Casilla
+                
+                if(decorationNum != -1){
+
+                    g2.drawImage(decorations[decorationNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
+
+                }
 
             }
 
@@ -143,4 +181,6 @@ public class AdministradorDeCasillas {
         }
 
     }
+
 }
+
