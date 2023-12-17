@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
@@ -25,29 +24,40 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JTextField escudoJugador2;
     public int turnos;
     public JTextField turno;
-    JButton botonHabilidad;
+    public JButton botonHabilidad;
 
 
     public InterfazCombate(Jugador jugador1,Jugador jugador2){
+        //fondo
+        JLabel fondo2=new JLabel();
+        fondo2.setBounds(0,0,850,750);
+        fondo2.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\background2.gif"));
+        add(fondo2,3,0);
+        
+        JLabel fondo=new JLabel();
+        fondo.setBounds(-80,0,850,750);
+        fondo.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\background.png"));
+        add(fondo,2,0);
+
+        
+        
         turnos=1;
         setLayout(null);
         //declaracion del boton de Ataque
-        JButton botonAtaque=new JButton("Atacar");
-        //botonAtaque.setBackground(Color.BLACK); 
+        JButton botonAtaque=new JButton("Atacar"); 
         botonAtaque.setBounds(500,500,250,50);
         botonAtaque.addActionListener(this);
         //declaracion del boton de habilidad
         botonHabilidad=new JButton("Habilidad"); 
-        //botonHabilidad.setBackground(Color.BLUE);
         botonHabilidad.setBounds(500,550,250,50);
         botonHabilidad.addActionListener(this);
         //declaracion del boton de pocion
         JButton botonPocion=new JButton("Pocion");
         botonPocion.setBounds(500,600,250,50);
         botonPocion.addActionListener(this);
-        add(botonAtaque);
-        add(botonHabilidad);
-        add(botonPocion);
+        add(botonAtaque,1,0);
+        add(botonHabilidad,1,0);
+        add(botonPocion,1,0);
         //declaracion de clase MetodoCombate para poder utilizar las funciones para el daño, pociones etc
         jugadores=new MetodoCombate(jugador1,jugador2);
         //vida y escudo del jugador 1
@@ -57,8 +67,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         vidaJugador1.setBounds(75,450,150,50);
         escudoJugador1.setEditable(false);
         vidaJugador1.setEditable(false);
-        add(vidaJugador1);
-        add(escudoJugador1);
+        add(vidaJugador1,1,0);
+        add(escudoJugador1,1,0);
         //Vida y escudo del jugador 2
         vidaJugador2=new JTextField(String.valueOf(jugadores.getJugador2().getVida()));
         escudoJugador2=new JTextField(String.valueOf(jugadores.getJugador2().getEscudo()));
@@ -66,36 +76,36 @@ public class InterfazCombate extends JPanel implements ActionListener{
         vidaJugador2.setBounds(250,110,150,50);
         escudoJugador2.setEditable(false);
         vidaJugador2.setEditable(false);
-        add(vidaJugador2);
-        add(escudoJugador2);
+        add(vidaJugador2,1,0);
+        add(escudoJugador2,1,0);
         //imagenes de los jugadores
         
         //BufferedImage imagenJugador1=jugador1.characterImage;
         //BufferedImage imagenJugador2=jugador2.characterImage;
         JLabel image1=new JLabel();
-        image1.setBounds(200,250,350,450);
+        image1.setBounds(100,300,350,450);
         image1.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.gif"));
         JLabel image2=new JLabel();
         image2.setBounds(350,-30,450,450);
         image2.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\eula.gif"));
-        add(image1);
-        add(image2);
+        add(image1,1,0);
+        add(image2,1,0);
 
         //Nombre de los pesonajes
         JLabel nombreJugador1=new JLabel(jugadores.getJugador1().getNombre());
         nombreJugador1.setBounds(75,365,150,50);
         JLabel nombreJugador2=new JLabel(jugadores.getJugador2().getNombre());
         nombreJugador2.setBounds(250,25,150,50);
-        add(nombreJugador1);
-        add(nombreJugador2);
+        add(nombreJugador1,1,0);
+        add(nombreJugador2,1,0);
         //turnos 
         JLabel nombreTurno=new JLabel("Turno");
         nombreTurno.setBounds(25,0,150,50);
         turno=new JTextField(String.valueOf(turnos));
         turno.setBounds(25,35,150,50);
         turno.setEditable(false);
-        add(nombreTurno);
-        add(turno);
+        add(nombreTurno,1,0);
+        add(turno,1,0);
         
     }
 
@@ -105,72 +115,53 @@ public class InterfazCombate extends JPanel implements ActionListener{
         String Opcion=clickedButton.getText();
         if(Opcion=="Atacar"){
             jugadores.Ataque();
-            vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
-            vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
-            escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
-            escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
-            turnos++;
-            turno.setText(String.valueOf(turnos));
+            ActualizacionEstadisticas();
             if(cooldownHabilidad==turnos){
                 System.out.println("Vuelves a tener la habilidad activa");
                 botonHabilidad.setEnabled(true);
             }
-            if(jugadores.getJugador2().getVida()==0){
-                System.out.println("Has ganado el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
-            if(jugadores.getJugador1().getVida()==0){
-                System.out.println("Has perdidio el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
+            FinPrograma();
         }
         else if(Opcion=="Habilidad"){
             jugadores.HabilidadJugador1();
-            vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
-            vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
-            escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
-            escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
+            cooldownHabilidad=turnos+3;
+            ActualizacionEstadisticas();
             botonHabilidad.setEnabled(false);
             System.out.println("Tienes la habilidad en cooldown, 3 turnos sin habilidad");
-            cooldownHabilidad=turnos+3;
-            turnos++;
-            turno.setText(String.valueOf(turnos));
-
-            if(jugadores.getJugador2().getVida()==0){
-                System.out.println("Has ganado el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
-            if(jugadores.getJugador1().getVida()==0){
-                System.out.println("Has perdidio el combate");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.exit(-1);
-            }
+            FinPrograma();
         }
         else{
             //pociones
+        }
+    }
+    public void ActualizacionEstadisticas(){
+        vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
+        vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
+        escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
+        escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
+        turnos++;
+        turno.setText(String.valueOf(turnos));
+    }
+    public void FinPrograma(){
+        if(jugadores.getJugador2().getVida()==0){
+            System.out.println("Has ganado el combate");
+            try{
+                Thread.sleep(3000);
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            System.exit(-1);
+        }
+        if(jugadores.getJugador1().getVida()==0){
+            System.out.println("Has perdidio el combate");
+            try{
+                Thread.sleep(3000);
+            }
+            catch(InterruptedException e){
+                 e.printStackTrace();
+            }
+            System.exit(-1);
         }
     }
 
@@ -183,6 +174,6 @@ public class InterfazCombate extends JPanel implements ActionListener{
         frameC.setSize(850,750);
         frameC.setTitle("Combate");
         frameC.setVisible(true);
-        frameC.setDefaultCloseOperation(0);
+        frameC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
