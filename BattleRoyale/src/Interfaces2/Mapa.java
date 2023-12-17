@@ -14,7 +14,7 @@ public class Mapa extends JPanel implements Runnable{
     
     //Constantes
     final int casillaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
-    final int escala = 3; 
+    public final int escala = 3; 
 
     public final int casillaSizeEscalada = casillaSize * escala; //Asi los personajes son 48x48
     public final int maxScreenColumnas = 20;
@@ -36,6 +36,7 @@ public class Mapa extends JPanel implements Runnable{
     AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
+    public ColisionCheck colisionCheck = new ColisionCheck(this);
     public Jugador player1 = new Zhongli(this, keyHandler);
     public Jugador player2 = new Mei(this, keyHandler);
     //Jugador player2 = new YunJin(this, keyHandler);

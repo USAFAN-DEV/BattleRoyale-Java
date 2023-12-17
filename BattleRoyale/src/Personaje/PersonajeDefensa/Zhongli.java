@@ -1,5 +1,6 @@
 package Personaje.PersonajeDefensa;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -15,9 +16,10 @@ public class Zhongli extends Jugador{
     //Constructor
     public Zhongli(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 90, mapa.casillaSizeEscalada * 60);
+        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 30, mapa.casillaSizeEscalada * 30);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
+        areaDeCollision = new Rectangle(4 * mapa.escala, 6 * mapa.escala, 8 * mapa.escala, 10 * mapa.escala);
         getPlayerImage();
         
     }

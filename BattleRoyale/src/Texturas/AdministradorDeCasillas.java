@@ -14,26 +14,28 @@ public class AdministradorDeCasillas {
 
     //Constantes
     final int numeroCasillasDistintas = 32; //Numero de fotos de Casillas diferentes
-    final int numeroDecorationsDistintas = 130;
+    final int numeroDecoracionesDistintas = 130;
     
     //Atributos
     Mapa mapa;
-    Casilla[] casillas;
-    Casilla[] decorations;
-    int mapInNumbers[][];
-    int decorationsInNumbers[][];
+    public Casilla[] casillas;
+    public Casilla[] decorations;
+    public int mapInNumbers[][];
+    public int decorationsInNumbers[][];
 
     //Constructor
     public AdministradorDeCasillas(Mapa mapa){
 
         this.mapa = mapa;
         casillas = new Casilla[numeroCasillasDistintas];
-        decorations = new Casilla[numeroDecorationsDistintas];
+        decorations = new Casilla[numeroDecoracionesDistintas];
         this.mapInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
         this.decorationsInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
 
         getCasillaImage();
+        getCasillaCollision();
         getDecorationImage();
+        getDecorationCollision();
         loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map01.txt", mapInNumbers);
         loadMap("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt", decorationsInNumbers);
 
@@ -47,21 +49,47 @@ public class AdministradorDeCasillas {
 
         try {
 
+            
             String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand2.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png", "ground-water-left-snow.png", "ground-water-top-left-snow.png", "ground-water-top-snow.png", "ground-water-top-right-snow.png", "ground-water-right-snow.png", "ground-water-down-snow.png", "ground-water-down-left-snow.png", "ground-water-down-right-snow.png", "ground-water-down-left-sand.png", "ground-water-left-sand.png", "ground-water-top-left-sand.png", "ground-water-top-sand.png", "ground-water-down-sand.png", "suelo-templo.png"}; //Fotos de cada tipo de casilla
 
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
                 casillas[i] = new Casilla();
                 String imagePath = "C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\textures\\" + tiposDeCasillas[i];
-                System.out.println(imagePath);
+                //System.out.println(imagePath);
                 casillas[i].image = ImageIO.read(new File(imagePath));
 
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {e.printStackTrace();}
 
+    }
+
+    public void getCasillaCollision(){
+
+        try {
+
+            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\casillasCollision.txt"));
+            String linea;
+            String[] lineaParseada;
+
+            for(int i = 0; i < numeroCasillasDistintas; i++){
+
+                linea = in.readLine();
+                lineaParseada = linea.split(",");
+
+                if("true".equalsIgnoreCase(lineaParseada[1].trim())){
+                    casillas[i].setCasillaCollision(true);
+                }
+
+                //System.out.println(casillas[i].collision);
+
+            }
+
+            in.close();
+            
+        } catch (Exception e) {e.printStackTrace();}
+        
     }
 
     public void getDecorationImage(){
@@ -70,19 +98,44 @@ public class AdministradorDeCasillas {
 
             String[] tiposDeDecorations = {"tree-winter.png", "tree-winter-cut.png", "house.png", "castle-topleft.png", "castle-topright.png", "castle-bottomleft.png", "castle-bottomright.png", "bridge-topleft.png", "bridge-topright.png", "bridge-centerleft.png", "bridge-centerright.png", "bridge-bottomleft.png", "bridge-bottomright.png", "bridge-center.png", "bridge-topleft-hor.png", "bridge-bottomleft-hor.png", "bridge-centertop-hor.png", "bridge-centerbottom-hor.png", "bridge-center-hor.png", "bridge-topright-hor.png", "bridge-bottomright-hor.png", "rock-winter1.png", "rock-winter2.png", "tumba.png", "mina.png", "tree.png", "trigo.png", "rock1.png", "rock2.png", "muralla-hor.png", "muralla-vert.png", "muralla-torre.png", "cuartel-topleft.png", "cuartel-topright.png", "cuartel-bottomleft.png", "cuartel-bottomright.png", "cuartel-casa.png", "cuartel-estatua.png", "cuartel-lanzas.png", "cuartel-barracones1.png", "cuartel-barracones2.png", "iglesia.png", "market1.png", "market2.png", "market3.png", "cartel.png", "pozo.png", "taberna.png", "tienda-vida-escudos.png", "tree-winter-dead.png", "portal.png", "cuartel-casa-guerreros.png", "hacha1.png", "hacha2.png", "tree-coconut.png", "cactus.png", "planta-desierto.png", "castle-sand-topleft.png", "castle-sand-topright.png", "castle-sand-bottomleft.png", "castle-sand-bottomright.png", "house-sand.png", "wall-bottom-temple1.png", "wall-bottom-temple2.png", "wall-bottom-temple3.png", "wall-bottom-temple4.png", "wall-bottom-temple5.png", "wall-bottom-temple6.png", "wall-bottom-temple7.png", "wall-bottom-temple8.png", "wall-bottom-temple9.png", "wall-bottom-temple10.png", "wall-bottom-temple11.png", "wall-bottom-temple12.png", "wall-bottom-temple13.png", "wall-bottom-temple14.png", "wall-bottom-temple15.png", "wall-bottom-temple16.png", "esquina-left-temple1.png", "esquina-left-temple2.png", "esquina-left-temple3.png", "esquina-left-temple4.png", "wall-left-temple1.png", "wall-left-temple2.png", "wall-left-temple3.png", "wall-left-temple4.png", "wall-left-temple5.png", "wall-left-temple6.png", "esquina-topleft-temple1.png", "esquina-topleft-temple2.png", "esquina-topleft-temple3.png", "esquina-topleft-temple4.png", "esquina-topright-temple1.png", "esquina-topright-temple2.png", "esquina-topright-temple3.png", "esquina-topright-temple4.png", "wall-right-temple1.png", "wall-right-temple2.png", "wall-right-temple3.png", "wall-right-temple4.png", "wall-right-temple5.png", "wall-right-temple6.png", "esquina-right-temple1.png", "esquina-right-temple2.png", "esquina-right-temple3.png", "esquina-right-temple4.png", "estatua-diosa1.png", "estatua-diosa2.png", "estatua-diosa3.png", "estatua-diosa4.png", "estatua-diosa5.png", "estatua-diosa6.png", "estatua-diosa7.png", "estatua-diosa8.png", "banco-down1.png", "banco-down2.png", "banco-down3.png", "banco-down4.png", "pilar-templo1.png", "pilar-templo2.png", "pilar-templo3.png", "pilar-templo4.png", "pilar-templo5.png", "pilar-templo6.png", "pilar-templo7.png", "pilar-templo8.png", "invocacion-templo1.png", "invocacion-templo2.png", "invocacion-templo3.png", "invocacion-templo4.png"}; //Fotos de cada tipo de decoracion
 
-            for(int i = 0; i < numeroDecorationsDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
+            for(int i = 0; i < numeroDecoracionesDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
                 decorations[i] = new Casilla();
                 String imagePath = "C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\decorations\\" + tiposDeDecorations[i];
-                System.out.println(imagePath);
+                //System.out.println(imagePath);
                 decorations[i].image = ImageIO.read(new File(imagePath));
-
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {e.printStackTrace();}
 
+    }
+
+    
+    public void getDecorationCollision(){
+
+        try {
+
+            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\decoracionesCollision.txt"));
+            String linea;
+            String[] lineaParseada;
+
+            for(int i = 0; i < numeroDecoracionesDistintas; i++){
+
+                linea = in.readLine();
+                lineaParseada = linea.split(",");
+
+                if("true".equalsIgnoreCase(lineaParseada[1].trim())){
+                    decorations[i].setCasillaCollision(true);
+                }
+
+                //System.out.println(decorations[i].collision);
+                
+            }
+
+            in.close();
+            
+        } catch (Exception e) {e.printStackTrace();}
+        
     }
 
     public void loadMap(String filePath, int[][] fileInNumbers){

@@ -1,6 +1,7 @@
 package Personaje;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import Herramientas.Armas;
@@ -45,12 +46,16 @@ public class Jugador {
 
     //images
     protected BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    String direction;
+    public String direction;
     int contFrames;
     int playerImage;
     
     //CooldownHabilidad
     private int cooldownHabilidad;
+
+    //Collision
+    public Rectangle areaDeCollision;
+    public boolean collisionEstado;
     
     //Constructor
     public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY){
@@ -86,7 +91,7 @@ public class Jugador {
         screenX = 480  - 24; //mapaMaxWidth/2 - tamanoCasilla/2. Pequeno ajuste para que este en el centro de la pantalla. Las coordenadas son la esquina izquierda superior por la cual se empieza a dibujar
         screenY = 360 - 24;
 
-        speed = 8;
+        speed = 4;
 
         direction = "down";
         contFrames = 0;
@@ -94,6 +99,9 @@ public class Jugador {
 
         //cooldown Habilidad
         cooldownHabilidad=0;
+
+        //Colision
+        collisionEstado = false;
     }
     
     //declaracion de getters y setter de cada uno de los atributos de la clase Jugador
@@ -203,6 +211,15 @@ public class Jugador {
     public int getSpeed(){
         return this.speed;
     }
+
+    public void setAreaDeColision(Rectangle areaDeColision){
+        this.areaDeCollision = areaDeColision;
+    }
+    public Rectangle getAreaDeColision(){
+
+        return this.areaDeCollision;
+
+    }
     
     //METODOS
 
@@ -254,48 +271,69 @@ public class Jugador {
    
     public void update(){
 
-        if(keyHandler.PressedUp == true){
+        teletransportacion();
 
-            direction = "up";
-            mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
-            contFrames++;
-        }
-        else if(keyHandler.PressedLeft == true){
+        if(keyHandler.PressedUp == true || keyHandler.PressedLeft == true || keyHandler.PressedDown == true || keyHandler.PressedRight == true){
 
-            direction = "left";
-            mapaX -= speed;
-            contFrames++;
+            if(keyHandler.PressedUp == true){
 
-        }
-        else if(keyHandler.PressedDown == true){
-
-            direction = "down";
-            mapaY += speed;
-            contFrames++;
-
-        }
-        else if(keyHandler.PressedRight == true){
- 
-            direction = "right";
-            mapaX += speed;
-            contFrames++;
-
-        }
-
-        if(contFrames > 15){
-
-            if(playerImage == 1){
-                playerImage = 2;
+                direction = "up";
+                contFrames++;
             }
-            else{
-                playerImage = 1;
+            else if(keyHandler.PressedLeft == true){
+
+                direction = "left";
+                contFrames++;
+
             }
-            
-            contFrames = 0;
+            else if(keyHandler.PressedDown == true){
+
+                direction = "down";
+                contFrames++;
+
+            }
+            else if(keyHandler.PressedRight == true){
+    
+                direction = "right";
+                contFrames++;
+
+            }
+
+            if(contFrames > 15){
+
+                if(playerImage == 1){
+                    playerImage = 2;
+                }
+                else{
+                    playerImage = 1;
+                }
+                
+                contFrames = 0;
+
+            }
+
+            collisionEstado = false;
+            mapa.colisionCheck.checkCasilla(this);
+            System.out.println(collisionEstado);
+
+            if(collisionEstado == false){
+
+                switch (direction) {
+                case "up": mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
+                    break;
+                case "down": mapaY += speed;
+                    break;
+                case "left": mapaX -= speed;
+                    break;
+                case "right": mapaX += speed;
+                    break;
+                default:
+                    break;
+                }
+
+            }
 
         }
-
-
 
     }
 
@@ -349,6 +387,26 @@ public class Jugador {
 
 
         g2.drawImage(image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
+
+    }
+
+    public void teletransportacion(){
+
+        int jugadorMapaCol = getMapaX()/mapa.casillaSizeEscalada;
+        int jugadorMapaRow = getMapaY()/mapa.casillaSizeEscalada;
+
+        System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
+
+
+        if(jugadorMapaCol == 21 && jugadorMapaRow == 51){
+            setMapaX(15 * mapa.casillaSizeEscalada);
+            setMapaY(70 * mapa.casillaSizeEscalada);
+        }
+
+        else if(jugadorMapaCol == 13 && jugadorMapaRow == 69){
+            setMapaX(21 * mapa.casillaSizeEscalada);
+            setMapaY(52 * mapa.casillaSizeEscalada);
+        }
 
     }
 
