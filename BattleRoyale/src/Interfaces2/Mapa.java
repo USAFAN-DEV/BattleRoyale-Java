@@ -121,6 +121,7 @@ public class Mapa extends JPanel implements Runnable{
         //player2.draw(g2)
         
         g2.dispose();
+
     }
 
 }

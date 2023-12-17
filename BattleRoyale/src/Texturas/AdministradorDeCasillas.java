@@ -13,8 +13,8 @@ import Interfaces2.Mapa;
 public class AdministradorDeCasillas {
 
     //Constantes
-    final int numeroCasillasDistintas = 32; //Numero de fotos de Casillas diferentes
-    final int numeroDecorationsDistintas = 14;
+    final int numeroCasillasDistintas = 31; //Numero de fotos de Casillas diferentes
+    final int numeroDecorationsDistintas = 54;
     
     //Atributos
     Mapa mapa;
@@ -47,7 +47,7 @@ public class AdministradorDeCasillas {
 
         try {
 
-            String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand2.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png", "ground-water-left-snow.png", "ground-water-top-left-snow.png", "ground-water-top-snow.png", "ground-water-top-right-snow.png", "ground-water-right-snow.png", "bridge-down-left.png", "ground-water-down-snow.png", "ground-water-down-left-snow.png", "ground-water-down-right-snow.png", "ground-water-down-left-sand.png", "ground-water-left-sand.png", "ground-water-top-left-sand.png", "ground-water-top-sand.png", "ground-water-down-sand.png"}; //Fotos de cada tipo de casilla
+            String[] tiposDeCasillas = {"grass.png", "water.png", "water2.png", "water-sand.png", "water-sand2.png", "sand.png", "ground-water-down.png", "ground-water-down-left.png", "ground-water-left.png", "ground-water-top-left.png", "ground-water-top.png", "ground-water-top-right.png", "ground-water-right.png", "ground-water-down-right.png", "snow1.png", "snow2.png", "snow3.png", "snow4.png", "ground-water-left-snow.png", "ground-water-top-left-snow.png", "ground-water-top-snow.png", "ground-water-top-right-snow.png", "ground-water-right-snow.png", "ground-water-down-snow.png", "ground-water-down-left-snow.png", "ground-water-down-right-snow.png", "ground-water-down-left-sand.png", "ground-water-left-sand.png", "ground-water-top-left-sand.png", "ground-water-top-sand.png", "ground-water-down-sand.png"}; //Fotos de cada tipo de casilla
 
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
@@ -68,7 +68,7 @@ public class AdministradorDeCasillas {
 
          try {
 
-            String[] tiposDeDecorations = {"tree-winter.png", "tree-winter-cut.png", "house.png", "castle-topleft.png", "castle-topright.png", "castle-bottomleft.png", "castle-bottomright.png", "bridge-topleft.png", "bridge-topright.png", "bridge-centerleft.png", "bridge-centerright.png", "bridge-bottomleft.png", "bridge-bottomright.png", "bridge-center.png"}; //Fotos de cada tipo de decoracion
+            String[] tiposDeDecorations = {"tree-winter.png", "tree-winter-cut.png", "house.png", "castle-topleft.png", "castle-topright.png", "castle-bottomleft.png", "castle-bottomright.png", "bridge-topleft.png", "bridge-topright.png", "bridge-centerleft.png", "bridge-centerright.png", "bridge-bottomleft.png", "bridge-bottomright.png", "bridge-center.png", "bridge-topleft-hor.png", "bridge-bottomleft-hor.png", "bridge-centertop-hor.png", "bridge-centerbottom-hor.png", "bridge-center-hor.png", "bridge-topright-hor.png", "bridge-bottomright-hor.png", "rock-winter1.png", "rock-winter2.png", "tumba.png", "mina.png", "tree.png", "trigo.png", "rock1.png", "rock2.png", "muralla-hor.png", "muralla-vert.png", "muralla-torre.png", "cuartel-topleft.png", "cuartel-topright.png", "cuartel-bottomleft.png", "cuartel-bottomright.png", "cuartel-casa.png", "cuartel-estatua.png", "cuartel-lanzas.png", "cuartel-barracones1.png", "cuartel-barracones2.png", "iglesia.png", "market1.png", "market2.png", "market3.png", "cartel.png", "pozo.png", "taberna.png", "tienda-vida-escudos.png", "tree-winter-dead.png", "portal.png", "cuartel-casa-guerreros.png", "hacha1.png", "hacha2.png"}; //Fotos de cada tipo de decoracion
 
             for(int i = 0; i < numeroDecorationsDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
@@ -160,7 +160,7 @@ public class AdministradorDeCasillas {
 
                 g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null); //Dibujamos una Casilla
                 
-                if(decorationNum != -1){
+                if(decorationNum >=0){
 
                     g2.drawImage(decorations[decorationNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
 
