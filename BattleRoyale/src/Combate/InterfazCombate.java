@@ -15,6 +15,8 @@ import Interfaces2.Mapa;
 import Combate.MetodoCombate;
 import Personaje.Jugador;
 
+import Sound.Musica;
+
 public class InterfazCombate extends JPanel implements ActionListener{
     public MetodoCombate jugadores;
     public int cooldownHabilidad;
@@ -25,6 +27,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public int turnos;
     public JTextField turno;
     public JButton botonHabilidad;
+    public Musica musica;
 
     public InterfazCombate(Jugador jugador1,Jugador jugador2){
         //fondo
@@ -38,7 +41,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         fondo.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/background.png"));
         add(fondo,2,0);
 
-        
+        //Musica 
+        musica=new Musica();
         
         turnos=1;
         setLayout(null);
@@ -177,8 +181,15 @@ public class InterfazCombate extends JPanel implements ActionListener{
             }
         }
     }
+    public void playMusic(int i){
+        musica.setupMusica(i);
+        musica.play();
+        musica.loop();
+    }
+    public void stopMusic(){
+        musica.stop();
+    }
         
-
     public static void main(String[] args){
         Mapa mapa=new Mapa();
         mapa.player1.setContadorPociones(1);
@@ -190,5 +201,6 @@ public class InterfazCombate extends JPanel implements ActionListener{
         frameC.setTitle("Combate");
         frameC.setVisible(true);
         frameC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        interfazC.playMusic(1);
     }
 }
