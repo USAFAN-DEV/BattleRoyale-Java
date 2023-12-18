@@ -11,7 +11,7 @@ public class Coin extends Objeto {
 
         name = "coin";
         try {
-            image = ImageIO.read(new File("C:\\Users\\nicol\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\objetos\\" + imageName)); 
+            image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/objetos/" + imageName)); 
         } catch (IOException e) {e.printStackTrace();}
 
         this.mapaX = mapaX;

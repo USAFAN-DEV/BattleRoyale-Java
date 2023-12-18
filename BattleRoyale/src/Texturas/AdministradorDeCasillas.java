@@ -36,8 +36,8 @@ public class AdministradorDeCasillas {
         getCasillaCollision();
         getDecorationImage();
         getDecorationCollision();
-        loadMap("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map01.txt", mapInNumbers);
-        loadMap("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\map02.txt", decorationsInNumbers);
+        loadMap("./BattleRoyale-Java/BattleRoyale/maps/map01.txt", mapInNumbers);
+        loadMap("./BattleRoyale-Java/BattleRoyale/maps/map02.txt", decorationsInNumbers);
 
     }
 
@@ -55,7 +55,7 @@ public class AdministradorDeCasillas {
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
                 casillas[i] = new Casilla();
-                String imagePath = "C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\textures\\" + tiposDeCasillas[i];
+                String imagePath = "./BattleRoyale-Java/BattleRoyale/images/textures/" + tiposDeCasillas[i];
                 //System.out.println(imagePath);
                 casillas[i].image = ImageIO.read(new File(imagePath));
 
@@ -69,7 +69,7 @@ public class AdministradorDeCasillas {
 
         try {
 
-            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\casillasCollision.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("./BattleRoyale-Java/BattleRoyale/maps/casillasCollision.txt"));
             String linea;
             String[] lineaParseada;
 
@@ -101,7 +101,7 @@ public class AdministradorDeCasillas {
             for(int i = 0; i < numeroDecoracionesDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
                 decorations[i] = new Casilla();
-                String imagePath = "C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\decorations\\" + tiposDeDecorations[i];
+                String imagePath = "./BattleRoyale-Java/BattleRoyale/images/decorations/" + tiposDeDecorations[i];
                 //System.out.println(imagePath);
                 decorations[i].image = ImageIO.read(new File(imagePath));
             }
@@ -115,7 +115,7 @@ public class AdministradorDeCasillas {
 
         try {
 
-            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\maps\\decoracionesCollision.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("./BattleRoyale-Java/BattleRoyale/maps/decoracionesCollision.txt"));
             String linea;
             String[] lineaParseada;
 

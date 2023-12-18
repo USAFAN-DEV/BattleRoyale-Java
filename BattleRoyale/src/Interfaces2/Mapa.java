@@ -9,6 +9,7 @@ import java.awt.*;
 import Personaje.Jugador;
 import Personaje.PersonajeAtk.Mei;
 import Personaje.PersonajeHealer.Qiqi;
+import Sound.Musica;
 import Personaje.PersonajeDefensa.Zhongli;
 import Texturas.AdministradorDeCasillas;
 
@@ -30,8 +31,7 @@ public class Mapa extends JPanel implements Runnable{
     //World variables
     public final int maxMapaColumnas = 103;
     public final int maxMapaFilas = 82;
-    public final int mapaWidth = casillaSize * maxMapaColumnas;
-    public final int mapaHeight = casillaSize * maxMapaFilas;
+
 
     //FPS (Frames per second)
 
@@ -39,12 +39,14 @@ public class Mapa extends JPanel implements Runnable{
 
     AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
     KeyHandler keyHandler = new KeyHandler();
-    Thread gameThread;
     public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
     public ColisionCheck colisionCheck = new ColisionCheck(this);
     public Jugador player1 = new Zhongli(this, keyHandler);
     public Jugador player2 = new Mei(this, keyHandler);
     public Objeto objetos[] = new Objeto[10]; 
+    public Musica musica = new Musica();
+
+    Thread gameThread;
     //Jugador player2 = new YunJin(this, keyHandler);
 
     
@@ -58,6 +60,7 @@ public class Mapa extends JPanel implements Runnable{
         this.addKeyListener(keyHandler); //Anadimos el keyListener
         this.setFocusable(true); // puede ser "focused" para recibir key inputs
         this.AdministradorO.colocarObjetos();
+        playMusic(0);
 
     }
     //getter y setter
@@ -69,6 +72,20 @@ public class Mapa extends JPanel implements Runnable{
 
         gameThread = new Thread(this); //Instanciamos el Thread
         gameThread.start(); //Llama a run()
+
+    }
+
+    public void playMusic(int i){
+
+        musica.setupMusica(i);
+        musica.play();
+        musica.loop();
+
+    }
+
+    public void stopMusic(){
+
+        musica.stop();
 
     }
 
