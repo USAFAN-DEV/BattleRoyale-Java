@@ -20,6 +20,8 @@ public class Zhongli extends Jugador{
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         areaDeCollision = new Rectangle(4 * mapa.escala, 6 * mapa.escala, 8 * mapa.escala, 10 * mapa.escala);
+        areaDeColisionDefaultX = areaDeCollision.x;
+        areaDeColisionDefaultY = areaDeCollision.y;
         getPlayerImage();
         
     }

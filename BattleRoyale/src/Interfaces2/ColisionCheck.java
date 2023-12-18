@@ -134,4 +134,102 @@ public class ColisionCheck {
 
     }
 
+    public int checkObject(Jugador jugador){
+
+        int index = -1;
+        //Revisar si es necesario crear un atributo de jugador para resetear el area de colision despues de calcular la del mapa, o puedo crear aqui una variable
+
+        for(int i = 0; i < mapa.objetos.length; i++){
+
+            if(mapa.objetos[i] != null){
+
+                //Necesitamos la posicion del area de colision de la entidad en el mapa
+                jugador.areaDeCollision.x = jugador.getMapaX() + jugador.areaDeCollision.x;
+                jugador.areaDeCollision.y = jugador.getMapaY() + jugador.areaDeCollision.y;
+
+                //Necesitamos la posicion del area de colision del objeto en el mapa
+                //Realmente no haria falta hacer esto si la x y la y del objeto son 0,0, pero por si se da el caso de que un objeto no tenga 48x48 de area de colision, lo escribimos
+                mapa.objetos[i].areaDeColision.x = mapa.objetos[i].mapaX + mapa.objetos[i].areaDeColision.x;
+                mapa.objetos[i].areaDeColision.y = mapa.objetos[i].mapaY + mapa.objetos[i].areaDeColision.y;
+
+                switch(jugador.direction){
+
+                    case "up":
+                        jugador.areaDeCollision.y -= jugador.speed;
+                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+
+                            if(mapa.objetos[i].collision == true){
+                                jugador.collisionEstado = true;
+                            }
+                            if(jugador instanceof Jugador){
+
+                                index = i;
+
+                            }
+
+                        }
+                        break;
+                    case "down":
+                        jugador.areaDeCollision.y += jugador.speed;
+                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+
+                            if(mapa.objetos[i].collision == true){
+                                jugador.collisionEstado = true;
+                            }
+                            if(jugador instanceof Jugador){
+
+                                index = i;
+
+                            }
+
+                        }
+                        break;
+                    case "left":
+                        jugador.areaDeCollision.x -= jugador.speed;
+                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+
+                            if(mapa.objetos[i].collision == true){
+                                jugador.collisionEstado = true;
+                            }
+                            if(jugador instanceof Jugador){
+
+                                index = i;
+
+                            }
+
+                        }
+                        break;
+                    case "right":
+                        jugador.areaDeCollision.x += jugador.speed;
+                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+
+                            if(mapa.objetos[i].collision == true){
+                                jugador.collisionEstado = true;
+                            }
+                            if(jugador instanceof Jugador){
+
+                                index = i;
+
+                            }
+
+                        }
+                        break;
+                    default:
+                    break;
+
+                }
+
+                jugador.areaDeCollision.x = jugador.areaDeColisionDefaultX;
+                jugador.areaDeCollision.y = jugador.areaDeColisionDefaultY;
+                mapa.objetos[i].areaDeColision.x = mapa.objetos[i].areaDeColisionDefaultX;
+                mapa.objetos[i].areaDeColision.y = mapa.objetos[i].areaDeColisionDefaultY;
+
+            }
+
+        }
+
+        return index;
+
+    }
+
 }

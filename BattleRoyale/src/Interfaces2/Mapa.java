@@ -56,7 +56,8 @@ public class Mapa extends JPanel implements Runnable{
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); //Mejora el rendimiento de la renderizacion del juego
         this.addKeyListener(keyHandler); //Anadimos el keyListener
-        this.setFocusable(true); //Interfaz puede ser "focused" para recibir key inputs
+        this.setFocusable(true); // puede ser "focused" para recibir key inputs
+        this.AdministradorO.colocarObjetos();
 
     }
     //getter y setter
