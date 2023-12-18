@@ -60,7 +60,7 @@ public class Mapa extends JPanel implements Runnable{
         this.addKeyListener(keyHandler); //Anadimos el keyListener
         this.setFocusable(true); // puede ser "focused" para recibir key inputs
         this.AdministradorO.colocarObjetos();
-        playMusic(0);
+        this.playMusic(0);
 
     }
     //getter y setter
