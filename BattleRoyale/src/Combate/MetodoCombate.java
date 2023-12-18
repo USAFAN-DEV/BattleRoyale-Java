@@ -65,22 +65,28 @@ public class MetodoCombate {
         int randOpcionBot=random.nextInt(2)+1;
         int damage;
         //Cooldown de la habilidad del bot
-        if(getJugador2().getCooldownHabilidad()!=3 && getJugador2().getCooldownHabilidad()>=1){
-            getJugador2().setCooldownHabilidad(getJugador2().getCooldownHabilidad()+1);
-            System.out.printf("El cooldown del bot le queda:%d\n",3-getJugador2().getCooldownHabilidad());
-        }
-        else{
-            getJugador2().setCooldownHabilidad(0);
-        }
-        if(randOpcionBot==1||getJugador2().getCooldownHabilidad()>=1){
+        if(getJugador2().getNombre()=="Qiqi"){
             damage=Dmg(getJugador1());
             System.out.println("Daño recibido "+damage);
         }
         else{
-            System.out.printf("El cooldown del bot le queda:%d\n",3-getJugador2().getCooldownHabilidad());
-            getJugador2().setCooldownHabilidad(1);
-            HabilidadJugador2(jugador1);
-        }
+            if(getJugador2().getCooldownHabilidad()!=3 && getJugador2().getCooldownHabilidad()>=1){
+            getJugador2().setCooldownHabilidad(getJugador2().getCooldownHabilidad()+1);
+            System.out.printf("La habilidad del bot le quedan %d turnos\n",3-getJugador2().getCooldownHabilidad());
+            }
+            else{
+                getJugador2().setCooldownHabilidad(0);
+            }
+            if(randOpcionBot==1||getJugador2().getCooldownHabilidad()>=1){
+                damage=Dmg(getJugador1());
+                System.out.println("Daño recibido "+damage);
+            }
+            else{
+                System.out.printf("La habilidad del bot le quedan %d turnos\n",3-getJugador2().getCooldownHabilidad());
+                getJugador2().setCooldownHabilidad(1);
+                HabilidadJugador2(jugador1);
+            }
+        }       
     }
 
     public void Ataque(){

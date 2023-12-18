@@ -8,7 +8,7 @@ import Objetos.Objeto;
 import java.awt.*;
 import Personaje.Jugador;
 import Personaje.PersonajeAtk.Mei;
-//import Personaje.PersonajeDefensa.YunJin;
+import Personaje.PersonajeHealer.Qiqi;
 import Personaje.PersonajeDefensa.Zhongli;
 import Texturas.AdministradorDeCasillas;
 
