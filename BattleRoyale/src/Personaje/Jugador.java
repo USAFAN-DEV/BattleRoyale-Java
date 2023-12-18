@@ -159,6 +159,9 @@ public class Jugador {
     public void setCrit(double crit){
         this.crit=crit;
     }
+    public String getPlayerGif(){
+        return "text";
+    }
 
     //Habilidad
     public void setEstadisticaHabilidad(double estadisticaHabilidad){

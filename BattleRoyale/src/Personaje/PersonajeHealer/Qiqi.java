@@ -27,7 +27,9 @@ public class Qiqi extends Jugador{
     }
 
     //METODOS
-
+    public String getPlayerGif(){
+        return "./BattleRoyale-Java/BattleRoyale/images/player/qiqi.gif";
+    }
     public void getPlayerImage(){
         /*try {
             System.out.println("Image loading started");
