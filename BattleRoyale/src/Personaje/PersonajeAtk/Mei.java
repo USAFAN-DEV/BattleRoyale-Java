@@ -27,7 +27,9 @@ public class Mei extends Jugador{
 
     //METODOS
 
-
+    public String getPlayerGif(){
+        return "./BattleRoyale-Java/BattleRoyale/images/player/eula.gif";
+    }
     public void getPlayerImage(){
         /*try {
             System.out.println("Image loading started");

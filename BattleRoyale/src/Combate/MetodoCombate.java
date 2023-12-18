@@ -22,16 +22,19 @@ public class MetodoCombate {
     public Jugador getJugador2(){
         return jugador2;
     }
-    public int Dmg(Jugador jugador){
+    public int CalcularDamage(Jugador jugador){
         Random random=new Random();
         int randDamage=random.nextInt(10)+1;
         int damage=0;
-        if(jugador2.getCrit()*10>=randDamage){
-                damage=jugador.getAtk()*2;
+        if(jugador.getCrit()*10>=randDamage){
+            damage=jugador.getAtk()*2;
         }
         else{
             damage=jugador.getAtk();
         }
+        return damage;
+    }
+    public int Dmg(Jugador jugador,int damage){
         //si el escudo es 0
         if(jugador.getEscudo()==0){
             //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
@@ -65,8 +68,9 @@ public class MetodoCombate {
         int randOpcionBot=random.nextInt(2)+1;
         int damage;
         //Cooldown de la habilidad del bot
+        damage=CalcularDamage(getJugador2());
         if(getJugador2().getNombre()=="Qiqi"){
-            damage=Dmg(getJugador1());
+            damage=Dmg(getJugador1(),damage);
             System.out.println("Daño recibido "+damage);
         }
         else{
@@ -78,13 +82,13 @@ public class MetodoCombate {
                 getJugador2().setCooldownHabilidad(0);
             }
             if(randOpcionBot==1||getJugador2().getCooldownHabilidad()>=1){
-                damage=Dmg(getJugador1());
+                damage=Dmg(getJugador1(),damage);
                 System.out.println("Daño recibido "+damage);
             }
             else{
                 System.out.printf("La habilidad del bot le quedan %d turnos\n",3-getJugador2().getCooldownHabilidad());
                 getJugador2().setCooldownHabilidad(1);
-                HabilidadJugador2(jugador1);
+                HabilidadJugador2(getJugador1());
             }
         }       
     }
@@ -94,7 +98,8 @@ public class MetodoCombate {
         //declaramos el daño que va a recibir el jugador2
         //el jugador 1 es siempre el que ejecuta el daño por tanto habrá que alternar en el ActionListener a los Jugadores
         int damage;
-        damage=Dmg(getJugador2());
+        damage=CalcularDamage(getJugador1());
+        damage=Dmg(getJugador2(),damage);
         try{
             System.out.println("Daño realizado de "+damage);
             Thread.sleep(1000);
@@ -121,8 +126,28 @@ public class MetodoCombate {
         getJugador2().usarHabilidad(jugador);
     }
 
-    public void Pocion(){
-        
+    public void usarPociones(){
+        //el jugador tiene un atributo que es contadorPociones
+        //System.out.println("Te has recuperado 50 puntos de vida");
+        if(getJugador1().getVida()==getJugador1().getVidaMaxima()){
+            System.out.println("Tienes la vida al maximo no puedes usar pociones");
+        }
+        else{
+            if(getJugador1().getContadorPociones()!=0){
+                getJugador1().setVida(getJugador1().getVida()+50);
+                if(getJugador1().getVida()>getJugador1().getVidaMaxima()){
+                    getJugador1().setVida(getJugador1().getVidaMaxima());
+                }
+                getJugador1().setContadorPociones(getJugador1().getContadorPociones()-1);
+                if(getJugador1().getContadorPociones()<0){
+                    getJugador1().setContadorPociones(0);
+                }
+                System.out.printf("Te has curado \n");
+                System.out.printf("Tienes %d pocion de vida\n",getJugador1().getContadorPociones());
+            }
+            else{
+                System.out.println("No te quedan pociones");
+            }
+        }
     }
-    
 }

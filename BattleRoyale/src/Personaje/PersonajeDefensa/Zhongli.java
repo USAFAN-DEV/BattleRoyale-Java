@@ -45,6 +45,9 @@ public class Zhongli extends Jugador{
     } 
 
     //Funcion para obtener la imagen del personaje de la carpeta
+    public String getPlayerGif(){
+        return "./BattleRoyale-Java/BattleRoyale/images/player/zhongli.gif";
+    }
     public void getPlayerImage(){
 
         try {

@@ -42,7 +42,7 @@ public class Mapa extends JPanel implements Runnable{
     public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
     public ColisionCheck colisionCheck = new ColisionCheck(this);
     public Jugador player1 = new Zhongli(this, keyHandler);
-    public Jugador player2 = new Mei(this, keyHandler);
+    public Jugador player2 = new Qiqi(this, keyHandler);
     public Objeto objetos[] = new Objeto[10]; 
     public Musica musica = new Musica();
 

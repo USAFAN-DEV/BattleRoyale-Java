@@ -44,15 +44,15 @@ public class InterfazCombate extends JPanel implements ActionListener{
         setLayout(null);
         //declaracion del boton de Ataque
         JButton botonAtaque=new JButton("Atacar"); 
-        botonAtaque.setBounds(500,500,250,50);
+        botonAtaque.setBounds(550,500,250,50);
         botonAtaque.addActionListener(this);
         //declaracion del boton de habilidad
         botonHabilidad=new JButton("Habilidad"); 
-        botonHabilidad.setBounds(500,550,250,50);
+        botonHabilidad.setBounds(550,550,250,50);
         botonHabilidad.addActionListener(this);
         //declaracion del boton de pocion
         JButton botonPocion=new JButton("Pocion");
-        botonPocion.setBounds(500,600,250,50);
+        botonPocion.setBounds(550,600,250,50);
         botonPocion.addActionListener(this);
         add(botonAtaque,1,0);
         add(botonHabilidad,1,0);
@@ -62,8 +62,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         //vida y escudo del jugador 1
         vidaJugador1=new JTextField(String.valueOf(jugadores.getJugador1().getVida()));
         escudoJugador1=new JTextField(String.valueOf(jugadores.getJugador1().getEscudo()));
-        escudoJugador1.setBounds(75,400,150,50);
-        vidaJugador1.setBounds(75,450,150,50);
+        escudoJugador1.setBounds(35,400,150,50);
+        vidaJugador1.setBounds(35,450,150,50);
         escudoJugador1.setEditable(false);
         vidaJugador1.setEditable(false);
         add(vidaJugador1,1,0);
@@ -83,16 +83,16 @@ public class InterfazCombate extends JPanel implements ActionListener{
         //BufferedImage imagenJugador2=jugador2.characterImage;
         JLabel image1=new JLabel();
         image1.setBounds(100,300,350,450);
-        image1.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/zhongli.gif"));
+        image1.setIcon(new ImageIcon(jugadores.getJugador1().getPlayerGif()));
         JLabel image2=new JLabel();
-        image2.setBounds(350,-30,450,450);
-        image2.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/eula.gif"));
+        image2.setBounds(400,-30,450,450);
+        image2.setIcon(new ImageIcon(jugadores.getJugador2().getPlayerGif()));
         add(image1,1,0);
         add(image2,1,0);
 
         //Nombre de los pesonajes
         JLabel nombreJugador1=new JLabel(jugadores.getJugador1().getNombre());
-        nombreJugador1.setBounds(75,365,150,50);
+        nombreJugador1.setBounds(35,365,150,50);
         JLabel nombreJugador2=new JLabel(jugadores.getJugador2().getNombre());
         nombreJugador2.setBounds(250,25,150,50);
         add(nombreJugador1,1,0);
@@ -131,6 +131,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         }
         else{
             //pociones
+            jugadores.usarPociones();
+            ActualizacionEstadisticas();
         }
     }
     public void ActualizacionEstadisticas(){
@@ -179,6 +181,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
 
     public static void main(String[] args){
         Mapa mapa=new Mapa();
+        mapa.player1.setContadorPociones(1);
         InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2);
         JFrame frameC=new JFrame();
         frameC.setResizable(false);
