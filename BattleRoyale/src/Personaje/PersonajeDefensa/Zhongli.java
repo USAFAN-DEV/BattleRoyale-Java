@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import Herramientas.ArmasDefensa.StaffOfHoma;
 import Interfaces2.Mapa;
 import Interfaces2.KeyHandler;
 import Personaje.Jugador;
@@ -19,10 +20,12 @@ public class Zhongli extends Jugador{
         super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 30, mapa.casillaSizeEscalada * 30);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
+        setArma(new StaffOfHoma());
         areaDeCollision = new Rectangle(4 * mapa.escala, 6 * mapa.escala, 8 * mapa.escala, 10 * mapa.escala);
         areaDeColisionDefaultX = areaDeCollision.x;
         areaDeColisionDefaultY = areaDeCollision.y;
         getPlayerImage();
+        arma.aplicarStatsArma(this);
         
     }
 

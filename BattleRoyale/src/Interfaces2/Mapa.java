@@ -2,6 +2,7 @@ package Interfaces2;
 
 import javax.swing.JPanel;
 
+import InterfazDeUsuario.UI;
 import Objetos.AdministradorDeObjetos;
 import Objetos.Objeto;
 
@@ -45,6 +46,7 @@ public class Mapa extends JPanel implements Runnable{
     public Jugador player2 = new Qiqi(this, keyHandler);
     public Objeto objetos[] = new Objeto[10]; 
     public Musica musica = new Musica();
+    public UI ui = new UI(this);
 
     Thread gameThread;
     //Jugador player2 = new YunJin(this, keyHandler);
@@ -149,7 +151,9 @@ public class Mapa extends JPanel implements Runnable{
             }
 
         }
+        
         player1.draw(g2);
+        ui.draw(g2);
         
         g2.dispose();
 

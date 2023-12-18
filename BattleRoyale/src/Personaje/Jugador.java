@@ -13,7 +13,7 @@ public class Jugador {
     //Declaracion variables stats principales
 
     //Arma
-    private Armas arma;
+    public Armas arma;
 
     //Vida y escudo
     private int vida;
