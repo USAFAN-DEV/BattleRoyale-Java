@@ -38,7 +38,7 @@ public class Jugador {
     int mapaX, mapaY;
     //Donde dibujamos al jugador en la pantalla
     public final int screenX, screenY;
-    int speed;
+    public int speed;
 
     //KeyHandler: movimiento personaje y Mapa. Se declaran en los hijos
     protected Mapa mapa;
@@ -56,6 +56,9 @@ public class Jugador {
     //Collision
     public Rectangle areaDeCollision;
     public boolean collisionEstado;
+    public int areaDeColisionDefaultX, areaDeColisionDefaultY;
+
+    int contCoins;
     
     //Constructor
     public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY){
@@ -102,6 +105,9 @@ public class Jugador {
 
         //Colision
         collisionEstado = false;
+
+        contCoins = 0;
+
     }
     
     //declaracion de getters y setter de cada uno de los atributos de la clase Jugador
@@ -317,7 +323,24 @@ public class Jugador {
 
             collisionEstado = false;
             mapa.colisionCheck.checkCasilla(this);
-            System.out.println(collisionEstado);
+            int objIndex = mapa.colisionCheck.checkObject(this);
+
+            if(objIndex != -1){
+
+                switch(mapa.objetos[objIndex].name){
+
+                    case "coin": 
+                        contCoins++;
+                        mapa.objetos[objIndex] = null;
+                        break;
+                    case "cofre":
+                        mapa.objetos[objIndex] = null;
+                        break;
+                }
+
+            }
+
+            System.out.println(contCoins);
 
             if(collisionEstado == false){
 
@@ -398,7 +421,7 @@ public class Jugador {
         int jugadorMapaCol = getMapaX()/mapa.casillaSizeEscalada;
         int jugadorMapaRow = getMapaY()/mapa.casillaSizeEscalada;
 
-        System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
+        //System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
 
 
         if(jugadorMapaCol == 21 && jugadorMapaRow == 51){

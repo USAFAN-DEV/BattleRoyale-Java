@@ -1,16 +1,20 @@
 package Objetos;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import Interfaces2.Mapa;
 
 public class Objeto{
     
+        public final int escala = 3;
         public BufferedImage image;
         public String name;
-        public boolean collision = false;
+        public boolean collision;
         public int mapaX, mapaY;
+        public Rectangle areaDeColision;
+        public int areaDeColisionDefaultX, areaDeColisionDefaultY;
 
         public void draw(Graphics2D g2, Mapa mapa){
 

@@ -1,5 +1,6 @@
 package Objetos;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -15,6 +16,10 @@ public class Cofre extends Objeto {
 
         this.mapaX = mapaX;
         this.mapaY = mapaY;
+        areaDeColision =  new Rectangle(0, 0, 16 * escala, 16 * escala);
+        areaDeColisionDefaultX = areaDeColision.x;
+        areaDeColisionDefaultY = areaDeColision.y;
+        this.collision = false;
 
     }
 

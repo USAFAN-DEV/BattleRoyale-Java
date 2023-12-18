@@ -20,7 +20,6 @@ public class Main {
         window.setLocationRelativeTo(null); //No especificamos la localizacion de la ventana. Por default en el centro
         window.setVisible(true);
 
-        mapa.AdministradorO.colocarObjetos();
         mapa.startGameThread();
 
     }
