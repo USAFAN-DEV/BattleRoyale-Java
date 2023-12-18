@@ -201,6 +201,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
         frameC.setTitle("Combate");
         frameC.setVisible(true);
         frameC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        interfazC.stopMusic();
         interfazC.playMusic(1);
     }
 }
