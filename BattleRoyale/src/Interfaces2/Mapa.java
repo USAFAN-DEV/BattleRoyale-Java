@@ -1,6 +1,10 @@
 package Interfaces2;
 
 import javax.swing.JPanel;
+
+import Objetos.AdministradorDeObjetos;
+import Objetos.Objeto;
+
 import java.awt.*;
 import Personaje.Jugador;
 import Personaje.PersonajeAtk.Mei;
@@ -36,9 +40,11 @@ public class Mapa extends JPanel implements Runnable{
     AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
+    public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
     public ColisionCheck colisionCheck = new ColisionCheck(this);
     public Jugador player1 = new Zhongli(this, keyHandler);
     public Jugador player2 = new Mei(this, keyHandler);
+    public Objeto objetos[] = new Objeto[10]; 
     //Jugador player2 = new YunJin(this, keyHandler);
 
     
@@ -118,8 +124,14 @@ public class Mapa extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
         administradorC.draw(g2);
+        for(int i = 0; i < objetos.length; i++){
+
+            if(objetos[i] != null){
+                objetos[i].draw(g2, this);
+            }
+
+        }
         player1.draw(g2);
-        //player2.draw(g2)
         
         g2.dispose();
 

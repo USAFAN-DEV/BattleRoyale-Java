@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
         
         JFrame window = new JFrame();
-        Mapa interfaz = new Mapa();
-        window.add(interfaz);
+        Mapa mapa = new Mapa();
+        window.add(mapa);
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Para que cuando el usuario le de a la x se cierre la ventana
         window.setResizable(false);
@@ -20,7 +20,8 @@ public class Main {
         window.setLocationRelativeTo(null); //No especificamos la localizacion de la ventana. Por default en el centro
         window.setVisible(true);
 
-        interfaz.startGameThread();
+        mapa.AdministradorO.colocarObjetos();
+        mapa.startGameThread();
 
     }
 }
