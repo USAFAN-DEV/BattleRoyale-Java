@@ -10,7 +10,7 @@ public class Qiqi extends Jugador{
     //Constructor
     public Qiqi(Mapa mapa, KeyHandler keyHandler){
 
-        super(200,200,25,0,100,0.25,0.25,"Healer","Qiqi","Preserver of Fortune",mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38);
+        super(150,150,15,0,100,0.25,0.25,"Healer","Qiqi","Preserver of Fortune",mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getPlayerImage();
@@ -47,7 +47,7 @@ public class Qiqi extends Jugador{
             super.setVida(100);
         } 
         else{
-            System.out.println("Error. La habilidad revivir ya se ha utilizado");
+            System.out.println("Error. La habilidad ya se ha utilizado");
         }    
     }
 

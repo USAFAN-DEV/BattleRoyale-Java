@@ -26,17 +26,16 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JTextField turno;
     public JButton botonHabilidad;
 
-
     public InterfazCombate(Jugador jugador1,Jugador jugador2){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);
-        fondo2.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\background2.gif"));
+        fondo2.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/background2.gif"));
         add(fondo2,3,0);
         
         JLabel fondo=new JLabel();
         fondo.setBounds(-80,0,850,750);
-        fondo.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\background.png"));
+        fondo.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/background.png"));
         add(fondo,2,0);
 
         
@@ -84,10 +83,10 @@ public class InterfazCombate extends JPanel implements ActionListener{
         //BufferedImage imagenJugador2=jugador2.characterImage;
         JLabel image1=new JLabel();
         image1.setBounds(100,300,350,450);
-        image1.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\zhongli.gif"));
+        image1.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/zhongli.gif"));
         JLabel image2=new JLabel();
         image2.setBounds(350,-30,450,450);
-        image2.setIcon(new ImageIcon("C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\player\\eula.gif"));
+        image2.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/eula.gif"));
         add(image1,1,0);
         add(image2,1,0);
 
@@ -146,6 +145,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
         if(jugadores.getJugador2().getVida()==0){
             if(jugadores.getJugador2().getNombre()=="Qiqi"){
                 jugadores.getJugador2().usarHabilidad(jugadores.getJugador1());
+                ActualizacionEstadisticas();
             }
             else{
                 System.out.println("Has ganado el combate");
@@ -161,6 +161,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
         if(jugadores.getJugador1().getVida()==0){
             if(jugadores.getJugador1().getNombre()=="Qiqi"){
                 jugadores.getJugador1().usarHabilidad(jugadores.getJugador2());
+                ActualizacionEstadisticas();
             }
             else{
                 System.out.println("Has perdidio el combate");
