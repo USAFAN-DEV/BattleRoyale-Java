@@ -22,6 +22,7 @@ public class Musica {
 
     public void setupMusica(int i){
 
+        System.out.println(musicaPaths[i]);
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(musicaPaths[i].toURI().toURL());  
             clip = AudioSystem.getClip();
