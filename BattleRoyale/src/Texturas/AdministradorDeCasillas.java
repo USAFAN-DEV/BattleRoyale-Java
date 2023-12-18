@@ -55,7 +55,7 @@ public class AdministradorDeCasillas {
             for(int i = 0; i < numeroCasillasDistintas; i++){ //Obtenemos las imagenes de cada tipo de casilla
 
                 casillas[i] = new Casilla();
-                String imagePath = "C:\\Users\\eduar\\Documents\\GitHub\\BattleRoyale-Java\\BattleRoyale\\images\\textures\\" + tiposDeCasillas[i];
+                String imagePath = "./BattleRoyale-Java/BattleRoyale/images/textures/" + tiposDeCasillas[i];
                 //System.out.println(imagePath);
                 casillas[i].image = ImageIO.read(new File(imagePath));
 

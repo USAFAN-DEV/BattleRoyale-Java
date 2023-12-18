@@ -30,6 +30,9 @@ public class Jugador {
     private double estadisticaHabilidad; //(es un porcentaje)
     private int nivelHabilidad;
 
+    //Pociones
+    private int contadorPociones;
+
     //Info del personaje
     private String nombre;
     private String tipo;
@@ -47,8 +50,8 @@ public class Jugador {
     //images
     protected BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
-    int contFrames;
-    int playerImage;
+    public int contFrames;
+    public int playerImage;
     
     //CooldownHabilidad
     private int cooldownHabilidad;
@@ -58,7 +61,7 @@ public class Jugador {
     public boolean collisionEstado;
     public int areaDeColisionDefaultX, areaDeColisionDefaultY;
 
-    int contCoins;
+    public int contCoins;
     
     //Constructor
     public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY){
@@ -80,6 +83,9 @@ public class Jugador {
         this.nombreHabilidad=nombreHabilidad;
         setEstadisticaHabilidad(estadisticaHabilidad);
         setNivelHabilidad(1);
+
+        //pociones
+        setContadorPociones(0);
 
         //Info del personaje
         setNombre(nombre);
@@ -164,6 +170,12 @@ public class Jugador {
     }
     public void setCrit(double crit){
         this.crit=crit;
+    }
+    public int getContadorPociones(){
+        return contadorPociones;
+    }
+    public void setContadorPociones(int contadorPociones){
+        this.contadorPociones=contadorPociones;
     }
     public String getPlayerGif(){
         return "text";

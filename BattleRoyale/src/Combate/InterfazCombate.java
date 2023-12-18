@@ -131,6 +131,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         }
         else{
             //pociones
+            jugadores.usarPociones();
+            ActualizacionEstadisticas();
         }
     }
     public void ActualizacionEstadisticas(){
@@ -179,6 +181,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
 
     public static void main(String[] args){
         Mapa mapa=new Mapa();
+        mapa.player1.setContadorPociones(1);
         InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2);
         JFrame frameC=new JFrame();
         frameC.setResizable(false);
