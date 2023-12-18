@@ -144,26 +144,37 @@ public class InterfazCombate extends JPanel implements ActionListener{
     }
     public void FinPrograma(){
         if(jugadores.getJugador2().getVida()==0){
-            System.out.println("Has ganado el combate");
-            try{
-                Thread.sleep(3000);
+            if(jugadores.getJugador2().getNombre()=="Qiqi"){
+                jugadores.getJugador2().usarHabilidad(jugadores.getJugador1());
             }
-            catch(InterruptedException e){
-                e.printStackTrace();
-            }
-            System.exit(-1);
+            else{
+                System.out.println("Has ganado el combate");
+                try{
+                    Thread.sleep(3000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.exit(-1);
+            }  
         }
         if(jugadores.getJugador1().getVida()==0){
-            System.out.println("Has perdidio el combate");
-            try{
-                Thread.sleep(3000);
+            if(jugadores.getJugador1().getNombre()=="Qiqi"){
+                jugadores.getJugador1().usarHabilidad(jugadores.getJugador2());
             }
-            catch(InterruptedException e){
-                 e.printStackTrace();
+            else{
+                System.out.println("Has perdidio el combate");
+                try{
+                    Thread.sleep(3000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.exit(-1);
             }
-            System.exit(-1);
         }
     }
+        
 
     public static void main(String[] args){
         Mapa mapa=new Mapa();
