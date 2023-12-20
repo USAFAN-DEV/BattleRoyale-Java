@@ -27,8 +27,9 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JTextField turno;
     public JButton botonHabilidad;
     public Musica musica;
+    public JFrame frameC;
 
-    public InterfazCombate(Personaje jugador1,Personaje jugador2){
+    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);
@@ -108,6 +109,9 @@ public class InterfazCombate extends JPanel implements ActionListener{
         turno.setEditable(false);
         add(nombreTurno,1,0);
         add(turno,1,0);
+
+        this.frameC = frameC;
+        frameC.add(this);
         
     }
 
@@ -160,7 +164,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                System.exit(-1);
+                frameC.dispose();
+                
             }  
         }
         if(jugadores.getJugador1().getVida()==0){
@@ -176,7 +181,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                System.exit(-1);
+                frameC.dispose();
             }
         }
     }
@@ -191,15 +196,15 @@ public class InterfazCombate extends JPanel implements ActionListener{
         
     public static void main(String[] args){
         Mapa mapa=new Mapa();
+        JFrame frameC= new JFrame();
         mapa.player1.setContadorPociones(1);
-        InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2);
-        JFrame frameC=new JFrame();
-        frameC.setResizable(false);
-        frameC.add(interfazC);
-        frameC.setSize(850,750);
-        frameC.setTitle("Combate");
-        frameC.setVisible(true);
-        frameC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2, frameC);
+        interfazC.frameC.setResizable(false);
+        interfazC.frameC.add(interfazC);
+        interfazC.frameC.setSize(850,750);
+        interfazC.frameC.setTitle("Combate");
+        interfazC.frameC.setVisible(true);
+        interfazC.frameC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mapa.stopMusic();
         interfazC.playMusic(1);
     }

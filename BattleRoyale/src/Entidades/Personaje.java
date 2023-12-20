@@ -5,6 +5,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import javax.swing.JFrame;
+
+import Combate.InterfazCombate;
 import Herramientas.Armas;
 import Interfaces.KeyHandler;
 import Interfaces.Mapa;
@@ -350,9 +353,21 @@ public abstract class Personaje {
             }
 
             int botIndex = mapa.colisionCheck.checkBot(this, mapa.bots);
+
             if(botIndex != -1){
-                //Abrir interfaz de combate y combatir
-                
+                mapa.estadoDelJuego = 3;
+                JFrame frameC= new JFrame();
+                mapa.player1.setContadorPociones(1);
+                InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.bots[0], frameC);
+                interfazC.frameC.setResizable(false);
+                interfazC.frameC.add(interfazC);
+                interfazC.frameC.setSize(850,750);
+                interfazC.frameC.setTitle("Combate");
+                interfazC.frameC.setVisible(true);
+                interfazC.frameC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                mapa.stopMusic();
+                interfazC.playMusic(1);
+                        
             }
 
             if(collisionEstado == false){
