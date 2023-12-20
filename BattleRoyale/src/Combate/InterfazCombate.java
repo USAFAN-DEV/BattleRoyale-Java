@@ -28,9 +28,9 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JButton botonHabilidad;
     public Musica musica;
     public JFrame frameC;
-    public int estadoDelJuego;
+    public Mapa mapa;
 
-    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC){
+    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC,Mapa mapa){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);
@@ -41,9 +41,9 @@ public class InterfazCombate extends JPanel implements ActionListener{
         fondo.setBounds(-80,0,850,750);
         fondo.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/background.png"));
         add(fondo,2,0);
+        //
 
-        estadoDelJuego = 0;
-
+        this.mapa=mapa;
         //Musica 
         musica=new Musica();
         
@@ -174,7 +174,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                estadoDelJuego=1;
+                mapa.estadoDelJuego=1;
                 frameC.dispose();
             }  
         }
@@ -191,7 +191,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                estadoDelJuego=0;
+                mapa.estadoDelJuego=4;
                 frameC.dispose();
             }
         }

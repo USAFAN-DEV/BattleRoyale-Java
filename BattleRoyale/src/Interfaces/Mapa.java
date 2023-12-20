@@ -130,7 +130,7 @@ public class Mapa extends JPanel implements Runnable{
             }
             if(timer >= 1000000000){ //Cuando timer llegue a un segundo (1000000000 nanosegundos). Timer es la resta entre current time y last time. Es decir, cuando el tiempo de ejecucion del programa llegue a un segundo
 
-                System.out.println("FPS:" + contDraw);
+                //System.out.println("FPS:" + contDraw);
                 timer = 0;
                 contDraw = 0;
 
@@ -143,21 +143,23 @@ public class Mapa extends JPanel implements Runnable{
     public void update(){
 
         if(estadoDelJuego == 1){
+            System.out.println("El estado del juego es 1");
             player1.update();
 
             for(int i = 0; i < bots.length; i++){
-
-                bots[i].updateBot();
-
+                if(bots[i] != null){
+                    bots[i].updateBot();
+                }
             }
             //player2.update(keyHandler);
         }
         else if(estadoDelJuego == 2){
+            System.out.println("El estado del juego es 2");
 
         }
         else if(estadoDelJuego == 3){
 
-            
+            System.out.println("El estado del juego es 3");
 
         }
 
@@ -180,9 +182,10 @@ public class Mapa extends JPanel implements Runnable{
         }
 
         for(int i = 0; i < bots.length; i++){
+            if(bots[i] != null){
+                bots[i].drawBot(g2);
 
-            bots[i].drawBot(g2);
-
+            }
         }
         
         player1.draw(g2);
