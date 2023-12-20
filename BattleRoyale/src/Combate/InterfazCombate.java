@@ -30,7 +30,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JFrame frameC;
     public int estadoDelJuego;
 
-    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frame){
+    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);
@@ -41,6 +41,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         fondo.setBounds(-80,0,850,750);
         fondo.setIcon(new ImageIcon("./BattleRoyale-Java/BattleRoyale/images/player/background.png"));
         add(fondo,2,0);
+
+        estadoDelJuego = 0;
 
         //Musica 
         musica=new Musica();
@@ -111,7 +113,6 @@ public class InterfazCombate extends JPanel implements ActionListener{
         add(nombreTurno,1,0);
         add(turno,1,0);
         //estado del juego
-        this.estadoDelJuego=estadoDelJuego;
 
         //Nos declaramos el frame como un atributo para que en el momento que ganes o pierdas se cambie solo la pantalla
         this.frameC = frameC;  
