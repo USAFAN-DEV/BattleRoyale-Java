@@ -1,38 +1,34 @@
-package Personaje.PersonajeDefensa;
+package Entidades.PersonajeDefensa;
 
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import Entidades.Personaje;
 import Herramientas.ArmasDefensa.StaffOfHoma;
-import Interfaces2.Mapa;
-import Interfaces2.KeyHandler;
-import Personaje.Jugador;
+import Herramientas.ArmasDefensa.TheCatch;
+import Interfaces.KeyHandler;
+import Interfaces.Mapa;
 
-public class Zhongli extends Jugador{
+public class Zhongli extends Personaje{
 
     //Hereda todos los atributos de la clase Jugador
 
     //Constructor
     public Zhongli(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 30, mapa.casillaSizeEscalada * 30);
-        this.mapa = mapa;
+        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 30, mapa.casillaSizeEscalada * 30, mapa);
         this.keyHandler = keyHandler;
-        setArma(new StaffOfHoma());
-        areaDeCollision = new Rectangle(4 * mapa.escala, 6 * mapa.escala, 8 * mapa.escala, 10 * mapa.escala);
-        areaDeColisionDefaultX = areaDeCollision.x;
-        areaDeColisionDefaultY = areaDeCollision.y;
-        getPlayerImage();
-        arma.aplicarStatsArma(this);
+        getCharacterImage();
+        setArma(new TheCatch());
         
     }
 
     //METODOS
 
     //declaracion de la habilidad y que estadisticas va a modificar
-    public void usarHabilidad(Jugador jugador){
+    public void usarHabilidad(Personaje jugador){
         super.setEscudo((int)(super.getEscudo()+super.getEstadisticaHabilidad()*super.getEscudoMaximo()));
         if(super.getEscudo()>super.getEscudoMaximo()){
             super.setEscudo(super.getEscudoMaximo());
@@ -51,7 +47,7 @@ public class Zhongli extends Jugador{
     public String getPlayerGif(){
         return "./BattleRoyale-Java/BattleRoyale/images/player/zhongli.gif";
     }
-    public void getPlayerImage(){
+    public void getCharacterImage(){
 
         try {
 

@@ -1,6 +1,6 @@
-package Interfaces2;
+package Interfaces;
 
-import Personaje.Jugador;
+import Entidades.Personaje;
 
 public class ColisionCheck {
     
@@ -12,7 +12,7 @@ public class ColisionCheck {
 
     }
 
-    public void checkCasilla(Jugador jugador){
+    public void checkCasilla(Personaje jugador){
 
         //Tendremos que checkear las cuatro esquinas del rectangulo areaDeColision del jugador y ver si alguna esta tocando con alguna casilla solida
         int areaDeColisionLeftMapaX = jugador.getMapaX() + jugador.getAreaDeColision().x;
@@ -134,7 +134,7 @@ public class ColisionCheck {
 
     }
 
-    public int checkObject(Jugador jugador){
+    public int checkObject(Personaje jugador){
 
         int index = -1;
         //Revisar si es necesario crear un atributo de jugador para resetear el area de colision despues de calcular la del mapa, o puedo crear aqui una variable
@@ -161,7 +161,7 @@ public class ColisionCheck {
                             if(mapa.objetos[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
-                            if(jugador instanceof Jugador){
+                            if(jugador instanceof Personaje){
 
                                 index = i;
 
@@ -176,7 +176,7 @@ public class ColisionCheck {
                             if(mapa.objetos[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
-                            if(jugador instanceof Jugador){
+                            if(jugador instanceof Personaje){
 
                                 index = i;
 
@@ -191,7 +191,7 @@ public class ColisionCheck {
                             if(mapa.objetos[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
-                            if(jugador instanceof Jugador){
+                            if(jugador instanceof Personaje){
 
                                 index = i;
 
@@ -206,7 +206,7 @@ public class ColisionCheck {
                             if(mapa.objetos[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
-                            if(jugador instanceof Jugador){
+                            if(jugador instanceof Personaje){
 
                                 index = i;
 
@@ -229,6 +229,122 @@ public class ColisionCheck {
         }
 
         return index;
+
+    }
+
+    public int checkBot(Personaje jugador, Personaje[] bots){
+
+        int index = -1;
+        //Revisar si es necesario crear un atributo de jugador para resetear el area de colision despues de calcular la del mapa, o puedo crear aqui una variable
+
+        for(int i = 0; i < bots.length; i++){
+
+            if(bots[i] != null){
+
+                //Necesitamos la posicion del area de colision de la entidad en el mapa
+                jugador.areaDeCollision.x = jugador.getMapaX() + jugador.areaDeCollision.x;
+                jugador.areaDeCollision.y = jugador.getMapaY() + jugador.areaDeCollision.y;
+
+                //Necesitamos la posicion del area de colision del objeto en el mapa
+                //Realmente no haria falta hacer esto si la x y la y del objeto son 0,0, pero por si se da el caso de que un objeto no tenga 48x48 de area de colision, lo escribimos
+                bots[i].areaDeCollision.x = bots[i].mapaX + bots[i].areaDeCollision.x;
+                bots[i].areaDeCollision.y = bots[i].mapaY + bots[i].areaDeCollision.y;
+
+                switch(jugador.direction){
+
+                    case "up":
+                        jugador.areaDeCollision.y -= jugador.speed;
+                        if(jugador.areaDeCollision.intersects(bots[i].areaDeCollision)){
+                            jugador.collisionEstado = true;
+                            index = i;
+                        }
+                        break;
+                    case "down":
+                        jugador.areaDeCollision.y += jugador.speed;
+                        if(jugador.areaDeCollision.intersects(bots[i].areaDeCollision)){
+                            jugador.collisionEstado = true;
+                            index = i;
+                        }
+                        break;
+                    case "left":
+                        jugador.areaDeCollision.x -= jugador.speed;
+                        if(jugador.areaDeCollision.intersects(bots[i].areaDeCollision)){
+                            jugador.collisionEstado = true;
+                            index = i;
+                        }
+                        break;
+                    case "right":
+                        jugador.areaDeCollision.x += jugador.speed;
+                        if(jugador.areaDeCollision.intersects(bots[i].areaDeCollision)){
+                            jugador.collisionEstado = true;
+                            index = i;
+                        }
+                        break;
+                    default:
+                    break;
+
+                }
+
+                jugador.areaDeCollision.x = jugador.areaDeColisionDefaultX;
+                jugador.areaDeCollision.y = jugador.areaDeColisionDefaultY;
+                bots[i].areaDeCollision.x = bots[i].areaDeColisionDefaultX;
+                bots[i].areaDeCollision.y = bots[i].areaDeColisionDefaultY;
+
+            }
+
+        }
+
+        return index;
+
+
+    }
+
+    public void checkPlayer(Personaje bot){
+
+        //Necesitamos la posicion del area de colision de la entidad en el mapa
+        bot.areaDeCollision.x = bot.getMapaX() + bot.areaDeCollision.x;
+        bot.areaDeCollision.y = bot.getMapaY() + bot.areaDeCollision.y;
+
+        //Necesitamos la posicion del area de colision del objeto en el mapa
+        //Realmente no haria falta hacer esto si la x y la y del objeto son 0,0, pero por si se da el caso de que un objeto no tenga 48x48 de area de colision, lo escribimos
+        mapa.player1.areaDeCollision.x = mapa.player1.mapaX + mapa.player1.areaDeCollision.x;
+        mapa.player1.areaDeCollision.y = mapa.player1.mapaY + mapa.player1.areaDeCollision.y;
+
+        switch(bot.direction){
+
+            case "up":
+                bot.areaDeCollision.y -= bot.speed;
+                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                    bot.collisionEstado = true;
+                }
+                break;
+            case "down":
+                bot.areaDeCollision.y += bot.speed;
+                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                    bot.collisionEstado = true;
+                }
+                break;
+            case "left":
+                bot.areaDeCollision.x -= bot.speed;
+                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                    bot.collisionEstado = true;
+                }
+                break;
+            case "right":
+                bot.areaDeCollision.x += bot.speed;
+                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                    bot.collisionEstado = true;
+                }
+                break;
+            default:
+            break;
+
+        }
+
+        bot.areaDeCollision.x = bot.areaDeColisionDefaultX;
+        bot.areaDeCollision.y = bot.areaDeColisionDefaultY;
+        mapa.player1.areaDeCollision.x = mapa.player1.areaDeColisionDefaultX;
+        mapa.player1.areaDeCollision.y = mapa.player1.areaDeColisionDefaultY;
 
     }
 

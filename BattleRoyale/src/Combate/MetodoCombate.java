@@ -1,28 +1,29 @@
 package Combate;
-import Personaje.Jugador;
 import java.util.Random;
+
+import Entidades.Personaje;
 
 public class MetodoCombate {
     //declaramos los atributos que son necesarios para calcular el critico, los jugadores y el los turnos del combate
-    private Jugador jugador1;
-    private Jugador jugador2;
-    public MetodoCombate(Jugador jugador1,Jugador jugador2){
+    private Personaje jugador1;
+    private Personaje jugador2;
+    public MetodoCombate(Personaje jugador1,Personaje jugador2){
         setJugador1(jugador1);
         setJugador2(jugador2);
     }
-    public void setJugador1(Jugador jugador1){
+    public void setJugador1(Personaje jugador1){
         this.jugador1=jugador1;
     }
-    public void setJugador2(Jugador jugador2){
+    public void setJugador2(Personaje jugador2){
         this.jugador2=jugador2;
     }
-    public Jugador getJugador1(){
+    public Personaje getJugador1(){
         return jugador1;
     }
-    public Jugador getJugador2(){
+    public Personaje getJugador2(){
         return jugador2;
     }
-    public int CalcularDamage(Jugador jugador){
+    public int CalcularDamage(Personaje jugador){
         Random random=new Random();
         int randDamage=random.nextInt(10)+1;
         int damage=0;
@@ -34,7 +35,7 @@ public class MetodoCombate {
         }
         return damage;
     }
-    public int Dmg(Jugador jugador,int damage){
+    public int Dmg(Personaje jugador,int damage){
         //si el escudo es 0
         if(jugador.getEscudo()==0){
             //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
@@ -121,7 +122,7 @@ public class MetodoCombate {
         }
         Botmove();
     }
-    public void HabilidadJugador2(Jugador jugador){
+    public void HabilidadJugador2(Personaje jugador){
         System.out.println("El bot ha usado la habilidad");
         getJugador2().usarHabilidad(jugador);
     }

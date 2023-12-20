@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-import Interfaces2.Mapa;
+import Interfaces.Mapa;
 
 
 public class Main {

@@ -1,6 +1,4 @@
-package Personaje.PersonajeAtk;
-
-import Personaje.Jugador;
+package Entidades.PersonajeAtk;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,17 +6,18 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import Interfaces2.KeyHandler;
-import Interfaces2.Mapa;
+import Entidades.Personaje;
+import Interfaces.KeyHandler;
+import Interfaces.Mapa;
 
-public class Mei extends Jugador{
+public class Mei extends Personaje{
     
     //Hereda todos los atributos de la clase Jugador
 
     //Constructor
     public Mei(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,100,0.5,1.3,"Atk","Raiden Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38);
+        super(100,100,25,0,100,0.5,1.3,"Atk","Raiden Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getPlayerImage();
@@ -40,7 +39,7 @@ public class Mei extends Jugador{
         }*/
     }
     //declaracion de la habilidad y que estadisticas va a modificar
-    public void usarHabilidad(Jugador jugador){
+    public void usarHabilidad(Personaje jugador){
 
         //Random random=new Random();
         //int num=random.nextInt(10)+1;
@@ -83,6 +82,12 @@ public class Mei extends Jugador{
 
         System.out.printf("Mei realiza daño en función a su ataque y su porcentaje de crítico a un enemigo. Daño realizado(crítico)= %d*2*%f,Daño realizado(Sin crítico)=%d*%f",super.getAtk(),super.getEstadisticaHabilidad(),super.getAtk(),super.getEstadisticaHabilidad());
 
+    }
+
+    @Override
+    public void getCharacterImage() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'characterImage'");
     }
     
 }

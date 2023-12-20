@@ -1,4 +1,4 @@
-package Interfaces2;
+package Interfaces;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -6,6 +6,13 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     public boolean PressedUp, PressedDown, PressedLeft, PressedRight;
+    Mapa mapa;
+
+    public KeyHandler(Mapa mapa){
+
+        this.mapa = mapa;
+
+    }
 
     @Override
     public void keyTyped(KeyEvent e) { //No la uso
@@ -34,6 +41,16 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){ //Si el usuario presiona la D
 
             PressedRight = true;
+
+        }
+        if(code == KeyEvent.VK_ESCAPE){
+
+            if(mapa.estadoDelJuego == 1){
+                mapa.estadoDelJuego = 2;
+            }
+            else{
+                mapa.estadoDelJuego = 1;
+            }
 
         }
     }

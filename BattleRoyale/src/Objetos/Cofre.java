@@ -5,11 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Cofre extends Objeto {
+import Entidades.Personaje;
+import Herramientas.Armas;
+
+public abstract class Cofre extends Objeto {
     
     public Cofre(String imageName, int mapaX, int mapaY){
 
-        name = "cofre";
         try {
             image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/objetos/" + imageName)); 
         } catch (IOException e) {e.printStackTrace();}
@@ -22,5 +24,8 @@ public class Cofre extends Objeto {
         this.collision = false;
 
     }
+
+    public abstract Armas recibirArma(String tipoPersonaje, int numEstrellas);
+    public abstract void lootCofre(Personaje jugador);
 
 }

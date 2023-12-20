@@ -11,10 +11,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import Interfaces2.Mapa; 
 import Combate.MetodoCombate;
-import Personaje.Jugador;
-
+import Entidades.Personaje;
+import Interfaces.Mapa;
 import Sound.Musica;
 
 public class InterfazCombate extends JPanel implements ActionListener{
@@ -29,7 +28,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JButton botonHabilidad;
     public Musica musica;
 
-    public InterfazCombate(Jugador jugador1,Jugador jugador2){
+    public InterfazCombate(Personaje jugador1,Personaje jugador2){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);

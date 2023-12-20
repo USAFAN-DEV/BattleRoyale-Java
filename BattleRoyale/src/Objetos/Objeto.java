@@ -4,9 +4,11 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import Interfaces2.Mapa;
+import Entidades.Personaje;
+import Herramientas.Armas;
+import Interfaces.Mapa;
 
-public class Objeto{
+public abstract class Objeto{
     
         public final int escala = 3;
         public BufferedImage image;
@@ -29,5 +31,8 @@ public class Objeto{
             }
 
         }
+
+        public abstract Armas recibirArma(String tipoPersonaje, int numEstrellas);
+        public abstract void lootCofre(Personaje jugador);
 
 }

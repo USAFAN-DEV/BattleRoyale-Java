@@ -1,14 +1,15 @@
-package Personaje;
+package Entidades;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import Herramientas.Armas;
-import Interfaces2.Mapa;
-import Interfaces2.KeyHandler;
+import Interfaces.KeyHandler;
+import Interfaces.Mapa;
 
-public class Jugador {
+public abstract class Personaje {
 
     //Declaracion variables stats principales
 
@@ -26,7 +27,7 @@ public class Jugador {
     private double crit;
 
     //Habilidad
-    private String nombreHabilidad;
+    protected String nombreHabilidad;
     private double estadisticaHabilidad; //(es un porcentaje)
     private int nivelHabilidad;
 
@@ -38,7 +39,7 @@ public class Jugador {
     private String tipo;
 
     //Donde esta el jugador en el mapa
-    int mapaX, mapaY;
+    public int mapaX, mapaY;
     //Donde dibujamos al jugador en la pantalla
     public final int screenX, screenY;
     public int speed;
@@ -61,10 +62,10 @@ public class Jugador {
     public boolean collisionEstado;
     public int areaDeColisionDefaultX, areaDeColisionDefaultY;
 
-    public int contCoins;
+    public int contBotDirection;
     
     //Constructor
-    public Jugador(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY){
+    public Personaje(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY, Mapa mapa){
 
         //Arma
         arma=null; //Al principio no tiene arma
@@ -106,13 +107,18 @@ public class Jugador {
         contFrames = 0;
         playerImage = 1;
 
+        this.mapa = mapa;
+
         //cooldown Habilidad
         cooldownHabilidad=0;
 
         //Colision
         collisionEstado = false;
+        areaDeCollision = new Rectangle(4 * mapa.escala, 6 * mapa.escala, 8 * mapa.escala, 10 * mapa.escala);
+        areaDeColisionDefaultX = areaDeCollision.x;
+        areaDeColisionDefaultY = areaDeCollision.y;
 
-        contCoins = 0;
+        contBotDirection = 0;
 
     }
     
@@ -265,18 +271,9 @@ public class Jugador {
         return resultado;
     }
 
-    public void descripcionHabilidad(){
-       
-    }
-
-    public void getPlayerImage(){
-
-
-    }
-
-    public void usarHabilidad(Jugador jugador){
-        
-    }
+    public abstract void descripcionHabilidad();
+    public abstract void getCharacterImage();
+    public abstract void usarHabilidad(Personaje jugador);
     
     //Print de las estadisticas 
     public void imprimeInfo(){
@@ -341,18 +338,22 @@ public class Jugador {
 
                 switch(mapa.objetos[objIndex].name){
 
-                    case "coin": 
-                        contCoins++;
+                    case "cofrePlateado": 
                         mapa.objetos[objIndex] = null;
                         break;
-                    case "cofre":
+                    case "cofreDorado":
+                        mapa.objetos[objIndex].lootCofre(this);
                         mapa.objetos[objIndex] = null;
                         break;
                 }
 
             }
 
-            System.out.println(contCoins);
+            int botIndex = mapa.colisionCheck.checkBot(this, mapa.bots);
+            if(botIndex != -1){
+                //Abrir interfaz de combate y combatir
+                
+            }
 
             if(collisionEstado == false){
 
@@ -447,5 +448,129 @@ public class Jugador {
         }
 
     }
+
+    //Bot metodos
+
+    public void drawBot(Graphics2D g2){
+
+        int screenX = mapaX - mapa.player1.getMapaX() + mapa.player1.screenX; //coordenada x del objeto en la pantalla
+        int screenY = mapaY - mapa.player1.getMapaY() + mapa.player1.screenY; //coordenada y del objeto casilla en la pantalla
+
+        if((mapaX + mapa.casillaSizeEscalada > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.casillaSizeEscalada < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.casillaSizeEscalada > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.casillaSizeEscalada < mapa.player1.getMapaY() + mapa.player1.screenY)){
+
+            BufferedImage image = null;
+
+            if(direction.equals("up")){
+
+                if(playerImage == 1){
+                    image = up1;
+                }
+                else{
+                    image = up2;
+                }
+                
+            }
+            if(direction.equals("down")){
+
+                if(playerImage == 1){
+                    image = down1;
+                }
+                else{
+                    image = down2;
+                }
+                
+            }
+            if(direction.equals("left")){
+
+                if(playerImage == 1){
+                    image = left1;
+                }
+                else{
+                    image = left2;
+                }
+                
+            }
+            if(direction.equals("right")){
+
+                if(playerImage == 1){
+                    image = right1;
+                }
+                else{
+                    image = right2;
+                }
+                
+            }
+
+            g2.drawImage(image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
+
+        }
+
+    }
+
+    public void setBotDirection(){
+
+        contBotDirection++;
+
+        if(contBotDirection == 120){
+
+            Random random = new Random();
+            int i = random.nextInt(4) + 1; //1-4
+
+            if(i == 1){direction = "up";}
+            else if(i == 2){direction = "down";}
+            else if(i == 3){direction = "left";}
+            else{direction = "right";}
+
+            contBotDirection = 0;
+
+        }
+        
+
+
+    }
+    public void updateBot(){
+
+        setBotDirection();
+        if(contBotDirection % 15 == 0){
+
+            if(playerImage == 1){
+                playerImage = 2;
+            }
+            else{
+                playerImage = 1;
+            }
+
+        }
+
+        collisionEstado = false;
+        mapa.colisionCheck.checkCasilla(this);
+        mapa.colisionCheck.checkPlayer(this);
+
+        if(mapa.colisionCheck.checkObject(this) != -1){
+
+            collisionEstado = true;
+
+        }
+
+        if(collisionEstado == false){
+
+            switch (direction) {
+            case "up": mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
+                break;
+            case "down": mapaY += speed;
+                break;
+            case "left": mapaX -= speed;
+                break;
+            case "right": mapaX += speed;
+                break;
+            default:
+                break;
+            }
+
+        }
+
+    }
+
+
 
 }

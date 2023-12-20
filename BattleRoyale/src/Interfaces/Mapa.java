@@ -1,17 +1,19 @@
-package Interfaces2;
+package Interfaces;
 
 import javax.swing.JPanel;
 
+import Entidades.Personaje;
+import Entidades.Bots.ZhongliBot;
+import Entidades.PersonajeAtk.Mei;
+import Entidades.PersonajeDefensa.Zhongli;
+import Entidades.PersonajeHealer.Qiqi;
 import InterfazDeUsuario.UI;
 import Objetos.AdministradorDeObjetos;
 import Objetos.Objeto;
 
 import java.awt.*;
-import Personaje.Jugador;
-import Personaje.PersonajeAtk.Mei;
-import Personaje.PersonajeHealer.Qiqi;
+
 import Sound.Musica;
-import Personaje.PersonajeDefensa.Zhongli;
 import Texturas.AdministradorDeCasillas;
 
 public class Mapa extends JPanel implements Runnable{
@@ -39,17 +41,22 @@ public class Mapa extends JPanel implements Runnable{
     int FPS = 60;
 
     AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
-    KeyHandler keyHandler = new KeyHandler();
+    public KeyHandler keyHandler = new KeyHandler(this);
     public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
     public ColisionCheck colisionCheck = new ColisionCheck(this);
-    public Jugador player1 = new Zhongli(this, keyHandler);
-    public Jugador player2 = new Qiqi(this, keyHandler);
+    public Personaje player1 = new Zhongli(this, keyHandler);
+    public Personaje player2 = new Mei(this, keyHandler);
     public Objeto objetos[] = new Objeto[10]; 
+    public Personaje bots[] = new Personaje[1];
     public Musica musica = new Musica();
     public UI ui = new UI(this);
 
     Thread gameThread;
     //Jugador player2 = new YunJin(this, keyHandler);
+
+    //Estado del juego: 1-jugar, 2-pausar, 3-combate
+    public int estadoDelJuego;
+    
 
     
     
@@ -62,11 +69,13 @@ public class Mapa extends JPanel implements Runnable{
         this.addKeyListener(keyHandler); //Anadimos el keyListener
         this.setFocusable(true); // puede ser "focused" para recibir key inputs
         this.AdministradorO.colocarObjetos();
+        this.AdministradorO.colocarBots();
         this.playMusic(0);
+        estadoDelJuego = 1;
 
     }
     //getter y setter
-    public Jugador getJugador1(){
+    public Personaje getJugador1(){
         return player1;
     }
 
@@ -133,8 +142,26 @@ public class Mapa extends JPanel implements Runnable{
 
     public void update(){
 
-        player1.update();
-        //player2.update(keyHandler);
+        if(estadoDelJuego == 1){
+            player1.update();
+
+            for(int i = 0; i < bots.length; i++){
+
+                bots[i].updateBot();
+
+            }
+            //player2.update(keyHandler);
+        }
+        else if(estadoDelJuego == 2){
+
+        }
+        else if(estadoDelJuego == 3){
+
+            
+
+        }
+
+        
 
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
@@ -149,6 +176,12 @@ public class Mapa extends JPanel implements Runnable{
             if(objetos[i] != null){
                 objetos[i].draw(g2, this);
             }
+
+        }
+
+        for(int i = 0; i < bots.length; i++){
+
+            bots[i].drawBot(g2);
 
         }
         

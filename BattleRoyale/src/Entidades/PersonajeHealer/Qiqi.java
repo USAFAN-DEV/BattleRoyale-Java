@@ -1,17 +1,16 @@
-package Personaje.PersonajeHealer;
+package Entidades.PersonajeHealer;
 
-import Interfaces2.KeyHandler;
-import Interfaces2.Mapa;
-import Personaje.Jugador;
+import Entidades.Personaje;
+import Interfaces.KeyHandler;
+import Interfaces.Mapa;
 
-public class Qiqi extends Jugador{
+public class Qiqi extends Personaje{
     private int revivir;
 
     //Constructor
     public Qiqi(Mapa mapa, KeyHandler keyHandler){
 
-        super(150,150,15,0,100,0.25,0.25,"Healer","Qiqi","Preserver of Fortune",mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38);
-        this.mapa = mapa;
+        super(150,150,15,0,100,0.25,0.25,"Healer","Qiqi","Preserver of Fortune",mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
         this.keyHandler = keyHandler;
         getPlayerImage();
         setRevivir(0);
@@ -40,7 +39,7 @@ public class Qiqi extends Jugador{
         }*/
     }
     //declaracion de la habilidad y que estadisticas va a modificar
-    public void usarHabilidad(Jugador jugador){
+    public void usarHabilidad(Personaje jugador){
         //necesito mas clases porque tengo que cambiar sus estadisticas 
         //revive a una persona
         if(super.getVida()==0 && getRevivir()==0){
@@ -57,5 +56,11 @@ public class Qiqi extends Jugador{
     public void descripcionHabilidad(){
         System.out.println("Qiqi se revive a si mismo con el 100 de la vida. Se puede usar una vez por ronda");
         
+    }
+
+    @Override
+    public void getCharacterImage() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCharacterImage'");
     }
 }

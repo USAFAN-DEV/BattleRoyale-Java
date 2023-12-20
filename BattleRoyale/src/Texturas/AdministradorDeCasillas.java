@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import Interfaces2.Mapa;
+import Interfaces.Mapa;
 
 public class AdministradorDeCasillas {
 

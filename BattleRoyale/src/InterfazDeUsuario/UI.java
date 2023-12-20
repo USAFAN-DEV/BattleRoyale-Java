@@ -6,10 +6,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Interfaces.Mapa;
+
 import java.awt.Color;
 import java.awt.Font;
 
-import Interfaces2.Mapa;
 import Texturas.Casilla;
 
 public class UI {
@@ -18,6 +19,7 @@ public class UI {
     Mapa mapa;
     Font fuenteTexto;
     public Icono[] iconos;
+    Graphics2D g2;
 
     public UI(Mapa mapa){
 
@@ -47,28 +49,68 @@ public class UI {
 
     }
 
+    public void drawPantallaDePausa(){
+
+        String text = "PAUSED";
+        int x = mapa.maxScreenWidht/2;
+        int y = mapa.maxScreenHeight/2;
+
+        g2.drawString(text, x, y);
+
+    }
+
+    public void drawPantallaDeCombate(){
+
+        String text = "ESTAS EN COMBATE";
+        int x = mapa.maxScreenWidht/2;
+        int y = mapa.maxScreenHeight/2;
+
+        g2.drawString(text, x, y);
+
+
+    }
+
     public void draw(Graphics2D g2){
 
-        int screenX = 10;
-        int screenY = 10;
+        this.g2 = g2; //Esta es la funcion que invocamos en el mapa y a la que le pasamos el g2 del mapa. nos guardamos este g2 en un atributo para poder usarlo en otros metodos
         g2.setFont(fuenteTexto);
         g2.setColor(Color.black);
 
-        g2.drawImage(iconos[0].image, screenX, screenY, 25, 25, null);
-        g2.drawString( "" + mapa.player1.getVida() + "/" + mapa.player1.getVidaMaxima(), screenX + (30), 29);
-        screenY += 40;
+        if(mapa.estadoDelJuego == 1){
 
-        g2.drawImage(iconos[1].image, screenX, screenY, 25, 25, null);
-        g2.drawString( "" + mapa.player1.getEscudo() + "/" + mapa.player1.getEscudoMaximo(), screenX + (30), 69);
-        screenY += 40;
+            int screenX = 10;
+            int screenY = 10;
 
-        g2.drawImage(iconos[2].image, screenX, screenY, 25, 25, null);
-        g2.drawString( "" + mapa.player1.getAtk(), screenX + (30), 109);
-        screenY += 40;
+            g2.drawImage(iconos[0].image, screenX, screenY, 25, 25, null);
+            g2.drawString( "" + mapa.player1.getVida() + "/" + mapa.player1.getVidaMaxima(), screenX + (30), 29);
+            screenY += 40;
 
-        g2.drawImage(iconos[3].image, screenX, screenY, 25, 25, null);
-        g2.drawString( "" + mapa.player1.getCrit(), screenX + (30), 149);
-        screenY += 40;
+            g2.drawImage(iconos[1].image, screenX, screenY, 25, 25, null);
+            g2.drawString( "" + mapa.player1.getEscudo() + "/" + mapa.player1.getEscudoMaximo(), screenX + (30), 69);
+            screenY += 40;
+
+            g2.drawImage(iconos[2].image, screenX, screenY, 25, 25, null);
+            g2.drawString( "" + mapa.player1.getAtk(), screenX + (30), 109);
+            screenY += 40;
+
+            g2.drawImage(iconos[3].image, screenX, screenY, 25, 25, null);
+            g2.drawString( "" + mapa.player1.getCrit(), screenX + (30), 149);
+            screenY += 40;
+
+        }
+        else if(mapa.estadoDelJuego == 2){
+
+            drawPantallaDePausa();
+
+        }
+
+        else if(mapa.estadoDelJuego == 3){
+
+            drawPantallaDeCombate();
+
+        }
+
+        
 
     }
 }
