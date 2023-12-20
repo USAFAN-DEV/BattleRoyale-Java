@@ -28,8 +28,9 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JButton botonHabilidad;
     public Musica musica;
     public JFrame frameC;
+    public int estadoDelJuego;
 
-    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC){
+    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC,int estadoDelJuego){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);
@@ -109,6 +110,9 @@ public class InterfazCombate extends JPanel implements ActionListener{
         turno.setEditable(false);
         add(nombreTurno,1,0);
         add(turno,1,0);
+        //estado del juego
+        this.estadoDelJuego=estadoDelJuego;
+
         //Nos declaramos el frame como un atributo para que en el momento que ganes o pierdas se cambie solo la pantalla
         this.frameC = frameC;  
         frameC.setResizable(false);
@@ -116,7 +120,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         frameC.setSize(850,750);
         frameC.setTitle("Combate");
         frameC.setVisible(true);
-        frameC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      
+        frameC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
+            
     }
 
     public void actionPerformed(ActionEvent event){
@@ -168,8 +173,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
+                estadoDelJuego=1;
                 frameC.dispose();
-                
             }  
         }
         if(jugadores.getJugador1().getVida()==0){
@@ -185,6 +190,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
+                estadoDelJuego=0;
                 frameC.dispose();
             }
         }
@@ -197,13 +203,13 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public void stopMusic(){
         musica.stop();
     }
-        
+    //Este main hay que quitarlo al final  
     public static void main(String[] args){
-        Mapa mapa=new Mapa();
+        /*Mapa mapa=new Mapa();
         JFrame frameC= new JFrame();
         mapa.player1.setContadorPociones(1);
-        InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2, frameC);
+        InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2, frameC,esta);
         mapa.stopMusic();
-        interfazC.playMusic(1);
+        interfazC.playMusic(1);*/
     }
 }
