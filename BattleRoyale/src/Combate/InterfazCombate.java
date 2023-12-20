@@ -109,10 +109,14 @@ public class InterfazCombate extends JPanel implements ActionListener{
         turno.setEditable(false);
         add(nombreTurno,1,0);
         add(turno,1,0);
-
-        this.frameC = frameC;
+        //Nos declaramos el frame como un atributo para que en el momento que ganes o pierdas se cambie solo la pantalla
+        this.frameC = frameC;  
+        frameC.setResizable(false);
         frameC.add(this);
-        
+        frameC.setSize(850,750);
+        frameC.setTitle("Combate");
+        frameC.setVisible(true);
+        frameC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      
     }
 
     public void actionPerformed(ActionEvent event){
@@ -199,12 +203,6 @@ public class InterfazCombate extends JPanel implements ActionListener{
         JFrame frameC= new JFrame();
         mapa.player1.setContadorPociones(1);
         InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2, frameC);
-        interfazC.frameC.setResizable(false);
-        interfazC.frameC.add(interfazC);
-        interfazC.frameC.setSize(850,750);
-        interfazC.frameC.setTitle("Combate");
-        interfazC.frameC.setVisible(true);
-        interfazC.frameC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mapa.stopMusic();
         interfazC.playMusic(1);
     }
