@@ -30,7 +30,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JFrame frameC;
     public int estadoDelJuego;
 
-    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC,int estadoDelJuego){
+    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frame){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);

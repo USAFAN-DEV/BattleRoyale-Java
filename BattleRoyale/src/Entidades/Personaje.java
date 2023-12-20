@@ -357,7 +357,7 @@ public abstract class Personaje {
             if(botIndex != -1){
                 mapa.estadoDelJuego = 3;
                 JFrame frameC= new JFrame();
-                InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.bots[0], frameC,mapa.estadoDelJuego);
+                InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.bots[0], frameC);
                 mapa.stopMusic();
                 interfazC.playMusic(1);   
             }
