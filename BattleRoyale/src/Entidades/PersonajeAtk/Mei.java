@@ -17,7 +17,7 @@ public class Mei extends Personaje{
     //Constructor
     public Mei(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,100,0.5,1.3,"Atk","Raiden Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
+        super(100,100,25,0,100,0.5,1.3,"Atk","Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getPlayerImage();
@@ -78,9 +78,10 @@ public class Mei extends Personaje{
     }
 
     //descripcion de la habilidad
-    public void descripcionHabilidad(){
+    public String descripcionHabilidad(){
 
-        System.out.printf("Mei realiza daño en función a su ataque y su porcentaje de crítico a un enemigo. Daño realizado(crítico)= %d*2*%f,Daño realizado(Sin crítico)=%d*%f",super.getAtk(),super.getEstadisticaHabilidad(),super.getAtk(),super.getEstadisticaHabilidad());
+        String descHabilidad = "Mei realiza daño en función a su ataque y su porcentaje\nde crítico a un enemigo.\nDaño realizado = " + super.getAtk() * 2 + "*" + super.getEstadisticaHabilidad();
+        return descHabilidad;
 
     }
 

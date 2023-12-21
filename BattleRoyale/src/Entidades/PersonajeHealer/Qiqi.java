@@ -53,8 +53,9 @@ public class Qiqi extends Personaje{
     }
 
     //descripcion de la habilidad
-    public void descripcionHabilidad(){
-        System.out.println("Qiqi se revive a si mismo con el 100 de la vida. Se puede usar una vez por ronda");
+    public String descripcionHabilidad(){
+        String descHabilidad = "Qiqi se revive a si misma con el 100 de la vida.\nSe puede usar una vez por combate";
+        return descHabilidad;
         
     }
 

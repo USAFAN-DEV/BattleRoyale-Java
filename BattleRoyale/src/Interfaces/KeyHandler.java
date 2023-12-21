@@ -3,6 +3,10 @@ package Interfaces;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import Entidades.PersonajeAtk.Mei;
+import Entidades.PersonajeDefensa.Zhongli;
+import Entidades.PersonajeHealer.Qiqi;
+
 public class KeyHandler implements KeyListener {
 
     public boolean PressedUp, PressedDown, PressedLeft, PressedRight;
@@ -27,36 +31,229 @@ public class KeyHandler implements KeyListener {
        
         int code = e.getKeyCode(); //Devuelve un codigo asociado a la tecla presionada
 
-        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){ //Si el usuario presiona la W
+        if(mapa.estadoDelJuego == 0){
 
-            PressedUp = true;
+            if(mapa.ui.pantallaDeInicioEstado == mapa.ui.pantallaTitulo){
 
-        }
-        if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){ //Si el usuario presiona la A
+                if(code == KeyEvent.VK_UP){
+                    mapa.ui.menuArrow--;
+                    if(mapa.ui.menuArrow < 0){
+                        mapa.ui.menuArrow = 1;
+                    }
+                }
+                else if(code == KeyEvent.VK_DOWN){
+                    mapa.ui.menuArrow++;
+                    if(mapa.ui.menuArrow > 1){
+                        mapa.ui.menuArrow = 0;
+                    }
+                }
+                else if(code == KeyEvent.VK_ENTER){
+                    
+                    if(mapa.ui.menuArrow == 0){
+                        mapa.ui.pantallaDeInicioEstado++;
+                    }
+                    else{
+                        System.exit(0);
+                    }
+                }
 
-            PressedLeft = true;
-
-        }
-        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){ //Si el usuario presiona la S
-
-            PressedDown = true;
-
-        }
-        if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){ //Si el usuario presiona la D
-
-            PressedRight = true;
-
-        }
-        if(code == KeyEvent.VK_ESCAPE){
-
-            if(mapa.estadoDelJuego == 1){
-                mapa.estadoDelJuego = 2;
             }
-            else{
-                mapa.estadoDelJuego = 1;
+            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.seleccionDePersonaje){
+
+                System.out.println(mapa.ui.menuArrow);
+
+                if(code == KeyEvent.VK_LEFT){
+                    mapa.ui.menuArrow--;
+                    if(mapa.ui.menuArrow < 0){
+                        mapa.ui.menuArrow = 2;
+                    }
+                }
+                else if(code == KeyEvent.VK_RIGHT){
+                    mapa.ui.menuArrow++;
+                    if(mapa.ui.menuArrow > 2){
+                        mapa.ui.menuArrow = 0;
+                    }
+                }
+                else if(code == KeyEvent.VK_ENTER){
+                    
+                    if(mapa.ui.menuArrow == 0){
+                        mapa.player1 = new Zhongli(mapa, this);
+                    }
+                    else if(mapa.ui.menuArrow == 1){
+                        mapa.player1 = new Qiqi(mapa, this);
+                    }
+                    else{
+                        mapa.player1 = new Mei(mapa, this);
+                    }
+
+                    mapa.ui.pantallaDeInicioEstado++;
+                }
+
+            }
+            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.datosPersonaje){
+
+                if(code == KeyEvent.VK_UP){
+                    mapa.ui.menuArrow--;
+                    if(mapa.ui.menuArrow < 0){
+                        mapa.ui.menuArrow = 1;
+                    }
+                }
+                else if(code == KeyEvent.VK_DOWN){
+                    mapa.ui.menuArrow++;
+                    if(mapa.ui.menuArrow > 1){
+                        mapa.ui.menuArrow = 0;
+                    }
+                }
+                else if(code == KeyEvent.VK_ENTER){
+                    
+                    if(mapa.ui.menuArrow == 0){
+                        mapa.ui.pantallaDeInicioEstado++;
+                    }
+                    else{
+                        mapa.ui.pantallaDeInicioEstado--;
+                    }
+                }
+
+            }
+            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.elegirCiudad){
+
+                if(code == KeyEvent.VK_UP){
+                    mapa.ui.menuArrow--;
+                    if(mapa.ui.menuArrow < 0){
+                        mapa.ui.menuArrow = 4;
+                    }
+                }
+                else if(code == KeyEvent.VK_DOWN){
+                    mapa.ui.menuArrow++;
+                    if(mapa.ui.menuArrow > 4){
+                        mapa.ui.menuArrow = 0;
+                    }
+                }
+                else if(code == KeyEvent.VK_ENTER){
+                    
+                    if(mapa.ui.menuArrow == 0){
+                        mapa.player1.setMapaX(20*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaY(15*mapa.casillaSizeEscalada);
+                    }
+                    else if(mapa.ui.menuArrow == 1){
+                        mapa.player1.setMapaX(46*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaY(16*mapa.casillaSizeEscalada);
+                    }
+                    else if(mapa.ui.menuArrow == 2){
+                        mapa.player1.setMapaX(46*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaY(45*mapa.casillaSizeEscalada);
+                    }
+                    else if(mapa.ui.menuArrow == 3){
+                        mapa.player1.setMapaX(46*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaY(66*mapa.casillaSizeEscalada);
+                    }
+                    else if(mapa.ui.menuArrow == 4){
+                        mapa.player1.setMapaX(86*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaY(16*mapa.casillaSizeEscalada);
+                    }
+
+                    mapa.ui.pantallaDeInicioEstado++;
+
+                }
+
+            }
+            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.elegirBots){
+
+                if(code == KeyEvent.VK_UP){
+                    mapa.ui.menuArrow--;
+                    if(mapa.ui.menuArrow < 0){
+                        mapa.ui.menuArrow = 2;
+                    }
+                }
+                else if(code == KeyEvent.VK_DOWN){
+                    mapa.ui.menuArrow++;
+                    if(mapa.ui.menuArrow > 2){
+                        mapa.ui.menuArrow = 0;
+                    }
+                }
+                else if(code == KeyEvent.VK_ENTER){
+                    
+                    if(mapa.ui.menuArrow == 0){
+                        mapa.numeroDeBots = 3;
+                    }
+                    else if(mapa.ui.menuArrow == 1){
+                        mapa.numeroDeBots = 6;
+                    }
+                    else if(mapa.ui.menuArrow == 2){
+                        mapa.numeroDeBots = 9;
+                    }
+
+                    mapa.ui.pantallaDeInicioEstado++;
+
+                }
+            }
+            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.elegirDificultadBots){
+
+                if(code == KeyEvent.VK_UP){
+                    mapa.ui.menuArrow--;
+                    if(mapa.ui.menuArrow < 0){
+                        mapa.ui.menuArrow = 2;
+                    }
+                }
+                else if(code == KeyEvent.VK_DOWN){
+                    mapa.ui.menuArrow++;
+                    if(mapa.ui.menuArrow > 2){
+                        mapa.ui.menuArrow = 0;
+                    }
+                }
+                else if(code == KeyEvent.VK_ENTER){
+                    
+                    if(mapa.ui.menuArrow == 0){
+                        mapa.dificultadBots = 1;
+                    }
+                    else if(mapa.ui.menuArrow == 1){
+                        mapa.dificultadBots = 2;
+                    }
+                    else if(mapa.ui.menuArrow == 2){
+                        mapa.dificultadBots = 3;
+                    }
+
+                    mapa.estadoDelJuego = mapa.jugar;
+
+                }
+
             }
 
         }
+        else{
+
+            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){ //Si el usuario presiona la W
+
+                PressedUp = true;
+
+            }
+            if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){ //Si el usuario presiona la A
+
+                PressedLeft = true;
+
+            }
+            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){ //Si el usuario presiona la S
+
+                PressedDown = true;
+
+            }
+            if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){ //Si el usuario presiona la D
+
+                PressedRight = true;
+
+            }
+            if(code == KeyEvent.VK_ESCAPE){
+
+                if(mapa.estadoDelJuego == 1){
+                    mapa.estadoDelJuego = 2;
+                }
+                else{
+                    mapa.estadoDelJuego = 1;
+                }
+
+            }
+        }
+        
     }
 
     @Override
@@ -64,48 +261,20 @@ public class KeyHandler implements KeyListener {
         
         int code = e.getKeyCode();
 
-        if(mapa.estadoDelJuego == 0){
-
-            if(code == KeyEvent.VK_UP){
-
-                mapa.ui.menuArrow--;
-
-            }
-            if(code == KeyEvent.VK_DOWN){
-
-                mapa.ui.menuArrow++;
-
-            }
-            if(code == KeyEvent.VK_ENTER){
-
-                mapa.ui.pantallaDeInicioLevel++;
-
-            }
-
+ 
+        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){ //Si el usuario suelta la W
+            PressedUp = false;
+        }
+        if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){ //Si el usuario suelta la A
+            PressedLeft = false;
+        }
+        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){ //Si el usuario suelta la S
+            PressedDown = false;
+        }
+        if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){ //Si el usuario suelta la D
+            PressedRight = false;
         }
 
-        else{
-            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){ //Si el usuario suelta la W
-
-                PressedUp = false;
-
-            }
-            if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){ //Si el usuario suelta la A
-
-                PressedLeft = false;
-
-            }
-            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){ //Si el usuario suelta la S
-
-                PressedDown = false;
-
-            }
-            if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){ //Si el usuario suelta la D
-
-                PressedRight = false;
-
-            }
-        }
 
     }
     

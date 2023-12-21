@@ -30,7 +30,27 @@ public class AdministradorDeObjetos {
 
     public void colocarBots(){
 
-        mapa.bots[0] = new ZhongliBot(mapa, mapa.keyHandler, 25*mapa.casillaSizeEscalada, 31*mapa.casillaSizeEscalada);
+        int zhongliX = 24 * mapa.casillaSizeEscalada, zhongliY = 10 * mapa.casillaSizeEscalada;
+        int qiqiX = 21 * mapa.casillaSizeEscalada, qiqiY = 34 * mapa.casillaSizeEscalada;
+        int meiX = 19 * mapa.casillaSizeEscalada, meiY = 50 * mapa.casillaSizeEscalada;
+
+        for(int i = 0; i < mapa.bots.length; i++){
+
+            if(i % 3 == 0){
+                mapa.bots[i] = new ZhongliBot(mapa, mapa.keyHandler, zhongliX, zhongliY);
+                zhongliX += 25;
+            }
+            if(i % 3 == 1){
+                mapa.bots[i] = new QiqiBot(mapa, mapa.keyHandler, qiqiX, qiqiY);
+                qiqiX += 33;
+            }
+            if(i % 3 == 2){
+                mapa.bots[i] = new ZhongliBot(mapa, mapa.keyHandler, meiX, meiY);
+                meiX += 32;
+            }
+
+        }
+        //mapa.bots[0] = new ZhongliBot(mapa, mapa.keyHandler, 25*mapa.casillaSizeEscalada, 31*mapa.casillaSizeEscalada);
 
     }
 

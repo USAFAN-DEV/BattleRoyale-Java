@@ -35,6 +35,11 @@ public class Mapa extends JPanel implements Runnable{
     public final int maxMapaColumnas = 103;
     public final int maxMapaFilas = 82;
 
+    public String personajeElegido;
+
+    public int numeroDeBots;
+    public int dificultadBots; //1 - facil, 2 - medio, 3 - dificil
+
 
     //FPS (Frames per second)
 
@@ -45,7 +50,6 @@ public class Mapa extends JPanel implements Runnable{
     public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
     public ColisionCheck colisionCheck = new ColisionCheck(this);
     public Personaje player1 = new Zhongli(this, keyHandler);
-    public Personaje player2 = new Mei(this, keyHandler);
     public Objeto objetos[] = new Objeto[10]; 
     public Personaje bots[] = new Personaje[1];
     public Musica musica = new Musica();
@@ -61,10 +65,6 @@ public class Mapa extends JPanel implements Runnable{
     public final int pausar = 2;
     public final int combate = 3;
     public final int muerte = 4;
-    
-
-    
-    
 
     public Mapa(){
 

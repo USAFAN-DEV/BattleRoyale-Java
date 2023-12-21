@@ -276,7 +276,7 @@ public abstract class Personaje {
         return resultado;
     }
 
-    public abstract void descripcionHabilidad();
+    public abstract String descripcionHabilidad();
     public abstract void getCharacterImage();
     public abstract void usarHabilidad(Personaje jugador);
     
@@ -446,7 +446,7 @@ public abstract class Personaje {
         int jugadorMapaCol = getMapaX()/mapa.casillaSizeEscalada;
         int jugadorMapaRow = getMapaY()/mapa.casillaSizeEscalada;
 
-        //System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
+        System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
 
         //tp nieve
         if(jugadorMapaCol == 21 && jugadorMapaRow == 51){

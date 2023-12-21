@@ -37,9 +37,10 @@ public class Zhongli extends Personaje{
     } 
 
     //descripcion de la habilidad
-    public void descripcionHabilidad(){
+    public String descripcionHabilidad(){
 
-        System.out.printf("Da escudo escudo al resto del equipo en función de su escudo máximo. El escudo recibido por un personaje no puede superar su escudo máximo. Escudo recibido= %f*%d",super.getEstadisticaHabilidad(),super.getEscudoMaximo());
+        String descHabilidad = "Da escudo al resto del equipo en función de su escudo\nmáximo. El escudo recibido por un personaje no puede\nsuperar su escudo máximo.\nEscudo recibido = " + super.getEstadisticaHabilidad() + "*" + super.getEscudoMaximo();
+        return descHabilidad;
 
     } 
 
