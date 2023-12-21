@@ -174,8 +174,10 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                mapa.estadoDelJuego=1;
+                mapa.estadoDelJuego=mapa.jugar;
                 frameC.dispose();
+                this.musica.stop();
+                mapa.playMusic(0);
             }  
         }
         if(jugadores.getJugador1().getVida()==0){
@@ -191,8 +193,10 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                mapa.estadoDelJuego=4;
+                mapa.estadoDelJuego=mapa.muerte;
                 frameC.dispose();
+                this.musica.stop();
+                mapa.playMusic(0);
             }
         }
     }

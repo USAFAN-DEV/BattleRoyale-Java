@@ -17,6 +17,13 @@ public abstract class Objeto{
         public int mapaX, mapaY;
         public Rectangle areaDeColision;
         public int areaDeColisionDefaultX, areaDeColisionDefaultY;
+        public Mapa mapa;
+
+        public Objeto(Mapa mapa){
+
+            this.mapa = mapa;
+
+        }
 
         public void draw(Graphics2D g2, Mapa mapa){
 
@@ -32,7 +39,7 @@ public abstract class Objeto{
 
         }
 
+        public abstract String lootCofre(Personaje jugador);
         public abstract Armas recibirArma(String tipoPersonaje, int numEstrellas);
-        public abstract void lootCofre(Personaje jugador);
 
 }

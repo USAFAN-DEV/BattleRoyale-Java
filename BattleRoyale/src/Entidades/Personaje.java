@@ -66,6 +66,7 @@ public abstract class Personaje {
     public int areaDeColisionDefaultX, areaDeColisionDefaultY;
 
     public int contBotDirection;
+    public String mensajeCofreLooteado;
     
     //Constructor
     public Personaje(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY, Mapa mapa){
@@ -122,6 +123,7 @@ public abstract class Personaje {
         areaDeColisionDefaultY = areaDeCollision.y;
 
         contBotDirection = 0;
+        mensajeCofreLooteado = null;
 
     }
     
@@ -292,6 +294,8 @@ public abstract class Personaje {
    
     public void update(){
 
+        //System.out.println(direction);
+
         teletransportacion();
 
         if(keyHandler.PressedUp == true || keyHandler.PressedLeft == true || keyHandler.PressedDown == true || keyHandler.PressedRight == true){
@@ -345,7 +349,7 @@ public abstract class Personaje {
                         mapa.objetos[objIndex] = null;
                         break;
                     case "cofreDorado":
-                        mapa.objetos[objIndex].lootCofre(this);
+                        mensajeCofreLooteado = mapa.objetos[objIndex].lootCofre(this);
                         mapa.objetos[objIndex] = null;
                         break;
                 }
@@ -444,7 +448,7 @@ public abstract class Personaje {
 
         //System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
 
-
+        //tp nieve
         if(jugadorMapaCol == 21 && jugadorMapaRow == 51){
             setMapaX(15 * mapa.casillaSizeEscalada);
             setMapaY(70 * mapa.casillaSizeEscalada);
@@ -453,6 +457,17 @@ public abstract class Personaje {
         else if(jugadorMapaCol == 13 && jugadorMapaRow == 69){
             setMapaX(21 * mapa.casillaSizeEscalada);
             setMapaY(52 * mapa.casillaSizeEscalada);
+        }
+
+        if(jugadorMapaCol == 89 && jugadorMapaRow == 11){
+            setMapaX(81*mapa.casillaSizeEscalada);
+            setMapaY(57*mapa.casillaSizeEscalada);
+
+        }
+        else if(jugadorMapaCol == 81 && jugadorMapaRow == 58){
+            setMapaX(89*mapa.casillaSizeEscalada);
+            setMapaY(13*mapa.casillaSizeEscalada);
+
         }
 
     }

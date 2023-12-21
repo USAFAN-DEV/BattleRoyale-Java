@@ -2,12 +2,13 @@ package Objetos;
 
 import Entidades.Personaje;
 import Herramientas.Armas;
+import Interfaces.Mapa;
 
 public class CofrePlateado extends Cofre {
     
-    public CofrePlateado(String imagePath, int mapaX, int mapaY){
+    public CofrePlateado(Mapa mapa, String imagePath, int mapaX, int mapaY){
 
-        super(imagePath, mapaX, mapaY);
+        super(mapa, imagePath, mapaX, mapaY);
         name = "cofrePlateado";
 
     }
@@ -19,7 +20,7 @@ public class CofrePlateado extends Cofre {
     }
 
     @Override
-    public void lootCofre(Personaje jugador) {
+    public String lootCofre(Personaje jugador) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'lootCofreDorado'");
     }

@@ -51,11 +51,16 @@ public class Mapa extends JPanel implements Runnable{
     public Musica musica = new Musica();
     public UI ui = new UI(this);
 
-    Thread gameThread;
+    public Thread gameThread;
     //Jugador player2 = new YunJin(this, keyHandler);
 
-    //Estado del juego: 1-jugar, 2-pausar, 3-combate
+    //Estado del juego: 1-jugar, 2-pausar, 3-combate, 4-muerte
     public int estadoDelJuego;
+    public final int pantallaInicio = 0;
+    public final int jugar = 1;
+    public final int pausar = 2;
+    public final int combate = 3;
+    public final int muerte = 4;
     
 
     
@@ -71,7 +76,7 @@ public class Mapa extends JPanel implements Runnable{
         this.AdministradorO.colocarObjetos();
         this.AdministradorO.colocarBots();
         this.playMusic(0);
-        estadoDelJuego = 1;
+        estadoDelJuego = pantallaInicio;
 
     }
     //getter y setter
@@ -138,12 +143,13 @@ public class Mapa extends JPanel implements Runnable{
            
 
         }
+
     }
 
     public void update(){
 
         if(estadoDelJuego == 1){
-            System.out.println("El estado del juego es 1");
+            //System.out.println("El estado del juego es 1");
             player1.update();
 
             for(int i = 0; i < bots.length; i++){
@@ -154,12 +160,17 @@ public class Mapa extends JPanel implements Runnable{
             //player2.update(keyHandler);
         }
         else if(estadoDelJuego == 2){
-            System.out.println("El estado del juego es 2");
+
+            //System.out.println("El estado del juego es 2");
 
         }
         else if(estadoDelJuego == 3){
-
-            System.out.println("El estado del juego es 3");
+            //Cuando entras en combate, si al colisionar con el jugador mantienes una tecla presionada, al volver a el estado de jugar, esa tecla sigue teniendo el valor true
+            //Por lo que el personaje se mueve aunque no estes presionando nada. Para que no ocurra esto, reseteamos aqui los valores del keyHandler
+            keyHandler.PressedDown = false;
+            keyHandler.PressedLeft = false;
+            keyHandler.PressedRight = false;
+            keyHandler.PressedUp = false;
 
         }
 
@@ -172,27 +183,63 @@ public class Mapa extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
-        administradorC.draw(g2);
-        for(int i = 0; i < objetos.length; i++){
+        if(estadoDelJuego == pantallaInicio){
+            ui.draw(g2);
+        }
 
-            if(objetos[i] != null){
-                objetos[i].draw(g2, this);
+        if(estadoDelJuego == 1){
+
+            administradorC.draw(g2);
+            for(int i = 0; i < objetos.length; i++){
+
+                if(objetos[i] != null){
+                    objetos[i].draw(g2, this);
+                }
+
             }
+
+            for(int i = 0; i < bots.length; i++){
+                if(bots[i] != null){
+                    bots[i].drawBot(g2);
+
+                }
+            }
+            
+            player1.draw(g2);
+            ui.draw(g2);
+
+
+            if(player1.mensajeCofreLooteado !=  null){
+
+                if(ui.contadorFramesMensajePantalla < 120){
+
+                    ui.drawMensajePorPantalla(player1.mensajeCofreLooteado);
+                    
+                }
+                else{
+                    player1.mensajeCofreLooteado = null;
+                    ui.contadorFramesMensajePantalla = 0;
+                }
+
+            }
+            
+            g2.dispose();
 
         }
 
-        for(int i = 0; i < bots.length; i++){
-            if(bots[i] != null){
-                bots[i].drawBot(g2);
+        if(estadoDelJuego == 2){
 
-            }
+            ui.draw(g2);
+
         }
-        
-        player1.draw(g2);
-        ui.draw(g2);
-        
-        g2.dispose();
 
+        if(estadoDelJuego == 3){
+
+            ui.draw(g2);
+
+        }
+
+        
     }
 
 }

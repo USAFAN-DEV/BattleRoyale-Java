@@ -7,10 +7,13 @@ import javax.imageio.ImageIO;
 
 import Entidades.Personaje;
 import Herramientas.Armas;
+import Interfaces.Mapa;
 
 public abstract class Cofre extends Objeto {
     
-    public Cofre(String imageName, int mapaX, int mapaY){
+    public Cofre(Mapa mapa, String imageName, int mapaX, int mapaY){
+
+        super(mapa);
 
         try {
             image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/objetos/" + imageName)); 
@@ -26,6 +29,6 @@ public abstract class Cofre extends Objeto {
     }
 
     public abstract Armas recibirArma(String tipoPersonaje, int numEstrellas);
-    public abstract void lootCofre(Personaje jugador);
+    public abstract String lootCofre(Personaje jugador);
 
 }

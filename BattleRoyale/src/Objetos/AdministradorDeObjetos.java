@@ -15,16 +15,16 @@ public class AdministradorDeObjetos {
 
     public void colocarObjetos(){
 
-        mapa.objetos[0] = new CofreDorado("cofre-oro.png", 30*mapa.casillaSizeEscalada, 29*mapa.casillaSizeEscalada);
-        mapa.objetos[1] = new CofrePlateado("cofre-plata.png", 13*mapa.casillaSizeEscalada, 14*mapa.casillaSizeEscalada);
-        mapa.objetos[2] = new CofreDorado("cofre-oro.png", 30*mapa.casillaSizeEscalada, 28*mapa.casillaSizeEscalada);
-        mapa.objetos[3] = new CofreDorado("cofre-oro.png", 30*mapa.casillaSizeEscalada, 27*mapa.casillaSizeEscalada);
-        mapa.objetos[4] = new CofreDorado("cofre-oro.png", 30*mapa.casillaSizeEscalada, 26*mapa.casillaSizeEscalada);
-        mapa.objetos[5] = new CofreDorado("cofre-oro.png", 30*mapa.casillaSizeEscalada, 25*mapa.casillaSizeEscalada);
-        mapa.objetos[6] = new CofreDorado("cofre-oro.png", 30*mapa.casillaSizeEscalada, 24*mapa.casillaSizeEscalada);
-        mapa.objetos[7] = new CofreDorado("cofre-oro.png", 30*mapa.casillaSizeEscalada, 23*mapa.casillaSizeEscalada);
-        mapa.objetos[8] = new CofreDorado("cofre-oro.png", 24*mapa.casillaSizeEscalada,31*mapa.casillaSizeEscalada);
-        mapa.objetos[9] = new CofreDorado("cofre-oro.png", 26*mapa.casillaSizeEscalada, 31*mapa.casillaSizeEscalada);
+        mapa.objetos[0] = new CofreDorado(mapa, "cofre-oro.png", 30*mapa.casillaSizeEscalada, 29*mapa.casillaSizeEscalada);
+        mapa.objetos[1] = new CofrePlateado(mapa,"cofre-plata.png", 13*mapa.casillaSizeEscalada, 14*mapa.casillaSizeEscalada);
+        mapa.objetos[2] = new CofreDorado(mapa,"cofre-oro.png", 30*mapa.casillaSizeEscalada, 28*mapa.casillaSizeEscalada);
+        mapa.objetos[3] = new CofreDorado(mapa,"cofre-oro.png", 30*mapa.casillaSizeEscalada, 27*mapa.casillaSizeEscalada);
+        mapa.objetos[4] = new CofreDorado(mapa,"cofre-oro.png", 30*mapa.casillaSizeEscalada, 26*mapa.casillaSizeEscalada);
+        mapa.objetos[5] = new CofreDorado(mapa,"cofre-oro.png", 30*mapa.casillaSizeEscalada, 25*mapa.casillaSizeEscalada);
+        mapa.objetos[6] = new CofreDorado(mapa,"cofre-oro.png", 30*mapa.casillaSizeEscalada, 24*mapa.casillaSizeEscalada);
+        mapa.objetos[7] = new CofreDorado(mapa,"cofre-oro.png", 30*mapa.casillaSizeEscalada, 23*mapa.casillaSizeEscalada);
+        mapa.objetos[8] = new CofreDorado(mapa,"cofre-oro.png", 24*mapa.casillaSizeEscalada,31*mapa.casillaSizeEscalada);
+        mapa.objetos[9] = new CofreDorado(mapa,"cofre-oro.png", 26*mapa.casillaSizeEscalada, 31*mapa.casillaSizeEscalada);
 
     }
 

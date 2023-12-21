@@ -14,6 +14,10 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    public boolean getPressedLeft(){
+        return PressedLeft;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) { //No la uso
     }
@@ -60,25 +64,47 @@ public class KeyHandler implements KeyListener {
         
         int code = e.getKeyCode();
 
-        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){ //Si el usuario suelta la W
+        if(mapa.estadoDelJuego == 0){
 
-            PressedUp = false;
+            if(code == KeyEvent.VK_UP){
+
+                mapa.ui.menuArrow--;
+
+            }
+            if(code == KeyEvent.VK_DOWN){
+
+                mapa.ui.menuArrow++;
+
+            }
+            if(code == KeyEvent.VK_ENTER){
+
+                mapa.ui.pantallaDeInicioLevel++;
+
+            }
 
         }
-        if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){ //Si el usuario suelta la A
 
-            PressedLeft = false;
+        else{
+            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP){ //Si el usuario suelta la W
 
-        }
-        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){ //Si el usuario suelta la S
+                PressedUp = false;
 
-            PressedDown = false;
+            }
+            if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){ //Si el usuario suelta la A
 
-        }
-        if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){ //Si el usuario suelta la D
+                PressedLeft = false;
 
-            PressedRight = false;
+            }
+            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){ //Si el usuario suelta la S
 
+                PressedDown = false;
+
+            }
+            if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){ //Si el usuario suelta la D
+
+                PressedRight = false;
+
+            }
         }
 
     }
