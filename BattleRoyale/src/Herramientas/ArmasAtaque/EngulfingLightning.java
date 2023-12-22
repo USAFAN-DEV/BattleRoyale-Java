@@ -6,7 +6,7 @@ public class EngulfingLightning extends Armas {
     
     public EngulfingLightning(){
 
-        super(30, 0.50, "CritRate", 5, "Engulfing Lightning");
+        super(30, 0.30, "CritRate", 5, "Engulfing Lightning");
 
     }
 

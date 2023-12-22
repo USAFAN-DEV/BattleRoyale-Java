@@ -124,7 +124,7 @@
 "pilar-templo6.png",true 
 "pilar-templo7.png",true 
 "pilar-templo8.png",true 
-"invocacion-templo1.png",true 
-"invocacion-templo2.png",true 
-"invocacion-templo3.png",true 
-"invocacion-templo4.png",true
+"invocacion-templo1.png",false 
+"invocacion-templo2.png",false 
+"invocacion-templo3.png",false 
+"invocacion-templo4.png",false

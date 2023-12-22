@@ -57,6 +57,11 @@ public class InterfazCombate extends JPanel implements ActionListener{
         botonHabilidad=new JButton("Habilidad"); 
         botonHabilidad.setBounds(550,550,250,50);
         botonHabilidad.addActionListener(this);
+        if(jugador1.getNombre().equals("Qiqi")){
+
+            botonHabilidad.setEnabled(false);
+
+        }
         //declaracion del boton de pocion
         JButton botonPocion=new JButton("Pocion");
         botonPocion.setBounds(550,600,250,50);
@@ -181,8 +186,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 mapa.playMusic(0);
             }  
         }
-        if(jugadores.getJugador1().getVida()==0){
-            if(jugadores.getJugador1().getNombre()=="Qiqi" && jugadores.getJugador2().getRevivir() == 0){
+        else if(jugadores.getJugador1().getVida()==0){
+            if(jugadores.getJugador1().getNombre()=="Qiqi" && jugadores.getJugador1().getRevivir() == 0){
                 jugadores.getJugador1().usarHabilidad(jugadores.getJugador2());
                 ActualizacionEstadisticas();
             }

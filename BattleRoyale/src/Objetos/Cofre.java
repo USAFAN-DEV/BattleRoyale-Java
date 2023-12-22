@@ -7,6 +7,12 @@ import javax.imageio.ImageIO;
 
 import Entidades.Personaje;
 import Herramientas.Armas;
+import Herramientas.ArmasAtaque.EngulfingLightning;
+import Herramientas.ArmasAtaque.SacrificialFragments;
+import Herramientas.ArmasDefensa.StaffOfHoma;
+import Herramientas.ArmasDefensa.TheCatch;
+import Herramientas.ArmasVida.AquilaFavonia;
+import Herramientas.ArmasVida.SacrificialSword;
 import Interfaces.Mapa;
 
 public abstract class Cofre extends Objeto {
@@ -28,7 +34,34 @@ public abstract class Cofre extends Objeto {
 
     }
 
-    public abstract Armas recibirArma(String tipoPersonaje, int numEstrellas);
+    public Armas recibirArma(String tipoPersonaje, int numEstrellas){
+
+        Armas arma = null;
+
+        switch (tipoPersonaje) {
+            case "Atk":
+                if(numEstrellas == 4){arma = new SacrificialFragments();}
+                else{arma = new EngulfingLightning();}
+                break;
+
+            case "Healer":
+                if(numEstrellas == 4){arma = new SacrificialSword();}
+                else{arma = new AquilaFavonia();}
+                break;
+
+            case "Defensa":
+                if(numEstrellas == 4){arma = new TheCatch();}
+                else{arma = new StaffOfHoma();}
+                break;
+        
+            default:
+                break;
+        }
+
+        return arma;
+        
+    }
+
     public abstract String lootCofre(Personaje jugador);
 
 }

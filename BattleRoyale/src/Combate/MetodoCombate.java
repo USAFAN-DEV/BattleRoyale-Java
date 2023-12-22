@@ -101,26 +101,34 @@ public class MetodoCombate {
         int damage;
         damage=CalcularDamage(getJugador1());
         damage=Dmg(getJugador2(),damage);
-        try{
-            System.out.println("Daño realizado de "+damage);
+        System.out.println("Daño realizado: " + damage);
+        try {
             Thread.sleep(1000);
-        }
-        catch(InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Botmove();
+        if(getJugador2().getVida() == 0){
+ 
+        }
+        else{
+            Botmove();
+        } 
     }
     //Este metodo va a utilizar las habilidades del jugador 1 sobre el jugador 2, tambien habrá que hacer lo mismo con el ActionListener
     public void HabilidadJugador1(){
         System.out.println("Has usado la habilidad");
         getJugador1().usarHabilidad(jugador2);
-        try{
+        try {
             Thread.sleep(1000);
-        }
-        catch(InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Botmove();
+        if(getJugador2().getVida() == 0){
+            
+        }
+        else{
+            Botmove();
+        } 
     }
     public void HabilidadJugador2(Personaje jugador){
         System.out.println("El bot ha usado la habilidad");

@@ -17,7 +17,7 @@ public class Mei extends Personaje{
     //Constructor
     public Mei(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,100,0.5,1.3,"Atk","Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
+        super(100,100,25,0,100,0.5,1.15,"Atk","Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getCharacterImage();
@@ -82,15 +82,15 @@ public class Mei extends Personaje{
         try {
 
             //System.out.println("Image loading started");
-            String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/";
-            up1 = ImageIO.read(new File(imagePath + "zhongli-up-1.png")); 
-            up2 = ImageIO.read(new File(imagePath + "zhongli-up-2.png"));
-            down1 = ImageIO.read(new File(imagePath + "zhongli-down-1.png"));
-            down2 = ImageIO.read(new File(imagePath + "zhongli-down-2.png"));
-            left1 = ImageIO.read(new File(imagePath + "zhongli-left-1.png"));
-            left2 = ImageIO.read(new File(imagePath + "zhongli-left-2.png"));
-            right1 = ImageIO.read(new File(imagePath + "zhongli-right-1.png"));
-            right2 = ImageIO.read(new File(imagePath + "zhongli-right-2.png"));
+            String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/mei/";
+            up1 = ImageIO.read(new File(imagePath + "mei-up-1.png")); 
+            up2 = ImageIO.read(new File(imagePath + "mei-up-2.png"));
+            down1 = ImageIO.read(new File(imagePath + "mei-down-1.png"));
+            down2 = ImageIO.read(new File(imagePath + "mei-down-2.png"));
+            left1 = ImageIO.read(new File(imagePath + "mei-left-1.png"));
+            left2 = ImageIO.read(new File(imagePath + "mei-left-2.png"));
+            right1 = ImageIO.read(new File(imagePath + "mei-right-1.png"));
+            right2 = ImageIO.read(new File(imagePath + "mei-right-2.png"));
             //System.out.println("Image loading ended");
 
         } catch (IOException e) {

@@ -50,7 +50,7 @@ public class Mapa extends JPanel implements Runnable{
     public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
     public ColisionCheck colisionCheck = new ColisionCheck(this);
     public Personaje player1 = new Zhongli(this, keyHandler);
-    public Objeto objetos[] = new Objeto[10]; 
+    public Objeto objetos[] = new Objeto[20]; 
     public Personaje bots[];
     public Musica musica = new Musica();
     public UI ui = new UI(this);
@@ -76,7 +76,6 @@ public class Mapa extends JPanel implements Runnable{
         this.addKeyListener(keyHandler); //Anadimos el keyListener
         this.setFocusable(true); // puede ser "focused" para recibir key inputs
         this.AdministradorO.colocarObjetos();
-        //this.AdministradorO.colocarBots();
         this.playMusic(0);
         estadoDelJuego = pantallaInicio;
 

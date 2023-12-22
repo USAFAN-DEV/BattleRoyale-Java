@@ -1,15 +1,7 @@
 package Objetos;
 
 import java.util.Random;
-
 import Entidades.Personaje;
-import Herramientas.*;
-import Herramientas.ArmasAtaque.EngulfingLightning;
-import Herramientas.ArmasAtaque.SacrificialFragments;
-import Herramientas.ArmasDefensa.StaffOfHoma;
-import Herramientas.ArmasDefensa.TheCatch;
-import Herramientas.ArmasVida.AquilaFavonia;
-import Herramientas.ArmasVida.SacrificialSword;
 import Interfaces.Mapa;
 
 public class CofreDorado extends Cofre {
@@ -21,33 +13,6 @@ public class CofreDorado extends Cofre {
 
     }
 
-    public Armas recibirArma(String tipoPersonaje, int numEstrellas){
-
-        Armas arma = null;
-
-        switch (tipoPersonaje) {
-            case "Atk":
-                if(numEstrellas == 4){arma = new SacrificialFragments();}
-                else{arma = new EngulfingLightning();}
-                break;
-
-            case "Healer":
-                if(numEstrellas == 4){arma = new SacrificialSword();}
-                else{arma = new AquilaFavonia();}
-                break;
-
-            case "Defensa":
-                if(numEstrellas == 4){arma = new TheCatch();}
-                else{arma = new StaffOfHoma();}
-                break;
-        
-            default:
-                break;
-        }
-
-        return arma;
-        
-    }
 
     public String lootCofre(Personaje jugador){ //Arma4 estrellas, Arma5 estrellas, pocionVida, pocionEscudo.
 

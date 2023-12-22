@@ -297,6 +297,8 @@ public abstract class Personaje {
    
     public void update(){
 
+        //System.out.println(mapa.estadoDelJuego);
+
         //System.out.println(direction);
 
         teletransportacion();
@@ -349,6 +351,7 @@ public abstract class Personaje {
                 switch(mapa.objetos[objIndex].name){
 
                     case "cofrePlateado": 
+                        mensajeCofreLooteado = mapa.objetos[objIndex].lootCofre(this);
                         mapa.objetos[objIndex] = null;
                         break;
                     case "cofreDorado":

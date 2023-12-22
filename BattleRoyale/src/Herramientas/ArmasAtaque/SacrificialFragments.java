@@ -6,7 +6,7 @@ public class SacrificialFragments extends Armas {
     
     public SacrificialFragments(){
 
-        super(25, 0.30, "CritRate", 4, "Sacrificial Fragments");
+        super(25, 0.10, "CritRate", 4, "Sacrificial Fragments");
 
     }
 

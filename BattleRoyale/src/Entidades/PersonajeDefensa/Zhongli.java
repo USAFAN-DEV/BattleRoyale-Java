@@ -1,13 +1,10 @@
 package Entidades.PersonajeDefensa;
 
-import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Entidades.Personaje;
-import Herramientas.ArmasDefensa.StaffOfHoma;
-import Herramientas.ArmasDefensa.TheCatch;
 import Interfaces.KeyHandler;
 import Interfaces.Mapa;
 
@@ -21,7 +18,6 @@ public class Zhongli extends Personaje{
         super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 30, mapa.casillaSizeEscalada * 30, mapa);
         this.keyHandler = keyHandler;
         getCharacterImage();
-        setArma(new TheCatch());
         
     }
 
@@ -53,7 +49,7 @@ public class Zhongli extends Personaje{
         try {
 
             //System.out.println("Image loading started");
-            String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/";
+            String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/zhongli/";
             up1 = ImageIO.read(new File(imagePath + "zhongli-up-1.png")); 
             up2 = ImageIO.read(new File(imagePath + "zhongli-up-2.png"));
             down1 = ImageIO.read(new File(imagePath + "zhongli-down-1.png"));
