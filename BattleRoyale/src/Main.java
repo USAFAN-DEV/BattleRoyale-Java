@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         
         JFrame window = new JFrame();
+        
         Mapa mapa = new Mapa();
         window.add(mapa);
 

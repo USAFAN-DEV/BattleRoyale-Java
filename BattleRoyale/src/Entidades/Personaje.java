@@ -118,7 +118,7 @@ public abstract class Personaje {
 
         //Colision
         collisionEstado = false;
-        areaDeCollision = new Rectangle(4 * mapa.escala, 6 * mapa.escala, 8 * mapa.escala, 10 * mapa.escala);
+        areaDeCollision = new Rectangle(4 * mapa.getEscala(), 6 * mapa.getEscala(), 8 * mapa.getEscala(), 10 * mapa.getEscala());
         areaDeColisionDefaultX = areaDeCollision.x;
         areaDeColisionDefaultY = areaDeCollision.y;
 
@@ -397,7 +397,7 @@ public abstract class Personaje {
     public void draw(Graphics2D g2){
 
         //g2.setColor(Color.white);
-        //g2.fillRect(x, y, mapa.CasillaSizeEscalada, mapa.CasillaSizeEscalada);
+        //g2.fillRect(x, y, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada());
 
         BufferedImage image = null;
 
@@ -443,36 +443,36 @@ public abstract class Personaje {
         }
 
 
-        g2.drawImage(image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
+        g2.drawImage(image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
 
     }
 
     public void teletransportacion(){
 
-        int jugadorMapaCol = getMapaX()/mapa.casillaSizeEscalada;
-        int jugadorMapaRow = getMapaY()/mapa.casillaSizeEscalada;
+        int jugadorMapaCol = getMapaX()/mapa.getCasillaSizeEscalada();
+        int jugadorMapaRow = getMapaY()/mapa.getCasillaSizeEscalada();
 
         //System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
 
         //tp nieve
         if(jugadorMapaCol == 21 && jugadorMapaRow == 51){
-            setMapaX(15 * mapa.casillaSizeEscalada);
-            setMapaY(70 * mapa.casillaSizeEscalada);
+            setMapaX(15 * mapa.getCasillaSizeEscalada());
+            setMapaY(70 * mapa.getCasillaSizeEscalada());
         }
 
         else if(jugadorMapaCol == 13 && jugadorMapaRow == 69){
-            setMapaX(21 * mapa.casillaSizeEscalada);
-            setMapaY(52 * mapa.casillaSizeEscalada);
+            setMapaX(21 * mapa.getCasillaSizeEscalada());
+            setMapaY(52 * mapa.getCasillaSizeEscalada());
         }
 
         if(jugadorMapaCol == 89 && jugadorMapaRow == 11){
-            setMapaX(81*mapa.casillaSizeEscalada);
-            setMapaY(57*mapa.casillaSizeEscalada);
+            setMapaX(81*mapa.getCasillaSizeEscalada());
+            setMapaY(57*mapa.getCasillaSizeEscalada());
 
         }
         else if(jugadorMapaCol == 81 && jugadorMapaRow == 58){
-            setMapaX(89*mapa.casillaSizeEscalada);
-            setMapaY(13*mapa.casillaSizeEscalada);
+            setMapaX(89*mapa.getCasillaSizeEscalada());
+            setMapaY(13*mapa.getCasillaSizeEscalada());
 
         }
 
@@ -485,7 +485,7 @@ public abstract class Personaje {
         int screenX = mapaX - mapa.player1.getMapaX() + mapa.player1.screenX; //coordenada x del objeto en la pantalla
         int screenY = mapaY - mapa.player1.getMapaY() + mapa.player1.screenY; //coordenada y del objeto casilla en la pantalla
 
-        if((mapaX + mapa.casillaSizeEscalada > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.casillaSizeEscalada < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.casillaSizeEscalada > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.casillaSizeEscalada < mapa.player1.getMapaY() + mapa.player1.screenY)){
+        if((mapaX + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaY() + mapa.player1.screenY)){
 
             BufferedImage image = null;
 
@@ -530,7 +530,7 @@ public abstract class Personaje {
                 
             }
 
-            g2.drawImage(image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
+            g2.drawImage(image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
 
         }
 

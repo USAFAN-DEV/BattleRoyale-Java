@@ -18,17 +18,17 @@ import Texturas.AdministradorDeCasillas;
 
 public class Mapa extends JPanel implements Runnable{
 
-    //array jugadores en el mapa
+    //ATRIBUTOS
     
-    //Constantes
-    final int casillaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
-    public final int escala = 3; 
+    //CONSTANTES
+    private final int casillaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
+    private final int escala = 3; 
 
-    public final int casillaSizeEscalada = casillaSize * escala; //Asi los personajes son 48x48
-    public final int maxScreenColumnas = 20;
-    public final int maxScreenFilas = 15; //Ratio 4x3;
-    public final int maxScreenWidht = casillaSizeEscalada * maxScreenColumnas; //48 * 20 = 960pixels
-    public final int maxScreenHeight = casillaSizeEscalada * maxScreenFilas; //48 * 15 = 720pixels
+    private final int casillaSizeEscalada = casillaSize * escala; //Asi los personajes son 48x48
+    private final int maxScreenColumnas = 20;
+    private final int maxScreenFilas = 15; //Ratio 4x3;
+    private final int maxScreenWidth = casillaSizeEscalada * maxScreenColumnas; //48 * 20 = 960pixels
+    private final int maxScreenHeight = casillaSizeEscalada * maxScreenFilas; //48 * 15 = 720pixels
 
 
     //World variables
@@ -45,32 +45,36 @@ public class Mapa extends JPanel implements Runnable{
 
     int FPS = 60;
 
+    
     AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
     public ColisionCheck colisionCheck = new ColisionCheck(this);
+    public UI ui = new UI(this);
+    public Musica musica = new Musica();
+    
     public Personaje player1 = new Zhongli(this, keyHandler);
     public Objeto objetos[] = new Objeto[20]; 
     public Personaje bots[];
-    public Musica musica = new Musica();
-    public UI ui = new UI(this);
 
     public Thread gameThread;
     //Jugador player2 = new YunJin(this, keyHandler);
 
-    //Estado del juego: 1-jugar, 2-pausar, 3-combate, 4-muerte
+    //Estado del juego: 1-jugar, 2-pausar, 3-combate, 4-muerte, 5-victoria
     public int estadoDelJuego;
     public final int pantallaInicio = 0;
     public final int jugar = 1;
     public final int pausar = 2;
     public final int combate = 3;
     public final int muerte = 4;
+    public final int victoria = 5;
 
+    //CONSTRUCTOR
     public Mapa(){
 
         System.out.println("entro al constructor");
 
-        this.setPreferredSize(new Dimension(maxScreenWidht, maxScreenHeight));
+        this.setPreferredSize(new Dimension(maxScreenWidth, maxScreenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); //Mejora el rendimiento de la renderizacion del juego
         this.addKeyListener(keyHandler); //Anadimos el keyListener
@@ -80,7 +84,22 @@ public class Mapa extends JPanel implements Runnable{
         estadoDelJuego = pantallaInicio;
 
     }
-    //getter y setter
+    //GETTERS Y SETTERS
+
+    //CONSTANTES
+    public int getEscala(){
+        return this.escala;
+    }
+    public int getCasillaSizeEscalada(){
+        return this.casillaSizeEscalada;
+    }
+    public int getMaxScreenWidth(){
+        return this.maxScreenWidth;
+    }
+    public int getMaxScreenHeight(){
+        return this.maxScreenHeight;
+    }
+
     public Personaje getJugador1(){
         return player1;
     }
@@ -149,7 +168,7 @@ public class Mapa extends JPanel implements Runnable{
 
     public void update(){
 
-        if(estadoDelJuego == 1){
+        if(estadoDelJuego == jugar){
             //System.out.println("El estado del juego es 1");
             player1.update();
 
@@ -159,13 +178,14 @@ public class Mapa extends JPanel implements Runnable{
                 }
             }
             //player2.update(keyHandler);
-        }
-        else if(estadoDelJuego == 2){
 
-            //System.out.println("El estado del juego es 2");
+            if(numeroDeBots == 0){
 
+             estadoDelJuego = victoria;
+
+            }
         }
-        else if(estadoDelJuego == 3){
+        else if(estadoDelJuego == combate){
             //Cuando entras en combate, si al colisionar con el jugador mantienes una tecla presionada, al volver a el estado de jugar, esa tecla sigue teniendo el valor true
             //Por lo que el personaje se mueve aunque no estes presionando nada. Para que no ocurra esto, reseteamos aqui los valores del keyHandler
             keyHandler.PressedDown = false;
@@ -174,8 +194,11 @@ public class Mapa extends JPanel implements Runnable{
             keyHandler.PressedUp = false;
 
         }
+        else{
 
-        
+            //El estado del juego es pausa, muerte o victoria. No queremos que update() actualice ninguna información
+
+        }
 
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
@@ -184,11 +207,7 @@ public class Mapa extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
-        if(estadoDelJuego == pantallaInicio){
-            ui.draw(g2);
-        }
-
-        if(estadoDelJuego == 1){
+        if(estadoDelJuego == jugar){
 
             administradorC.draw(g2);
             for(int i = 0; i < objetos.length; i++){
@@ -228,18 +247,12 @@ public class Mapa extends JPanel implements Runnable{
 
         }
 
-        if(estadoDelJuego == 2){
+        else{
 
+            //En el resto de estados del juego, simplemente dibujamos su pantalla correspondiente de la UI.
             ui.draw(g2);
 
         }
-
-        if(estadoDelJuego == 3){
-
-            ui.draw(g2);
-
-        }
-
         
     }
 

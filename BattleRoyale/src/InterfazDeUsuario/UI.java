@@ -49,7 +49,7 @@ public class UI {
     public int getXForText(String text){
 
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        int x = mapa.maxScreenWidht/2 - length/2;
+        int x = mapa.getMaxScreenWidth()/2 - length/2;
         return x;
 
     }
@@ -75,10 +75,14 @@ public class UI {
 
     public void drawPantallaDePausa(){
 
-        //g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50));
-        String text = "Mermaid";
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0, 0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight());
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+        g2.setColor(Color.white);
+        String text = "PAUSA";
         int x = getXForText(text);
-        int y = mapa.maxScreenHeight/2;
+        int y = mapa.getMaxScreenHeight()/6;
 
         g2.drawString(text, x, y);
 
@@ -88,7 +92,7 @@ public class UI {
 
         String text = "ESTAS EN COMBATE";
         int x = getXForText(text);
-        int y = mapa.maxScreenHeight/2;
+        int y = mapa.getMaxScreenHeight()/2;
 
         g2.drawString(text, x, y);
 
@@ -99,10 +103,10 @@ public class UI {
 
         contadorFramesMensajePantalla++;
 
-        int width = 10*mapa.casillaSizeEscalada;
-        int height = 2*mapa.casillaSizeEscalada;
-        int screenX = mapa.maxScreenWidht/4; 
-        int screenY = mapa.maxScreenHeight - height;
+        int width = 10*mapa.getCasillaSizeEscalada();
+        int height = 2*mapa.getCasillaSizeEscalada();
+        int screenX = mapa.getMaxScreenWidth()/4; 
+        int screenY = mapa.getMaxScreenHeight() - height;
         
 
 
@@ -110,7 +114,7 @@ public class UI {
         g2.setColor(c);
         g2.fillRoundRect(screenX, screenY, width, height, 20, 20);
         g2.setColor(Color.white);
-        g2.drawString(mensajePorPantalla, getXForText(mensajePorPantalla), screenY + mapa.casillaSizeEscalada);
+        g2.drawString(mensajePorPantalla, getXForText(mensajePorPantalla), screenY + mapa.getCasillaSizeEscalada());
 
     }
 
@@ -124,14 +128,14 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
             text = "Genshin Royale";
             x = getXForText(text);
-            y = 4 * mapa.casillaSizeEscalada;
+            y = 4 * mapa.getCasillaSizeEscalada();
 
             //Background
             g2.setColor(Color.black);
-            g2.fillRect(0,0, mapa.maxScreenWidht, mapa.maxScreenHeight);
+            g2.fillRect(0,0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight());
             /*try {
                 image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/UI/fondo.jpeg"));
-                g2.drawImage(image, 0, 0, mapa.maxScreenWidht, mapa.maxScreenHeight, null);
+                g2.drawImage(image, 0, 0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight(), null);
             } catch (IOException e) { e.printStackTrace();}*/
 
             //Sombras
@@ -147,20 +151,20 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
             text = "NEW GAME";
             x = getXForText(text);
-            y += mapa.casillaSizeEscalada * 4;
+            y += mapa.getCasillaSizeEscalada() * 4;
             g2.drawString("NEW GAME", x, y);
 
             if(menuArrow == 0){
-                g2.drawString("=>", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("=>", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "EXIT";
             x = getXForText(text);
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             g2.drawString("EXIT", x, y );
 
             if(menuArrow == 1){
-                g2.drawString("=>", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("=>", x-mapa.getCasillaSizeEscalada(), y);
             }
            
         }
@@ -170,7 +174,7 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
             text = "Selecciona tu personaje";
             x = getXForText(text);
-            y = mapa.casillaSizeEscalada * 2;
+            y = mapa.getCasillaSizeEscalada() * 2;
 
             g2.setColor(Color.gray);
             g2.drawString(text, x+5, y+5);
@@ -178,122 +182,122 @@ public class UI {
             g2.drawString(text, x, y);
 
             //Zhongli
-            x = mapa.casillaSizeEscalada + mapa.casillaSizeEscalada*2;
-            y = mapa.casillaSizeEscalada*4;
+            x = mapa.getCasillaSizeEscalada() + mapa.getCasillaSizeEscalada()*2;
+            y = mapa.getCasillaSizeEscalada()*4;
             try {
                 image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/player/zhongli.gif"));
-                g2.drawImage(image, x, y, mapa.maxScreenWidht/4, mapa.maxScreenHeight/4, null);
+                g2.drawImage(image, x, y, mapa.getMaxScreenWidth()/4, mapa.getMaxScreenHeight()/4, null);
             } catch (IOException e) { e.printStackTrace();}
 
-            y += mapa.casillaSizeEscalada*5;
+            y += mapa.getCasillaSizeEscalada()*5;
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
             text = "Zhongli, el arconte Geo";
             g2.drawString(text, x + 10, y);
 
             if(menuArrow == 0){
-                g2.drawString("=>", x-mapa.casillaSizeEscalada/2, y);
+                g2.drawString("=>", x-mapa.getCasillaSizeEscalada()/2, y);
             }
 
             //Qiqi
-            x += mapa.maxScreenWidht/4;
-            y = mapa.casillaSizeEscalada * 4;
+            x += mapa.getMaxScreenWidth()/4;
+            y = mapa.getCasillaSizeEscalada() * 4;
             try {
                 image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/player/qiqi.gif"));
-                g2.drawImage(image, x, y, mapa.maxScreenWidht/4, mapa.maxScreenHeight/4, null);
+                g2.drawImage(image, x, y, mapa.getMaxScreenWidth()/4, mapa.getMaxScreenHeight()/4, null);
             } catch (IOException e) { e.printStackTrace();}
 
-            y += mapa.casillaSizeEscalada*5;
+            y += mapa.getCasillaSizeEscalada()*5;
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
             text = "Qiqi, La arconte de hielo";
             g2.drawString(text, x+ 10, y);
 
             if(menuArrow == 1){
-                g2.drawString("=>", x-mapa.casillaSizeEscalada/2, y);
+                g2.drawString("=>", x-mapa.getCasillaSizeEscalada()/2, y);
             }
 
             //Raiden
-            x += mapa.maxScreenWidht/4;
-            y = mapa.casillaSizeEscalada*4;
+            x += mapa.getMaxScreenWidth()/4;
+            y = mapa.getCasillaSizeEscalada()*4;
             try {
                 image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/player/mei.gif"));
-                g2.drawImage(image, x, y, mapa.maxScreenWidht/4, mapa.maxScreenHeight/4, null);
+                g2.drawImage(image, x, y, mapa.getMaxScreenWidth()/4, mapa.getMaxScreenHeight()/4, null);
             } catch (IOException e) { e.printStackTrace();}
 
-            y += mapa.casillaSizeEscalada*5;
+            y += mapa.getCasillaSizeEscalada()*5;
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
             text = "Raiden, La arconte electro";
             g2.drawString(text, x+ 10, y);
 
             if(menuArrow == 2){
-                g2.drawString("=>", x-mapa.casillaSizeEscalada/2, y);
+                g2.drawString("=>", x-mapa.getCasillaSizeEscalada()/2, y);
             }
 
         }
         else if(pantallaDeInicioEstado == datosPersonaje){
 
             x = 0;
-            y = mapa.maxScreenHeight/6;
+            y = mapa.getMaxScreenHeight()/6;
 
             try {
                 image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/player/" + mapa.player1.getNombre().toLowerCase() + ".gif"));
-                g2.drawImage(image, x, y, mapa.maxScreenWidht/3, mapa.maxScreenHeight/3, null);
+                g2.drawImage(image, x, y, mapa.getMaxScreenWidth()/3, mapa.getMaxScreenHeight()/3, null);
             } catch (IOException e) { e.printStackTrace();}
 
-            x += mapa.maxScreenWidht/3;
-            y += mapa.casillaSizeEscalada*2;
+            x += mapa.getMaxScreenWidth()/3;
+            y += mapa.getCasillaSizeEscalada()*2;
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
             g2.setColor(Color.white);
 
             text = mapa.player1.getNombre();
             g2.drawString(text, x, y);
 
-            y += mapa.casillaSizeEscalada/2;
+            y += mapa.getCasillaSizeEscalada()/2;
             text = "Ataque = " + mapa.player1.getAtk();
             g2.drawString(text, x, y);
 
-            y += mapa.casillaSizeEscalada/2;
+            y += mapa.getCasillaSizeEscalada()/2;
             text = "%Crit = " + mapa.player1.getCrit();
             g2.drawString(text, x, y);
 
-            y += mapa.casillaSizeEscalada/2;
+            y += mapa.getCasillaSizeEscalada()/2;
             text = "Vida Maxima = " + mapa.player1.getVidaMaxima();
             g2.drawString(text, x, y);
 
-            y += mapa.casillaSizeEscalada/2;
+            y += mapa.getCasillaSizeEscalada()/2;
             text = "Escudo Maximo = " + mapa.player1.getEscudoMaximo();
             g2.drawString(text, x, y);
 
-            x += mapa.casillaSizeEscalada * 4;
-            y = mapa.maxScreenHeight/6 + mapa.casillaSizeEscalada*2;
+            x += mapa.getCasillaSizeEscalada() * 4;
+            y = mapa.getMaxScreenHeight()/6 + mapa.getCasillaSizeEscalada()*2;
 
             text = "Habilidad: " + mapa.player1.getNombreHabilidad();
             g2.drawString(text, x, y);
 
-            y += mapa.casillaSizeEscalada/2;
+            y += mapa.getCasillaSizeEscalada()/2;
             String[] textHabilidad = mapa.player1.descripcionHabilidad().split("\n");
             
             for(int i = 0; i < textHabilidad.length; i++){
                 g2.drawString(textHabilidad[i], x, y);
-                y += mapa.casillaSizeEscalada/2;
+                y += mapa.getCasillaSizeEscalada()/2;
             }
 
-            y += mapa.casillaSizeEscalada * 4;
+            y += mapa.getCasillaSizeEscalada() * 4;
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
             text = "CONFIRMAR";
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 0){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             text = "VOLVER";
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 1){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
         }
         else if(pantallaDeInicioEstado == elegirCiudad){
@@ -302,7 +306,7 @@ public class UI {
 
             text = "Elige una ciudad para caer";
             x = getXForText(text);
-            y = mapa.casillaSizeEscalada * 2;
+            y = mapa.getCasillaSizeEscalada() * 2;
 
             g2.setColor(Color.gray);
             g2.drawString(text, x + 5, y + 5);
@@ -314,47 +318,47 @@ public class UI {
 
             text = "Espinadragon. Zona nevada";
             x = getXForText(text);
-            y = mapa.maxScreenHeight/3;
+            y = mapa.getMaxScreenHeight()/3;
             g2.drawString(text, x, y);
 
             if(menuArrow == 0){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
-            text = "Moonstad. La ciudad de la libertad";
-            y += mapa.casillaSizeEscalada;
+            text = "Mondstadt. La ciudad de la libertad";
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 1){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "Liyue. La ciudad de los contratos";
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 2){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "Inazuma. La ciudad de la eternidad";
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 3){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "Sumeru. El desierto sin fin";
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 4){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
         }
@@ -363,7 +367,7 @@ public class UI {
 
             text = "Elige el Numero de Bots";
             x = getXForText(text);
-            y = mapa.casillaSizeEscalada * 2;
+            y = mapa.getCasillaSizeEscalada() * 2;
 
             g2.setColor(Color.gray);
             g2.drawString(text, x + 5, y + 5);
@@ -375,29 +379,29 @@ public class UI {
 
             text = "TRES";
             x = getXForText(text);
-            y = mapa.maxScreenHeight/3;
+            y = mapa.getMaxScreenHeight()/3;
             g2.drawString(text, x, y);
 
             if(menuArrow == 0){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "SEIS";
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 1){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "NUEVE";
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 2){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
 
@@ -408,7 +412,7 @@ public class UI {
 
             text = "Elige la dificultad de los Bots";
             x = getXForText(text);
-            y = mapa.casillaSizeEscalada * 2;
+            y = mapa.getCasillaSizeEscalada() * 2;
 
             g2.setColor(Color.gray);
             g2.drawString(text, x + 5, y + 5);
@@ -420,32 +424,124 @@ public class UI {
 
             text = "FACIL";
             x = getXForText(text);
-            y = mapa.maxScreenHeight/3;
+            y = mapa.getMaxScreenHeight()/3;
             g2.drawString(text, x, y);
 
             if(menuArrow == 0){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "MEDIO";
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 1){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
             text = "DIFICIL";
-            y += mapa.casillaSizeEscalada;
+            y += mapa.getCasillaSizeEscalada();
             x = getXForText(text);
             g2.drawString(text, x, y);
 
             if(menuArrow == 2){
-                g2.drawString("->", x-mapa.casillaSizeEscalada, y);
+                g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
 
         }
+    }
+
+    public void drawGameOver(){
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "GAME OVER";
+        int x = getXForText(text);
+        int y = 4 * mapa.getCasillaSizeEscalada();
+
+        //Background
+        g2.setColor(Color.black);
+        g2.fillRect(0,0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight());
+        try {
+            image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/UI/calavera.png"));
+            g2.drawImage(image, mapa.getMaxScreenWidth()/3, mapa.getMaxScreenHeight()/3, mapa.getMaxScreenWidth()/4, mapa.getMaxScreenHeight()/4, null);
+        } catch (IOException e) { e.printStackTrace();}
+
+        //Sombras
+        g2.setColor(Color.gray);
+        g2.drawString(text, x+5, y+5);
+
+        //Titulo
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        //Menu
+        
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+        text = "PLAY AGAIN";
+        x = getXForText(text);
+        y += mapa.getCasillaSizeEscalada() * 6;
+        g2.drawString(text, x, y);
+
+        if(menuArrow == 0){
+            g2.drawString("=>", x-mapa.getCasillaSizeEscalada(), y);
+        }
+
+        text = "EXIT";
+        x = getXForText(text);
+        y += mapa.getCasillaSizeEscalada();
+        g2.drawString(text, x, y );
+
+        if(menuArrow == 1){
+            g2.drawString("=>", x-mapa.getCasillaSizeEscalada(), y);
+        }
+
+    }
+
+    public void drawVictoria(){
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "VICTORIA";
+        int x = getXForText(text);
+        int y = 4 * mapa.getCasillaSizeEscalada();
+
+        //Background
+        g2.setColor(Color.black);
+        g2.fillRect(0,0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight());
+        /*try {
+            image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/UI/calavera.png"));
+            g2.drawImage(image, mapa.getMaxScreenWidth()/3, mapa.getMaxScreenHeight()/3, mapa.getMaxScreenWidth()/4, mapa.getMaxScreenHeight()/4, null);
+        } catch (IOException e) { e.printStackTrace();}*/
+
+        //Sombras
+        g2.setColor(Color.gray);
+        g2.drawString(text, x+5, y+5);
+
+        //Titulo
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        //Menu
+        
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+        text = "PLAY AGAIN";
+        x = getXForText(text);
+        y += mapa.getCasillaSizeEscalada() * 6;
+        g2.drawString(text, x, y);
+
+        if(menuArrow == 0){
+            g2.drawString("=>", x-mapa.getCasillaSizeEscalada(), y);
+        }
+
+        text = "EXIT";
+        x = getXForText(text);
+        y += mapa.getCasillaSizeEscalada();
+        g2.drawString(text, x, y );
+
+        if(menuArrow == 1){
+            g2.drawString("=>", x-mapa.getCasillaSizeEscalada(), y);
+        }
+
     }
 
     //public void drawEstadisticasPersonaje(int vida, int escudoMaximo, int )
@@ -481,8 +577,8 @@ public class UI {
             g2.drawImage(iconos[4].image, screenX, screenY, 25, 25, null);
             g2.drawString( "" + mapa.player1.getContadorPociones(), screenX + (30), 189);;
 
-            g2.drawImage(iconos[5].image,mapa.casillaSizeEscalada*18 , 10, 25, 25, null);
-            g2.drawString( "" + mapa.numeroDeBots, mapa.casillaSizeEscalada*18 + (30), 29);;
+            g2.drawImage(iconos[5].image,mapa.getCasillaSizeEscalada()*18 , 10, 25, 25, null);
+            g2.drawString( "" + mapa.numeroDeBots, mapa.getCasillaSizeEscalada()*18 + (30), 29);;
 
         }
         else if(mapa.estadoDelJuego == mapa.pantallaInicio){
@@ -500,13 +596,16 @@ public class UI {
             drawPantallaDeCombate();
 
         }
-        else if(mapa.estadoDelJuego == 4){ //Estado del juego: mensaje por pantalla
+        else if(mapa.estadoDelJuego == mapa.muerte){ //Estado del juego: mensaje por pantalla
 
-           //muerte
+           drawGameOver();
 
         } 
+        else if(mapa.estadoDelJuego == mapa.victoria){
 
-        
+            drawVictoria();
+
+        }
 
     }
 }

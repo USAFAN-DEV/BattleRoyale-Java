@@ -189,8 +189,8 @@ public class AdministradorDeCasillas {
             int casillaNum = mapInNumbers[drawedMapaCols][drawedMapaRows];//Tipo de Casilla correspondiente a cada 
             int decorationNum = decorationsInNumbers[drawedMapaCols][drawedMapaRows];//Tipo de Casilla correspondiente a cada 
 
-            int mapaX = drawedMapaCols * mapa.casillaSizeEscalada; //coordenada x de la casilla en el mapa
-            int mapaY = drawedMapaRows * mapa.casillaSizeEscalada; //coordenada y de la casilla en el mapa
+            int mapaX = drawedMapaCols * mapa.getCasillaSizeEscalada(); //coordenada x de la casilla en el mapa
+            int mapaY = drawedMapaRows * mapa.getCasillaSizeEscalada(); //coordenada y de la casilla en el mapa
             int screenX = mapaX - mapa.player1.getMapaX() + mapa.player1.screenX; //coordenada x de la casilla en la pantalla
             int screenY = mapaY - mapa.player1.getMapaY() + mapa.player1.screenY; //coordenada y de la casilla en la pantalla
 
@@ -209,13 +209,13 @@ public class AdministradorDeCasillas {
 
                 sumamos el tamano de una casilla para que el rango de casillas que se dibujan sea un poco mas grande y nunca veamos un fondo negro
             */
-            if((mapaX + mapa.casillaSizeEscalada > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.casillaSizeEscalada < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.casillaSizeEscalada > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.casillaSizeEscalada < mapa.player1.getMapaY() + mapa.player1.screenY)){
+            if((mapaX + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaY() + mapa.player1.screenY)){
 
-                g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null); //Dibujamos una Casilla
+                g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null); //Dibujamos una Casilla
                 
                 if(decorationNum >=0){
 
-                    g2.drawImage(decorations[decorationNum].image, screenX, screenY, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada, null);
+                    g2.drawImage(decorations[decorationNum].image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
 
                 }
 

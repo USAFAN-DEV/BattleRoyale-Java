@@ -15,7 +15,7 @@ public class Qiqi extends Personaje{
     //Constructor
     public Qiqi(Mapa mapa, KeyHandler keyHandler){
 
-        super(150,150,25,0,100,0.25,0.25,"Healer","Qiqi","Preserver of Fortune",mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
+        super(150,150,25,0,100,0.25,0.25,"Healer","Qiqi","Preserver of Fortune",0, 0, mapa);
         this.keyHandler = keyHandler;
         getCharacterImage();
         setRevivir(0);

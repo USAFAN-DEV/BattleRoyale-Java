@@ -17,7 +17,7 @@ public class Mei extends Personaje{
     //Constructor
     public Mei(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,100,0.5,1.15,"Atk","Mei","Musou Shinsetsu", mapa.casillaSizeEscalada * 50, mapa.casillaSizeEscalada * 38, mapa);
+        super(100,100,25,0,100,0.5,1.15,"Atk","Mei","Musou Shinsetsu", 0, 0, mapa);
         this.mapa = mapa;
         this.keyHandler = keyHandler;
         getCharacterImage();

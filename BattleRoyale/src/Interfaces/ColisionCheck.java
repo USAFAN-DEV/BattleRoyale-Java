@@ -20,17 +20,17 @@ public class ColisionCheck {
         int areaDeColisionTopMapaY = jugador.getMapaY() + jugador.getAreaDeColision().y;
         int areaDeColisionBottomMapaY = jugador.getMapaY() + jugador.getAreaDeColision().y + jugador.getAreaDeColision().height;
 
-        int areaDeColisionLeftCol = areaDeColisionLeftMapaX/mapa.casillaSizeEscalada;
-        int areaDeColisionRightCol = areaDeColisionRightMapaX/mapa.casillaSizeEscalada;
-        int areaDeColisionTopRow = areaDeColisionTopMapaY/mapa.casillaSizeEscalada;
-        int areaDeColisionBottomRow = areaDeColisionBottomMapaY/mapa.casillaSizeEscalada;
+        int areaDeColisionLeftCol = areaDeColisionLeftMapaX/mapa.getCasillaSizeEscalada();
+        int areaDeColisionRightCol = areaDeColisionRightMapaX/mapa.getCasillaSizeEscalada();
+        int areaDeColisionTopRow = areaDeColisionTopMapaY/mapa.getCasillaSizeEscalada();
+        int areaDeColisionBottomRow = areaDeColisionBottomMapaY/mapa.getCasillaSizeEscalada();
 
         int casillaNum1, casillaNum2, decoracionNum1, decoracionNum2;
 
         switch (jugador.direction) {
             case "up":
 
-                areaDeColisionTopRow = (areaDeColisionTopMapaY - jugador.getSpeed())/mapa.casillaSizeEscalada; //Restamos la velocidad para predecir la posicion del jugador antes de que este se mueva. Si la posicion esta en contacto con alguna casilla solida el jugador no debera poder avanzar
+                areaDeColisionTopRow = (areaDeColisionTopMapaY - jugador.getSpeed())/mapa.getCasillaSizeEscalada(); //Restamos la velocidad para predecir la posicion del jugador antes de que este se mueva. Si la posicion esta en contacto con alguna casilla solida el jugador no debera poder avanzar
                 casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow];
                 casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionTopRow];
 
@@ -55,7 +55,7 @@ public class ColisionCheck {
                 break;
             case "down":
 
-                areaDeColisionBottomRow = (areaDeColisionBottomMapaY + jugador.getSpeed())/mapa.casillaSizeEscalada;
+                areaDeColisionBottomRow = (areaDeColisionBottomMapaY + jugador.getSpeed())/mapa.getCasillaSizeEscalada();
                 casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow];
                 casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow];
                 
@@ -80,7 +80,7 @@ public class ColisionCheck {
                 break;
             case "left":
 
-                areaDeColisionLeftCol = (areaDeColisionLeftMapaX - jugador.getSpeed())/mapa.casillaSizeEscalada; 
+                areaDeColisionLeftCol = (areaDeColisionLeftMapaX - jugador.getSpeed())/mapa.getCasillaSizeEscalada(); 
                 casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow];
                 casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow];
                 
@@ -105,7 +105,7 @@ public class ColisionCheck {
                 break;
             case "right":
                 
-                areaDeColisionRightCol = (areaDeColisionRightMapaX + jugador.getSpeed())/mapa.casillaSizeEscalada; 
+                areaDeColisionRightCol = (areaDeColisionRightMapaX + jugador.getSpeed())/mapa.getCasillaSizeEscalada(); 
                 casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionTopRow];
                 casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow];
                 

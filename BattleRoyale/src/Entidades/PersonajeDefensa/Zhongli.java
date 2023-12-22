@@ -15,7 +15,7 @@ public class Zhongli extends Personaje{
     //Constructor
     public Zhongli(Mapa mapa, KeyHandler keyHandler){
 
-        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", mapa.casillaSizeEscalada * 30, mapa.casillaSizeEscalada * 30, mapa);
+        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", 0, 0, mapa);
         this.keyHandler = keyHandler;
         getCharacterImage();
         

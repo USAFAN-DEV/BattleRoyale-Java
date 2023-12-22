@@ -131,24 +131,24 @@ public class KeyHandler implements KeyListener {
                 else if(code == KeyEvent.VK_ENTER){
                     
                     if(mapa.ui.menuArrow == 0){
-                        mapa.player1.setMapaX(20*mapa.casillaSizeEscalada);
-                        mapa.player1.setMapaY(15*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaX(20*mapa.getCasillaSizeEscalada());
+                        mapa.player1.setMapaY(15*mapa.getCasillaSizeEscalada());
                     }
                     else if(mapa.ui.menuArrow == 1){
-                        mapa.player1.setMapaX(46*mapa.casillaSizeEscalada);
-                        mapa.player1.setMapaY(16*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaX(46*mapa.getCasillaSizeEscalada());
+                        mapa.player1.setMapaY(16*mapa.getCasillaSizeEscalada());
                     }
                     else if(mapa.ui.menuArrow == 2){
-                        mapa.player1.setMapaX(46*mapa.casillaSizeEscalada);
-                        mapa.player1.setMapaY(45*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaX(46*mapa.getCasillaSizeEscalada());
+                        mapa.player1.setMapaY(45*mapa.getCasillaSizeEscalada());
                     }
                     else if(mapa.ui.menuArrow == 3){
-                        mapa.player1.setMapaX(46*mapa.casillaSizeEscalada);
-                        mapa.player1.setMapaY(66*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaX(46*mapa.getCasillaSizeEscalada());
+                        mapa.player1.setMapaY(66*mapa.getCasillaSizeEscalada());
                     }
                     else if(mapa.ui.menuArrow == 4){
-                        mapa.player1.setMapaX(86*mapa.casillaSizeEscalada);
-                        mapa.player1.setMapaY(16*mapa.casillaSizeEscalada);
+                        mapa.player1.setMapaX(86*mapa.getCasillaSizeEscalada());
+                        mapa.player1.setMapaY(16*mapa.getCasillaSizeEscalada());
                     }
 
                     mapa.ui.pantallaDeInicioEstado++;
@@ -220,6 +220,33 @@ public class KeyHandler implements KeyListener {
                 }
 
             }
+
+        }
+        else if(mapa.estadoDelJuego == mapa.muerte || mapa.estadoDelJuego == mapa.victoria){
+
+             if(code == KeyEvent.VK_UP){
+                mapa.ui.menuArrow--;
+                if(mapa.ui.menuArrow < 0){
+                    mapa.ui.menuArrow = 1;
+                }
+            }
+            else if(code == KeyEvent.VK_DOWN){
+                mapa.ui.menuArrow++;
+                if(mapa.ui.menuArrow > 1){
+                    mapa.ui.menuArrow = 0;
+                }
+            }
+            else if(code == KeyEvent.VK_ENTER){
+                
+                if(mapa.ui.menuArrow == 0){
+                    mapa.estadoDelJuego = mapa.pantallaInicio;
+                    mapa.ui.pantallaDeInicioEstado = mapa.ui.pantallaTitulo;
+                }
+                else{
+                    System.exit(0);
+                }
+            }
+
 
         }
         else{
