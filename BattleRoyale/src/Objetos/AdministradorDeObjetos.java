@@ -1,6 +1,13 @@
 package Objetos;
 
 import Interfaces.Mapa;
+import Herramientas.*;
+import Herramientas.ArmasAtaque.EngulfingLightning;
+import Herramientas.ArmasAtaque.SacrificialFragments;
+import Herramientas.ArmasDefensa.StaffOfHoma;
+import Herramientas.ArmasDefensa.TheCatch;
+import Herramientas.ArmasVida.AquilaFavonia;
+import Herramientas.ArmasVida.SacrificialSword;
 import Entidades.Bots.*;
 
 public class AdministradorDeObjetos {
@@ -34,19 +41,68 @@ public class AdministradorDeObjetos {
         int qiqiX = 21 * mapa.casillaSizeEscalada, qiqiY = 34 * mapa.casillaSizeEscalada;
         int meiX = 19 * mapa.casillaSizeEscalada, meiY = 50 * mapa.casillaSizeEscalada;
 
-        for(int i = 0; i < mapa.bots.length; i++){
+        for(int i = 0; i < mapa.numeroDeBots; i++){
 
             if(i % 3 == 0){
                 mapa.bots[i] = new ZhongliBot(mapa, mapa.keyHandler, zhongliX, zhongliY);
-                zhongliX += 25;
+                zhongliX += 25 * mapa.casillaSizeEscalada;
             }
             if(i % 3 == 1){
                 mapa.bots[i] = new QiqiBot(mapa, mapa.keyHandler, qiqiX, qiqiY);
-                qiqiX += 33;
+                qiqiX += 33 * mapa.casillaSizeEscalada;
             }
             if(i % 3 == 2){
-                mapa.bots[i] = new ZhongliBot(mapa, mapa.keyHandler, meiX, meiY);
-                meiX += 32;
+                mapa.bots[i] = new MeiBot(mapa, mapa.keyHandler, meiX, meiY);
+                meiX += 32 * mapa.casillaSizeEscalada;
+            }
+
+        }
+        if(mapa.dificultadBots == 2){
+            Armas armaAtaque = new SacrificialFragments();
+            Armas armaDefensa = new TheCatch();
+            Armas armaVida = new SacrificialSword();
+
+            for(int i = 0; i < mapa.numeroDeBots; i++){
+
+                if(i % 3 == 0){
+                    mapa.bots[i].arma = armaDefensa;
+                    mapa.bots[i].arma.aplicarStatsArma(mapa.bots[i]);
+                }
+                if(i % 3 == 1){
+                    mapa.bots[i].arma = armaVida;
+                    mapa.bots[i].arma.aplicarStatsArma(mapa.bots[i]);
+                }
+                if(i % 3 == 2){
+                    mapa.bots[i].arma = armaAtaque;
+                    mapa.bots[i].arma.aplicarStatsArma(mapa.bots[i]);
+                }
+
+            }
+
+        }
+        else if(mapa.dificultadBots == 3){
+            Armas armaAtaque = new EngulfingLightning();
+            Armas armaDefensa = new StaffOfHoma();
+            Armas armaVida = new AquilaFavonia();
+
+            for(int i = 0; i < mapa.numeroDeBots; i++){
+
+                if(i % 3 == 0){
+                    mapa.bots[i].arma = armaDefensa;
+                    mapa.bots[i].arma.aplicarStatsArma(mapa.bots[i]);
+                    mapa.bots[i].setEscudo(50);
+                }
+                if(i % 3 == 1){
+                    mapa.bots[i].arma = armaVida;
+                    mapa.bots[i].arma.aplicarStatsArma(mapa.bots[i]);
+                    mapa.bots[i].setEscudo(50);
+                }
+                if(i % 3 == 2){
+                    mapa.bots[i].arma = armaAtaque;
+                    mapa.bots[i].arma.aplicarStatsArma(mapa.bots[i]);
+                    mapa.bots[i].setEscudo(50);
+                }
+
             }
 
         }

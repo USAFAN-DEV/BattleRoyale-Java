@@ -252,6 +252,9 @@ public abstract class Personaje {
         return this.areaDeCollision;
 
     }
+    public int getRevivir(){
+        return 0;
+    }
     
     //METODOS
 
@@ -361,7 +364,7 @@ public abstract class Personaje {
             if(botIndex != -1){
                 mapa.estadoDelJuego = 3;
                 JFrame frameC= new JFrame();
-                InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.bots[0], frameC,mapa);
+                InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.bots[botIndex], frameC,mapa);
                 mapa.bots[botIndex] = null;
                 mapa.stopMusic();
                 interfazC.playMusic(1);   
@@ -446,7 +449,7 @@ public abstract class Personaje {
         int jugadorMapaCol = getMapaX()/mapa.casillaSizeEscalada;
         int jugadorMapaRow = getMapaY()/mapa.casillaSizeEscalada;
 
-        System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
+        //System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
 
         //tp nieve
         if(jugadorMapaCol == 21 && jugadorMapaRow == 51){

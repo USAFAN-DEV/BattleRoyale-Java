@@ -162,7 +162,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     }
     public void FinPrograma(){
         if(jugadores.getJugador2().getVida()==0){
-            if(jugadores.getJugador2().getNombre()=="Qiqi"){
+            if(jugadores.getJugador2().getNombre()=="Qiqi" && jugadores.getJugador2().getRevivir() == 0){
                 jugadores.getJugador2().usarHabilidad(jugadores.getJugador1());
                 ActualizacionEstadisticas();
             }
@@ -175,13 +175,14 @@ public class InterfazCombate extends JPanel implements ActionListener{
                     e.printStackTrace();
                 }
                 mapa.estadoDelJuego=mapa.jugar;
+                mapa.numeroDeBots--;
                 frameC.dispose();
                 this.musica.stop();
                 mapa.playMusic(0);
             }  
         }
         if(jugadores.getJugador1().getVida()==0){
-            if(jugadores.getJugador1().getNombre()=="Qiqi"){
+            if(jugadores.getJugador1().getNombre()=="Qiqi" && jugadores.getJugador2().getRevivir() == 0){
                 jugadores.getJugador1().usarHabilidad(jugadores.getJugador2());
                 ActualizacionEstadisticas();
             }

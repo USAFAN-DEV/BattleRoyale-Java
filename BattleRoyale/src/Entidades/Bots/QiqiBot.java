@@ -1,12 +1,10 @@
 package Entidades.Bots;
 
-import java.awt.Rectangle;
-
-import Entidades.PersonajeDefensa.Zhongli;
+import Entidades.PersonajeHealer.Qiqi;
 import Interfaces.Mapa;
 import Interfaces.KeyHandler;
 
-public class QiqiBot extends Zhongli{
+public class QiqiBot extends Qiqi{
     
     public QiqiBot(Mapa mapa, KeyHandler keyHandler, int mapaX, int mapaY){
 
@@ -22,6 +20,7 @@ public class QiqiBot extends Zhongli{
         this.areaDeCollision = new Rectangle(0, 0, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada);*/
 
     }
+    
 
 }
 

@@ -1,12 +1,11 @@
 package Entidades.Bots;
 
-import java.awt.Rectangle;
 
-import Entidades.PersonajeDefensa.Zhongli;
+import Entidades.PersonajeAtk.Mei;
 import Interfaces.Mapa;
 import Interfaces.KeyHandler;
 
-public class MeiBot extends Zhongli{
+public class MeiBot extends Mei{
     
     public MeiBot(Mapa mapa, KeyHandler keyHandler, int mapaX, int mapaY){
 

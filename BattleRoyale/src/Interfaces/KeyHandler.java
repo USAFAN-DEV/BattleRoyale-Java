@@ -3,6 +3,7 @@ package Interfaces;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import Entidades.Personaje;
 import Entidades.PersonajeAtk.Mei;
 import Entidades.PersonajeDefensa.Zhongli;
 import Entidades.PersonajeHealer.Qiqi;
@@ -59,8 +60,6 @@ public class KeyHandler implements KeyListener {
 
             }
             else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.seleccionDePersonaje){
-
-                System.out.println(mapa.ui.menuArrow);
 
                 if(code == KeyEvent.VK_LEFT){
                     mapa.ui.menuArrow--;
@@ -213,6 +212,9 @@ public class KeyHandler implements KeyListener {
                         mapa.dificultadBots = 3;
                     }
 
+                    mapa.bots = new Personaje[mapa.numeroDeBots];
+                    System.out.println("Dificultad bots: " + mapa.dificultadBots);
+                    mapa.AdministradorO.colocarBots();
                     mapa.estadoDelJuego = mapa.jugar;
 
                 }
