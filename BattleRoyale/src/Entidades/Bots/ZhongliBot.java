@@ -2,11 +2,8 @@ package Entidades.Bots;
 
 
 import Entidades.PersonajeDefensa.Zhongli;
-import Herramientas.Armas;
-import Herramientas.ArmasDefensa.StaffOfHoma;
-import Herramientas.ArmasDefensa.TheCatch;
-import Interfaces.Mapa;
-import Interfaces.KeyHandler;
+import Main.KeyHandler;
+import Main.Mapa;
 
 public class ZhongliBot extends Zhongli{
     

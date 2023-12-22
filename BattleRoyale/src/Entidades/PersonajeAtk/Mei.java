@@ -2,13 +2,12 @@ package Entidades.PersonajeAtk;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 import Entidades.Personaje;
-import Interfaces.KeyHandler;
-import Interfaces.Mapa;
+import Main.KeyHandler;
+import Main.Mapa;
 
 public class Mei extends Personaje{
     

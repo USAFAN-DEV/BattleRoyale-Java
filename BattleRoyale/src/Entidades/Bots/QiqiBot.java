@@ -1,8 +1,8 @@
 package Entidades.Bots;
 
 import Entidades.PersonajeHealer.Qiqi;
-import Interfaces.Mapa;
-import Interfaces.KeyHandler;
+import Main.KeyHandler;
+import Main.Mapa;
 
 public class QiqiBot extends Qiqi{
     

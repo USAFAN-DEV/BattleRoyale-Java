@@ -3,15 +3,14 @@ package Objetos;
 import java.util.Random;
 
 import Entidades.Personaje;
-
-import Interfaces.Mapa;
+import Main.Mapa;
 
 public class CofrePlateado extends Cofre {
     
     public CofrePlateado(Mapa mapa, String imagePath, int mapaX, int mapaY){
 
         super(mapa, imagePath, mapaX, mapaY);
-        name = "cofrePlateado";
+        setName("cofrePlateado");
 
     }
 
@@ -27,9 +26,9 @@ public class CofrePlateado extends Cofre {
             if(jugador.getArma() == null || jugador.getArma().getEstrellasArma() != 5){
 
                 jugador.setArma(recibirArma(jugador.getTipo(), 5));
-                jugador.arma.aplicarStatsArma(jugador);
+                jugador.getArma().aplicarStatsArma(jugador);
 
-                res = "Te ha tocado el arma " + jugador.arma.getNombreArma();
+                res = "Te ha tocado el arma " + jugador.getArma().getNombreArma();
 
 
             }
@@ -45,8 +44,8 @@ public class CofrePlateado extends Cofre {
             if(jugador.getArma() == null){
 
                 jugador.setArma(recibirArma(jugador.getTipo(), 4));
-                res = "Te ha tocado el arma " + jugador.arma.getNombreArma();
-                jugador.arma.aplicarStatsArma(jugador);
+                res = "Te ha tocado el arma " + jugador.getArma().getNombreArma();
+                jugador.getArma().aplicarStatsArma(jugador);
 
             }
             else{

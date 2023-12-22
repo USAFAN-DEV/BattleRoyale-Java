@@ -2,8 +2,8 @@ package Entidades.Bots;
 
 
 import Entidades.PersonajeAtk.Mei;
-import Interfaces.Mapa;
-import Interfaces.KeyHandler;
+import Main.KeyHandler;
+import Main.Mapa;
 
 public class MeiBot extends Mei{
     

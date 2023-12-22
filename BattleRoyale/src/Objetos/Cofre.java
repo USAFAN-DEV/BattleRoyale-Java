@@ -13,7 +13,7 @@ import Herramientas.ArmasDefensa.StaffOfHoma;
 import Herramientas.ArmasDefensa.TheCatch;
 import Herramientas.ArmasVida.AquilaFavonia;
 import Herramientas.ArmasVida.SacrificialSword;
-import Interfaces.Mapa;
+import Main.Mapa;
 
 public abstract class Cofre extends Objeto {
     
@@ -30,7 +30,7 @@ public abstract class Cofre extends Objeto {
         areaDeColision =  new Rectangle(0, 0, 16 * escala, 16 * escala);
         areaDeColisionDefaultX = areaDeColision.x;
         areaDeColisionDefaultY = areaDeColision.y;
-        this.collision = false;
+        this.colision = false;
 
     }
 

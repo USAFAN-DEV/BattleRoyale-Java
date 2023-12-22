@@ -4,35 +4,40 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import Interfaces.Mapa;
+import Main.Mapa;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-
-import Texturas.Casilla;
 
 public class UI {
     
+    //ATRIBUTOS
+
+    //CONSTANTES (ES COMO UN ENUM). Lo dejo en publico
     public final int pantallaTitulo = 0;
     public final int seleccionDePersonaje = 1;
     public final int datosPersonaje = 2;
     public final int elegirCiudad = 3;
     public final int elegirBots = 4;
     public final int elegirDificultadBots = 5;
-    final int numeroTiposIconosUI = 6;
-    Mapa mapa;
-    Font fuenteTexto;
-    public Icono[] iconos;
-    Graphics2D g2;
-    public int contadorFramesMensajePantalla;
-    BufferedImage image;
-    public int menuArrow;
-    public int pantallaDeInicioEstado;
+
+    private final int numeroTiposIconosUI = 6;
+
+    //VARIABLES
+    private int contadorFramesMensajePantalla;
+    private int menuArrow;
+    private int pantallaDeInicioEstado;
+
+    //OBJETOS
+    private Mapa mapa;
+    private Font fuenteTexto;
+    private Icono[] iconos;
+    private Graphics2D g2;
+    private BufferedImage image;
+    
 
     public UI(Mapa mapa){
 
@@ -45,6 +50,27 @@ public class UI {
         getIconsImages();
     
     }
+
+    //GETTERS y SETTERS
+    public void setContadorFramesMensajePantalla(int contadorFramesMensajePantalla){
+        this.contadorFramesMensajePantalla = contadorFramesMensajePantalla;
+    }
+    public int getContadorFramesMensajePantalla(){
+        return this.contadorFramesMensajePantalla;
+    }
+    public void setMenuArrow(int menuArrow){
+        this.menuArrow = menuArrow;
+    }
+    public int getMenuArrow(){
+        return this.menuArrow;
+    }
+    public void setPantallaDeInicioEstado(int pantallaDeInicioEstado){
+        this.pantallaDeInicioEstado = pantallaDeInicioEstado;
+    }
+    public int getPantallaDeInicioEstado(){
+        return this.pantallaDeInicioEstado;
+    }
+
 
     public int getXForText(String text){
 

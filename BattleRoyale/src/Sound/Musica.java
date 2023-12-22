@@ -8,8 +8,8 @@ import javax.sound.sampled.Clip;
 
 public class Musica {
     
-    Clip clip;
-    File musicaPaths[] = new File[2];
+    private Clip clip;
+    private File musicaPaths[] = new File[2];
 
     public Musica(){
 

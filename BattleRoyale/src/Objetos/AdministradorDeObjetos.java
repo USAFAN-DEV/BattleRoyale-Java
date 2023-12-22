@@ -1,6 +1,5 @@
 package Objetos;
 
-import Interfaces.Mapa;
 import Herramientas.*;
 import Herramientas.ArmasAtaque.EngulfingLightning;
 import Herramientas.ArmasAtaque.SacrificialFragments;
@@ -8,11 +7,12 @@ import Herramientas.ArmasDefensa.StaffOfHoma;
 import Herramientas.ArmasDefensa.TheCatch;
 import Herramientas.ArmasVida.AquilaFavonia;
 import Herramientas.ArmasVida.SacrificialSword;
+import Main.Mapa;
 import Entidades.Bots.*;
 
 public class AdministradorDeObjetos {
     
-    Mapa mapa;
+    private Mapa mapa;
 
     public AdministradorDeObjetos(Mapa mapa){
 
@@ -78,16 +78,16 @@ public class AdministradorDeObjetos {
             for(int i = 0; i < mapa.getNumeroDeBots(); i++){
 
                 if(i % 3 == 0){
-                    mapa.getBots()[i].arma = armaDefensa;
-                    mapa.getBots()[i].arma.aplicarStatsArma(mapa.getBots()[i]);
+                    mapa.getBots()[i].setArma(armaDefensa);
+                    mapa.getBots()[i].getArma().aplicarStatsArma(mapa.getBots()[i]);
                 }
                 if(i % 3 == 1){
-                    mapa.getBots()[i].arma = armaVida;
-                    mapa.getBots()[i].arma.aplicarStatsArma(mapa.getBots()[i]);
+                    mapa.getBots()[i].setArma(armaVida);
+                    mapa.getBots()[i].getArma().aplicarStatsArma(mapa.getBots()[i]);
                 }
                 if(i % 3 == 2){
-                    mapa.getBots()[i].arma = armaAtaque;
-                    mapa.getBots()[i].arma.aplicarStatsArma(mapa.getBots()[i]);
+                    mapa.getBots()[i].setArma(armaAtaque);
+                    mapa.getBots()[i].getArma().aplicarStatsArma(mapa.getBots()[i]);
                 }
 
             }
@@ -101,16 +101,16 @@ public class AdministradorDeObjetos {
             for(int i = 0; i < mapa.getNumeroDeBots(); i++){
 
                 if(i % 3 == 0){
-                    mapa.getBots()[i].arma = armaDefensa;
-                    mapa.getBots()[i].arma.aplicarStatsArma(mapa.getBots()[i]);
+                    mapa.getBots()[i].setArma(armaDefensa);
+                    mapa.getBots()[i].getArma().aplicarStatsArma(mapa.getBots()[i]);
                 }
                 if(i % 3 == 1){
-                    mapa.getBots()[i].arma = armaVida;
-                    mapa.getBots()[i].arma.aplicarStatsArma(mapa.getBots()[i]);
+                    mapa.getBots()[i].setArma(armaVida);
+                    mapa.getBots()[i].getArma().aplicarStatsArma(mapa.getBots()[i]);
                 }
                 if(i % 3 == 2){
-                    mapa.getBots()[i].arma = armaAtaque;
-                    mapa.getBots()[i].arma.aplicarStatsArma(mapa.getBots()[i]);
+                    mapa.getBots()[i].setArma(armaAtaque);
+                    mapa.getBots()[i].getArma().aplicarStatsArma(mapa.getBots()[i]);
                 }
 
             }

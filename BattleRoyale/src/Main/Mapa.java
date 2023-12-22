@@ -1,4 +1,4 @@
-package Interfaces;
+package Main;
 
 import javax.swing.JPanel;
 import java.awt.*;
@@ -221,7 +221,7 @@ public class Mapa extends JPanel implements Runnable{
             }
             if(timer >= 1000000000){ //Cuando timer llegue a un segundo (1000000000 nanosegundos). Timer es la resta entre current time y last time. Es decir, cuando el tiempo de ejecucion del programa llegue a un segundo
 
-                //System.out.println("FPS:" + contDraw);
+                System.out.println("FPS:" + contDraw);
                 timer = 0;
                 contDraw = 0;
 
@@ -250,10 +250,10 @@ public class Mapa extends JPanel implements Runnable{
         else if(estadoDelJuego == combate){
             //Cuando entras en combate, si al colisionar con el jugador mantienes una tecla presionada, al volver a el estado de jugar, esa tecla sigue teniendo el valor true
             //Por lo que el personaje se mueve aunque no estes presionando nada. Para que no ocurra esto, reseteamos aqui los valores del keyHandler
-            keyHandler.PressedDown = false;
-            keyHandler.PressedLeft = false;
-            keyHandler.PressedRight = false;
-            keyHandler.PressedUp = false;
+            keyHandler.setPressedDown(false);
+            keyHandler.setPressedLeft(false);
+            keyHandler.setPressedRight(false);
+            keyHandler.setPressedUp(false);
 
         }
         else{
@@ -291,14 +291,14 @@ public class Mapa extends JPanel implements Runnable{
             jugador.draw(g2);
             ui.draw(g2);
 
-            if(getJugador().mensajeCofreLooteado !=  null){
+            if(getJugador().getMensajeCofreLooteado() !=  null){
 
-                if(ui.contadorFramesMensajePantalla < 120){
-                    ui.drawMensajePorPantalla(getJugador().mensajeCofreLooteado);
+                if(ui.getContadorFramesMensajePantalla() < 120){
+                    ui.drawMensajePorPantalla(getJugador().getMensajeCofreLooteado());
                 }
                 else{
-                    getJugador().mensajeCofreLooteado = null;
-                    ui.contadorFramesMensajePantalla = 0;
+                    getJugador().setMensajeCofreLooteado(null);
+                    ui.setContadorFramesMensajePantalla(0);
                 }
 
             }

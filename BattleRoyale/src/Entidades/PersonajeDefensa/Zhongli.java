@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Entidades.Personaje;
-import Interfaces.KeyHandler;
-import Interfaces.Mapa;
+import Main.KeyHandler;
+import Main.Mapa;
 
 public class Zhongli extends Personaje{
 

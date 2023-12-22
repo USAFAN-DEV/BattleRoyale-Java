@@ -6,14 +6,12 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import Combate.MetodoCombate;
 import Entidades.Personaje;
-import Interfaces.Mapa;
+import Main.Mapa;
 import Sound.Musica;
 
 public class InterfazCombate extends JPanel implements ActionListener{

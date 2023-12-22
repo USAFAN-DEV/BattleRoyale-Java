@@ -1,6 +1,5 @@
+package Main;
 import javax.swing.JFrame;
-
-import Interfaces.Mapa;
 
 
 public class Main {
@@ -16,11 +15,8 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Genshin Royale");
         window.pack(); //Hace que el JFrame tenga el tamano de sus componentes ()
-
-
         window.setLocationRelativeTo(null); //No especificamos la localizacion de la ventana. Por default en el centro
         window.setVisible(true);
-
         mapa.startGameThread();
 
     }

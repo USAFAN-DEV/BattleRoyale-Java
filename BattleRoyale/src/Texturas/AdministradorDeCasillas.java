@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import Interfaces.Mapa;
+import Main.Mapa;
 
 public class AdministradorDeCasillas {
 
@@ -17,11 +17,11 @@ public class AdministradorDeCasillas {
     final int numeroDecoracionesDistintas = 130;
     
     //Atributos
-    Mapa mapa;
-    public Casilla[] casillas;
-    public Casilla[] decorations;
-    public int mapInNumbers[][];
-    public int decorationsInNumbers[][];
+    private Mapa mapa;
+    private Casilla[] casillas;
+    private Casilla[] decorations;
+    private int mapInNumbers[][];
+    private int decorationsInNumbers[][];
 
     //Constructor
     public AdministradorDeCasillas(Mapa mapa){
@@ -39,6 +39,19 @@ public class AdministradorDeCasillas {
         loadMap("./BattleRoyale-Java/BattleRoyale/maps/map01.txt", mapInNumbers);
         loadMap("./BattleRoyale-Java/BattleRoyale/maps/map02.txt", decorationsInNumbers);
 
+    }
+
+    public Casilla[] getCasillas(){
+        return this.casillas;
+    }
+    public Casilla[] getDecorations(){
+        return this.decorations;
+    }
+    public int[][] getMapInNumbers(){
+        return this.mapInNumbers;
+    }
+    public int[][] getDecorationsInNumbers(){
+        return this.decorationsInNumbers;
     }
 
 
@@ -191,8 +204,8 @@ public class AdministradorDeCasillas {
 
             int mapaX = drawedMapaCols * mapa.getCasillaSizeEscalada(); //coordenada x de la casilla en el mapa
             int mapaY = drawedMapaRows * mapa.getCasillaSizeEscalada(); //coordenada y de la casilla en el mapa
-            int screenX = mapaX - mapa.getJugador().getMapaX() + mapa.getJugador().screenX; //coordenada x de la casilla en la pantalla
-            int screenY = mapaY - mapa.getJugador().getMapaY() + mapa.getJugador().screenY; //coordenada y de la casilla en la pantalla
+            int screenX = mapaX - mapa.getJugador().getMapaX() + mapa.getJugador().getScreenX(); //coordenada x de la casilla en la pantalla
+            int screenY = mapaY - mapa.getJugador().getMapaY() + mapa.getJugador().getScreenY(); //coordenada y de la casilla en la pantalla
 
             /*
             Si el jugador esta en la posicion 500, 500:
@@ -209,7 +222,7 @@ public class AdministradorDeCasillas {
 
                 sumamos el tamano de una casilla para que el rango de casillas que se dibujan sea un poco mas grande y nunca veamos un fondo negro
             */
-            if((mapaX + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaX() - mapa.getJugador().screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaX() + mapa.getJugador().screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaY() - mapa.getJugador().screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaY() + mapa.getJugador().screenY)){
+            if((mapaX + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaX() - mapa.getJugador().getScreenX() && mapaX - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaX() + mapa.getJugador().getScreenX()) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaY() - mapa.getJugador().getScreenY() && mapaY - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaY() + mapa.getJugador().getScreenY())){
 
                 g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null); //Dibujamos una Casilla
                 
