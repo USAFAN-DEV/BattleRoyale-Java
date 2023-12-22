@@ -29,8 +29,8 @@ public class AdministradorDeCasillas {
         this.mapa = mapa;
         casillas = new Casilla[numeroCasillasDistintas];
         decorations = new Casilla[numeroDecoracionesDistintas];
-        this.mapInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
-        this.decorationsInNumbers = new int[mapa.maxMapaColumnas][mapa.maxMapaFilas];
+        this.mapInNumbers = new int[mapa.getMaxMapaColumnas()][mapa.getMaxMapaFilas()];
+        this.decorationsInNumbers = new int[mapa.getMaxMapaColumnas()][mapa.getMaxMapaFilas()];
 
         getCasillaImage();
         getCasillaCollision();
@@ -146,11 +146,11 @@ public class AdministradorDeCasillas {
             int col = 0;
             int row = 0;
 
-            while(col < mapa.maxMapaColumnas && row < mapa.maxMapaFilas){ //Mientras col y row no superen el numero maximo de columnas y filas del mapa
+            while(col < mapa.getMaxMapaColumnas() && row < mapa.getMaxMapaFilas()){ //Mientras col y row no superen el numero maximo de columnas y filas del mapa
 
                 String linea = in.readLine(); //Leemos una linea
 
-                while(col < mapa.maxMapaColumnas){ //Vamos cogiendo los numeros de la linea y los guardamos en nuestra matriz mapInNumbers
+                while(col < mapa.getMaxMapaColumnas()){ //Vamos cogiendo los numeros de la linea y los guardamos en nuestra matriz mapInNumbers
 
                     String numbers[] = linea.split(" ");
                     int num = Integer.parseInt(numbers[col]);
@@ -159,7 +159,7 @@ public class AdministradorDeCasillas {
 
                 }
 
-                if(col == mapa.maxMapaColumnas){ //Cuando llegamos al final de la fila, pasamos a la siguiente
+                if(col == mapa.getMaxMapaColumnas()){ //Cuando llegamos al final de la fila, pasamos a la siguiente
 
                     col = 0;
                     row++;
@@ -184,15 +184,15 @@ public class AdministradorDeCasillas {
         int drawedMapaCols = 0; 
         int drawedMapaRows = 0;
 
-        while(drawedMapaCols < mapa.maxMapaColumnas && drawedMapaRows < mapa.maxMapaFilas){ //Mientras que el numero de columnas dibujadas sea menor que el maximo numero de columnas del mapa y el numero de filas dibujadas sea menor que el maximo numero de filas del mapa
+        while(drawedMapaCols < mapa.getMaxMapaColumnas() && drawedMapaRows < mapa.getMaxMapaFilas()){ //Mientras que el numero de columnas dibujadas sea menor que el maximo numero de columnas del mapa y el numero de filas dibujadas sea menor que el maximo numero de filas del mapa
 
             int casillaNum = mapInNumbers[drawedMapaCols][drawedMapaRows];//Tipo de Casilla correspondiente a cada 
             int decorationNum = decorationsInNumbers[drawedMapaCols][drawedMapaRows];//Tipo de Casilla correspondiente a cada 
 
             int mapaX = drawedMapaCols * mapa.getCasillaSizeEscalada(); //coordenada x de la casilla en el mapa
             int mapaY = drawedMapaRows * mapa.getCasillaSizeEscalada(); //coordenada y de la casilla en el mapa
-            int screenX = mapaX - mapa.player1.getMapaX() + mapa.player1.screenX; //coordenada x de la casilla en la pantalla
-            int screenY = mapaY - mapa.player1.getMapaY() + mapa.player1.screenY; //coordenada y de la casilla en la pantalla
+            int screenX = mapaX - mapa.getJugador().getMapaX() + mapa.getJugador().screenX; //coordenada x de la casilla en la pantalla
+            int screenY = mapaY - mapa.getJugador().getMapaY() + mapa.getJugador().screenY; //coordenada y de la casilla en la pantalla
 
             /*
             Si el jugador esta en la posicion 500, 500:
@@ -209,7 +209,7 @@ public class AdministradorDeCasillas {
 
                 sumamos el tamano de una casilla para que el rango de casillas que se dibujan sea un poco mas grande y nunca veamos un fondo negro
             */
-            if((mapaX + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaY() + mapa.player1.screenY)){
+            if((mapaX + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaX() - mapa.getJugador().screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaX() + mapa.getJugador().screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaY() - mapa.getJugador().screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaY() + mapa.getJugador().screenY)){
 
                 g2.drawImage(casillas[casillaNum].image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null); //Dibujamos una Casilla
                 
@@ -223,7 +223,7 @@ public class AdministradorDeCasillas {
 
             drawedMapaCols++; //Incrementamos el contador de columnas dibujadas
 
-            if(drawedMapaCols == mapa.maxMapaColumnas){ //Si hemos llegado al maximo de columnas, Las reseteamos a 0 y pasamos a la siguiente fila
+            if(drawedMapaCols == mapa.getMaxMapaColumnas()){ //Si hemos llegado al maximo de columnas, Las reseteamos a 0 y pasamos a la siguiente fila
 
                 //reseteamos las columnas dibujadas y la x
                 drawedMapaCols = 0;

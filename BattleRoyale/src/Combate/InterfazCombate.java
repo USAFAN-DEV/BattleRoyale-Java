@@ -179,8 +179,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                mapa.estadoDelJuego=mapa.jugar;
-                mapa.numeroDeBots--;
+                mapa.setEstadoDelJuego(mapa.jugar);
+                mapa.setNumeroDeBots(mapa.getNumeroDeBots()-1);
                 frameC.dispose();
                 this.musica.stop();
                 mapa.playMusic(0);
@@ -199,7 +199,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                mapa.estadoDelJuego=mapa.muerte;
+                mapa.setEstadoDelJuego(mapa.muerte);
                 frameC.dispose();
                 this.musica.stop();
                 mapa.playMusic(0);

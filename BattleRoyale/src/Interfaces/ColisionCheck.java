@@ -31,22 +31,22 @@ public class ColisionCheck {
             case "up":
 
                 areaDeColisionTopRow = (areaDeColisionTopMapaY - jugador.getSpeed())/mapa.getCasillaSizeEscalada(); //Restamos la velocidad para predecir la posicion del jugador antes de que este se mueva. Si la posicion esta en contacto con alguna casilla solida el jugador no debera poder avanzar
-                casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow];
-                casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionTopRow];
+                casillaNum1 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow];
+                casillaNum2 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionRightCol][areaDeColisionTopRow];
 
-                if((decoracionNum1 = mapa.administradorC.decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow]) < 0){
+                if((decoracionNum1 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow]) < 0){
                     decoracionNum1 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
-                if((decoracionNum2 = mapa.administradorC.decorationsInNumbers[areaDeColisionRightCol][areaDeColisionTopRow]) < 0){
+                if((decoracionNum2 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionRightCol][areaDeColisionTopRow]) < 0){
                     decoracionNum2 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
 
-                if(mapa.administradorC.casillas[casillaNum1].collision == true || mapa.administradorC.casillas[casillaNum2].collision == true){
+                if(mapa.getAdministradorDeCasillas().casillas[casillaNum1].collision == true || mapa.getAdministradorDeCasillas().casillas[casillaNum2].collision == true){
                     jugador.collisionEstado = true;
                 }
                 else{
 
-                    if(mapa.administradorC.decorations[decoracionNum1].collision == true || mapa.administradorC.decorations[decoracionNum2].collision == true){
+                    if(mapa.getAdministradorDeCasillas().decorations[decoracionNum1].collision == true || mapa.getAdministradorDeCasillas().decorations[decoracionNum2].collision == true){
                         jugador.collisionEstado = true;
                     }
 
@@ -56,22 +56,22 @@ public class ColisionCheck {
             case "down":
 
                 areaDeColisionBottomRow = (areaDeColisionBottomMapaY + jugador.getSpeed())/mapa.getCasillaSizeEscalada();
-                casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow];
-                casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow];
+                casillaNum1 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow];
+                casillaNum2 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow];
                 
-                if((decoracionNum1 = mapa.administradorC.decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow]) < 0){
+                if((decoracionNum1 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow]) < 0){
                     decoracionNum1 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
-                if((decoracionNum2 = mapa.administradorC.decorationsInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow]) < 0){
+                if((decoracionNum2 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow]) < 0){
                     decoracionNum2 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
 
-                if(mapa.administradorC.casillas[casillaNum1].collision == true || mapa.administradorC.casillas[casillaNum2].collision == true){
+                if(mapa.getAdministradorDeCasillas().casillas[casillaNum1].collision == true || mapa.getAdministradorDeCasillas().casillas[casillaNum2].collision == true){
                     jugador.collisionEstado = true;
                 }
                 else{
 
-                    if(mapa.administradorC.decorations[decoracionNum1].collision == true || mapa.administradorC.decorations[decoracionNum2].collision == true){
+                    if(mapa.getAdministradorDeCasillas().decorations[decoracionNum1].collision == true || mapa.getAdministradorDeCasillas().decorations[decoracionNum2].collision == true){
                         jugador.collisionEstado = true;
                     }
 
@@ -81,22 +81,22 @@ public class ColisionCheck {
             case "left":
 
                 areaDeColisionLeftCol = (areaDeColisionLeftMapaX - jugador.getSpeed())/mapa.getCasillaSizeEscalada(); 
-                casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow];
-                casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow];
+                casillaNum1 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow];
+                casillaNum2 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow];
                 
-                if((decoracionNum1 = mapa.administradorC.decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow]) < 0){
+                if((decoracionNum1 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionTopRow]) < 0){
                     decoracionNum1 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
-                if((decoracionNum2 = mapa.administradorC.decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow]) < 0){
+                if((decoracionNum2 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionLeftCol][areaDeColisionBottomRow]) < 0){
                     decoracionNum2 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
 
-                if(mapa.administradorC.casillas[casillaNum1].collision == true || mapa.administradorC.casillas[casillaNum2].collision == true){
+                if(mapa.getAdministradorDeCasillas().casillas[casillaNum1].collision == true || mapa.getAdministradorDeCasillas().casillas[casillaNum2].collision == true){
                     jugador.collisionEstado = true;
                 }
                 else{
 
-                    if(mapa.administradorC.decorations[decoracionNum1].collision == true || mapa.administradorC.decorations[decoracionNum2].collision == true){
+                    if(mapa.getAdministradorDeCasillas().decorations[decoracionNum1].collision == true || mapa.getAdministradorDeCasillas().decorations[decoracionNum2].collision == true){
                         jugador.collisionEstado = true;
                     }
 
@@ -106,22 +106,22 @@ public class ColisionCheck {
             case "right":
                 
                 areaDeColisionRightCol = (areaDeColisionRightMapaX + jugador.getSpeed())/mapa.getCasillaSizeEscalada(); 
-                casillaNum1 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionTopRow];
-                casillaNum2 = mapa.administradorC.mapInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow];
+                casillaNum1 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionRightCol][areaDeColisionTopRow];
+                casillaNum2 = mapa.getAdministradorDeCasillas().mapInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow];
                 
-                if((decoracionNum1 = mapa.administradorC.decorationsInNumbers[areaDeColisionRightCol][areaDeColisionTopRow]) < 0){
+                if((decoracionNum1 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionRightCol][areaDeColisionTopRow]) < 0){
                     decoracionNum1 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
-                if((decoracionNum2 = mapa.administradorC.decorationsInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow]) < 0){
+                if((decoracionNum2 = mapa.getAdministradorDeCasillas().decorationsInNumbers[areaDeColisionRightCol][areaDeColisionBottomRow]) < 0){
                     decoracionNum2 = 7;//Decoracion que no tiene colision = no hay decoracion
                 }
 
-                if(mapa.administradorC.casillas[casillaNum1].collision == true || mapa.administradorC.casillas[casillaNum2].collision == true){
+                if(mapa.getAdministradorDeCasillas().casillas[casillaNum1].collision == true || mapa.getAdministradorDeCasillas().casillas[casillaNum2].collision == true){
                     jugador.collisionEstado = true;
                 }
                 else{
 
-                    if(mapa.administradorC.decorations[decoracionNum1].collision == true || mapa.administradorC.decorations[decoracionNum2].collision == true){
+                    if(mapa.getAdministradorDeCasillas().decorations[decoracionNum1].collision == true || mapa.getAdministradorDeCasillas().decorations[decoracionNum2].collision == true){
                         jugador.collisionEstado = true;
                     }
 
@@ -139,9 +139,9 @@ public class ColisionCheck {
         int index = -1;
         //Revisar si es necesario crear un atributo de jugador para resetear el area de colision despues de calcular la del mapa, o puedo crear aqui una variable
 
-        for(int i = 0; i < mapa.objetos.length; i++){
+        for(int i = 0; i < mapa.getObjetos().length; i++){
 
-            if(mapa.objetos[i] != null){
+            if(mapa.getObjetos()[i] != null){
 
                 //Necesitamos la posicion del area de colision de la entidad en el mapa
                 jugador.areaDeCollision.x = jugador.getMapaX() + jugador.areaDeCollision.x;
@@ -149,16 +149,16 @@ public class ColisionCheck {
 
                 //Necesitamos la posicion del area de colision del objeto en el mapa
                 //Realmente no haria falta hacer esto si la x y la y del objeto son 0,0, pero por si se da el caso de que un objeto no tenga 48x48 de area de colision, lo escribimos
-                mapa.objetos[i].areaDeColision.x = mapa.objetos[i].mapaX + mapa.objetos[i].areaDeColision.x;
-                mapa.objetos[i].areaDeColision.y = mapa.objetos[i].mapaY + mapa.objetos[i].areaDeColision.y;
+                mapa.getObjetos()[i].areaDeColision.x = mapa.getObjetos()[i].mapaX + mapa.getObjetos()[i].areaDeColision.x;
+                mapa.getObjetos()[i].areaDeColision.y = mapa.getObjetos()[i].mapaY + mapa.getObjetos()[i].areaDeColision.y;
 
                 switch(jugador.direction){
 
                     case "up":
                         jugador.areaDeCollision.y -= jugador.speed;
-                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+                        if(jugador.areaDeCollision.intersects(mapa.getObjetos()[i].areaDeColision)){
 
-                            if(mapa.objetos[i].collision == true){
+                            if(mapa.getObjetos()[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
                             if(jugador instanceof Personaje){
@@ -171,9 +171,9 @@ public class ColisionCheck {
                         break;
                     case "down":
                         jugador.areaDeCollision.y += jugador.speed;
-                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+                        if(jugador.areaDeCollision.intersects(mapa.getObjetos()[i].areaDeColision)){
 
-                            if(mapa.objetos[i].collision == true){
+                            if(mapa.getObjetos()[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
                             if(jugador instanceof Personaje){
@@ -186,9 +186,9 @@ public class ColisionCheck {
                         break;
                     case "left":
                         jugador.areaDeCollision.x -= jugador.speed;
-                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+                        if(jugador.areaDeCollision.intersects(mapa.getObjetos()[i].areaDeColision)){
 
-                            if(mapa.objetos[i].collision == true){
+                            if(mapa.getObjetos()[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
                             if(jugador instanceof Personaje){
@@ -201,9 +201,9 @@ public class ColisionCheck {
                         break;
                     case "right":
                         jugador.areaDeCollision.x += jugador.speed;
-                        if(jugador.areaDeCollision.intersects(mapa.objetos[i].areaDeColision)){
+                        if(jugador.areaDeCollision.intersects(mapa.getObjetos()[i].areaDeColision)){
 
-                            if(mapa.objetos[i].collision == true){
+                            if(mapa.getObjetos()[i].collision == true){
                                 jugador.collisionEstado = true;
                             }
                             if(jugador instanceof Personaje){
@@ -221,8 +221,8 @@ public class ColisionCheck {
 
                 jugador.areaDeCollision.x = jugador.areaDeColisionDefaultX;
                 jugador.areaDeCollision.y = jugador.areaDeColisionDefaultY;
-                mapa.objetos[i].areaDeColision.x = mapa.objetos[i].areaDeColisionDefaultX;
-                mapa.objetos[i].areaDeColision.y = mapa.objetos[i].areaDeColisionDefaultY;
+                mapa.getObjetos()[i].areaDeColision.x = mapa.getObjetos()[i].areaDeColisionDefaultX;
+                mapa.getObjetos()[i].areaDeColision.y = mapa.getObjetos()[i].areaDeColisionDefaultY;
 
             }
 
@@ -307,32 +307,32 @@ public class ColisionCheck {
 
         //Necesitamos la posicion del area de colision del objeto en el mapa
         //Realmente no haria falta hacer esto si la x y la y del objeto son 0,0, pero por si se da el caso de que un objeto no tenga 48x48 de area de colision, lo escribimos
-        mapa.player1.areaDeCollision.x = mapa.player1.mapaX + mapa.player1.areaDeCollision.x;
-        mapa.player1.areaDeCollision.y = mapa.player1.mapaY + mapa.player1.areaDeCollision.y;
+        mapa.getJugador().areaDeCollision.x = mapa.getJugador().mapaX + mapa.getJugador().areaDeCollision.x;
+        mapa.getJugador().areaDeCollision.y = mapa.getJugador().mapaY + mapa.getJugador().areaDeCollision.y;
 
         switch(bot.direction){
 
             case "up":
                 bot.areaDeCollision.y -= bot.speed;
-                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                if(bot.areaDeCollision.intersects(mapa.getJugador().areaDeCollision)){
                     bot.collisionEstado = true;
                 }
                 break;
             case "down":
                 bot.areaDeCollision.y += bot.speed;
-                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                if(bot.areaDeCollision.intersects(mapa.getJugador().areaDeCollision)){
                     bot.collisionEstado = true;
                 }
                 break;
             case "left":
                 bot.areaDeCollision.x -= bot.speed;
-                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                if(bot.areaDeCollision.intersects(mapa.getJugador().areaDeCollision)){
                     bot.collisionEstado = true;
                 }
                 break;
             case "right":
                 bot.areaDeCollision.x += bot.speed;
-                if(bot.areaDeCollision.intersects(mapa.player1.areaDeCollision)){
+                if(bot.areaDeCollision.intersects(mapa.getJugador().areaDeCollision)){
                     bot.collisionEstado = true;
                 }
                 break;
@@ -343,8 +343,8 @@ public class ColisionCheck {
 
         bot.areaDeCollision.x = bot.areaDeColisionDefaultX;
         bot.areaDeCollision.y = bot.areaDeColisionDefaultY;
-        mapa.player1.areaDeCollision.x = mapa.player1.areaDeColisionDefaultX;
-        mapa.player1.areaDeCollision.y = mapa.player1.areaDeColisionDefaultY;
+        mapa.getJugador().areaDeCollision.x = mapa.getJugador().areaDeColisionDefaultX;
+        mapa.getJugador().areaDeCollision.y = mapa.getJugador().areaDeColisionDefaultY;
 
     }
 

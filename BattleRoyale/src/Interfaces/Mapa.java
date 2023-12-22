@@ -1,19 +1,13 @@
 package Interfaces;
 
 import javax.swing.JPanel;
+import java.awt.*;
+import Sound.Musica;
 
 import Entidades.Personaje;
-import Entidades.Bots.ZhongliBot;
-import Entidades.PersonajeAtk.Mei;
-import Entidades.PersonajeDefensa.Zhongli;
-import Entidades.PersonajeHealer.Qiqi;
 import InterfazDeUsuario.UI;
 import Objetos.AdministradorDeObjetos;
 import Objetos.Objeto;
-
-import java.awt.*;
-
-import Sound.Musica;
 import Texturas.AdministradorDeCasillas;
 
 public class Mapa extends JPanel implements Runnable{
@@ -29,39 +23,21 @@ public class Mapa extends JPanel implements Runnable{
     private final int maxScreenFilas = 15; //Ratio 4x3;
     private final int maxScreenWidth = casillaSizeEscalada * maxScreenColumnas; //48 * 20 = 960pixels
     private final int maxScreenHeight = casillaSizeEscalada * maxScreenFilas; //48 * 15 = 720pixels
+    private final int maxMapaColumnas = 103;
+    private final int maxMapaFilas = 82;
+
+    private final int FPS = 60; //Frames per second
+    private final int numeroDeObjetos = 20;
 
 
-    //World variables
-    public final int maxMapaColumnas = 103;
-    public final int maxMapaFilas = 82;
-
-    public String personajeElegido;
-
-    public int numeroDeBots;
-    public int dificultadBots; //1 - facil, 2 - medio, 3 - dificil
-
-
-    //FPS (Frames per second)
-
-    int FPS = 60;
-
-    
-    AdministradorDeCasillas administradorC = new AdministradorDeCasillas(this);
-    public KeyHandler keyHandler = new KeyHandler(this);
-    public AdministradorDeObjetos AdministradorO = new AdministradorDeObjetos(this);
-    public ColisionCheck colisionCheck = new ColisionCheck(this);
-    public UI ui = new UI(this);
-    public Musica musica = new Musica();
-    
-    public Personaje player1 = new Zhongli(this, keyHandler);
-    public Objeto objetos[] = new Objeto[20]; 
-    public Personaje bots[];
-
-    public Thread gameThread;
-    //Jugador player2 = new YunJin(this, keyHandler);
+    //VARIABLES
+    private String personajeElegido;
+    private int numeroDeBots;
+    private int dificultadBots; //1 - facil, 2 - medio, 3 - dificil
 
     //Estado del juego: 1-jugar, 2-pausar, 3-combate, 4-muerte, 5-victoria
-    public int estadoDelJuego;
+    private int estadoDelJuego;
+    //Declaro estos atributos en publico. Simplemente son constantes que representan el estado del juego, como un enum.
     public final int pantallaInicio = 0;
     public final int jugar = 1;
     public final int pausar = 2;
@@ -69,21 +45,45 @@ public class Mapa extends JPanel implements Runnable{
     public final int muerte = 4;
     public final int victoria = 5;
 
+    //OBJETOS
+    private AdministradorDeCasillas administradorC;
+    private KeyHandler keyHandler;
+    private AdministradorDeObjetos administradorO;
+    private ColisionCheck colisionChecker;
+    private UI ui;
+    private Musica musica;
+    private Personaje jugador;
+    private Objeto[] objetos; 
+    private Personaje[] bots;
+
+    private Thread gameThread;
+
+    
+
     //CONSTRUCTOR
     public Mapa(){
 
-        System.out.println("entro al constructor");
+        //instanciamos los objetos
+        setObjetos(new Objeto[numeroDeObjetos]);
+        this.musica = new Musica();
+        keyHandler = new KeyHandler(this);
+        administradorC = new AdministradorDeCasillas(this);
+        administradorO = new AdministradorDeObjetos(this);
+        colisionChecker = new ColisionCheck(this);
+        ui = new UI(this);
 
         this.setPreferredSize(new Dimension(maxScreenWidth, maxScreenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); //Mejora el rendimiento de la renderizacion del juego
         this.addKeyListener(keyHandler); //Anadimos el keyListener
         this.setFocusable(true); // puede ser "focused" para recibir key inputs
-        this.AdministradorO.colocarObjetos();
+
+        //Colocamos los objetos en el mapa, ponemos la musica e inicializamos el estado del juego
+        this.administradorO.colocarObjetos();
         this.playMusic(0);
         estadoDelJuego = pantallaInicio;
-
     }
+
     //GETTERS Y SETTERS
 
     //CONSTANTES
@@ -99,18 +99,77 @@ public class Mapa extends JPanel implements Runnable{
     public int getMaxScreenHeight(){
         return this.maxScreenHeight;
     }
-
-    public Personaje getJugador1(){
-        return player1;
+    public int getMaxMapaColumnas(){
+        return this.maxMapaColumnas;
+    }
+    public int getMaxMapaFilas(){
+        return this.maxMapaFilas;
     }
 
-    public void startGameThread(){
-
-        gameThread = new Thread(this); //Instanciamos el Thread
-        gameThread.start(); //Llama a run()
-
+    //VARIABLES
+    public void setEstadoDelJuego(int estadoDelJuego){
+        this.estadoDelJuego = estadoDelJuego;
+    }
+    public int getEstadoDelJuego(){
+        return this.estadoDelJuego;
+    }
+    public void setPersonajeElegido(String personajeElegido){
+        this.personajeElegido = personajeElegido;
+    }
+    public String getPersonajeElegido(){
+        return this.personajeElegido;
+    }
+    public void setNumeroDeBots(int numeroDeBots){
+        this.numeroDeBots = numeroDeBots;
+    }
+    public int getNumeroDeBots(){
+        return this.numeroDeBots;
+    }
+    public void setDificultadBots(int dificultadBots){
+        this.dificultadBots = dificultadBots;
+    }
+    public int getDificultadBots(){
+        return this.dificultadBots;
     }
 
+    //OBJETOS
+    public AdministradorDeCasillas getAdministradorDeCasillas(){
+        return this.administradorC;
+    }
+    public KeyHandler getKeyHandler(){
+        return this.keyHandler;
+    }
+    public AdministradorDeObjetos getAdministradorDeObjetos(){
+        return this.administradorO;
+    }
+    public ColisionCheck getColisionChecker(){
+        return this.colisionChecker;
+    }
+    public UI getUi(){
+        return this.ui;
+    }
+
+
+    public Personaje getJugador(){
+        return jugador;
+    }
+    public void setJugador(Personaje jugador){
+        this.jugador = jugador;
+    }
+    public void setObjetos(Objeto[] objetos){
+        this.objetos = objetos;
+    }
+    public Objeto[] getObjetos(){
+        return this.objetos;
+    }
+    public void setBots(Personaje[] bots){
+        this.bots = bots;
+    }
+    public Personaje[] getBots(){
+        return this.bots;
+    }
+
+    //Funciones para la musica
     public void playMusic(int i){
 
         musica.setupMusica(i);
@@ -118,22 +177,29 @@ public class Mapa extends JPanel implements Runnable{
         musica.loop();
 
     }
-
     public void stopMusic(){
-
         musica.stop();
+    }
+
+    //Funcion para instanciar y empezar el gameThread
+    public void startGameThread(){
+
+        gameThread = new Thread(this); //Instanciamos el Thread
+        gameThread.start(); //Llama a run()
 
     }
 
+    
     @Override
     public void run() {
+
         // Funcion llamada cuando empieza gameThread. Core del juego
         double drawInterval = 1000000000/FPS; //Intervalo de dibujo. 1 segundo (1000000000 nanosegundos) / FPS (60) = 0.016666 segundos. Cada 0.016666 segundos dibujaremos el siguiente frame
         double delta = 0;
         long lastTime = System.nanoTime(); //En nanosegundos
         long currentTime;
         int timer = 0;
-        int contDraw = 0;
+        int contDraw = 0; //Se usa para mostrar los fps por consola
 
         while(gameThread != null){ //Mientras gameThread exista
 
@@ -161,28 +227,24 @@ public class Mapa extends JPanel implements Runnable{
 
             }
            
-
         }
 
     }
 
     public void update(){
 
-        if(estadoDelJuego == jugar){
-            //System.out.println("El estado del juego es 1");
-            player1.update();
+        if(estadoDelJuego == jugar){ 
+
+            jugador.update();
 
             for(int i = 0; i < bots.length; i++){
                 if(bots[i] != null){
                     bots[i].updateBot();
                 }
             }
-            //player2.update(keyHandler);
 
-            if(numeroDeBots == 0){
-
+            if(numeroDeBots == 0){ //En cada update comprobamos si el usuario ha ganado la partida
              estadoDelJuego = victoria;
-
             }
         }
         else if(estadoDelJuego == combate){
@@ -210,6 +272,7 @@ public class Mapa extends JPanel implements Runnable{
         if(estadoDelJuego == jugar){
 
             administradorC.draw(g2);
+
             for(int i = 0; i < objetos.length; i++){
 
                 if(objetos[i] != null){
@@ -225,19 +288,16 @@ public class Mapa extends JPanel implements Runnable{
                 }
             }
             
-            player1.draw(g2);
+            jugador.draw(g2);
             ui.draw(g2);
 
-
-            if(player1.mensajeCofreLooteado !=  null){
+            if(getJugador().mensajeCofreLooteado !=  null){
 
                 if(ui.contadorFramesMensajePantalla < 120){
-
-                    ui.drawMensajePorPantalla(player1.mensajeCofreLooteado);
-                    
+                    ui.drawMensajePorPantalla(getJugador().mensajeCofreLooteado);
                 }
                 else{
-                    player1.mensajeCofreLooteado = null;
+                    getJugador().mensajeCofreLooteado = null;
                     ui.contadorFramesMensajePantalla = 0;
                 }
 
@@ -251,7 +311,6 @@ public class Mapa extends JPanel implements Runnable{
 
             //En el resto de estados del juego, simplemente dibujamos su pantalla correspondiente de la UI.
             ui.draw(g2);
-
         }
         
     }

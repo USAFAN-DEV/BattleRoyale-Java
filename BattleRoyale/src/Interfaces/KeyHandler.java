@@ -32,26 +32,26 @@ public class KeyHandler implements KeyListener {
        
         int code = e.getKeyCode(); //Devuelve un codigo asociado a la tecla presionada
 
-        if(mapa.estadoDelJuego == 0){
+        if(mapa.getEstadoDelJuego() == 0){
 
-            if(mapa.ui.pantallaDeInicioEstado == mapa.ui.pantallaTitulo){
+            if(mapa.getUi().pantallaDeInicioEstado == mapa.getUi().pantallaTitulo){
 
                 if(code == KeyEvent.VK_UP){
-                    mapa.ui.menuArrow--;
-                    if(mapa.ui.menuArrow < 0){
-                        mapa.ui.menuArrow = 1;
+                    mapa.getUi().menuArrow--;
+                    if(mapa.getUi().menuArrow < 0){
+                        mapa.getUi().menuArrow = 1;
                     }
                 }
                 else if(code == KeyEvent.VK_DOWN){
-                    mapa.ui.menuArrow++;
-                    if(mapa.ui.menuArrow > 1){
-                        mapa.ui.menuArrow = 0;
+                    mapa.getUi().menuArrow++;
+                    if(mapa.getUi().menuArrow > 1){
+                        mapa.getUi().menuArrow = 0;
                     }
                 }
                 else if(code == KeyEvent.VK_ENTER){
                     
-                    if(mapa.ui.menuArrow == 0){
-                        mapa.ui.pantallaDeInicioEstado++;
+                    if(mapa.getUi().menuArrow == 0){
+                        mapa.getUi().pantallaDeInicioEstado++;
                     }
                     else{
                         System.exit(0);
@@ -59,188 +59,188 @@ public class KeyHandler implements KeyListener {
                 }
 
             }
-            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.seleccionDePersonaje){
+            else if(mapa.getUi().pantallaDeInicioEstado == mapa.getUi().seleccionDePersonaje){
 
                 if(code == KeyEvent.VK_LEFT){
-                    mapa.ui.menuArrow--;
-                    if(mapa.ui.menuArrow < 0){
-                        mapa.ui.menuArrow = 2;
+                    mapa.getUi().menuArrow--;
+                    if(mapa.getUi().menuArrow < 0){
+                        mapa.getUi().menuArrow = 2;
                     }
                 }
                 else if(code == KeyEvent.VK_RIGHT){
-                    mapa.ui.menuArrow++;
-                    if(mapa.ui.menuArrow > 2){
-                        mapa.ui.menuArrow = 0;
+                    mapa.getUi().menuArrow++;
+                    if(mapa.getUi().menuArrow > 2){
+                        mapa.getUi().menuArrow = 0;
                     }
                 }
                 else if(code == KeyEvent.VK_ENTER){
                     
-                    if(mapa.ui.menuArrow == 0){
-                        mapa.player1 = new Zhongli(mapa, this);
+                    if(mapa.getUi().menuArrow == 0){
+                        mapa.setJugador(new Zhongli(mapa, this));
                     }
-                    else if(mapa.ui.menuArrow == 1){
-                        mapa.player1 = new Qiqi(mapa, this);
+                    else if(mapa.getUi().menuArrow == 1){
+                        mapa.setJugador(new Qiqi(mapa, this));
                     }
                     else{
-                        mapa.player1 = new Mei(mapa, this);
+                        mapa.setJugador(new Mei(mapa, this));
                     }
 
-                    mapa.ui.pantallaDeInicioEstado++;
+                    mapa.getUi().pantallaDeInicioEstado++;
                 }
 
             }
-            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.datosPersonaje){
+            else if(mapa.getUi().pantallaDeInicioEstado == mapa.getUi().datosPersonaje){
 
                 if(code == KeyEvent.VK_UP){
-                    mapa.ui.menuArrow--;
-                    if(mapa.ui.menuArrow < 0){
-                        mapa.ui.menuArrow = 1;
+                    mapa.getUi().menuArrow--;
+                    if(mapa.getUi().menuArrow < 0){
+                        mapa.getUi().menuArrow = 1;
                     }
                 }
                 else if(code == KeyEvent.VK_DOWN){
-                    mapa.ui.menuArrow++;
-                    if(mapa.ui.menuArrow > 1){
-                        mapa.ui.menuArrow = 0;
+                    mapa.getUi().menuArrow++;
+                    if(mapa.getUi().menuArrow > 1){
+                        mapa.getUi().menuArrow = 0;
                     }
                 }
                 else if(code == KeyEvent.VK_ENTER){
                     
-                    if(mapa.ui.menuArrow == 0){
-                        mapa.ui.pantallaDeInicioEstado++;
+                    if(mapa.getUi().menuArrow == 0){
+                        mapa.getUi().pantallaDeInicioEstado++;
                     }
                     else{
-                        mapa.ui.pantallaDeInicioEstado--;
+                        mapa.getUi().pantallaDeInicioEstado--;
                     }
                 }
 
             }
-            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.elegirCiudad){
+            else if(mapa.getUi().pantallaDeInicioEstado == mapa.getUi().elegirCiudad){
 
                 if(code == KeyEvent.VK_UP){
-                    mapa.ui.menuArrow--;
-                    if(mapa.ui.menuArrow < 0){
-                        mapa.ui.menuArrow = 4;
+                    mapa.getUi().menuArrow--;
+                    if(mapa.getUi().menuArrow < 0){
+                        mapa.getUi().menuArrow = 4;
                     }
                 }
                 else if(code == KeyEvent.VK_DOWN){
-                    mapa.ui.menuArrow++;
-                    if(mapa.ui.menuArrow > 4){
-                        mapa.ui.menuArrow = 0;
+                    mapa.getUi().menuArrow++;
+                    if(mapa.getUi().menuArrow > 4){
+                        mapa.getUi().menuArrow = 0;
                     }
                 }
                 else if(code == KeyEvent.VK_ENTER){
                     
-                    if(mapa.ui.menuArrow == 0){
-                        mapa.player1.setMapaX(20*mapa.getCasillaSizeEscalada());
-                        mapa.player1.setMapaY(15*mapa.getCasillaSizeEscalada());
+                    if(mapa.getUi().menuArrow == 0){
+                        mapa.getJugador().setMapaX(20*mapa.getCasillaSizeEscalada());
+                        mapa.getJugador().setMapaY(15*mapa.getCasillaSizeEscalada());
                     }
-                    else if(mapa.ui.menuArrow == 1){
-                        mapa.player1.setMapaX(46*mapa.getCasillaSizeEscalada());
-                        mapa.player1.setMapaY(16*mapa.getCasillaSizeEscalada());
+                    else if(mapa.getUi().menuArrow == 1){
+                        mapa.getJugador().setMapaX(46*mapa.getCasillaSizeEscalada());
+                        mapa.getJugador().setMapaY(16*mapa.getCasillaSizeEscalada());
                     }
-                    else if(mapa.ui.menuArrow == 2){
-                        mapa.player1.setMapaX(46*mapa.getCasillaSizeEscalada());
-                        mapa.player1.setMapaY(45*mapa.getCasillaSizeEscalada());
+                    else if(mapa.getUi().menuArrow == 2){
+                        mapa.getJugador().setMapaX(46*mapa.getCasillaSizeEscalada());
+                        mapa.getJugador().setMapaY(45*mapa.getCasillaSizeEscalada());
                     }
-                    else if(mapa.ui.menuArrow == 3){
-                        mapa.player1.setMapaX(46*mapa.getCasillaSizeEscalada());
-                        mapa.player1.setMapaY(66*mapa.getCasillaSizeEscalada());
+                    else if(mapa.getUi().menuArrow == 3){
+                        mapa.getJugador().setMapaX(46*mapa.getCasillaSizeEscalada());
+                        mapa.getJugador().setMapaY(66*mapa.getCasillaSizeEscalada());
                     }
-                    else if(mapa.ui.menuArrow == 4){
-                        mapa.player1.setMapaX(86*mapa.getCasillaSizeEscalada());
-                        mapa.player1.setMapaY(16*mapa.getCasillaSizeEscalada());
+                    else if(mapa.getUi().menuArrow == 4){
+                        mapa.getJugador().setMapaX(86*mapa.getCasillaSizeEscalada());
+                        mapa.getJugador().setMapaY(16*mapa.getCasillaSizeEscalada());
                     }
 
-                    mapa.ui.pantallaDeInicioEstado++;
+                    mapa.getUi().pantallaDeInicioEstado++;
 
                 }
 
             }
-            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.elegirBots){
+            else if(mapa.getUi().pantallaDeInicioEstado == mapa.getUi().elegirBots){
 
                 if(code == KeyEvent.VK_UP){
-                    mapa.ui.menuArrow--;
-                    if(mapa.ui.menuArrow < 0){
-                        mapa.ui.menuArrow = 2;
+                    mapa.getUi().menuArrow--;
+                    if(mapa.getUi().menuArrow < 0){
+                        mapa.getUi().menuArrow = 2;
                     }
                 }
                 else if(code == KeyEvent.VK_DOWN){
-                    mapa.ui.menuArrow++;
-                    if(mapa.ui.menuArrow > 2){
-                        mapa.ui.menuArrow = 0;
+                    mapa.getUi().menuArrow++;
+                    if(mapa.getUi().menuArrow > 2){
+                        mapa.getUi().menuArrow = 0;
                     }
                 }
                 else if(code == KeyEvent.VK_ENTER){
                     
-                    if(mapa.ui.menuArrow == 0){
-                        mapa.numeroDeBots = 3;
+                    if(mapa.getUi().menuArrow == 0){
+                        mapa.setNumeroDeBots(3);
                     }
-                    else if(mapa.ui.menuArrow == 1){
-                        mapa.numeroDeBots = 6;
+                    else if(mapa.getUi().menuArrow == 1){
+                        mapa.setNumeroDeBots(6);
                     }
-                    else if(mapa.ui.menuArrow == 2){
-                        mapa.numeroDeBots = 9;
+                    else if(mapa.getUi().menuArrow == 2){
+                        mapa.setNumeroDeBots(9);
                     }
 
-                    mapa.ui.pantallaDeInicioEstado++;
+                    mapa.getUi().pantallaDeInicioEstado++;
 
                 }
             }
-            else if(mapa.ui.pantallaDeInicioEstado == mapa.ui.elegirDificultadBots){
+            else if(mapa.getUi().pantallaDeInicioEstado == mapa.getUi().elegirDificultadBots){
 
                 if(code == KeyEvent.VK_UP){
-                    mapa.ui.menuArrow--;
-                    if(mapa.ui.menuArrow < 0){
-                        mapa.ui.menuArrow = 2;
+                    mapa.getUi().menuArrow--;
+                    if(mapa.getUi().menuArrow < 0){
+                        mapa.getUi().menuArrow = 2;
                     }
                 }
                 else if(code == KeyEvent.VK_DOWN){
-                    mapa.ui.menuArrow++;
-                    if(mapa.ui.menuArrow > 2){
-                        mapa.ui.menuArrow = 0;
+                    mapa.getUi().menuArrow++;
+                    if(mapa.getUi().menuArrow > 2){
+                        mapa.getUi().menuArrow = 0;
                     }
                 }
                 else if(code == KeyEvent.VK_ENTER){
                     
-                    if(mapa.ui.menuArrow == 0){
-                        mapa.dificultadBots = 1;
+                    if(mapa.getUi().menuArrow == 0){
+                        mapa.setDificultadBots(1);
                     }
-                    else if(mapa.ui.menuArrow == 1){
-                        mapa.dificultadBots = 2;
+                    else if(mapa.getUi().menuArrow == 1){
+                        mapa.setDificultadBots(2);
                     }
-                    else if(mapa.ui.menuArrow == 2){
-                        mapa.dificultadBots = 3;
+                    else if(mapa.getUi().menuArrow == 2){
+                        mapa.setDificultadBots(3);
                     }
 
-                    mapa.bots = new Personaje[mapa.numeroDeBots];
-                    System.out.println("Dificultad bots: " + mapa.dificultadBots);
-                    mapa.AdministradorO.colocarBots();
-                    mapa.estadoDelJuego = mapa.jugar;
+                    mapa.setBots(new Personaje[mapa.getNumeroDeBots()]);
+                    System.out.println("Dificultad bots: " + mapa.getDificultadBots());
+                    mapa.getAdministradorDeObjetos().colocarBots();
+                    mapa.setEstadoDelJuego(mapa.jugar);
 
                 }
 
             }
 
         }
-        else if(mapa.estadoDelJuego == mapa.muerte || mapa.estadoDelJuego == mapa.victoria){
+        else if(mapa.getEstadoDelJuego() == mapa.muerte || mapa.getEstadoDelJuego() == mapa.victoria){
 
              if(code == KeyEvent.VK_UP){
-                mapa.ui.menuArrow--;
-                if(mapa.ui.menuArrow < 0){
-                    mapa.ui.menuArrow = 1;
+                mapa.getUi().menuArrow--;
+                if(mapa.getUi().menuArrow < 0){
+                    mapa.getUi().menuArrow = 1;
                 }
             }
             else if(code == KeyEvent.VK_DOWN){
-                mapa.ui.menuArrow++;
-                if(mapa.ui.menuArrow > 1){
-                    mapa.ui.menuArrow = 0;
+                mapa.getUi().menuArrow++;
+                if(mapa.getUi().menuArrow > 1){
+                    mapa.getUi().menuArrow = 0;
                 }
             }
             else if(code == KeyEvent.VK_ENTER){
                 
-                if(mapa.ui.menuArrow == 0){
-                    mapa.estadoDelJuego = mapa.pantallaInicio;
-                    mapa.ui.pantallaDeInicioEstado = mapa.ui.pantallaTitulo;
+                if(mapa.getUi().menuArrow == 0){
+                    mapa.setEstadoDelJuego(mapa.pantallaInicio);
+                    mapa.getUi().pantallaDeInicioEstado = mapa.getUi().pantallaTitulo;
                 }
                 else{
                     System.exit(0);
@@ -273,11 +273,11 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_ESCAPE){
 
-                if(mapa.estadoDelJuego == 1){
-                    mapa.estadoDelJuego = 2;
+                if(mapa.getEstadoDelJuego() == 1){
+                    mapa.setEstadoDelJuego(2);
                 }
                 else{
-                    mapa.estadoDelJuego = 1;
+                    mapa.setEstadoDelJuego(1);
                 }
 
             }

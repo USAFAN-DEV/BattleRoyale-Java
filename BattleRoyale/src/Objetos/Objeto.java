@@ -27,11 +27,11 @@ public abstract class Objeto{
 
         public void draw(Graphics2D g2, Mapa mapa){
 
-            int screenX = mapaX - mapa.player1.getMapaX() + mapa.player1.screenX; //coordenada x del objeto en la pantalla
-            int screenY = mapaY - mapa.player1.getMapaY() + mapa.player1.screenY; //coordenada y del objeto casilla en la pantalla
+            int screenX = mapaX - mapa.getJugador().getMapaX() + mapa.getJugador().screenX; //coordenada x del objeto en la pantalla
+            int screenY = mapaY - mapa.getJugador().getMapaY() + mapa.getJugador().screenY; //coordenada y del objeto casilla en la pantalla
 
             
-            if((mapaX + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaY() + mapa.player1.screenY)){
+            if((mapaX + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaX() - mapa.getJugador().screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaX() + mapa.getJugador().screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaY() - mapa.getJugador().screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaY() + mapa.getJugador().screenY)){
 
                 g2.drawImage(image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
 

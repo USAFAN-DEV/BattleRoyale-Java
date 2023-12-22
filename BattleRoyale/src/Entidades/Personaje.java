@@ -343,32 +343,32 @@ public abstract class Personaje {
             }
 
             collisionEstado = false;
-            mapa.colisionCheck.checkCasilla(this);
-            int objIndex = mapa.colisionCheck.checkObject(this);
+            mapa.getColisionChecker().checkCasilla(this);
+            int objIndex = mapa.getColisionChecker().checkObject(this);
 
             if(objIndex != -1){
 
-                switch(mapa.objetos[objIndex].name){
+                switch(mapa.getObjetos()[objIndex].name){
 
                     case "cofrePlateado": 
-                        mensajeCofreLooteado = mapa.objetos[objIndex].lootCofre(this);
-                        mapa.objetos[objIndex] = null;
+                        mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
+                        mapa.getObjetos()[objIndex] = null;
                         break;
                     case "cofreDorado":
-                        mensajeCofreLooteado = mapa.objetos[objIndex].lootCofre(this);
-                        mapa.objetos[objIndex] = null;
+                        mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
+                        mapa.getObjetos()[objIndex] = null;
                         break;
                 }
 
             }
 
-            int botIndex = mapa.colisionCheck.checkBot(this, mapa.bots);
+            int botIndex = mapa.getColisionChecker().checkBot(this, mapa.getBots());
 
             if(botIndex != -1){
-                mapa.estadoDelJuego = 3;
+                mapa.setEstadoDelJuego(3);
                 JFrame frameC= new JFrame();
-                InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.bots[botIndex], frameC,mapa);
-                mapa.bots[botIndex] = null;
+                InterfazCombate interfazC=new InterfazCombate(mapa.getJugador(),mapa.getBots()[botIndex], frameC,mapa);
+                mapa.getBots()[botIndex] = null;
                 mapa.stopMusic();
                 interfazC.playMusic(1);   
             }
@@ -482,10 +482,10 @@ public abstract class Personaje {
 
     public void drawBot(Graphics2D g2){
 
-        int screenX = mapaX - mapa.player1.getMapaX() + mapa.player1.screenX; //coordenada x del objeto en la pantalla
-        int screenY = mapaY - mapa.player1.getMapaY() + mapa.player1.screenY; //coordenada y del objeto casilla en la pantalla
+        int screenX = mapaX - mapa.getJugador().getMapaX() + mapa.getJugador().screenX; //coordenada x del objeto en la pantalla
+        int screenY = mapaY - mapa.getJugador().getMapaY() + mapa.getJugador().screenY; //coordenada y del objeto casilla en la pantalla
 
-        if((mapaX + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaX() - mapa.player1.screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaX() + mapa.player1.screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.player1.getMapaY() - mapa.player1.screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.player1.getMapaY() + mapa.player1.screenY)){
+        if((mapaX + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaX() - mapa.getJugador().screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaX() + mapa.getJugador().screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaY() - mapa.getJugador().screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaY() + mapa.getJugador().screenY)){
 
             BufferedImage image = null;
 
@@ -572,10 +572,10 @@ public abstract class Personaje {
         }
 
         collisionEstado = false;
-        mapa.colisionCheck.checkCasilla(this);
-        mapa.colisionCheck.checkPlayer(this);
+        mapa.getColisionChecker().checkCasilla(this);
+        mapa.getColisionChecker().checkPlayer(this);
 
-        if(mapa.colisionCheck.checkObject(this) != -1){
+        if(mapa.getColisionChecker().checkObject(this) != -1){
 
             collisionEstado = true;
 

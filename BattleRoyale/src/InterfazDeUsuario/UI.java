@@ -239,7 +239,7 @@ public class UI {
             y = mapa.getMaxScreenHeight()/6;
 
             try {
-                image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/player/" + mapa.player1.getNombre().toLowerCase() + ".gif"));
+                image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/player/" + mapa.getJugador().getNombre().toLowerCase() + ".gif"));
                 g2.drawImage(image, x, y, mapa.getMaxScreenWidth()/3, mapa.getMaxScreenHeight()/3, null);
             } catch (IOException e) { e.printStackTrace();}
 
@@ -248,33 +248,33 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
             g2.setColor(Color.white);
 
-            text = mapa.player1.getNombre();
+            text = mapa.getJugador().getNombre();
             g2.drawString(text, x, y);
 
             y += mapa.getCasillaSizeEscalada()/2;
-            text = "Ataque = " + mapa.player1.getAtk();
+            text = "Ataque = " + mapa.getJugador().getAtk();
             g2.drawString(text, x, y);
 
             y += mapa.getCasillaSizeEscalada()/2;
-            text = "%Crit = " + mapa.player1.getCrit();
+            text = "%Crit = " + mapa.getJugador().getCrit();
             g2.drawString(text, x, y);
 
             y += mapa.getCasillaSizeEscalada()/2;
-            text = "Vida Maxima = " + mapa.player1.getVidaMaxima();
+            text = "Vida Maxima = " + mapa.getJugador().getVidaMaxima();
             g2.drawString(text, x, y);
 
             y += mapa.getCasillaSizeEscalada()/2;
-            text = "Escudo Maximo = " + mapa.player1.getEscudoMaximo();
+            text = "Escudo Maximo = " + mapa.getJugador().getEscudoMaximo();
             g2.drawString(text, x, y);
 
             x += mapa.getCasillaSizeEscalada() * 4;
             y = mapa.getMaxScreenHeight()/6 + mapa.getCasillaSizeEscalada()*2;
 
-            text = "Habilidad: " + mapa.player1.getNombreHabilidad();
+            text = "Habilidad: " + mapa.getJugador().getNombreHabilidad();
             g2.drawString(text, x, y);
 
             y += mapa.getCasillaSizeEscalada()/2;
-            String[] textHabilidad = mapa.player1.descripcionHabilidad().split("\n");
+            String[] textHabilidad = mapa.getJugador().descripcionHabilidad().split("\n");
             
             for(int i = 0; i < textHabilidad.length; i++){
                 g2.drawString(textHabilidad[i], x, y);
@@ -464,7 +464,7 @@ public class UI {
         g2.fillRect(0,0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight());
         try {
             image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/UI/calavera.png"));
-            g2.drawImage(image, mapa.getMaxScreenWidth()/3, mapa.getMaxScreenHeight()/3, mapa.getMaxScreenWidth()/4, mapa.getMaxScreenHeight()/4, null);
+            g2.drawImage(image, mapa.getMaxScreenWidth()/3 + mapa.getCasillaSizeEscalada()/2, mapa.getMaxScreenHeight()/3, mapa.getMaxScreenWidth()/4, mapa.getMaxScreenHeight()/4, null);
         } catch (IOException e) { e.printStackTrace();}
 
         //Sombras
@@ -553,55 +553,55 @@ public class UI {
         //g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
         g2.setColor(Color.black);
 
-        if(mapa.estadoDelJuego == mapa.jugar){ //Estado del juego: jugar
+        if(mapa.getEstadoDelJuego() == mapa.jugar){ //Estado del juego: jugar
 
             int screenX = 10;
             int screenY = 10;
 
             g2.drawImage(iconos[0].image, screenX, screenY, 25, 25, null);
-            g2.drawString( "" + mapa.player1.getVida() + "/" + mapa.player1.getVidaMaxima(), screenX + (30), 29);
+            g2.drawString( "" + mapa.getJugador().getVida() + "/" + mapa.getJugador().getVidaMaxima(), screenX + (30), 29);
             screenY += 40;
 
             g2.drawImage(iconos[1].image, screenX, screenY, 25, 25, null);
-            g2.drawString( "" + mapa.player1.getEscudo() + "/" + mapa.player1.getEscudoMaximo(), screenX + (30), 69);
+            g2.drawString( "" + mapa.getJugador().getEscudo() + "/" + mapa.getJugador().getEscudoMaximo(), screenX + (30), 69);
             screenY += 40;
 
             g2.drawImage(iconos[2].image, screenX, screenY, 25, 25, null);
-            g2.drawString( "" + mapa.player1.getAtk(), screenX + (30), 109);
+            g2.drawString( "" + mapa.getJugador().getAtk(), screenX + (30), 109);
             screenY += 40;
 
             g2.drawImage(iconos[3].image, screenX, screenY, 25, 25, null);
-            g2.drawString( "" + mapa.player1.getCrit(), screenX + (30), 149);
+            g2.drawString( "" + mapa.getJugador().getCrit(), screenX + (30), 149);
             screenY += 40;
 
             g2.drawImage(iconos[4].image, screenX, screenY, 25, 25, null);
-            g2.drawString( "" + mapa.player1.getContadorPociones(), screenX + (30), 189);;
+            g2.drawString( "" + mapa.getJugador().getContadorPociones(), screenX + (30), 189);;
 
             g2.drawImage(iconos[5].image,mapa.getCasillaSizeEscalada()*18 , 10, 25, 25, null);
-            g2.drawString( "" + mapa.numeroDeBots, mapa.getCasillaSizeEscalada()*18 + (30), 29);;
+            g2.drawString( "" + mapa.getNumeroDeBots(), mapa.getCasillaSizeEscalada()*18 + (30), 29);;
 
         }
-        else if(mapa.estadoDelJuego == mapa.pantallaInicio){
+        else if(mapa.getEstadoDelJuego() == mapa.pantallaInicio){
             drawPantallaInicio();
         }
-        else if(mapa.estadoDelJuego == mapa.pausar){ //Estado del juego: pausado
+        else if(mapa.getEstadoDelJuego() == mapa.pausar){ //Estado del juego: pausado
 
             g2.setColor(Color.white);
             drawPantallaDePausa();
             
         }
 
-        else if(mapa.estadoDelJuego == mapa.combate){ //Estado del juego: combate
+        else if(mapa.getEstadoDelJuego() == mapa.combate){ //Estado del juego: combate
 
             drawPantallaDeCombate();
 
         }
-        else if(mapa.estadoDelJuego == mapa.muerte){ //Estado del juego: mensaje por pantalla
+        else if(mapa.getEstadoDelJuego() == mapa.muerte){ //Estado del juego: mensaje por pantalla
 
            drawGameOver();
 
         } 
-        else if(mapa.estadoDelJuego == mapa.victoria){
+        else if(mapa.getEstadoDelJuego() == mapa.victoria){
 
             drawVictoria();
 
