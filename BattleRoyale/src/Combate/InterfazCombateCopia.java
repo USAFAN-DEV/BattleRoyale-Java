@@ -15,7 +15,7 @@ import Main.Mapa;
 import Sound.Musica;
 
 public class InterfazCombateCopia extends JPanel implements ActionListener{
-    public MetodoCombate jugadores;
+    public MetodoCombateCopia jugadores;
     public int cooldownHabilidad;
     public JTextField vidaJugador1;
     public JTextField vidaJugador2;
@@ -68,7 +68,7 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         add(botonHabilidad,1,0);
         add(botonPocion,1,0);
         //declaracion de clase MetodoCombate para poder utilizar las funciones para el daño, pociones etc
-        jugadores=new MetodoCombate(jugador1,jugador2);
+        jugadores=new MetodoCombateCopia(jugador1,jugador2);
         //vida y escudo del jugador 1
         vidaJugador1=new JTextField(String.valueOf(jugadores.getJugador1().getVida()));
         escudoJugador1=new JTextField(String.valueOf(jugadores.getJugador1().getEscudo()));

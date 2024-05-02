@@ -7,7 +7,7 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
-import Combate.InterfazCombate;
+import Combate.InterfazCombateCopia;
 import Herramientas.Armas;
 import Main.KeyHandler;
 import Main.Mapa;
@@ -353,7 +353,7 @@ public abstract class Personaje {
             if(botIndex != -1){
                 mapa.setEstadoDelJuego(3);
                 JFrame frameC= new JFrame();
-                InterfazCombate interfazC=new InterfazCombate(mapa.getJugador(),mapa.getBots()[botIndex], frameC,mapa);
+                InterfazCombateCopia interfazC=new InterfazCombateCopia(mapa.getJugador(),mapa.getBots()[botIndex], frameC,mapa);
                 mapa.getBots()[botIndex] = null;
                 mapa.stopMusic();
                 interfazC.playMusic(1);   
