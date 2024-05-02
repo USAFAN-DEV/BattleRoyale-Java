@@ -8,6 +8,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Main.Mapa;
+import StatePatternMapa.CombateConcreteState;
+import StatePatternMapa.JugarConcreteState;
+import StatePatternMapa.MuerteConcreteState;
+import StatePatternMapa.PantallaInicioConcreteState;
+import StatePatternMapa.PausaConcreteState;
+import StatePatternMapa.VictoriaConcreteState;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -579,7 +585,7 @@ public class UI {
         //g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
         g2.setColor(Color.black);
 
-        if(mapa.getEstadoDelJuego() == mapa.jugar){ //Estado del juego: jugar
+        if(mapa.getEstadoDelJuego() instanceof JugarConcreteState){ //Estado del juego: jugar
 
             int screenX = 10;
             int screenY = 10;
@@ -607,27 +613,27 @@ public class UI {
             g2.drawString( "" + mapa.getNumeroDeBots(), mapa.getCasillaSizeEscalada()*18 + (30), 29);;
 
         }
-        else if(mapa.getEstadoDelJuego() == mapa.pantallaInicio){
+        else if(mapa.getEstadoDelJuego() instanceof PantallaInicioConcreteState){
             drawPantallaInicio();
         }
-        else if(mapa.getEstadoDelJuego() == mapa.pausar){ //Estado del juego: pausado
+        else if(mapa.getEstadoDelJuego() instanceof PausaConcreteState){ //Estado del juego: pausado
 
             g2.setColor(Color.white);
             drawPantallaDePausa();
             
         }
 
-        else if(mapa.getEstadoDelJuego() == mapa.combate){ //Estado del juego: combate
+        else if(mapa.getEstadoDelJuego() instanceof CombateConcreteState){ //Estado del juego: combate
 
             drawPantallaDeCombate();
 
         }
-        else if(mapa.getEstadoDelJuego() == mapa.muerte){ //Estado del juego: mensaje por pantalla
+        else if(mapa.getEstadoDelJuego() instanceof MuerteConcreteState){ //Estado del juego: mensaje por pantalla
 
            drawGameOver();
 
         } 
-        else if(mapa.getEstadoDelJuego() == mapa.victoria){
+        else if(mapa.getEstadoDelJuego() instanceof VictoriaConcreteState){
 
             drawVictoria();
 

@@ -1,4 +1,5 @@
 package Combate;
+/* 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
@@ -219,6 +220,8 @@ public class InterfazCombate extends JPanel implements ActionListener{
         mapa.player1.setContadorPociones(1);
         InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2, frameC,esta);
         mapa.stopMusic();
-        interfazC.playMusic(1);*/
+        interfazC.playMusic(1);
     }
-}
+}*/
+
+

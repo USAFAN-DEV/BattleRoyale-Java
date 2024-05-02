@@ -207,7 +207,7 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                mapa.setEstadoDelJuego(mapa.jugar);
+                mapa.setSolicitudFinCombate("Combate ganado");
                 mapa.setNumeroDeBots(mapa.getNumeroDeBots()-1);
                 frameC.dispose();
                 this.musica.stop();
@@ -227,7 +227,7 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
                 catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                mapa.setEstadoDelJuego(mapa.muerte);
+                mapa.setSolicitudMuerteCombate("Combate Perdido");;
                 frameC.dispose();
                 this.musica.stop();
                 mapa.playMusic(0);

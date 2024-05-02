@@ -7,6 +7,7 @@ import Entidades.Personaje;
 import Entidades.PersonajeAtk.Mei;
 import Entidades.PersonajeDefensa.Zhongli;
 import Entidades.PersonajeHealer.Qiqi;
+import StatePatternMapa.*;
 
 public class KeyHandler implements KeyListener {
 
@@ -53,7 +54,7 @@ public class KeyHandler implements KeyListener {
        
         int code = e.getKeyCode(); //Devuelve un codigo asociado a la tecla presionada
 
-        if(mapa.getEstadoDelJuego() == 0){
+        if(mapa.getEstadoDelJuego() instanceof PantallaInicioConcreteState){
 
             if(mapa.getUi().getPantallaDeInicioEstado() == mapa.getUi().pantallaTitulo){
 
@@ -236,14 +237,14 @@ public class KeyHandler implements KeyListener {
                     mapa.setBots(new Personaje[mapa.getNumeroDeBots()]);
                     System.out.println("Dificultad bots: " + mapa.getDificultadBots());
                     mapa.getAdministradorDeObjetos().colocarBots();
-                    mapa.setEstadoDelJuego(mapa.jugar);
+                    mapa.setSolicitudEmpezarPartida("Ajustes configurados. Empezemos la partida");
 
                 }
 
             }
 
         }
-        else if(mapa.getEstadoDelJuego() == mapa.muerte || mapa.getEstadoDelJuego() == mapa.victoria){
+        else if(mapa.getEstadoDelJuego() instanceof MuerteConcreteState|| mapa.getEstadoDelJuego() instanceof VictoriaConcreteState){
 
              if(code == KeyEvent.VK_UP){
                 mapa.getUi().setMenuArrow(mapa.getUi().getMenuArrow() - 1);
@@ -260,7 +261,7 @@ public class KeyHandler implements KeyListener {
             else if(code == KeyEvent.VK_ENTER){
                 
                 if(mapa.getUi().getMenuArrow() == 0){
-                    mapa.setEstadoDelJuego(mapa.pantallaInicio);
+                    mapa.setSolicitudReiniciarPartida("El usuario quiere jugar otra partida. Reiniciar seleccion de personaje, ciudad y bots");
                     mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().pantallaTitulo);
                 }
                 else{
@@ -294,11 +295,15 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_ESCAPE){
 
-                if(mapa.getEstadoDelJuego() == 1){
-                    mapa.setEstadoDelJuego(2);
+                if(mapa.getEstadoDelJuego() instanceof JugarConcreteState){
+
+                    mapa.setSolicitudPausarPartida("Pausar Partida");
+
                 }
-                else{
-                    mapa.setEstadoDelJuego(1);
+                else if(mapa.getEstadoDelJuego() instanceof PausaConcreteState){
+
+                    mapa.setSolicitudReanudarPartida("Reanudar Partida");
+
                 }
 
             }

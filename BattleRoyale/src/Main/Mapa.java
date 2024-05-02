@@ -42,21 +42,40 @@ public class Mapa extends JPanel implements Runnable{
     private int dificultadBots; //1 - facil, 2 - medio, 3 - dificil
 
     //Estado del juego: 1-jugar, 2-pausar, 3-combate, 4-muerte, 5-victoria
-    /*private int estadoDelJuego;
-    //Declaro estos atributos en publico. Simplemente son constantes que representan el estado del juego, como un enum.
+
+    /*
+    private int estadoDelJuego;
+    Declaro estos atributos en publico. Simplemente son constantes que representan el estado del juego, como un enum.
     public final int pantallaInicio = 0;
     public final int jugar = 1;
     public final int pausar = 2;
     public final int combate = 3;
     public final int muerte = 4;
-    public final int victoria = 5;*/
+    public final int victoria = 5;
+    */
+
     private MapaStates estadoDelJuego;
-    private MapaStates pantallaInicio = new PantallaInicioConcreteState(this);
-    private MapaStates jugar = new JugarConcreteState(this);
-    private MapaStates pausar = new PausaConcreteState(this);
-    private MapaStates combate = new CombateConcreteState(this);
-    private MapaStates muerte = new MuerteConcreteState(this);
-    private MapaStates victoria = new VictoriaConcreteState(this);
+
+    private final MapaStates pantallaInicio = new PantallaInicioConcreteState(this);
+
+    /* 
+    private final MapaStates jugar = new JugarConcreteState(this);
+    private final MapaStates pausar = new PausaConcreteState(this);
+    private final MapaStates combate = new CombateConcreteState(this);
+    private final MapaStates muerte = new MuerteConcreteState(this);
+    private final MapaStates victoria = new VictoriaConcreteState(this);
+    */
+
+    private String solicitudEmpezarPartida; //Mensaje de Keyhandler a mapa para empezar la partida cuando se termina la seleccion de la configuracion de esta
+    private String solicitudReiniciarPartida; //Mensaje de Keyhandler a mapa cuando se termina la partida (muerte o victoria) para volver a jugar otra vez
+    private String solicitudPausarPartida; //Mensaje de Keyhandler a mapa cuando se quiere pausar la partida
+    private String solicitudReanudarPartida; //Mensaje de Keyhandler a mapa cuando se quiere reaunudar la partida
+    private String solicitudEmpezarCombate; //Mensaje de la clase jugador a mapa cuando se interactua con un bot para empezar el combate
+    private String solicitudMuerteCombate; //Mensaje de InterfazCombate a mapa cuando se pierde un combate
+    private String solicitudVictoria; //Mensaje cuando el numero de bots es 0
+    private String solicitudFinCombate; //Mensaje de InterfazCombate a mapa cuando se gana un combate y se quiere reanudar la partida
+
+
     //OBJETOS
     private AdministradorDeCasillas administradorC;
     private KeyHandler keyHandler;
@@ -93,6 +112,15 @@ public class Mapa extends JPanel implements Runnable{
         //Colocamos los objetos en el mapa, ponemos la musica e inicializamos el estado del juego
         this.administradorO.colocarObjetos();
         this.playMusic(0);
+
+        this.solicitudEmpezarPartida = null;
+        this.solicitudPausarPartida = null;
+        this.solicitudReiniciarPartida = null;
+        this.solicitudReanudarPartida = null;
+        this.solicitudEmpezarCombate = null;
+        this.solicitudMuerteCombate = null;
+        this.solicitudVictoria = null;
+        this.solicitudFinCombate = null;
         estadoDelJuego = pantallaInicio;
     }
 
@@ -119,10 +147,10 @@ public class Mapa extends JPanel implements Runnable{
     }
 
     //VARIABLES
-    public void setEstadoDelJuego(int estadoDelJuego){
+    public void setEstadoDelJuego(MapaStates estadoDelJuego){
         this.estadoDelJuego = estadoDelJuego;
     }
-    public int getEstadoDelJuego(){
+    public MapaStates getEstadoDelJuego(){
         return this.estadoDelJuego;
     }
     public void setPersonajeElegido(String personajeElegido){
@@ -193,6 +221,116 @@ public class Mapa extends JPanel implements Runnable{
         musica.stop();
     }
 
+    //Funciones para procesar el estado del juego
+
+    public void setSolicitudEmpezarPartida(String solicitudEmpezarPartida){
+
+        this.solicitudEmpezarPartida = solicitudEmpezarPartida;
+
+    }
+
+    public String getSolicitudEmpezarPartida(){
+
+        return this.solicitudEmpezarPartida;
+
+    }
+
+    public void setSolicitudReiniciarPartida(String solicitudReiniciarPartida){
+
+        this.solicitudReiniciarPartida = solicitudReiniciarPartida;
+
+    }
+
+    public String getSolicitudReiniciarPartida(){
+
+        return this.solicitudReiniciarPartida;
+
+    }
+
+    public void setSolicitudPausarPartida(String solicitudPausarPartida){
+
+        this.solicitudPausarPartida = solicitudPausarPartida;
+
+    }
+
+    public String getSolicitudPausarPartida(){
+
+        return this.solicitudPausarPartida;
+
+    }
+
+    public void setSolicitudReanudarPartida(String solicitudReanudarPartida){
+
+        this.solicitudReanudarPartida = solicitudReanudarPartida;
+
+    }
+
+    public String getSolicitudReanudarPartida(){
+
+        return this.solicitudReanudarPartida;
+
+    }
+
+    public void setSolicitudEmpezarCombate(String solicitudEmpezarCombate){
+
+        this.solicitudEmpezarCombate = solicitudEmpezarCombate;
+
+    }
+
+    public String getSolicitudEmpezarCombate(){
+
+        return this.solicitudEmpezarCombate;
+
+    }
+
+    public void setSolicitudVictoria(String solicitudVictoria){
+
+        this.solicitudVictoria = solicitudVictoria;
+
+    }
+
+    public String getSolicitudVictoria(){
+
+        return this.solicitudVictoria;
+
+    }
+
+    public void setSolicitudMuerteCombate(String solicitudMuerteCombate){
+
+        this.solicitudMuerteCombate = solicitudMuerteCombate;
+
+    }
+
+    public String getSolicidtudMuerteCombate(){
+
+        return this.solicitudMuerteCombate;
+
+    }
+
+    public void setSolicitudFinCombate(String solicitudFinCombate){
+
+        this.solicitudFinCombate = solicitudFinCombate;
+
+    }
+
+    public String getSolicitudFinCombate(){
+
+        return this.solicitudFinCombate;
+
+    }
+
+    public void processUpdate(){
+
+        this.estadoDelJuego.accionUpdate();
+
+    }
+
+    public void processDraw(Graphics2D g2){
+
+        this.estadoDelJuego.accionDraw(g2);
+
+    }
+
     //Funcion para instanciar y empezar el gameThread
     public void startGameThread(){
 
@@ -245,6 +383,11 @@ public class Mapa extends JPanel implements Runnable{
 
     public void update(){
 
+        this.estadoDelJuego.accionUpdate();
+        this.estadoDelJuego.process();
+
+        /* 
+
         if(estadoDelJuego == jugar){ 
 
             jugador.update();
@@ -274,6 +417,8 @@ public class Mapa extends JPanel implements Runnable{
 
         }
 
+        */
+
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
 
@@ -281,6 +426,10 @@ public class Mapa extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
+        this.estadoDelJuego.accionDraw(g2);
+
+
+        /* 
         if(estadoDelJuego == jugar){
 
             administradorC.draw(g2);
@@ -323,7 +472,7 @@ public class Mapa extends JPanel implements Runnable{
 
             //En el resto de estados del juego, simplemente dibujamos su pantalla correspondiente de la UI.
             ui.draw(g2);
-        }
+        }*/
         
     }
 
