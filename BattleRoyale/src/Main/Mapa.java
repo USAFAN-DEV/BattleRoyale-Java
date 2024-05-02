@@ -3,7 +3,13 @@ package Main;
 import javax.swing.JPanel;
 import java.awt.*;
 import Sound.Musica;
-
+import StatePatternMapa.CombateConcreteState;
+import StatePatternMapa.JugarConcreteState;
+import StatePatternMapa.MapaStates;
+import StatePatternMapa.MuerteConcreteState;
+import StatePatternMapa.PantallaInicioConcreteState;
+import StatePatternMapa.PausaConcreteState;
+import StatePatternMapa.VictoriaConcreteState;
 import Entidades.Personaje;
 import InterfazDeUsuario.UI;
 import Objetos.AdministradorDeObjetos;
@@ -36,15 +42,21 @@ public class Mapa extends JPanel implements Runnable{
     private int dificultadBots; //1 - facil, 2 - medio, 3 - dificil
 
     //Estado del juego: 1-jugar, 2-pausar, 3-combate, 4-muerte, 5-victoria
-    private int estadoDelJuego;
+    /*private int estadoDelJuego;
     //Declaro estos atributos en publico. Simplemente son constantes que representan el estado del juego, como un enum.
     public final int pantallaInicio = 0;
     public final int jugar = 1;
     public final int pausar = 2;
     public final int combate = 3;
     public final int muerte = 4;
-    public final int victoria = 5;
-
+    public final int victoria = 5;*/
+    private MapaStates estadoDelJuego;
+    private MapaStates pantallaInicio = new PantallaInicioConcreteState(this);
+    private MapaStates jugar = new JugarConcreteState(this);
+    private MapaStates pausar = new PausaConcreteState(this);
+    private MapaStates combate = new CombateConcreteState(this);
+    private MapaStates muerte = new MuerteConcreteState(this);
+    private MapaStates victoria = new VictoriaConcreteState(this);
     //OBJETOS
     private AdministradorDeCasillas administradorC;
     private KeyHandler keyHandler;
