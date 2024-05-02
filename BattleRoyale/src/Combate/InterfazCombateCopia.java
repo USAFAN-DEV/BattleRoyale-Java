@@ -14,7 +14,7 @@ import Entidades.Personaje;
 import Main.Mapa;
 import Sound.Musica;
 
-public class InterfazCombate extends JPanel implements ActionListener{
+public class InterfazCombateCopia extends JPanel implements ActionListener{
     public MetodoCombate jugadores;
     public int cooldownHabilidad;
     public JTextField vidaJugador1;
@@ -28,7 +28,7 @@ public class InterfazCombate extends JPanel implements ActionListener{
     public JFrame frameC;
     public Mapa mapa;
 
-    public InterfazCombate(Personaje jugador1,Personaje jugador2, JFrame frameC,Mapa mapa){
+    public InterfazCombateCopia(Personaje jugador1,Personaje jugador2, JFrame frameC,Mapa mapa){
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);

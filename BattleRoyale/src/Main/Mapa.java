@@ -221,7 +221,7 @@ public class Mapa extends JPanel implements Runnable{
             }
             if(timer >= 1000000000){ //Cuando timer llegue a un segundo (1000000000 nanosegundos). Timer es la resta entre current time y last time. Es decir, cuando el tiempo de ejecucion del programa llegue a un segundo
 
-                System.out.println("FPS:" + contDraw);
+                //System.out.println("FPS:" + contDraw);
                 timer = 0;
                 contDraw = 0;
 
