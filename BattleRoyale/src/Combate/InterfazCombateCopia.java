@@ -1,11 +1,17 @@
 package Combate;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Combate.StrategyPattern.AccionStrategyContext;
+import Combate.StrategyPattern.BotStrategy;
+import Combate.StrategyPattern.UserStrategy;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +21,6 @@ import Main.Mapa;
 import Sound.Musica;
 
 public class InterfazCombateCopia extends JPanel implements ActionListener{
-    public MetodoCombateCopia jugadores;
     public int cooldownHabilidad;
     public JTextField vidaJugador1;
     public JTextField vidaJugador2;
@@ -28,7 +33,20 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
     public JFrame frameC;
     public Mapa mapa;
 
+    public Personaje jugador1;
+    public Personaje jugador2;
+    public AccionStrategyContext contexto;
+    public UserStrategy userStrategy;
+    public BotStrategy botStrategy;
+
     public InterfazCombateCopia(Personaje jugador1,Personaje jugador2, JFrame frameC,Mapa mapa){
+        //declaracion del contexto y estrategias
+        this.jugador1=jugador1;
+        this.jugador2=jugador2;
+        userStrategy=new UserStrategy(jugador1, jugador2);
+        botStrategy=new BotStrategy(jugador1, jugador2);
+        contexto=new AccionStrategyContext(userStrategy);
+
         //fondo
         JLabel fondo2=new JLabel();
         fondo2.setBounds(0,0,850,750);
@@ -68,10 +86,10 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         add(botonHabilidad,1,0);
         add(botonPocion,1,0);
         //declaracion de clase MetodoCombate para poder utilizar las funciones para el daño, pociones etc
-        jugadores=new MetodoCombateCopia(jugador1,jugador2);
+        
         //vida y escudo del jugador 1
-        vidaJugador1=new JTextField(String.valueOf(jugadores.getJugador1().getVida()));
-        escudoJugador1=new JTextField(String.valueOf(jugadores.getJugador1().getEscudo()));
+        vidaJugador1=new JTextField(String.valueOf(jugador1.getVida()));
+        escudoJugador1=new JTextField(String.valueOf(jugador1.getEscudo()));
         escudoJugador1.setBounds(35,400,150,50);
         vidaJugador1.setBounds(35,450,150,50);
         escudoJugador1.setEditable(false);
@@ -79,8 +97,8 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         add(vidaJugador1,1,0);
         add(escudoJugador1,1,0);
         //Vida y escudo del jugador 2
-        vidaJugador2=new JTextField(String.valueOf(jugadores.getJugador2().getVida()));
-        escudoJugador2=new JTextField(String.valueOf(jugadores.getJugador2().getEscudo()));
+        vidaJugador2=new JTextField(String.valueOf(jugador2.getVida()));
+        escudoJugador2=new JTextField(String.valueOf(jugador2.getEscudo()));
         escudoJugador2.setBounds(250,60,150,50);
         vidaJugador2.setBounds(250,110,150,50);
         escudoJugador2.setEditable(false);
@@ -93,17 +111,17 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         //BufferedImage imagenJugador2=jugador2.characterImage;
         JLabel image1=new JLabel();
         image1.setBounds(100,300,350,450);
-        image1.setIcon(new ImageIcon(jugadores.getJugador1().getPlayerGif()));
+        image1.setIcon(new ImageIcon(jugador1.getPlayerGif()));
         JLabel image2=new JLabel();
         image2.setBounds(400,-30,450,450);
-        image2.setIcon(new ImageIcon(jugadores.getJugador2().getPlayerGif()));
+        image2.setIcon(new ImageIcon(jugador2.getPlayerGif()));
         add(image1,1,0);
         add(image2,1,0);
 
         //Nombre de los pesonajes
-        JLabel nombreJugador1=new JLabel(jugadores.getJugador1().getNombre());
+        JLabel nombreJugador1=new JLabel(jugador1.getNombre());
         nombreJugador1.setBounds(35,365,150,50);
-        JLabel nombreJugador2=new JLabel(jugadores.getJugador2().getNombre());
+        JLabel nombreJugador2=new JLabel(jugador2.getNombre());
         nombreJugador2.setBounds(250,25,150,50);
         add(nombreJugador1,1,0);
         add(nombreJugador2,1,0);
@@ -132,8 +150,15 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         //falta hacer el sistema de turno para que el bot te pege una hostia
         JButton clickedButton=(JButton) event.getSource();
         String Opcion=clickedButton.getText();
+        Random random=new Random();
+        int randOpcionBot=random.nextInt(2)+1;
         if(Opcion=="Atacar"){
-            jugadores.Ataque();
+            contexto.accion(0);
+            if(jugador2.getVida() != 0){
+                contexto.setStrategy(botStrategy);
+                contexto.accion(randOpcionBot);
+            }
+            contexto.setStrategy(userStrategy);
             ActualizacionEstadisticas();
             if(cooldownHabilidad==turnos){
                 System.out.println("Vuelves a tener la habilidad activa");
@@ -142,7 +167,12 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
             FinPrograma();
         }
         else if(Opcion=="Habilidad"){
-            jugadores.HabilidadJugador1();
+            contexto.accion(1);
+            if(jugador2.getVida() != 0){
+                contexto.setStrategy(botStrategy);
+                contexto.accion(randOpcionBot);
+            }
+            contexto.setStrategy(userStrategy);
             cooldownHabilidad=turnos+3;
             ActualizacionEstadisticas();
             botonHabilidad.setEnabled(false);
@@ -151,22 +181,22 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         }
         else{
             //pociones
-            jugadores.usarPociones();
+            contexto.accion(3);
             ActualizacionEstadisticas();
         }
     }
     public void ActualizacionEstadisticas(){
-        vidaJugador1.setText(String.valueOf(jugadores.getJugador1().getVida()));
-        vidaJugador2.setText(String.valueOf(jugadores.getJugador2().getVida()));
-        escudoJugador1.setText(String.valueOf(jugadores.getJugador1().getEscudo()));
-        escudoJugador2.setText(String.valueOf(jugadores.getJugador2().getEscudo()));
+        vidaJugador1.setText(String.valueOf(jugador1.getVida()));
+        vidaJugador2.setText(String.valueOf(jugador2.getVida()));
+        escudoJugador1.setText(String.valueOf(jugador1.getEscudo()));
+        escudoJugador2.setText(String.valueOf(jugador2.getEscudo()));
         turnos++;
         turno.setText(String.valueOf(turnos));
     }
     public void FinPrograma(){
-        if(jugadores.getJugador2().getVida()==0){
-            if(jugadores.getJugador2().getNombre()=="Qiqi" && jugadores.getJugador2().getRevivir() == 0){
-                jugadores.getJugador2().usarHabilidad(jugadores.getJugador1());
+        if(jugador2.getVida()==0){
+            if(jugador2.getNombre()=="Qiqi" && jugador2.getRevivir() == 0){
+                jugador2.usarHabilidad(jugador1);
                 ActualizacionEstadisticas();
             }
             else{
@@ -184,9 +214,9 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
                 mapa.playMusic(0);
             }  
         }
-        else if(jugadores.getJugador1().getVida()==0){
-            if(jugadores.getJugador1().getNombre()=="Qiqi" && jugadores.getJugador1().getRevivir() == 0){
-                jugadores.getJugador1().usarHabilidad(jugadores.getJugador2());
+        else if(jugador1.getVida()==0){
+            if(jugador1.getNombre()=="Qiqi" && jugador1.getRevivir() == 0){
+                jugador1.usarHabilidad(jugador2);
                 ActualizacionEstadisticas();
             }
             else{
