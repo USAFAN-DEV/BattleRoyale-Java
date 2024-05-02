@@ -242,13 +242,4 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
     public void stopMusic(){
         musica.stop();
     }
-    //Este main hay que quitarlo al final  
-    public static void main(String[] args){
-        /*Mapa mapa=new Mapa();
-        JFrame frameC= new JFrame();
-        mapa.player1.setContadorPociones(1);
-        InterfazCombate interfazC=new InterfazCombate(mapa.player1,mapa.player2, frameC,esta);
-        mapa.stopMusic();
-        interfazC.playMusic(1);*/
-    }
 }
