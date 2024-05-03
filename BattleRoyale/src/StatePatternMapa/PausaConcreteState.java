@@ -32,7 +32,7 @@ public class PausaConcreteState implements MapaStatesTransition{
         
         //Tambien reanudar partida
 
-        this.mapa.setEstadoDelJuego(new JugarConcreteState(this.mapa));
+        this.mapa.setEstadoDelJuego(this.mapa.getJugarConcreteState());
 
     }
 
@@ -74,10 +74,9 @@ public class PausaConcreteState implements MapaStatesTransition{
     @Override
     public void process() {
         
-        if(this.mapa.getSolicitudReanudarPartida() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Reanudar partida")){
 
             this.empezarPartida();
-            this.mapa.setSolicitudReanudarPartida(null);
 
         }
 

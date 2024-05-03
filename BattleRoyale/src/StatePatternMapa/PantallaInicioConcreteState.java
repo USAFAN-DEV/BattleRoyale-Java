@@ -33,7 +33,7 @@ public class PantallaInicioConcreteState implements MapaStatesTransition{
     @Override
     public void empezarPartida() {
         
-        this.mapa.setEstadoDelJuego(new JugarConcreteState(this.mapa));
+        this.mapa.setEstadoDelJuego(this.mapa.getJugarConcreteState());
 
     }
 
@@ -75,11 +75,10 @@ public class PantallaInicioConcreteState implements MapaStatesTransition{
     @Override
     public void process() {
         
-        if(this.mapa.getSolicitudEmpezarPartida() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Empezar partida")){
 
             this.empezarPartida();
-            this.mapa.setSolicitudEmpezarPartida(null);
-
+            
         }
     }
 }

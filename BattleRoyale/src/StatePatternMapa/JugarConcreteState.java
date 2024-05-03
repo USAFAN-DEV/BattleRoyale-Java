@@ -33,7 +33,7 @@ public class JugarConcreteState implements MapaStatesTransition{
 
         if(this.mapa.getNumeroDeBots() == 0){ //En cada update comprobamos si el usuario ha ganado la partida
             //victoria
-            this.mapa.setSolicitudVictoria("He ganado");;
+            this.mapa.setSolicitudCambioEstado("Victoria");;
 
         }
     }
@@ -98,14 +98,15 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void pausarPartida() {
         
-        this.mapa.setEstadoDelJuego(new PausaConcreteState(this.mapa));
+        System.out.println("Solicitud pausar partida");
+        this.mapa.setEstadoDelJuego(this.mapa.getPausaConcreteState());
 
     }
 
     @Override
     public void empezarCombate() {
 
-        this.mapa.setEstadoDelJuego(new CombateConcreteState(this.mapa));
+        this.mapa.setEstadoDelJuego(this.mapa.getCombateConcreteState());
 
     }
 
@@ -119,7 +120,7 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void ganarPartida() {
         
-        this.mapa.setEstadoDelJuego(new VictoriaConcreteState(this.mapa));
+        this.mapa.setEstadoDelJuego(this.mapa.getVictoriaConcreteState());
 
     }
 
@@ -133,24 +134,22 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void process() {
         
-        if(this.mapa.getSolicitudPausarPartida() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Pausar partida")){
 
             this.pausarPartida();
-            this.mapa.setSolicitudPausarPartida(null);
 
         }
 
-        if(this.mapa.getSolicitudEmpezarCombate() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Empezar combate")){
 
+            System.out.println("Empezando combate");
             this.empezarCombate();
-            this.mapa.setSolicitudEmpezarCombate(null);
 
         }
 
-        if(this.mapa.getSolicitudVictoria() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Victoria")){
 
             this.ganarPartida();
-            this.mapa.setSolicitudVictoria(null);
 
         }
 

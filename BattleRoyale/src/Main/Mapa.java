@@ -43,37 +43,16 @@ public class Mapa extends JPanel implements Runnable{
 
     //Estado del juego: 1-jugar, 2-pausar, 3-combate, 4-muerte, 5-victoria
 
-    /*
-    private int estadoDelJuego;
-    Declaro estos atributos en publico. Simplemente son constantes que representan el estado del juego, como un enum.
-    public final int pantallaInicio = 0;
-    public final int jugar = 1;
-    public final int pausar = 2;
-    public final int combate = 3;
-    public final int muerte = 4;
-    public final int victoria = 5;
-    */
-
     private MapaStates estadoDelJuego;
 
     private final MapaStates pantallaInicio = new PantallaInicioConcreteState(this);
-
-    /* 
     private final MapaStates jugar = new JugarConcreteState(this);
     private final MapaStates pausar = new PausaConcreteState(this);
     private final MapaStates combate = new CombateConcreteState(this);
     private final MapaStates muerte = new MuerteConcreteState(this);
     private final MapaStates victoria = new VictoriaConcreteState(this);
-    */
 
-    private String solicitudEmpezarPartida; //Mensaje de Keyhandler a mapa para empezar la partida cuando se termina la seleccion de la configuracion de esta
-    private String solicitudReiniciarPartida; //Mensaje de Keyhandler a mapa cuando se termina la partida (muerte o victoria) para volver a jugar otra vez
-    private String solicitudPausarPartida; //Mensaje de Keyhandler a mapa cuando se quiere pausar la partida
-    private String solicitudReanudarPartida; //Mensaje de Keyhandler a mapa cuando se quiere reaunudar la partida
-    private String solicitudEmpezarCombate; //Mensaje de la clase jugador a mapa cuando se interactua con un bot para empezar el combate
-    private String solicitudMuerteCombate; //Mensaje de InterfazCombate a mapa cuando se pierde un combate
-    private String solicitudVictoria; //Mensaje cuando el numero de bots es 0
-    private String solicitudFinCombate; //Mensaje de InterfazCombate a mapa cuando se gana un combate y se quiere reanudar la partida
+    private String solicitudCambioEstado; //Mensaje de una clase al mapa porque ha sucedido algo que requiere un cambio de estado
 
 
     //OBJETOS
@@ -113,14 +92,7 @@ public class Mapa extends JPanel implements Runnable{
         this.administradorO.colocarObjetos();
         this.playMusic(0);
 
-        this.solicitudEmpezarPartida = null;
-        this.solicitudPausarPartida = null;
-        this.solicitudReiniciarPartida = null;
-        this.solicitudReanudarPartida = null;
-        this.solicitudEmpezarCombate = null;
-        this.solicitudMuerteCombate = null;
-        this.solicitudVictoria = null;
-        this.solicitudFinCombate = null;
+        this.solicitudCambioEstado = "";
         estadoDelJuego = pantallaInicio;
     }
 
@@ -148,10 +120,14 @@ public class Mapa extends JPanel implements Runnable{
 
     //VARIABLES
     public void setEstadoDelJuego(MapaStates estadoDelJuego){
+
         this.estadoDelJuego = estadoDelJuego;
+
     }
     public MapaStates getEstadoDelJuego(){
+        
         return this.estadoDelJuego;
+        
     }
     public void setPersonajeElegido(String personajeElegido){
         this.personajeElegido = personajeElegido;
@@ -223,99 +199,51 @@ public class Mapa extends JPanel implements Runnable{
 
     //Funciones para procesar el estado del juego
 
-    public void setSolicitudEmpezarPartida(String solicitudEmpezarPartida){
+    public void setSolicitudCambioEstado(String solicitudCambioEstado){
 
-        this.solicitudEmpezarPartida = solicitudEmpezarPartida;
-
-    }
-
-    public String getSolicitudEmpezarPartida(){
-
-        return this.solicitudEmpezarPartida;
+        this.solicitudCambioEstado = solicitudCambioEstado;
 
     }
 
-    public void setSolicitudReiniciarPartida(String solicitudReiniciarPartida){
+    public String getSolicitudCambioEstado(){
 
-        this.solicitudReiniciarPartida = solicitudReiniciarPartida;
-
-    }
-
-    public String getSolicitudReiniciarPartida(){
-
-        return this.solicitudReiniciarPartida;
+        return this.solicitudCambioEstado;
 
     }
 
-    public void setSolicitudPausarPartida(String solicitudPausarPartida){
+    public MapaStates getPantallaInicioConcreteState(){
 
-        this.solicitudPausarPartida = solicitudPausarPartida;
-
-    }
-
-    public String getSolicitudPausarPartida(){
-
-        return this.solicitudPausarPartida;
+        return this.pantallaInicio;
 
     }
 
-    public void setSolicitudReanudarPartida(String solicitudReanudarPartida){
+    public MapaStates getJugarConcreteState(){
 
-        this.solicitudReanudarPartida = solicitudReanudarPartida;
-
-    }
-
-    public String getSolicitudReanudarPartida(){
-
-        return this.solicitudReanudarPartida;
+        return this.jugar;
 
     }
 
-    public void setSolicitudEmpezarCombate(String solicitudEmpezarCombate){
+    public MapaStates getPausaConcreteState(){
 
-        this.solicitudEmpezarCombate = solicitudEmpezarCombate;
-
-    }
-
-    public String getSolicitudEmpezarCombate(){
-
-        return this.solicitudEmpezarCombate;
+        return this.pausar;
 
     }
 
-    public void setSolicitudVictoria(String solicitudVictoria){
+    public MapaStates getCombateConcreteState(){
 
-        this.solicitudVictoria = solicitudVictoria;
-
-    }
-
-    public String getSolicitudVictoria(){
-
-        return this.solicitudVictoria;
+        return this.combate;
 
     }
 
-    public void setSolicitudMuerteCombate(String solicitudMuerteCombate){
+    public MapaStates getMuerteConcreteState(){
 
-        this.solicitudMuerteCombate = solicitudMuerteCombate;
-
-    }
-
-    public String getSolicidtudMuerteCombate(){
-
-        return this.solicitudMuerteCombate;
+        return this.muerte;
 
     }
 
-    public void setSolicitudFinCombate(String solicitudFinCombate){
+    public MapaStates getVictoriaConcreteState(){
 
-        this.solicitudFinCombate = solicitudFinCombate;
-
-    }
-
-    public String getSolicitudFinCombate(){
-
-        return this.solicitudFinCombate;
+        return this.victoria;
 
     }
 
@@ -385,95 +313,16 @@ public class Mapa extends JPanel implements Runnable{
 
         this.estadoDelJuego.accionUpdate();
         this.estadoDelJuego.process();
-
-        /* 
-
-        if(estadoDelJuego == jugar){ 
-
-            jugador.update();
-
-            for(int i = 0; i < bots.length; i++){
-                if(bots[i] != null){
-                    bots[i].updateBot();
-                }
-            }
-
-            if(numeroDeBots == 0){ //En cada update comprobamos si el usuario ha ganado la partida
-             estadoDelJuego = victoria;
-            }
-        }
-        else if(estadoDelJuego == combate){
-            //Cuando entras en combate, si al colisionar con el jugador mantienes una tecla presionada, al volver a el estado de jugar, esa tecla sigue teniendo el valor true
-            //Por lo que el personaje se mueve aunque no estes presionando nada. Para que no ocurra esto, reseteamos aqui los valores del keyHandler
-            keyHandler.setPressedDown(false);
-            keyHandler.setPressedLeft(false);
-            keyHandler.setPressedRight(false);
-            keyHandler.setPressedUp(false);
-
-        }
-        else{
-
-            //El estado del juego es pausa, muerte o victoria. No queremos que update() actualice ninguna información
-
-        }
-
-        */
+        System.out.println(solicitudCambioEstado + ", " + estadoDelJuego);
 
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
 
         super.paintComponent(g); //Pintar en el parent class (JPanel)
-
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
         this.estadoDelJuego.accionDraw(g2);
 
-
-        /* 
-        if(estadoDelJuego == jugar){
-
-            administradorC.draw(g2);
-
-            for(int i = 0; i < objetos.length; i++){
-
-                if(objetos[i] != null){
-                    objetos[i].draw(g2, this);
-                }
-
-            }
-
-            for(int i = 0; i < bots.length; i++){
-                if(bots[i] != null){
-                    bots[i].drawBot(g2);
-
-                }
-            }
-            
-            jugador.draw(g2);
-            ui.draw(g2);
-
-            if(getJugador().getMensajeCofreLooteado() !=  null){
-
-                if(ui.getContadorFramesMensajePantalla() < 120){
-                    ui.drawMensajePorPantalla(getJugador().getMensajeCofreLooteado());
-                }
-                else{
-                    getJugador().setMensajeCofreLooteado(null);
-                    ui.setContadorFramesMensajePantalla(0);
-                }
-
-            }
-            
-            g2.dispose();
-
-        }
-
-        else{
-
-            //En el resto de estados del juego, simplemente dibujamos su pantalla correspondiente de la UI.
-            ui.draw(g2);
-        }*/
-        
     }
 
 }

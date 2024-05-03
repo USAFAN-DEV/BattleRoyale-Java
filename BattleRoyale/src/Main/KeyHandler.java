@@ -237,7 +237,7 @@ public class KeyHandler implements KeyListener {
                     mapa.setBots(new Personaje[mapa.getNumeroDeBots()]);
                     System.out.println("Dificultad bots: " + mapa.getDificultadBots());
                     mapa.getAdministradorDeObjetos().colocarBots();
-                    mapa.setSolicitudEmpezarPartida("Ajustes configurados. Empezemos la partida");
+                    mapa.setSolicitudCambioEstado("Empezar partida");
 
                 }
 
@@ -261,7 +261,7 @@ public class KeyHandler implements KeyListener {
             else if(code == KeyEvent.VK_ENTER){
                 
                 if(mapa.getUi().getMenuArrow() == 0){
-                    mapa.setSolicitudReiniciarPartida("El usuario quiere jugar otra partida. Reiniciar seleccion de personaje, ciudad y bots");
+                    mapa.setSolicitudCambioEstado("Reiniciar partida");
                     mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().pantallaTitulo);
                 }
                 else{
@@ -297,12 +297,12 @@ public class KeyHandler implements KeyListener {
 
                 if(mapa.getEstadoDelJuego() instanceof JugarConcreteState){
 
-                    mapa.setSolicitudPausarPartida("Pausar Partida");
+                    mapa.setSolicitudCambioEstado("Pausar partida");
 
                 }
                 else if(mapa.getEstadoDelJuego() instanceof PausaConcreteState){
 
-                    mapa.setSolicitudReanudarPartida("Reanudar Partida");
+                    mapa.setSolicitudCambioEstado("Reanudar partida");
 
                 }
 

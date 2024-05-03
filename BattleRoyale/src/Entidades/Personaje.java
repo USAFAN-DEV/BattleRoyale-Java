@@ -351,7 +351,7 @@ public abstract class Personaje {
             int botIndex = mapa.getColisionChecker().checkBot(this, mapa.getBots());
 
             if(botIndex != -1){
-                mapa.setSolicitudEmpezarCombate("Empezar combate");
+                mapa.setSolicitudCambioEstado("Empezar combate");
                 JFrame frameC= new JFrame();
                 InterfazCombateCopia interfazC=new InterfazCombateCopia(mapa.getJugador(),mapa.getBots()[botIndex], frameC,mapa);
                 mapa.getBots()[botIndex] = null;

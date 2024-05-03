@@ -35,7 +35,7 @@ public class CombateConcreteState implements MapaStatesTransition{
     @Override
     public void empezarPartida() {
         
-        this.mapa.setEstadoDelJuego(new JugarConcreteState(this.mapa));
+        this.mapa.setEstadoDelJuego(this.mapa.getJugarConcreteState());
 
     }
 
@@ -56,7 +56,7 @@ public class CombateConcreteState implements MapaStatesTransition{
     @Override
     public void terminarPartida() {
         
-        this.mapa.setEstadoDelJuego(new MuerteConcreteState(this.mapa));
+        this.mapa.setEstadoDelJuego(this.mapa.getMuerteConcreteState());
 
     }
 
@@ -77,16 +77,14 @@ public class CombateConcreteState implements MapaStatesTransition{
     @Override
     public void process() {
         
-        if(this.mapa.getSolicitudFinCombate() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Combate ganado")){
 
             this.empezarPartida();//reanudar partida
-            this.mapa.setSolicitudFinCombate(null);
 
         }
-        if(this.mapa.getSolicidtudMuerteCombate() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Combate perdido")){
 
             this.terminarPartida();
-            this.mapa.setSolicitudMuerteCombate(null);
 
         }
 

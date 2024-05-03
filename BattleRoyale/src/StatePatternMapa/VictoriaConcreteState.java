@@ -64,17 +64,16 @@ public class VictoriaConcreteState implements MapaStatesTransition{
     @Override
     public void volverAJugar() {
 
-        this.mapa.setEstadoDelJuego(new PantallaInicioConcreteState(this.mapa));
+        this.mapa.setEstadoDelJuego(this.mapa.getPantallaInicioConcreteState());
         
     }
 
     @Override
     public void process() {
 
-        if(this.mapa.getSolicitudReiniciarPartida() != null){
+        if(this.mapa.getSolicitudCambioEstado().equals("Reiniciar partida")){
 
             this.volverAJugar();
-            this.mapa.setSolicitudReiniciarPartida(null);
 
         }
         
