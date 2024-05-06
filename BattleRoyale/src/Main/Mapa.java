@@ -313,7 +313,6 @@ public class Mapa extends JPanel implements Runnable{
 
         this.estadoDelJuego.accionUpdate();
         this.estadoDelJuego.process();
-        System.out.println(solicitudCambioEstado + ", " + estadoDelJuego);
 
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
