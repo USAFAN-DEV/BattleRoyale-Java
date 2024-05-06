@@ -25,12 +25,12 @@ public class Calculadora {
     public void actualizarVidasDeJugadores(Personaje jugador,int damage){
         //si el escudo es 0
         if(jugador.getEscudo()==0){
-            //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
-            jugador.setVida(jugador.getVida()-damage);
-            //Si la vida resulta ser negativa entonces se actualiza a 0
-            if(jugador.getVida()<0){
-                 jugador.setVida(0);
-            }
+             //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
+             jugador.setVida(jugador.getVida()-damage);
+             //Si la vida resulta ser negativa entonces se actualiza a 0
+             if(jugador.getVida()<0){
+                  jugador.setVida(0);
+             }
         }
         else{
             //Si tiene escudo

@@ -12,6 +12,8 @@ import Herramientas.Armas;
 import Main.KeyHandler;
 import Main.Mapa;
 
+import Combate.StatePatternVida.*;
+
 public abstract class Personaje {
 
     //ATRIBUTOS
@@ -28,6 +30,9 @@ public abstract class Personaje {
     private int atk;
     private double crit;
     private int contadorPociones;
+    private LifeState currentState; //atributo que indica si el personaje esta vivo, herido o muerto
+    private MuertoState muertoState;
+    private VivoState vivoState;
 
     //HABILIDAD DEL PERSONAJE
     private String nombreHabilidad;
@@ -89,6 +94,11 @@ public abstract class Personaje {
         setEstadisticaHabilidad(estadisticaHabilidad);
         setNivelHabilidad(1);
         cooldownHabilidad=0;
+
+        //Vida personaje
+        this.vivoState = new VivoState(this);
+        this.currentState = vivoState;
+        this.muertoState = new MuertoState(this);
 
         //ATRIBUTOS PARA EL MAPA
         setMapaX(mapaX);
@@ -173,6 +183,22 @@ public abstract class Personaje {
     }
     public void setContadorPociones(int contadorPociones){
         this.contadorPociones=contadorPociones;
+    }
+    //Estadisticas vida
+    public void setState(LifeState lifeState){
+        this.currentState = lifeState;
+    }
+    public LifeState getLifeState(){
+        return this.currentState;
+    }
+    public LifeState getVivoState(){
+        return this.vivoState;
+    }
+    public LifeState getMuertoState(){
+        return this.muertoState;
+    }
+    public void cambiarVida(){
+        currentState.cambiarVida();
     }
 
     //HABILIDAD

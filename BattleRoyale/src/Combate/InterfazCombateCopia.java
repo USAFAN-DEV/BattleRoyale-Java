@@ -39,6 +39,7 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
     public UserStrategy userStrategy;
     public BotStrategy botStrategy;
 
+
     public InterfazCombateCopia(Personaje jugador1,Personaje jugador2, JFrame frameC,Mapa mapa){
         //declaracion del contexto y estrategias
         this.jugador1=jugador1;
@@ -196,10 +197,11 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
     public void FinPrograma(){
         if(jugador2.getVida()==0){
             if(jugador2.getNombre()=="Qiqi" && jugador2.getRevivir() == 0){
-                jugador2.usarHabilidad(jugador1);
+                jugador2.cambiarVida();
                 ActualizacionEstadisticas();
             }
             else{
+                jugador2.cambiarVida();
                 System.out.println("Has ganado el combate");
                 try{
                     Thread.sleep(3000);
@@ -216,10 +218,11 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         }
         else if(jugador1.getVida()==0){
             if(jugador1.getNombre()=="Qiqi" && jugador1.getRevivir() == 0){
-                jugador1.usarHabilidad(jugador2);
+                jugador1.cambiarVida();
                 ActualizacionEstadisticas();
             }
             else{
+                jugador1.cambiarVida();
                 System.out.println("Has perdido el combate");
                 try{
                     Thread.sleep(3000);
