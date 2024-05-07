@@ -16,7 +16,7 @@ public class PantallaInicioConcreteState implements MapaStatesTransition{
     @Override
     public void accionUpdate(){
         
-        //Durante este estado no queremos que update() actualice ninguna información
+        this.mapa.getUi().process(); //procesamos el estado de la UI
 
     }
 
@@ -39,36 +39,36 @@ public class PantallaInicioConcreteState implements MapaStatesTransition{
 
     @Override
     public void pausarPartida() {
-        
-        System.out.println("La partida todavia no ha empezado");
+
+        throw new IllegalStateException("La partida todavia no ha empezado");
 
     }
 
     @Override
     public void empezarCombate() {
         
-        System.out.println("La partida todavia no ha empezado");
+        throw new IllegalStateException("La partida todavia no ha empezado");
 
     }
 
     @Override
     public void terminarPartida() {
         
-        System.out.println("La partida todavia no ha empezado");
+        throw new IllegalStateException("La partida todavia no ha empezado");
 
     }
 
     @Override
     public void ganarPartida() {
         
-        System.out.println("La partida todavia no ha empezado");
+        throw new IllegalStateException("La partida todavia no ha empezado");
 
     }
 
     @Override
     public void volverAJugar() {
         
-        System.out.println("Ya estas en la pantalla de inicio");
+        throw new IllegalStateException("Ya estas en la pantalla de inicio");
 
     }
 

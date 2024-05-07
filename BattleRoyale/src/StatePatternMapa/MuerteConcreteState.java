@@ -16,7 +16,7 @@ public class MuerteConcreteState implements MapaStatesTransition{
     @Override
     public void accionUpdate(){
 
-         //Durante este estado no queremos que update() actualice ninguna información
+        this.mapa.getUi().process(); //procesamos el estado de la UI
 
     }
     
@@ -30,35 +30,35 @@ public class MuerteConcreteState implements MapaStatesTransition{
     @Override
     public void empezarPartida() {
         
-        System.out.println("Selecciona personaje, ciudad, numero de bots y dificultad de bots antes");
+        throw new IllegalStateException("Selecciona personaje, ciudad, numero de bots y dificultad de bots antes");
 
     }
 
     @Override
     public void pausarPartida() {
         
-        System.out.println("La partida ya ha terminado");
+        throw new IllegalStateException("La partida ya ha terminado");
 
     }
 
     @Override
     public void empezarCombate() {
         
-        System.out.println("La partida ya ha terminado");
+        throw new IllegalStateException("La partida ya ha terminado");
 
     }
 
     @Override
     public void terminarPartida() {
         
-        System.out.println("La partida ya ha terminado");
+        throw new IllegalStateException("La partida ya ha terminado");
 
     }
 
     @Override
     public void ganarPartida() {
         
-        System.out.println("La partida ya ha terminado");
+        throw new IllegalStateException("La partida ya ha terminado");
 
     }
 

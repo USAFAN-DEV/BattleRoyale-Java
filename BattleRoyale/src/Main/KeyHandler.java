@@ -8,6 +8,7 @@ import Entidades.PersonajeAtk.Mei;
 import Entidades.PersonajeDefensa.Zhongli;
 import Entidades.PersonajeHealer.Qiqi;
 import StatePatternMapa.*;
+import InterfazDeUsuario.StatePatternUI.*;
 
 public class KeyHandler implements KeyListener {
 
@@ -56,7 +57,7 @@ public class KeyHandler implements KeyListener {
 
         if(mapa.getEstadoDelJuego() instanceof PantallaInicioConcreteState){
 
-            if(mapa.getUi().getPantallaDeInicioEstado() == mapa.getUi().pantallaTitulo){
+            if(mapa.getUi().getEstadoUI() instanceof TituloConcreteState){
 
                 if(code == KeyEvent.VK_UP){
                     mapa.getUi().setMenuArrow(mapa.getUi().getMenuArrow() - 1);
@@ -73,15 +74,19 @@ public class KeyHandler implements KeyListener {
                 else if(code == KeyEvent.VK_ENTER){
                     
                     if(mapa.getUi().getMenuArrow() == 0){
-                        mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().getPantallaDeInicioEstado() + 1);
+
+                        mapa.getUi().setSolicitudCambioEstado("Seleccion personaje");
+
                     }
                     else{
+
                         System.exit(0);
+
                     }
                 }
 
             }
-            else if(mapa.getUi().getPantallaDeInicioEstado() == mapa.getUi().seleccionDePersonaje){
+            else if(mapa.getUi().getEstadoUI() instanceof SeleccionPersonajeConcreteState){
 
                 if(code == KeyEvent.VK_LEFT){
                     mapa.getUi().setMenuArrow(mapa.getUi().getMenuArrow() - 1);
@@ -107,11 +112,12 @@ public class KeyHandler implements KeyListener {
                         mapa.setJugador(new Mei(mapa, this));
                     }
 
-                    mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().getPantallaDeInicioEstado() + 1);
+                    mapa.getUi().setSolicitudCambioEstado("Datos personaje");
+
                 }
 
             }
-            else if(mapa.getUi().getPantallaDeInicioEstado() == mapa.getUi().datosPersonaje){
+            else if(mapa.getUi().getEstadoUI() instanceof DatosPersonajeConcreteState){
 
                 if(code == KeyEvent.VK_UP){
                     mapa.getUi().setMenuArrow(mapa.getUi().getMenuArrow() - 1);
@@ -128,15 +134,17 @@ public class KeyHandler implements KeyListener {
                 else if(code == KeyEvent.VK_ENTER){
                     
                     if(mapa.getUi().getMenuArrow() == 0){
-                        mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().getPantallaDeInicioEstado() + 1);
+
+                        mapa.getUi().setSolicitudCambioEstado("Elegir ciudad");
+                        
                     }
                     else{
-                        mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().getPantallaDeInicioEstado() - 1);
+                        mapa.getUi().setSolicitudCambioEstado("Elegir personaje");;
                     }
                 }
 
             }
-            else if(mapa.getUi().getPantallaDeInicioEstado() == mapa.getUi().elegirCiudad){
+            else if(mapa.getUi().getEstadoUI() instanceof ElegirCiudadConcreteState){
 
                 if(code == KeyEvent.VK_UP){
                     mapa.getUi().setMenuArrow(mapa.getUi().getMenuArrow() - 1);
@@ -173,12 +181,12 @@ public class KeyHandler implements KeyListener {
                         mapa.getJugador().setMapaY(16*mapa.getCasillaSizeEscalada());
                     }
 
-                    mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().getPantallaDeInicioEstado() + 1);
+                    mapa.getUi().setSolicitudCambioEstado("Elegir bots");
 
                 }
 
             }
-            else if(mapa.getUi().getPantallaDeInicioEstado() == mapa.getUi().elegirBots){
+            else if(mapa.getUi().getEstadoUI() instanceof BotsConcreteState){
 
                 if(code == KeyEvent.VK_UP){
                     mapa.getUi().setMenuArrow(mapa.getUi().getMenuArrow() - 1);
@@ -204,11 +212,11 @@ public class KeyHandler implements KeyListener {
                         mapa.setNumeroDeBots(9);
                     }
 
-                    mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().getPantallaDeInicioEstado() + 1);
+                    mapa.getUi().setSolicitudCambioEstado("Elegir dificultad bots");
 
                 }
             }
-            else if(mapa.getUi().getPantallaDeInicioEstado() == mapa.getUi().elegirDificultadBots){
+            else if(mapa.getUi().getEstadoUI() instanceof DificultadBotsConcreteState){
 
                 if(code == KeyEvent.VK_UP){
                     mapa.getUi().setMenuArrow(mapa.getUi().getMenuArrow() - 1);
@@ -237,6 +245,7 @@ public class KeyHandler implements KeyListener {
                     mapa.setBots(new Personaje[mapa.getNumeroDeBots()]);
                     System.out.println("Dificultad bots: " + mapa.getDificultadBots());
                     mapa.getAdministradorDeObjetos().colocarBots();
+                    mapa.getUi().setSolicitudCambioEstado("Nada");
                     mapa.setSolicitudCambioEstado("Empezar partida");
 
                 }
@@ -262,7 +271,7 @@ public class KeyHandler implements KeyListener {
                 
                 if(mapa.getUi().getMenuArrow() == 0){
                     mapa.setSolicitudCambioEstado("Reiniciar partida");
-                    mapa.getUi().setPantallaDeInicioEstado(mapa.getUi().pantallaTitulo);
+                    mapa.getUi().setSolicitudCambioEstado("Crear partida");
                 }
                 else{
                     System.exit(0);

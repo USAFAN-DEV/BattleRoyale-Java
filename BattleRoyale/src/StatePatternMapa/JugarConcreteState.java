@@ -91,14 +91,13 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void empezarPartida() {
         
-        System.out.println("La partida ya ha empezado");
+        throw new IllegalStateException("La partida ya ha empezado");
 
     }
 
     @Override
     public void pausarPartida() {
         
-        System.out.println("Solicitud pausar partida");
         this.mapa.setEstadoDelJuego(this.mapa.getPausaConcreteState());
 
     }
@@ -113,7 +112,7 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void terminarPartida() {
         
-        System.out.println("Solo puedes morir en combate");
+        throw new IllegalStateException("Solo puedes morir en combate");
 
     }
 
@@ -127,7 +126,7 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void volverAJugar() {
         
-        System.out.println("Termina esta partida para empezar otra");
+        throw new IllegalStateException("Termina esta partida para empezar otra");
 
     }
 
@@ -142,7 +141,6 @@ public class JugarConcreteState implements MapaStatesTransition{
 
         if(this.mapa.getSolicitudCambioEstado().equals("Empezar combate")){
 
-            System.out.println("Empezando combate");
             this.empezarCombate();
 
         }

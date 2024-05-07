@@ -611,7 +611,5 @@ public abstract class Personaje {
         }
 
     }
-
-
-
+    
 }

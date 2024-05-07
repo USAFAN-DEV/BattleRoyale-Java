@@ -42,14 +42,14 @@ public class CombateConcreteState implements MapaStatesTransition{
     @Override
     public void pausarPartida() {
         
-        System.out.println("No se puede pausar la partida durante un combate");
+        throw new IllegalStateException("No se puede pausar la partida durante un combate");
 
     }
 
     @Override
     public void empezarCombate() {
         
-        System.out.println("Ya se ha iniciado un combate");
+        throw new IllegalStateException("Ya se ha iniciado un combate");
 
     }
 
@@ -63,14 +63,14 @@ public class CombateConcreteState implements MapaStatesTransition{
     @Override
     public void ganarPartida() {
         
-        System.out.println("No puede ganar mientras estas en combate");
+        throw new IllegalStateException("No puede ganar mientras estas en combate");
 
     }
 
     @Override
     public void volverAJugar() {
         
-        System.out.println("Termina esta partida para empezar otra");
+        throw new IllegalStateException("Termina esta partida para empezar otra");
 
     }
 

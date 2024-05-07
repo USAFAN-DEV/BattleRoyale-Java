@@ -8,12 +8,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Main.Mapa;
-import StatePatternMapa.CombateConcreteState;
-import StatePatternMapa.JugarConcreteState;
-import StatePatternMapa.MuerteConcreteState;
-import StatePatternMapa.PantallaInicioConcreteState;
-import StatePatternMapa.PausaConcreteState;
-import StatePatternMapa.VictoriaConcreteState;
+import StatePatternMapa.*;
+import InterfazDeUsuario.StatePatternUI.*;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,20 +18,31 @@ public class UI {
     
     //ATRIBUTOS
 
-    //CONSTANTES (ES COMO UN ENUM). Lo dejo en publico
+    /*
     public final int pantallaTitulo = 0;
     public final int seleccionDePersonaje = 1;
     public final int datosPersonaje = 2;
     public final int elegirCiudad = 3;
     public final int elegirBots = 4;
     public final int elegirDificultadBots = 5;
+    */
 
+    private UIStates estadoUI;
+    private String solicitudCambioEstado;
+
+    private final UIStates tituloConcreteState = new TituloConcreteState(this);
+    private final UIStates seleccionPersonajeConcreteState = new SeleccionPersonajeConcreteState(this);
+    private final UIStates datosPersonajeConcreteState = new DatosPersonajeConcreteState(this);
+    private final UIStates elegirCiudadConcreteState = new ElegirCiudadConcreteState(this);
+    private final UIStates botsConcreteState = new BotsConcreteState(this);
+    private final UIStates dificultadBotsConcreteState = new DificultadBotsConcreteState(this);
+
+    //Numero fotos de iconos de la UI
     private final int numeroTiposIconosUI = 6;
 
     //VARIABLES
     private int contadorFramesMensajePantalla;
     private int menuArrow;
-    private int pantallaDeInicioEstado;
 
     //OBJETOS
     private Mapa mapa;
@@ -52,29 +59,103 @@ public class UI {
         iconos = new Icono[numeroTiposIconosUI];
         contadorFramesMensajePantalla = 0;
         menuArrow = 0;
-        pantallaDeInicioEstado = 0;
+        estadoUI = tituloConcreteState;
+        solicitudCambioEstado = "Nada";
         getIconsImages();
     
     }
 
     //GETTERS y SETTERS
     public void setContadorFramesMensajePantalla(int contadorFramesMensajePantalla){
+
         this.contadorFramesMensajePantalla = contadorFramesMensajePantalla;
+
     }
+
     public int getContadorFramesMensajePantalla(){
+
         return this.contadorFramesMensajePantalla;
+
     }
+
     public void setMenuArrow(int menuArrow){
+
         this.menuArrow = menuArrow;
+
     }
+
     public int getMenuArrow(){
+
         return this.menuArrow;
+
     }
-    public void setPantallaDeInicioEstado(int pantallaDeInicioEstado){
-        this.pantallaDeInicioEstado = pantallaDeInicioEstado;
+
+    //Metodos para procesar el estado de la UI
+
+    public void setSolicitudCambioEstado(String solicitudCambioEstado){
+
+        this.solicitudCambioEstado = solicitudCambioEstado;
+
     }
-    public int getPantallaDeInicioEstado(){
-        return this.pantallaDeInicioEstado;
+
+    public String getSolicitudCambioEstado(){
+
+        return this.solicitudCambioEstado;
+
+    }
+
+    public UIStates getTituloConcreteState(){
+
+        return this.tituloConcreteState;
+
+    }
+
+    public UIStates getSeleccionPersonajeConcreteState(){
+
+        return this.seleccionPersonajeConcreteState;
+
+    }
+
+    public UIStates getDatosPersonajeConcreteState(){
+
+        return this.datosPersonajeConcreteState;
+
+    }
+
+    public UIStates getElegirCiudadConcreteState(){
+
+        return this.elegirCiudadConcreteState;
+
+    }
+
+    public UIStates getBotsConcreteState(){
+
+        return this.botsConcreteState;
+
+    }
+
+    public UIStates getDificultadBotsConcreteState(){
+
+        return this.dificultadBotsConcreteState;
+
+    }
+
+    public void setEstadoUI(UIStates estadoUI){
+
+        this.estadoUI = estadoUI;
+
+    }
+
+    public UIStates getEstadoUI(){
+
+        return this.estadoUI;
+
+    }
+
+    public void process(){
+
+        this.estadoUI.process();
+
     }
 
 
@@ -155,7 +236,7 @@ public class UI {
         int x = 0, y = 0;
         String text = "";
 
-        if(pantallaDeInicioEstado == pantallaTitulo){
+        if(estadoUI instanceof TituloConcreteState){
 
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
             text = "Genshin Royale";
@@ -200,7 +281,7 @@ public class UI {
             }
            
         }
-        else if(pantallaDeInicioEstado == seleccionDePersonaje){
+        else if(estadoUI instanceof SeleccionPersonajeConcreteState){
 
             //Titulo
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
@@ -265,7 +346,7 @@ public class UI {
             }
 
         }
-        else if(pantallaDeInicioEstado == datosPersonaje){
+        else if(estadoUI instanceof DatosPersonajeConcreteState){
 
             x = 0;
             y = mapa.getMaxScreenHeight()/6;
@@ -332,7 +413,7 @@ public class UI {
                 g2.drawString("->", x-mapa.getCasillaSizeEscalada(), y);
             }
         }
-        else if(pantallaDeInicioEstado == elegirCiudad){
+        else if(estadoUI instanceof ElegirCiudadConcreteState){
 
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
 
@@ -394,7 +475,7 @@ public class UI {
             }
 
         }
-        else if(pantallaDeInicioEstado == elegirBots){
+        else if(estadoUI instanceof BotsConcreteState){
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
 
             text = "Elige el Numero de Bots";
@@ -438,7 +519,7 @@ public class UI {
 
 
         }
-        else if(pantallaDeInicioEstado == elegirDificultadBots){
+        else if(estadoUI instanceof DificultadBotsConcreteState){
 
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
 
@@ -614,7 +695,9 @@ public class UI {
 
         }
         else if(mapa.getEstadoDelJuego() instanceof PantallaInicioConcreteState){
+
             drawPantallaInicio();
+            
         }
         else if(mapa.getEstadoDelJuego() instanceof PausaConcreteState){ //Estado del juego: pausado
 

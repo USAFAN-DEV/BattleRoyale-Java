@@ -119,16 +119,7 @@ public class Mapa extends JPanel implements Runnable{
     }
 
     //VARIABLES
-    public void setEstadoDelJuego(MapaStates estadoDelJuego){
 
-        this.estadoDelJuego = estadoDelJuego;
-
-    }
-    public MapaStates getEstadoDelJuego(){
-        
-        return this.estadoDelJuego;
-        
-    }
     public void setPersonajeElegido(String personajeElegido){
         this.personajeElegido = personajeElegido;
     }
@@ -165,7 +156,6 @@ public class Mapa extends JPanel implements Runnable{
         return this.ui;
     }
 
-
     public Personaje getJugador(){
         return jugador;
     }
@@ -198,6 +188,17 @@ public class Mapa extends JPanel implements Runnable{
     }
 
     //Funciones para procesar el estado del juego
+
+    public void setEstadoDelJuego(MapaStates estadoDelJuego){
+
+        this.estadoDelJuego = estadoDelJuego;
+
+    }
+    public MapaStates getEstadoDelJuego(){
+        
+        return this.estadoDelJuego;
+        
+    }
 
     public void setSolicitudCambioEstado(String solicitudCambioEstado){
 
@@ -247,15 +248,21 @@ public class Mapa extends JPanel implements Runnable{
 
     }
 
-    public void processUpdate(){
+    public void process(){
 
-        this.estadoDelJuego.accionUpdate();
+        this.estadoDelJuego.process(); //delegacion por composicion dura
 
     }
 
-    public void processDraw(Graphics2D g2){
+    public void updateDependingOfState(){
 
-        this.estadoDelJuego.accionDraw(g2);
+        this.estadoDelJuego.accionUpdate(); //delegacion por composicion dura
+
+    }
+
+    public void drawDependingOfState(Graphics2D g2){
+
+        this.estadoDelJuego.accionDraw(g2); //delegacion por composicion dura
 
     }
 
@@ -272,6 +279,11 @@ public class Mapa extends JPanel implements Runnable{
     public void run() {
 
         // Funcion llamada cuando empieza gameThread. Core del juego
+        //TemplateMethod:
+        //  Crear clase GameCore que haga todo esto. Clase abstracta que tiene todos los metodos que se usan en el algoritmo mas el template method. 
+        //  Todo lo de los fps lo hace y luego el update y draw los delega
+
+        
         double drawInterval = 1000000000/FPS; //Intervalo de dibujo. 1 segundo (1000000000 nanosegundos) / FPS (60) = 0.016666 segundos. Cada 0.016666 segundos dibujaremos el siguiente frame
         double delta = 0;
         long lastTime = System.nanoTime(); //En nanosegundos
@@ -311,8 +323,8 @@ public class Mapa extends JPanel implements Runnable{
 
     public void update(){
 
-        this.estadoDelJuego.accionUpdate();
-        this.estadoDelJuego.process();
+        this.updateDependingOfState();
+        this.process();
 
     }
     public void paintComponent(Graphics g){ //metodo built-in java. Uno de los metodos estandares para dibujar cosas en un JPanel
@@ -320,7 +332,7 @@ public class Mapa extends JPanel implements Runnable{
         super.paintComponent(g); //Pintar en el parent class (JPanel)
         Graphics2D g2 = (Graphics2D)g; //cambiamos g de Graphics a Graphics2d. Graphics2D tiene mas metodos y nos da mas control
 
-        this.estadoDelJuego.accionDraw(g2);
+        this.drawDependingOfState(g2);
 
     }
 
