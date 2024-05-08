@@ -40,7 +40,6 @@ public class Qiqi extends Personaje{
         //necesito mas clases porque tengo que cambiar sus estadisticas 
         //revive a una persona
         if(super.getVida()==0 && getRevivir()==0){
-            System.out.println("Qiqi ha revivido y tiene 100 de vida\n");
             setRevivir(1);
             super.setVida(100);
         } 

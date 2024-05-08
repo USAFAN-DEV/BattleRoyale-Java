@@ -11,17 +11,22 @@ public class VivoState implements LifeStateTransition{
 
     @Override
     public void cambiarVida(){
-        if(jugador.getVida() <= 0){
+        if(getJugador().getVida() <= 0){
             morir();
         }else{
             revivir();
         }
     }
-
+    public Personaje getJugador(){
+        return this.jugador;
+    }
+    public void setJugador(Personaje jugador){
+        this.jugador=jugador;
+    }
     @Override
     public void morir() {
-        jugador.setVida(0);
-        jugador.setState(jugador.getMuertoState());
+        System.out.println("El jugador acaba de morir");
+        jugador.setState(getJugador().getMuertoState());
     }
 
     @Override

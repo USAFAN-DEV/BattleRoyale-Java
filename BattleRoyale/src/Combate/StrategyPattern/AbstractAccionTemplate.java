@@ -15,23 +15,23 @@ public abstract class AbstractAccionTemplate implements JugadorAccionStrategy{
     }
     @Override
     public final void accion(int opcion) {
-        if(jugador2.getNombre()=="Qiqi"){
+        if(getJugador2().getNombre()=="Qiqi"){
             ataque();
         }
         else{
-            if(jugador2.getCooldownHabilidad()!=3 && jugador2.getCooldownHabilidad()>=1){
-                jugador2.setCooldownHabilidad(jugador2.getCooldownHabilidad()+1);
-                System.out.printf("La habilidad del bot le quedan %d turnos\n",3-jugador2.getCooldownHabilidad());
+            if(getJugador2().getCooldownHabilidad()!=3 && getJugador2().getCooldownHabilidad()>=1){
+                getJugador2().setCooldownHabilidad(getJugador2().getCooldownHabilidad()+1);
+                System.out.printf("La habilidad del bot le quedan %d turnos\n",3-getJugador2().getCooldownHabilidad());
             }
             else{
-                jugador2.setCooldownHabilidad(0);
+                getJugador2().setCooldownHabilidad(0);
             }
-            if(opcion==1||jugador2.getCooldownHabilidad()>=1){
+            if(opcion==1||getJugador2().getCooldownHabilidad()>=1){
                 ataque();
             }
             else{
-                jugador2.setCooldownHabilidad(1);
-                System.out.printf("La habilidad del bot le quedan %d turnos\n",3-jugador2.getCooldownHabilidad());
+                getJugador2().setCooldownHabilidad(1);
+                System.out.printf("La habilidad del bot le quedan %d turnos\n",3-getJugador2().getCooldownHabilidad());
                 usarHabilidad();
             }
         }

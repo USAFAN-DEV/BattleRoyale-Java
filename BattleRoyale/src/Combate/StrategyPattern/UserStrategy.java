@@ -11,23 +11,29 @@ public class UserStrategy implements JugadorAccionStrategy{
         this.jugador1=jugador1;
         this.jugador2=jugador2;
     }
+    public Personaje getJugador1(){
+        return this.jugador1;
+    }
+    public Personaje getJugador2(){
+        return this.jugador2;
+    }
     @Override
     public void usarPociones() {
-        if(jugador1.getVida()==jugador1.getVidaMaxima()){
+        if(getJugador1().getVida()==getJugador1().getVidaMaxima()){
             System.out.println("Tienes la vida al maximo no puedes usar pociones");
         }
         else{
-            if(jugador1.getContadorPociones()!=0){
-                jugador1.setVida(jugador1.getVida()+50);
-                if(jugador1.getVida()>jugador1.getVidaMaxima()){
-                    jugador1.setVida(jugador1.getVidaMaxima());
+            if(getJugador1().getContadorPociones()!=0){
+                getJugador1().setVida(getJugador1().getVida()+50);
+                if(getJugador1().getVida()>getJugador1().getVidaMaxima()){
+                    getJugador1().setVida(getJugador1().getVidaMaxima());
                 }
-                jugador1.setContadorPociones(jugador1.getContadorPociones()-1);
-                if(jugador1.getContadorPociones()<0){
-                    jugador1.setContadorPociones(0);
+                getJugador1().setContadorPociones(getJugador1().getContadorPociones()-1);
+                if(getJugador1().getContadorPociones()<0){
+                    getJugador1().setContadorPociones(0);
                 }
                 System.out.printf("Te has curado \n");
-                System.out.printf("Tienes %d pocion de vida\n",jugador1.getContadorPociones());
+                System.out.printf("Tienes %d pocion de vida\n",getJugador1().getContadorPociones());
             }
             else{
                 System.out.println("No te quedan pociones");
@@ -49,20 +55,20 @@ public class UserStrategy implements JugadorAccionStrategy{
     @Override
     public void ataque() {
         int damage;
-        damage=calcularDamage.damage(jugador1);
-        calcularDamage.actualizarVidasDeJugadores(jugador2,damage);
+        damage=calcularDamage.damage(getJugador1());
+        calcularDamage.actualizarVidasDeJugadores(getJugador2(),damage);
         System.out.println("Daño realizado: " + damage);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(jugador2.getVida() == 0);
+        if(getJugador2().getVida() == 0);
     }
     @Override
     public void usarHabilidad() {
         System.out.println("Has usado la habilidad");
-        jugador1.usarHabilidad(jugador2);
+        getJugador1().usarHabilidad(getJugador2());
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

@@ -9,6 +9,9 @@ public class BotStrategy extends AbstractAccionTemplate{
         super(jugador2);
         this.jugador1=jugador1;
     }
+    public Personaje getJugador1(){
+        return this.jugador1;
+    }
     @Override
     public void usarPociones() {
         try {
@@ -21,13 +24,13 @@ public class BotStrategy extends AbstractAccionTemplate{
     public void ataque() {
         int damage;
         damage=calcularDamage.damage(super.getJugador2());
-        calcularDamage.actualizarVidasDeJugadores(jugador1,damage);
+        calcularDamage.actualizarVidasDeJugadores(getJugador1(),damage);
         System.out.println("Daño recibido "+damage);
     }
     @Override
     public void usarHabilidad() {
         System.out.println("El bot ha usado la habilidad");
-        super.getJugador2().usarHabilidad(jugador1);
+        super.getJugador2().usarHabilidad(getJugador1());
     }
     
 }

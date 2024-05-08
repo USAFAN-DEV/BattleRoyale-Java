@@ -188,13 +188,13 @@ public abstract class Personaje {
     public void setState(LifeState lifeState){
         this.currentState = lifeState;
     }
-    public LifeState getLifeState(){
+    public LifeState getCurrentState(){
         return this.currentState;
     }
-    public LifeState getVivoState(){
+    public VivoState getVivoState(){
         return this.vivoState;
     }
-    public LifeState getMuertoState(){
+    public MuertoState getMuertoState(){
         return this.muertoState;
     }
     public void cambiarVida(){

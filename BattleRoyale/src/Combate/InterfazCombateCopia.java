@@ -198,9 +198,11 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         if(jugador2.getVida()==0){
             if(jugador2.getNombre()=="Qiqi" && jugador2.getRevivir() == 0){
                 jugador2.cambiarVida();
+                jugador2.cambiarVida();
                 ActualizacionEstadisticas();
             }
             else{
+                jugador2.cambiarVida();
                 jugador2.cambiarVida();
                 System.out.println("Has ganado el combate");
                 try{
@@ -219,9 +221,11 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
         else if(jugador1.getVida()==0){
             if(jugador1.getNombre()=="Qiqi" && jugador1.getRevivir() == 0){
                 jugador1.cambiarVida();
+                jugador1.cambiarVida();
                 ActualizacionEstadisticas();
             }
             else{
+                jugador1.cambiarVida();
                 jugador1.cambiarVida();
                 System.out.println("Has perdido el combate");
                 try{

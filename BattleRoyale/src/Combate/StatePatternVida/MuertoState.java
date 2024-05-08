@@ -9,9 +9,14 @@ public class MuertoState implements LifeStateTransition{
     public MuertoState(Personaje jugador){
         this.jugador = jugador;
     }
-
+    public Personaje getJugador(){
+        return this.jugador;
+    }
+    public void setJugador(Personaje jugador){
+        this.jugador=jugador;
+    }
     public void cambiarVida(){
-        if(jugador instanceof Qiqi && jugador.getVida() <= 0 && jugador.getRevivir() == 0){
+        if(getJugador() instanceof Qiqi && getJugador().getVida() <= 0 && getJugador().getRevivir() == 0){
             revivir();
         }else{
             revivir();
@@ -25,7 +30,8 @@ public class MuertoState implements LifeStateTransition{
 
     @Override
     public void revivir() {
-        jugador.usarHabilidad(jugador);
-        jugador.setState(jugador.getVivoState());
+        System.out.println("Qiqi ha revivido y tiene 100 de vida\n");
+        getJugador().usarHabilidad(getJugador());
+        getJugador().setState(getJugador().getVivoState());
     }
 }
