@@ -1,4 +1,4 @@
-package Entidades.PersonajeDefensa;
+package Entidades.AbstractFactoryPattern;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import Entidades.Personaje;
 import Main.KeyHandler;
 import Main.Mapa;
 
-public class Zhongli extends Personaje{
+public abstract class Zhongli extends Personaje{
 
     //Hereda todos los atributos de la clase Jugador
 

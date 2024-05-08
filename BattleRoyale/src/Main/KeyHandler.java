@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import Entidades.Personaje;
-import Entidades.PersonajeAtk.Mei;
-import Entidades.PersonajeDefensa.Zhongli;
-import Entidades.PersonajeHealer.Qiqi;
+import Entidades.AbstractFactoryPattern.Mei;
+import Entidades.AbstractFactoryPattern.Qiqi;
+import Entidades.AbstractFactoryPattern.Zhongli;
 import StatePatternMapa.*;
 import InterfazDeUsuario.StatePatternUI.*;
 
@@ -103,13 +103,16 @@ public class KeyHandler implements KeyListener {
                 else if(code == KeyEvent.VK_ENTER){
                     
                     if(mapa.getUi().getMenuArrow() == 0){
-                        mapa.setJugador(new Zhongli(mapa, this));
+                        //mapa.setJugador(new Zhongli(mapa, this));
+                        mapa.setJugador(mapa.getZhongliCreator().createJugador(mapa, this));
                     }
                     else if(mapa.getUi().getMenuArrow() == 1){
-                        mapa.setJugador(new Qiqi(mapa, this));
+                        //mapa.setJugador(new Qiqi(mapa, this));
+                        mapa.setJugador(mapa.getQiqiCreator().createJugador(mapa, this));
                     }
                     else{
-                        mapa.setJugador(new Mei(mapa, this));
+                        //mapa.setJugador(new Mei(mapa, this));
+                        mapa.setJugador(mapa.getMeiCreator().createJugador(mapa, this));
                     }
 
                     mapa.getUi().setSolicitudCambioEstado("Datos personaje");

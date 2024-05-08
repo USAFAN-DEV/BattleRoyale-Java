@@ -1,5 +1,6 @@
 package Objetos;
 
+import Entidades.AbstractFactoryPattern.Bots.*;
 import Herramientas.*;
 import Herramientas.ArmasAtaque.EngulfingLightning;
 import Herramientas.ArmasAtaque.SacrificialFragments;
@@ -8,7 +9,6 @@ import Herramientas.ArmasDefensa.TheCatch;
 import Herramientas.ArmasVida.AquilaFavonia;
 import Herramientas.ArmasVida.SacrificialSword;
 import Main.Mapa;
-import Entidades.Bots.*;
 
 public class AdministradorDeObjetos {
     
@@ -57,15 +57,18 @@ public class AdministradorDeObjetos {
         for(int i = 0; i < mapa.getNumeroDeBots(); i++){
 
             if(i % 3 == 0){
-                mapa.getBots()[i] = new ZhongliBot(mapa, mapa.getKeyHandler(), zhongliX, zhongliY);
+                //mapa.getBots()[i] = new ZhongliBot(mapa, mapa.getKeyHandler(), zhongliX, zhongliY);
+                mapa.getBots()[i] = mapa.getZhongliCreator().createBot(mapa, mapa.getKeyHandler(), zhongliX, zhongliY);
                 zhongliX += 25 * mapa.getCasillaSizeEscalada();
             }
             if(i % 3 == 1){
-                mapa.getBots()[i] = new QiqiBot(mapa, mapa.getKeyHandler(), qiqiX, qiqiY);
+                //mapa.getBots()[i] = new QiqiBot(mapa, mapa.getKeyHandler(), qiqiX, qiqiY);
+                mapa.getBots()[i] = mapa.getQiqiCreator().createBot(mapa, mapa.getKeyHandler(), qiqiX, qiqiY);
                 qiqiX += 33 * mapa.getCasillaSizeEscalada();
             }
             if(i % 3 == 2){
-                mapa.getBots()[i] = new MeiBot(mapa, mapa.getKeyHandler(), meiX, meiY);
+                //mapa.getBots()[i] = new MeiBot(mapa, mapa.getKeyHandler(), meiX, meiY);
+                mapa.getBots()[i] = mapa.getMeiCreator().createBot(mapa, mapa.getKeyHandler(), meiX, meiY);
                 meiX -= 32 * mapa.getCasillaSizeEscalada();
             }
 

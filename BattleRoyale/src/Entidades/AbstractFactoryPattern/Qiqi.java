@@ -1,4 +1,4 @@
-package Entidades.PersonajeHealer;
+package Entidades.AbstractFactoryPattern;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import Entidades.Personaje;
 import Main.KeyHandler;
 import Main.Mapa;
 
-public class Qiqi extends Personaje{
+public abstract class Qiqi extends Personaje{
     private int revivir;
 
     //Constructor
@@ -42,6 +42,7 @@ public class Qiqi extends Personaje{
         if(super.getVida()==0 && getRevivir()==0){
             setRevivir(1);
             super.setVida(100);
+            System.out.println("Qiqi ha revivido y tiene 100 de vida\n");
         } 
         else{
             System.out.println("Error. La habilidad ya se ha utilizado");

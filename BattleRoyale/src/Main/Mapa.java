@@ -11,6 +11,10 @@ import StatePatternMapa.PantallaInicioConcreteState;
 import StatePatternMapa.PausaConcreteState;
 import StatePatternMapa.VictoriaConcreteState;
 import Entidades.Personaje;
+import Entidades.AbstractFactoryPattern.EntidadesCreator;
+import Entidades.AbstractFactoryPattern.MeiCreator;
+import Entidades.AbstractFactoryPattern.QiqiCreator;
+import Entidades.AbstractFactoryPattern.ZhongliCreator;
 import InterfazDeUsuario.UI;
 import Objetos.AdministradorDeObjetos;
 import Objetos.Objeto;
@@ -68,7 +72,10 @@ public class Mapa extends JPanel implements Runnable{
 
     private Thread gameThread;
 
-    
+    //ABSTRACT FACTORY PATTERN
+    private EntidadesCreator meiCreator = new MeiCreator();
+    private EntidadesCreator zhongliCreator = new ZhongliCreator();
+    private EntidadesCreator qiqiCreator = new QiqiCreator();
 
     //CONSTRUCTOR
     public Mapa(){
@@ -97,6 +104,17 @@ public class Mapa extends JPanel implements Runnable{
     }
 
     //GETTERS Y SETTERS
+
+    //ABSTRACT FACTORY PATTERN
+    public EntidadesCreator getQiqiCreator(){
+        return this.qiqiCreator;
+    }
+    public EntidadesCreator getMeiCreator(){
+        return this.meiCreator;
+    }
+    public EntidadesCreator getZhongliCreator(){
+        return this.zhongliCreator;
+    }
 
     //CONSTANTES
     public int getEscala(){

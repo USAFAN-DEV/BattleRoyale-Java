@@ -264,6 +264,24 @@ public abstract class Personaje {
     public String getMensajeCofreLooteado(){
         return this.mensajeCofreLooteado;
     }
+    public void setContFrames(int contFrames){
+        this.contFrames = contFrames;
+    }
+    public int getContFrames(){
+        return this.contFrames;
+    }
+    public void setPlayerImageEstado(int playerImageEstado){
+        this.playerImageEstado = playerImageEstado;
+    }
+    public int getPlayerImageEstado(){
+        return this.playerImageEstado;
+    }
+    public void setContBotDirection(int contBotDirection){
+        this.contBotDirection = contBotDirection;
+    }
+    public int getContBotDirection(){
+        return this.contBotDirection;
+    }
 
     //COLISION
     public void setAreaDeColision(Rectangle areaDeColision){
@@ -306,165 +324,11 @@ public abstract class Personaje {
         System.out.println();
 
     }
-   
-    public void update(){
-
-        //System.out.println(mapa.estadoDelJuego);
-
-        //System.out.println(direction);
-
-        teletransportacion();
-
-        if(keyHandler.getPressedUp() == true || keyHandler.getPressedLeft() == true || keyHandler.getPressedDown() == true || keyHandler.getPressedRight() == true){
-
-            if(keyHandler.getPressedUp() == true){
-
-                direction = "up";
-                contFrames++;
-            }
-            else if(keyHandler.getPressedLeft() == true){
-
-                direction = "left";
-                contFrames++;
-
-            }
-            else if(keyHandler.getPressedDown() == true){
-
-                direction = "down";
-                contFrames++;
-
-            }
-            else if(keyHandler.getPressedRight() == true){
-    
-                direction = "right";
-                contFrames++;
-
-            }
-
-            if(contFrames > 15){
-
-                if(playerImageEstado == 1){
-                    playerImageEstado = 2;
-                }
-                else{
-                    playerImageEstado = 1;
-                }
-                
-                contFrames = 0;
-
-            }
-
-            colisionEstado = false;
-            mapa.getColisionChecker().checkCasilla(this);
-            int objIndex = mapa.getColisionChecker().checkObject(this);
-
-            if(objIndex != -1){
-
-                switch(mapa.getObjetos()[objIndex].getName()){
-
-                    case "cofrePlateado": 
-                        mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
-                        mapa.getObjetos()[objIndex] = null;
-                        break;
-                    case "cofreDorado":
-                        mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
-                        mapa.getObjetos()[objIndex] = null;
-                        break;
-                }
-
-            }
-
-            int botIndex = mapa.getColisionChecker().checkBot(this, mapa.getBots());
-
-            if(botIndex != -1){
-                mapa.setSolicitudCambioEstado("Empezar combate");
-                JFrame frameC= new JFrame();
-                InterfazCombateCopia interfazC=new InterfazCombateCopia(mapa.getJugador(),mapa.getBots()[botIndex], frameC,mapa);
-                mapa.getBots()[botIndex] = null;
-                mapa.stopMusic();
-                interfazC.playMusic(1);   
-            }
-
-            if(colisionEstado == false){
-
-                switch (direction) {
-                case "up": mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
-                    break;
-                case "down": mapaY += speed;
-                    break;
-                case "left": mapaX -= speed;
-                    break;
-                case "right": mapaX += speed;
-                    break;
-                default:
-                    break;
-                }
-
-            }
-
-        }
-
-    }
-
-    public void draw(Graphics2D g2){
-
-        //g2.setColor(Color.white);
-        //g2.fillRect(x, y, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada());
-
-        BufferedImage image = null;
-
-        if(direction.equals("up")){
-
-            if(playerImageEstado == 1){
-                image = up1;
-            }
-            else{
-                image = up2;
-            }
-            
-        }
-        if(direction.equals("down")){
-
-            if(playerImageEstado == 1){
-                image = down1;
-            }
-            else{
-                image = down2;
-            }
-            
-        }
-        if(direction.equals("left")){
-
-            if(playerImageEstado == 1){
-                image = left1;
-            }
-            else{
-                image = left2;
-            }
-            
-        }
-        if(direction.equals("right")){
-
-            if(playerImageEstado == 1){
-                image = right1;
-            }
-            else{
-                image = right2;
-            }
-            
-        }
-
-
-        g2.drawImage(image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
-
-    }
 
     public void teletransportacion(){
 
         int jugadorMapaCol = getMapaX()/mapa.getCasillaSizeEscalada();
         int jugadorMapaRow = getMapaY()/mapa.getCasillaSizeEscalada();
-
-        //System.out.println(jugadorMapaCol + " " + jugadorMapaRow);
 
         //tp nieve
         if(jugadorMapaCol == 21 && jugadorMapaRow == 51){
@@ -492,62 +356,6 @@ public abstract class Personaje {
 
     //Bot metodos
 
-    public void drawBot(Graphics2D g2){
-
-        int screenX = mapaX - mapa.getJugador().getMapaX() + mapa.getJugador().screenX; //coordenada x del objeto en la pantalla
-        int screenY = mapaY - mapa.getJugador().getMapaY() + mapa.getJugador().screenY; //coordenada y del objeto casilla en la pantalla
-
-        if((mapaX + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaX() - mapa.getJugador().screenX && mapaX - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaX() + mapa.getJugador().screenX) && (mapaY + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaY() - mapa.getJugador().screenY && mapaY - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaY() + mapa.getJugador().screenY)){
-
-            BufferedImage image = null;
-
-            if(direction.equals("up")){
-
-                if(playerImageEstado == 1){
-                    image = up1;
-                }
-                else{
-                    image = up2;
-                }
-                
-            }
-            if(direction.equals("down")){
-
-                if(playerImageEstado == 1){
-                    image = down1;
-                }
-                else{
-                    image = down2;
-                }
-                
-            }
-            if(direction.equals("left")){
-
-                if(playerImageEstado == 1){
-                    image = left1;
-                }
-                else{
-                    image = left2;
-                }
-                
-            }
-            if(direction.equals("right")){
-
-                if(playerImageEstado == 1){
-                    image = right1;
-                }
-                else{
-                    image = right2;
-                }
-                
-            }
-
-            g2.drawImage(image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
-
-        }
-
-    }
-
     public void setBotDirection(){
 
         contBotDirection++;
@@ -569,47 +377,9 @@ public abstract class Personaje {
 
 
     }
-    public void updateBot(){
-
-        setBotDirection();
-        if(contBotDirection % 15 == 0){
-
-            if(playerImageEstado == 1){
-                playerImageEstado = 2;
-            }
-            else{
-                playerImageEstado = 1;
-            }
-
-        }
-
-        colisionEstado = false;
-        mapa.getColisionChecker().checkCasilla(this);
-        mapa.getColisionChecker().checkPlayer(this);
-
-        if(mapa.getColisionChecker().checkObject(this) != -1){
-
-            colisionEstado = true;
-
-        }
-
-        if(colisionEstado == false){
-
-            switch (direction) {
-            case "up": mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
-                break;
-            case "down": mapaY += speed;
-                break;
-            case "left": mapaX -= speed;
-                break;
-            case "right": mapaX += speed;
-                break;
-            default:
-                break;
-            }
-
-        }
-
-    }
     
+    public abstract void update();
+    public abstract void draw(Graphics2D g2);
+    public abstract void updateBot();
+    public abstract void drawBot(Graphics2D g2);
 }

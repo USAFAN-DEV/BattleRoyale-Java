@@ -33,7 +33,7 @@ public class JugarConcreteState implements MapaStatesTransition{
 
         if(this.mapa.getNumeroDeBots() == 0){ //En cada update comprobamos si el usuario ha ganado la partida
             //victoria
-            this.mapa.setSolicitudCambioEstado("Victoria");;
+            this.mapa.setSolicitudCambioEstado("Victoria");
 
         }
     }
@@ -91,42 +91,42 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void empezarPartida() {
         
-        throw new IllegalStateException("La partida ya ha empezado");
+        System.out.println("La partida ya ha empezado");
 
     }
 
     @Override
     public void pausarPartida() {
         
-        this.mapa.setEstadoDelJuego(this.mapa.getPausaConcreteState());
+        this.mapa.setEstadoDelJuego(new PausaConcreteState(this.mapa));
 
     }
 
     @Override
     public void empezarCombate() {
 
-        this.mapa.setEstadoDelJuego(this.mapa.getCombateConcreteState());
+        this.mapa.setEstadoDelJuego(new CombateConcreteState(this.mapa));
 
     }
 
     @Override
     public void terminarPartida() {
         
-        throw new IllegalStateException("Solo puedes morir en combate");
+        System.out.println("Solo puedes morir en combate");
 
     }
 
     @Override
     public void ganarPartida() {
         
-        this.mapa.setEstadoDelJuego(this.mapa.getVictoriaConcreteState());
+        this.mapa.setEstadoDelJuego(new VictoriaConcreteState(this.mapa));
 
     }
 
     @Override
     public void volverAJugar() {
         
-        throw new IllegalStateException("Termina esta partida para empezar otra");
+        System.out.println("Termina esta partida para empezar otra");
 
     }
 

@@ -1,7 +1,7 @@
 package Combate.StatePatternVida;
 
 import Entidades.Personaje;
-import Entidades.PersonajeHealer.Qiqi;
+import Entidades.AbstractFactoryPattern.Qiqi;
 
 public class MuertoState implements LifeStateTransition{
     private Personaje jugador;
@@ -30,7 +30,7 @@ public class MuertoState implements LifeStateTransition{
 
     @Override
     public void revivir() {
-        System.out.println("Qiqi ha revivido y tiene 100 de vida\n");
+        
         getJugador().usarHabilidad(getJugador());
         getJugador().setState(getJugador().getVivoState());
     }
