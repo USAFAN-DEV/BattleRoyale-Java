@@ -16,6 +16,7 @@ import ObserverPattern.ModelObserver;
 public abstract class Personaje extends Entidad implements ModelObservable{
 
     private List<ModelObserver> observers;
+    private String mensajeCofreLooteado;
 
     public Personaje(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY, Mapa mapa){
 
@@ -27,6 +28,18 @@ public abstract class Personaje extends Entidad implements ModelObservable{
     public abstract String descripcionHabilidad();
     public abstract void getCharacterImage();
     public abstract void usarHabilidad(Entidad jugador);
+
+    public void setMensajeCofreLooteado(String mensajeCofreLooteado){
+
+        this.mensajeCofreLooteado = mensajeCofreLooteado;
+
+    }
+
+    public String getMensajeCofreLooteado(){
+
+        return this.mensajeCofreLooteado;
+
+    }
 
     public void update(){
 

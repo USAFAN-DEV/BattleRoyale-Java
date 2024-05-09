@@ -7,7 +7,6 @@ import Entidades.Entidad;
 import Entidades.Personaje;
 import StatePatternMapa.*;
 import InterfazDeUsuario.StatePatternUI.*;
-import ObserverPattern.ModelObserver;
 
 public class KeyHandler implements KeyListener {
 

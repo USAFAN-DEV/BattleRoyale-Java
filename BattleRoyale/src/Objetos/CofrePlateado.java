@@ -23,13 +23,20 @@ public class CofrePlateado extends Cofre {
         String res;
 
         if(loot <= 10){
-            if(jugador.getArma() == null || jugador.getArma().getEstrellasArma() != 5){
+            if(jugador.getArma() == null){
 
+                jugador.setArma(recibirArma(jugador.getTipo(), 5));
+                jugador.getArma().aplicarStatsArma(jugador);
+                res = "Te ha tocado el arma " + jugador.getArma().getNombreArma();
+
+            } 
+            else if(jugador.getArma().getEstrellasArma() == 4){
+
+                jugador.getArma().quitarStatsArma(jugador);
                 jugador.setArma(recibirArma(jugador.getTipo(), 5));
                 jugador.getArma().aplicarStatsArma(jugador);
 
                 res = "Te ha tocado el arma " + jugador.getArma().getNombreArma();
-
 
             }
             else{

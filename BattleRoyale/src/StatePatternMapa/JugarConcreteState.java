@@ -69,7 +69,7 @@ public class JugarConcreteState implements MapaStatesTransition{
         this.mapa.getJugador().draw(g2);
         this.mapa.getUi().draw(g2);
 
-        if(this.mapa.getJugador().getMensajeCofreLooteado() != null){ //el jugador cambia de estado. Ha chocado con un cofre
+        if(((Personaje)this.mapa.getJugador()).getMensajeCofreLooteado() != null){ //el jugador cambia de estado. Ha chocado con un cofre
 
             ((Personaje)this.mapa.getJugador()).notifyObservers(); //notificamos a los observadores
 

@@ -91,4 +91,26 @@ public abstract class Armas {
         }
 
     }
+
+    public void quitarStatsArma(Entidad jugador1){
+
+        jugador1.setAtk(jugador1.getAtk() - this.getStatPrincipal());
+
+        if(this.getTipoStatSecundaria().equals("CritRate")){
+
+            jugador1.setCrit(jugador1.getCrit() - this.getStatSecundaria());
+
+        }
+        else if(this.getTipoStatSecundaria().equals("EscudoPorcentual")){
+
+            jugador1.setEscudoMaximo(jugador1.getEscudoMaximo() - (int)(this.getStatSecundaria()*200));
+
+        }
+        else{
+
+            jugador1.setVidaMaxima(jugador1.getVidaMaxima() - (int)(this.getStatSecundaria() * 150));
+
+        }
+
+    }
 }

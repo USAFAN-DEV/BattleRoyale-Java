@@ -50,8 +50,6 @@ public abstract class Entidad {
     private Rectangle areaDeColision;
     private boolean colisionEstado;
     private int areaDeColisionDefaultX, areaDeColisionDefaultY;
-    //private int contBotDirection;
-    private String mensajeCofreLooteado;
 
     //OBJETOS 
     protected Mapa mapa;
@@ -102,9 +100,6 @@ public abstract class Entidad {
         areaDeColision = new Rectangle(4 * mapa.getEscala(), 6 * mapa.getEscala(), 8 * mapa.getEscala(), 10 * mapa.getEscala());
         areaDeColisionDefaultX = areaDeColision.x;
         areaDeColisionDefaultY = areaDeColision.y;
-
-        //contBotDirection = 0;
-        mensajeCofreLooteado = null;
 
     }
     
@@ -375,18 +370,6 @@ public abstract class Entidad {
 
     }
 
-    public void setMensajeCofreLooteado(String mensajeCofreLooteado){
-
-        this.mensajeCofreLooteado = mensajeCofreLooteado;
-
-    }
-
-    public String getMensajeCofreLooteado(){
-
-        return this.mensajeCofreLooteado;
-
-    }
-
     public void setContFrames(int contFrames){
 
         this.contFrames = contFrames;
@@ -410,15 +393,6 @@ public abstract class Entidad {
         return this.playerImageEstado;
 
     }
-
-    /*
-    public void setContBotDirection(int contBotDirection){
-        this.contBotDirection = contBotDirection;
-    }
-    public int getContBotDirection(){
-        return this.contBotDirection;
-    }
-    */
 
     //COLISION
 
