@@ -223,13 +223,12 @@ public class UI implements ModelObserver{
         int screenX = mapa.getMaxScreenWidth()/4; 
         int screenY = mapa.getMaxScreenHeight() - height;
         
-
-
         Color c  = new Color(81, 81, 81, 200);
         g2.setColor(c);
         g2.fillRoundRect(screenX, screenY, width, height, 20, 20);
         g2.setColor(Color.white);
         g2.drawString(object.toString(), getXForText(object.toString()), screenY + mapa.getCasillaSizeEscalada());
+        
 
     }
 

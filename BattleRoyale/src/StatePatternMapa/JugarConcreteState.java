@@ -2,6 +2,7 @@ package StatePatternMapa;
 
 import Main.Mapa;
 import Entidades.Entidad;
+import Entidades.Personaje;
 import Objetos.Objeto;
 import java.awt.Graphics2D;
 
@@ -67,22 +68,12 @@ public class JugarConcreteState implements MapaStatesTransition{
         
         this.mapa.getJugador().draw(g2);
         this.mapa.getUi().draw(g2);
-        this.mapa.getJugador().notifyObservers();
-        /*if(this.mapa.getJugador().getMensajeCofreLooteado() !=  null){
 
-            if(this.mapa.getUi().getContadorFramesMensajePantalla() < 120){
+        if(this.mapa.getJugador().getMensajeCofreLooteado() != null){ //el jugador cambia de estado. Ha chocado con un cofre
 
-                
+            ((Personaje)this.mapa.getJugador()).notifyObservers(); //notificamos a los observadores
 
-            }
-            else{
-
-                this.mapa.getJugador().setMensajeCofreLooteado(null);
-                this.mapa.getUi().setContadorFramesMensajePantalla(0);
-
-            }
-
-        }*/
+        }
         
         g2.dispose();
 

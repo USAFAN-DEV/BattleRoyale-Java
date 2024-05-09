@@ -16,6 +16,7 @@ import ObserverPattern.ModelObserver;
 public abstract class Personaje extends Entidad implements ModelObservable{
 
     private List<ModelObserver> observers;
+
     public Personaje(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY, Mapa mapa){
 
         super(vida, vidaMaxima, atk, escudo, escudoMaximo, crit, estadisticaHabilidad, tipo, nombre, nombreHabilidad, mapaX, mapaY, mapa);
@@ -92,13 +93,11 @@ public abstract class Personaje extends Entidad implements ModelObservable{
                         //mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
                         this.setMensajeCofreLooteado(mapa.getObjetos()[objIndex].lootCofre(this));
                         mapa.getObjetos()[objIndex] = null;
-                        this.notifyObservers();
                         break;
                     case "cofreDorado":
                         //mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
                         this.setMensajeCofreLooteado(mapa.getObjetos()[objIndex].lootCofre(this));
                         mapa.getObjetos()[objIndex] = null;
-                        this.notifyObservers();
                         break;
                 }
 
@@ -188,6 +187,7 @@ public abstract class Personaje extends Entidad implements ModelObservable{
 
         g2.drawImage(image, this.getScreenX(), this.getScreenY(), mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
 
+
     }
 
     @Override
@@ -218,11 +218,19 @@ public abstract class Personaje extends Entidad implements ModelObservable{
     @Override
     public void notifyObservers(){
         for(ModelObserver observer : this.observers){
-            while(((UI) observer).getContadorFramesMensajePantalla()<120){
+
+            if(((UI) observer).getContadorFramesMensajePantalla() < 120){
+
                 observer.drawMensajePorPantalla(null, this.getMensajeCofreLooteado());
+
             }
+            else{
+
                 this.setMensajeCofreLooteado(null);
                 ((UI) observer).setContadorFramesMensajePantalla(0);
+
+            }
+                
         }
     }
 }
