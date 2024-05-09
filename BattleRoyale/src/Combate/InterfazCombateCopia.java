@@ -16,7 +16,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import Entidades.Personaje;
+import Entidades.Entidad;
 import Main.Mapa;
 import Sound.Musica;
 
@@ -33,14 +33,14 @@ public class InterfazCombateCopia extends JPanel implements ActionListener{
     public JFrame frameC;
     public Mapa mapa;
 
-    public Personaje jugador1;
-    public Personaje jugador2;
+    public Entidad jugador1;
+    public Entidad jugador2;
     public AccionStrategyContext contexto;
     public UserStrategy userStrategy;
     public BotStrategy botStrategy;
 
 
-    public InterfazCombateCopia(Personaje jugador1,Personaje jugador2, JFrame frameC,Mapa mapa){
+    public InterfazCombateCopia(Entidad jugador1,Entidad jugador2, JFrame frameC,Mapa mapa){
         //declaracion del contexto y estrategias
         this.jugador1=jugador1;
         this.jugador2=jugador2;

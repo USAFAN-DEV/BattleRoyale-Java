@@ -1,20 +1,20 @@
 package Combate.StrategyPattern;
 
 import Combate.Calculadora;
-import Entidades.Personaje;
+import Entidades.Entidad;
 
 public class UserStrategy implements JugadorAccionStrategy{
     private Calculadora calcularDamage=Calculadora.getInstanceOf();
-    private Personaje jugador1;
-    private Personaje jugador2;
-    public UserStrategy(Personaje jugador1,Personaje jugador2){
+    private Entidad jugador1;
+    private Entidad jugador2;
+    public UserStrategy(Entidad jugador1,Entidad jugador2){
         this.jugador1=jugador1;
         this.jugador2=jugador2;
     }
-    public Personaje getJugador1(){
+    public Entidad getJugador1(){
         return this.jugador1;
     }
-    public Personaje getJugador2(){
+    public Entidad getJugador2(){
         return this.jugador2;
     }
     @Override

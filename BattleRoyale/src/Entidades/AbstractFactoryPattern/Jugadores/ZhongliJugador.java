@@ -1,192 +1,74 @@
 package Entidades.AbstractFactoryPattern.Jugadores;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JFrame;
-
-import Combate.InterfazCombateCopia;
-import Entidades.AbstractFactoryPattern.Zhongli;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import Entidades.Entidad;
+import Entidades.Personaje;
 import Main.KeyHandler;
 import Main.Mapa;
 
-public class ZhongliJugador extends Zhongli {
+public class ZhongliJugador extends Personaje {
 
     public ZhongliJugador(Mapa mapa, KeyHandler keyHandler) {
-        super(mapa, keyHandler);
-        //TODO Auto-generated constructor stub
+
+        super(100,100,25,0,200,0.25,0.25,"Defensa","Zhongli","Dominus Lapidis", 0, 0, mapa);
+        this.keyHandler = keyHandler;
+        getCharacterImage();
+
     }
     
-    public void update(){
-        
-        teletransportacion();
+    //declaracion de la habilidad y que estadisticas va a modificar
+    public void usarHabilidad(Entidad jugador){
 
-        if(keyHandler.getPressedUp() == true || keyHandler.getPressedLeft() == true || keyHandler.getPressedDown() == true || keyHandler.getPressedRight() == true){
+        super.setEscudo((int)(super.getEscudo()+super.getEstadisticaHabilidad()*super.getEscudoMaximo()));
 
-            if(keyHandler.getPressedUp() == true){
+        if(super.getEscudo()>super.getEscudoMaximo()){
 
-                //direction = "up";
-                this.setDirection("up");
-                //contFrames++;
-                this.setContFrames(this.getContFrames()+1);
-            }
-            else if(keyHandler.getPressedLeft() == true){
+            super.setEscudo(super.getEscudoMaximo());
+            
+        }
 
-                //direction = "left";
-                this.setDirection("left");
-                //contFrames++;
-                this.setContFrames(this.getContFrames()+1);
+        System.out.println("Tienes un escudo de "+super.getEscudo());
+    } 
 
-            }
-            else if(keyHandler.getPressedDown() == true){
+    //descripcion de la habilidad
+    public String descripcionHabilidad(){
 
-                //direction = "down";
-                this.setDirection("down");
-                //contFrames++;
-                this.setContFrames(this.getContFrames()+1);
+        String descHabilidad = "Da escudo al resto del equipo en función de su escudo\nmáximo. El escudo recibido por un personaje no puede\nsuperar su escudo máximo.\nEscudo recibido = " + super.getEstadisticaHabilidad() + "*" + super.getEscudoMaximo();
+        return descHabilidad;
 
-            }
-            else if(keyHandler.getPressedRight() == true){
-    
-                //direction = "right";
-                this.setDirection("right");
-                //contFrames++;
-                this.setContFrames(this.getContFrames()+1);
-            }
+    } 
 
-            if(this.getContFrames()/*contFrames*/ > 15){
+    //Funcion para obtener la imagen del personaje de la carpeta
+    public String getPlayerGif(){
 
-                if(this.getPlayerImageEstado()/*playerImageEstado*/ == 1){
-                    //playerImageEstado = 2;
-                    this.setPlayerImageEstado(2);
-                }
-                else{
-                    //playerImageEstado = 1;
-                    this.setPlayerImageEstado(1);
-                }
-                
-                //contFrames = 0;
-                this.setContFrames(0);
-            }
+        return "./BattleRoyale-Java/BattleRoyale/images/player/zhongli.gif";
 
-            //colisionEstado = false;
-            this.setColisionEstado(false);
-            mapa.getColisionChecker().checkCasilla(this);
-            int objIndex = mapa.getColisionChecker().checkObject(this);
+    }
 
-            if(objIndex != -1){
+    public void getCharacterImage(){
 
-                switch(mapa.getObjetos()[objIndex].getName()){
+        try {
 
-                    case "cofrePlateado": 
-                        //mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
-                        this.setMensajeCofreLooteado(mapa.getObjetos()[objIndex].lootCofre(this));
-                        mapa.getObjetos()[objIndex] = null;
-                        break;
-                    case "cofreDorado":
-                        //mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
-                        this.setMensajeCofreLooteado(mapa.getObjetos()[objIndex].lootCofre(this));
-                        mapa.getObjetos()[objIndex] = null;
-                        break;
-                }
+            //System.out.println("Image loading started");
+            String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/zhongli/";
+            up1 = ImageIO.read(new File(imagePath + "zhongli-up-1.png")); 
+            up2 = ImageIO.read(new File(imagePath + "zhongli-up-2.png"));
+            down1 = ImageIO.read(new File(imagePath + "zhongli-down-1.png"));
+            down2 = ImageIO.read(new File(imagePath + "zhongli-down-2.png"));
+            left1 = ImageIO.read(new File(imagePath + "zhongli-left-1.png"));
+            left2 = ImageIO.read(new File(imagePath + "zhongli-left-2.png"));
+            right1 = ImageIO.read(new File(imagePath + "zhongli-right-1.png"));
+            right2 = ImageIO.read(new File(imagePath + "zhongli-right-2.png"));
+            //System.out.println("Image loading ended");
 
-            }
+        } catch (IOException e) {
 
-            int botIndex = mapa.getColisionChecker().checkBot(this, mapa.getBots());
-
-            if(botIndex != -1){
-                mapa.setSolicitudCambioEstado("Empezar combate");
-                JFrame frameC= new JFrame();
-                InterfazCombateCopia interfazC=new InterfazCombateCopia(mapa.getJugador(),mapa.getBots()[botIndex], frameC,mapa);
-                mapa.getBots()[botIndex] = null;
-                mapa.stopMusic();
-                interfazC.playMusic(1);   
-            }
-
-            if(this.getColisionEstado() == false/*colisionEstado == false*/){
-
-                switch (this.getDirection()/*direction*/) {
-                case "up": //mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
-                    this.setMapaY(this.getMapaY()-speed);    
-                break;
-                case "down": //mapaY += speed;
-                    this.setMapaY(this.getMapaY() + speed);
-                break;
-                case "left": //mapaX -= speed;
-                    this.setMapaX(this.getMapaX() - speed);
-                break;
-                case "right": //mapaX += speed;
-                    this.setMapaX(this.getMapaX() + speed);
-                break;
-                default:
-                    break;
-                }
-
-            }
+            e.printStackTrace();
 
         }
 
     }
 
-    public void draw(Graphics2D g2){
-
-        BufferedImage image = null;
-
-        if(this.getDirection().equals("up")){
-
-            if(this.getPlayerImageEstado() == 1){
-                image = up1;
-            }
-            else{
-                image = up2;
-            }
-            
-        }
-        if(this.getDirection().equals("down")){
-
-            if(this.getPlayerImageEstado() == 1){
-                image = down1;
-            }
-            else{
-                image = down2;
-            }
-            
-        }
-        if(this.getDirection().equals("left")){
-
-            if(this.getPlayerImageEstado() == 1){
-                image = left1;
-            }
-            else{
-                image = left2;
-            }
-            
-        }
-        if(this.getDirection().equals("right")){
-
-            if(this.getPlayerImageEstado() == 1){
-                image = right1;
-            }
-            else{
-                image = right2;
-            }
-            
-        }
-
-
-        g2.drawImage(image, this.getScreenX(), this.getScreenY(), mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
-
-    }
-
-    @Override
-    public void updateBot() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBot'");
-    }
-
-    @Override
-    public void drawBot(Graphics2D g2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'drawBot'");
-    }
 }

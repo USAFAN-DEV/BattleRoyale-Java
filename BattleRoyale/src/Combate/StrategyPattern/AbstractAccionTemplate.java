@@ -1,16 +1,16 @@
 package Combate.StrategyPattern;
 
-import Entidades.Personaje;
+import Entidades.Entidad;
 
 public abstract class AbstractAccionTemplate implements JugadorAccionStrategy{
-    private Personaje jugador2;
+    private Entidad jugador2;
     public abstract void ataque();
     public abstract void usarHabilidad();
     public abstract void usarPociones();
-    public AbstractAccionTemplate(Personaje jugador2){
+    public AbstractAccionTemplate(Entidad jugador2){
         this.jugador2=jugador2;
     }
-    public Personaje getJugador2(){
+    public Entidad getJugador2(){
         return this.jugador2;
     }
     @Override

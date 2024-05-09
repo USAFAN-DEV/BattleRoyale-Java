@@ -1,6 +1,6 @@
 package Main;
 
-import Entidades.Personaje;
+import Entidades.Entidad;
 
 public class ColisionCheck {
     
@@ -12,7 +12,7 @@ public class ColisionCheck {
 
     }
 
-    public void checkCasilla(Personaje jugador){
+    public void checkCasilla(Entidad jugador){
 
         //Tendremos que checkear las cuatro esquinas del rectangulo areaDeColision del jugador y ver si alguna esta tocando con alguna casilla solida
         int areaDeColisionLeftMapaX = jugador.getMapaX() + jugador.getAreaDeColision().x;
@@ -134,7 +134,7 @@ public class ColisionCheck {
 
     }
 
-    public int checkObject(Personaje jugador){
+    public int checkObject(Entidad jugador){
 
         int index = -1;
 
@@ -160,7 +160,7 @@ public class ColisionCheck {
                             if(mapa.getObjetos()[i].getColision() == true){
                                 jugador.setColisionEstado(true);
                             }
-                            if(jugador instanceof Personaje){
+                            if(jugador instanceof Entidad){
 
                                 index = i;
 
@@ -175,7 +175,7 @@ public class ColisionCheck {
                             if(mapa.getObjetos()[i].getColision() == true){
                                 jugador.setColisionEstado(true);
                             }
-                            if(jugador instanceof Personaje){
+                            if(jugador instanceof Entidad){
 
                                 index = i;
 
@@ -190,7 +190,7 @@ public class ColisionCheck {
                             if(mapa.getObjetos()[i].getColision() == true){
                                 jugador.setColisionEstado(true);
                             }
-                            if(jugador instanceof Personaje){
+                            if(jugador instanceof Entidad){
 
                                 index = i;
 
@@ -205,7 +205,7 @@ public class ColisionCheck {
                             if(mapa.getObjetos()[i].getColision() == true){
                                 jugador.setColisionEstado(true);
                             }
-                            if(jugador instanceof Personaje){
+                            if(jugador instanceof Entidad){
 
                                 index = i;
 
@@ -231,7 +231,7 @@ public class ColisionCheck {
 
     }
 
-    public int checkBot(Personaje jugador, Personaje[] bots){
+    public int checkBot(Entidad jugador, Entidad[] bots){
 
         int index = -1;
 
@@ -294,7 +294,7 @@ public class ColisionCheck {
 
     }
 
-    public void checkPlayer(Personaje bot){
+    public void checkPlayer(Entidad bot){
 
         bot.getAreaDeColision().x = bot.getMapaX() + bot.getAreaDeColision().x;
         bot.getAreaDeColision().y = bot.getMapaY() + bot.getAreaDeColision().y;

@@ -1,7 +1,7 @@
 package StatePatternMapa;
 
 import Main.Mapa;
-import Entidades.Personaje;
+import Entidades.Entidad;
 import Objetos.Objeto;
 import java.awt.Graphics2D;
 
@@ -18,7 +18,7 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void accionUpdate(){
 
-        Personaje[] bots = this.mapa.getBots();
+        Entidad[] bots = this.mapa.getBots();
         this.mapa.getJugador().update();
         
         for(int i = 0; i < bots.length; i++){
@@ -41,7 +41,7 @@ public class JugarConcreteState implements MapaStatesTransition{
     @Override
     public void accionDraw(Graphics2D g2){
 
-        Personaje[] bots = this.mapa.getBots();
+        Entidad[] bots = this.mapa.getBots();
         Objeto[] objetos = this.mapa.getObjetos();
         this.mapa.getAdministradorDeCasillas().draw(g2);
         

@@ -1,18 +1,18 @@
 package Entidades.AbstractFactoryPattern.Bots;
 
-
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
-import Entidades.AbstractFactoryPattern.Mei;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import Entidades.Bot;
+import Entidades.Entidad;
 import Main.KeyHandler;
 import Main.Mapa;
 
-public class MeiBot extends Mei{
+public class MeiBot extends Bot{
     
     public MeiBot(Mapa mapa, KeyHandler keyHandler, int mapaX, int mapaY){
 
-        super(mapa, keyHandler);
+        super(100,100,25,0,100,0.5,1.15,"Atk","Mei","Musou Shinsetsu", mapaX, mapaY, mapa);
         this.keyHandler = keyHandler;
 
         this.speed = 2;
@@ -25,120 +25,83 @@ public class MeiBot extends Mei{
 
     }
 
-    public void updateBot(){
+    public String getPlayerGif(){
 
-        setBotDirection();
-        if(this.getContBotDirection() % 15 == 0){
+        return "./BattleRoyale-Java/BattleRoyale/images/player/mei.gif";
 
-            if(this.getPlayerImageEstado() == 1){
-                //playerImageEstado = 2;
-                this.setPlayerImageEstado(2);
-            }
-            else{
-                //playerImageEstado = 1;
-                this.setPlayerImageEstado(1);
-            }
-
-        }
-
-        //colisionEstado = false;
-        this.setColisionEstado(false);
-        mapa.getColisionChecker().checkCasilla(this);
-        mapa.getColisionChecker().checkPlayer(this);
-
-        if(mapa.getColisionChecker().checkObject(this) != -1){
-
-            //colisionEstado = true;
-            this.setColisionEstado(true);
-
-        }
-
-        if(this.getColisionEstado() == false){
-
-            switch (this.getDirection()/*direction*/) {
-                case "up": //mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
-                    this.setMapaY(this.getMapaY()-speed);    
-                break;
-                case "down": //mapaY += speed;
-                    this.setMapaY(this.getMapaY() + speed);
-                break;
-                case "left": //mapaX -= speed;
-                    this.setMapaX(this.getMapaX() - speed);
-                break;
-                case "right": //mapaX += speed;
-                    this.setMapaX(this.getMapaX() + speed);
-                break;
-                default:
-                    break;
-                }
-
-        }
     }
 
-    public void drawBot(Graphics2D g2){
+    //declaracion de la habilidad y que estadisticas va a modificar
+    public void usarHabilidad(Entidad jugador){
 
-        int screenX = this.getMapaX() - mapa.getJugador().getMapaX() + mapa.getJugador().getScreenX(); //coordenada x del objeto en la pantalla
-        int screenY = this.getMapaY() - mapa.getJugador().getMapaY() + mapa.getJugador().getScreenY(); //coordenada y del objeto casilla en la pantalla
-
-        if((this.getMapaX() + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaX() - mapa.getJugador().getScreenX() && this.getMapaX() - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaX() + mapa.getJugador().getScreenX()) && (this.getMapaY() + mapa.getCasillaSizeEscalada() > mapa.getJugador().getMapaY() - mapa.getJugador().getScreenY() && this.getMapaY() - mapa.getCasillaSizeEscalada() < mapa.getJugador().getMapaY() + mapa.getJugador().getScreenY())){
-
-            BufferedImage image = null;
-
-            if(this.getDirection().equals("up")){
-
-                if(this.getPlayerImageEstado() == 1){
-                    image = up1;
-                }
-                else{
-                    image = up2;
-                }
-                
+        //Random random=new Random();
+        //int num=random.nextInt(10)+1;
+        int damage=0;
+        //necesito mas clases porque tengo que cambiar sus estadisticas 
+        //if(super.getCrit()*10>=num){
+            damage=(int)((super.getAtk()*2)*super.getEstadisticaHabilidad());//le puse 1.5 para que tenga un daño original porque si no es igual que el critico asegurado //he quitado *super.estadisticahabilidad()
+       //}
+        //else{
+            //damage=(int)(super.getAtk()*super.getEstadisticaHabilidad());
+       //}
+        if(jugador.getEscudo()==0){
+            //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
+            jugador.setVida(jugador.getVida()-damage);
+            //Si la vida resulta ser negativa entonces se actualiza a 0
+            if(jugador.getVida()<0){
+                jugador.setVida(0);
             }
-            if(this.getDirection().equals("down")){
-
-                if(this.getPlayerImageEstado() == 1){
-                    image = down1;
-                }
-                else{
-                    image = down2;
-                }
-                
-            }
-            if(this.getDirection().equals("left")){
-
-                if(this.getPlayerImageEstado() == 1){
-                    image = left1;
-                }
-                else{
-                    image = left2;
-                }
-                
-            }
-            if(this.getDirection().equals("right")){
-
-                if(this.getPlayerImageEstado() == 1){
-                    image = right1;
-                }
-                else{
-                    image = right2;
-                }
-                
-            }
-
-            g2.drawImage(image, screenX, screenY, mapa.getCasillaSizeEscalada(), mapa.getCasillaSizeEscalada(), null);
-
         }
+        else{
+            //Si tiene escudo
+            jugador.setEscudo(jugador.getEscudo()-damage);
+            //Si despues de recibir la hostia el escudo se queda negativo
+            if(jugador.getEscudo()<0){
+                //Entonces Calculamos lo que te tiene que quedar respectivamente en la vida haciendo el resto y quitandoselo a la vida
+                jugador.setVida(jugador.getVida()+(jugador.getEscudo()));
+                //Ponemos el escudo a 0
+                jugador.setEscudo(0);
+                //Si resulta que la vida es negativa lo actualizamos a 0
+                if(jugador.getVida()<0){
+                        jugador.setVida(0);
+                }
+            }
+        }
+        System.out.println("La habilidad de mei ha quitado "+damage);
+    }
+
+    //descripcion de la habilidad
+    public String descripcionHabilidad(){
+
+        String descHabilidad = "Mei realiza daño en función a su ataque y su porcentaje\nde crítico a un enemigo.\nDaño realizado = " + super.getAtk() * 2 + "*" + super.getEstadisticaHabilidad();
+        return descHabilidad;
+
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void getCharacterImage(){
+
+        try {
+
+            //System.out.println("Image loading started");
+            String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/mei/";
+            up1 = ImageIO.read(new File(imagePath + "mei-up-1.png")); 
+            up2 = ImageIO.read(new File(imagePath + "mei-up-2.png"));
+            down1 = ImageIO.read(new File(imagePath + "mei-down-1.png"));
+            down2 = ImageIO.read(new File(imagePath + "mei-down-2.png"));
+            left1 = ImageIO.read(new File(imagePath + "mei-left-1.png"));
+            left2 = ImageIO.read(new File(imagePath + "mei-left-2.png"));
+            right1 = ImageIO.read(new File(imagePath + "mei-right-1.png"));
+            right2 = ImageIO.read(new File(imagePath + "mei-right-2.png"));
+            //System.out.println("Image loading ended");
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
     }
 
-    @Override
-    public void draw(Graphics2D g2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
-    }
+
 }

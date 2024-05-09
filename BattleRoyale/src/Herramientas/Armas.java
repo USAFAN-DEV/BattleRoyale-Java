@@ -1,6 +1,6 @@
 package Herramientas;
 
-import Entidades.Personaje;
+import Entidades.Entidad;
 
 public abstract class Armas {
     
@@ -70,7 +70,7 @@ public abstract class Armas {
 
     }
 
-    public void aplicarStatsArma(Personaje jugador1){
+    public void aplicarStatsArma(Entidad jugador1){
 
         jugador1.setAtk(jugador1.getAtk() + this.getStatPrincipal());
 

@@ -1,11 +1,12 @@
 package Combate.StatePatternVida;
 
-import Entidades.Personaje;
+import Entidades.Entidad;
+
 
 public class VivoState implements LifeStateTransition{
-    private Personaje jugador;
+    private Entidad jugador;
 
-    public VivoState(Personaje jugador){
+    public VivoState(Entidad jugador){
         this.jugador = jugador;
     }
 
@@ -17,10 +18,10 @@ public class VivoState implements LifeStateTransition{
             revivir();
         }
     }
-    public Personaje getJugador(){
+    public Entidad getJugador(){
         return this.jugador;
     }
-    public void setJugador(Personaje jugador){
+    public void setJugador(Entidad jugador){
         this.jugador=jugador;
     }
     @Override

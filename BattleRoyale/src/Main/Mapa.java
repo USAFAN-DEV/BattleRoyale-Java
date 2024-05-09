@@ -10,7 +10,7 @@ import StatePatternMapa.MuerteConcreteState;
 import StatePatternMapa.PantallaInicioConcreteState;
 import StatePatternMapa.PausaConcreteState;
 import StatePatternMapa.VictoriaConcreteState;
-import Entidades.Personaje;
+import Entidades.Entidad;
 import Entidades.AbstractFactoryPattern.EntidadesCreator;
 import Entidades.AbstractFactoryPattern.MeiCreator;
 import Entidades.AbstractFactoryPattern.QiqiCreator;
@@ -64,9 +64,9 @@ public class Mapa extends JPanel implements Runnable{
     private ColisionCheck colisionChecker;
     private UI ui;
     private Musica musica;
-    private Personaje jugador;
+    private Entidad jugador;
     private Objeto[] objetos; 
-    private Personaje[] bots;
+    private Entidad[] bots;
 
     private Thread gameThread;
 
@@ -180,10 +180,10 @@ public class Mapa extends JPanel implements Runnable{
         return this.ui;
     }
 
-    public Personaje getJugador(){
+    public Entidad getJugador(){
         return jugador;
     }
-    public void setJugador(Personaje jugador){
+    public void setJugador(Entidad jugador){
         this.jugador = jugador;
     }
     public void setObjetos(Objeto[] objetos){
@@ -192,10 +192,10 @@ public class Mapa extends JPanel implements Runnable{
     public Objeto[] getObjetos(){
         return this.objetos;
     }
-    public void setBots(Personaje[] bots){
+    public void setBots(Entidad[] bots){
         this.bots = bots;
     }
-    public Personaje[] getBots(){
+    public Entidad[] getBots(){
         return this.bots;
     }
 

@@ -1,22 +1,23 @@
 package Combate.StatePatternVida;
 
-import Entidades.Personaje;
-import Entidades.AbstractFactoryPattern.Qiqi;
+import Entidades.Entidad;
+import Entidades.AbstractFactoryPattern.Bots.QiqiBot;
+import Entidades.AbstractFactoryPattern.Jugadores.QiqiJugador;
 
 public class MuertoState implements LifeStateTransition{
-    private Personaje jugador;
+    private Entidad jugador;
 
-    public MuertoState(Personaje jugador){
+    public MuertoState(Entidad jugador){
         this.jugador = jugador;
     }
-    public Personaje getJugador(){
+    public Entidad getJugador(){
         return this.jugador;
     }
-    public void setJugador(Personaje jugador){
+    public void setJugador(Entidad jugador){
         this.jugador=jugador;
     }
     public void cambiarVida(){
-        if(getJugador() instanceof Qiqi && getJugador().getVida() <= 0 && getJugador().getRevivir() == 0){
+        if((getJugador() instanceof QiqiJugador || getJugador() instanceof QiqiBot) && getJugador().getVida() <= 0 && getJugador().getRevivir() == 0){
             revivir();
         }else{
             revivir();

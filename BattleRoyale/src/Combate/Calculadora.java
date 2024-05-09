@@ -2,7 +2,7 @@ package Combate;
 
 import java.util.Random;
 
-import Entidades.Personaje;
+import Entidades.Entidad;
 
 public class Calculadora {
     private static Calculadora calcularDamage=new Calculadora();
@@ -10,7 +10,7 @@ public class Calculadora {
     public static Calculadora getInstanceOf(){
         return calcularDamage;
     }
-    public int damage(Personaje jugador){
+    public int damage(Entidad jugador){
         Random random=new Random();
         int randDamage=random.nextInt(10)+1;
         int damage=0;
@@ -22,7 +22,7 @@ public class Calculadora {
         }
         return damage;
     }
-    public void actualizarVidasDeJugadores(Personaje jugador,int damage){
+    public void actualizarVidasDeJugadores(Entidad jugador,int damage){
         //si el escudo es 0
         if(jugador.getEscudo()==0){
              //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1

@@ -1,5 +1,6 @@
 package Entidades.AbstractFactoryPattern;
 
+import Entidades.Bot;
 import Entidades.Personaje;
 import Entidades.AbstractFactoryPattern.Bots.ZhongliBot;
 import Entidades.AbstractFactoryPattern.Jugadores.ZhongliJugador;
@@ -13,7 +14,7 @@ public class ZhongliCreator implements EntidadesCreator{
         return new ZhongliJugador(mapa, keyHandler);
     }
     @Override
-    public Personaje createBot(Mapa mapa, KeyHandler keyHandler, int mapaX, int mapaY) {
+    public Bot createBot(Mapa mapa, KeyHandler keyHandler, int mapaX, int mapaY) {
         return new ZhongliBot(mapa, keyHandler, mapaX, mapaY);
     }
     

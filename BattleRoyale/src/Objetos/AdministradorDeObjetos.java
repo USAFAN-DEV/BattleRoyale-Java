@@ -1,6 +1,5 @@
 package Objetos;
 
-import Entidades.AbstractFactoryPattern.Bots.*;
 import Herramientas.*;
 import Herramientas.ArmasAtaque.EngulfingLightning;
 import Herramientas.ArmasAtaque.SacrificialFragments;

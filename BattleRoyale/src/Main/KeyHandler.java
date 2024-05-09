@@ -3,7 +3,7 @@ package Main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import Entidades.Personaje;
+import Entidades.Entidad;
 import StatePatternMapa.*;
 import InterfazDeUsuario.StatePatternUI.*;
 
@@ -242,7 +242,7 @@ public class KeyHandler implements KeyListener {
                         mapa.setDificultadBots(3);
                     }
 
-                    mapa.setBots(new Personaje[mapa.getNumeroDeBots()]);
+                    mapa.setBots(new Entidad[mapa.getNumeroDeBots()]);
                     System.out.println("Dificultad bots: " + mapa.getDificultadBots());
                     mapa.getAdministradorDeObjetos().colocarBots();
                     mapa.getUi().setSolicitudCambioEstado("Nada");

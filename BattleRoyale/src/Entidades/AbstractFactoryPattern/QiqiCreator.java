@@ -1,5 +1,6 @@
 package Entidades.AbstractFactoryPattern;
 
+import Entidades.Bot;
 import Entidades.Personaje;
 import Entidades.AbstractFactoryPattern.Bots.QiqiBot;
 import Entidades.AbstractFactoryPattern.Jugadores.QiqiJugador;
@@ -14,7 +15,7 @@ public class QiqiCreator implements EntidadesCreator{
     }
 
     @Override
-    public Personaje createBot(Mapa mapa, KeyHandler keyHandler, int mapaX, int mapaY) {
+    public Bot createBot(Mapa mapa, KeyHandler keyHandler, int mapaX, int mapaY) {
         return new QiqiBot(mapa, keyHandler, mapaX, mapaY);
     }
     
