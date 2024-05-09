@@ -4,8 +4,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import Entidades.Entidad;
+import Entidades.Personaje;
 import StatePatternMapa.*;
 import InterfazDeUsuario.StatePatternUI.*;
+import ObserverPattern.ModelObserver;
 
 public class KeyHandler implements KeyListener {
 
@@ -111,7 +113,7 @@ public class KeyHandler implements KeyListener {
                         //mapa.setJugador(new Mei(mapa, this));
                         mapa.setJugador(mapa.getMeiCreator().createJugador(mapa, this));
                     }
-
+                    ((Personaje) mapa.getJugador()).attach(mapa.getUi());
                     mapa.getUi().setSolicitudCambioEstado("Datos personaje");
 
                 }

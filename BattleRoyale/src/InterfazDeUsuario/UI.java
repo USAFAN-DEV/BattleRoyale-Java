@@ -8,13 +8,15 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Main.Mapa;
+import ObserverPattern.ModelObservable;
+import ObserverPattern.ModelObserver;
 import StatePatternMapa.*;
 import InterfazDeUsuario.StatePatternUI.*;
 
 import java.awt.Color;
 import java.awt.Font;
 
-public class UI {
+public class UI implements ModelObserver{
     
     //ATRIBUTOS
 
@@ -212,10 +214,10 @@ public class UI {
 
     }
 
-    public void drawMensajePorPantalla(String mensajePorPantalla){
+    public void drawMensajePorPantalla(ModelObservable modelObservable, Object object/*mensajePorPantalla*/){
 
         contadorFramesMensajePantalla++;
-
+        System.out.println("ContadorFramesMensajePantalla: "+ contadorFramesMensajePantalla);
         int width = 10*mapa.getCasillaSizeEscalada();
         int height = 2*mapa.getCasillaSizeEscalada();
         int screenX = mapa.getMaxScreenWidth()/4; 
@@ -227,7 +229,7 @@ public class UI {
         g2.setColor(c);
         g2.fillRoundRect(screenX, screenY, width, height, 20, 20);
         g2.setColor(Color.white);
-        g2.drawString(mensajePorPantalla, getXForText(mensajePorPantalla), screenY + mapa.getCasillaSizeEscalada());
+        g2.drawString(object.toString(), getXForText(object.toString()), screenY + mapa.getCasillaSizeEscalada());
 
     }
 

@@ -67,12 +67,12 @@ public class JugarConcreteState implements MapaStatesTransition{
         
         this.mapa.getJugador().draw(g2);
         this.mapa.getUi().draw(g2);
-
-        if(this.mapa.getJugador().getMensajeCofreLooteado() !=  null){
+        this.mapa.getJugador().notifyObservers();
+        /*if(this.mapa.getJugador().getMensajeCofreLooteado() !=  null){
 
             if(this.mapa.getUi().getContadorFramesMensajePantalla() < 120){
 
-                this.mapa.getUi().drawMensajePorPantalla(this.mapa.getJugador().getMensajeCofreLooteado());
+                
 
             }
             else{
@@ -82,7 +82,7 @@ public class JugarConcreteState implements MapaStatesTransition{
 
             }
 
-        }
+        }*/
         
         g2.dispose();
 

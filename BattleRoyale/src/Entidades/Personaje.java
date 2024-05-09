@@ -2,19 +2,24 @@ package Entidades;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import Combate.InterfazCombateCopia;
+import InterfazDeUsuario.UI;
 import Main.Mapa;
+import ObserverPattern.ModelObservable;
+import ObserverPattern.ModelObserver;
 
+public abstract class Personaje extends Entidad implements ModelObservable{
 
-public abstract class Personaje extends Entidad{
-
+    private List<ModelObserver> observers;
     public Personaje(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY, Mapa mapa){
 
         super(vida, vidaMaxima, atk, escudo, escudoMaximo, crit, estadisticaHabilidad, tipo, nombre, nombreHabilidad, mapaX, mapaY, mapa);
-
+        this.observers = new ArrayList<ModelObserver>();
     }
 
     //METODOS
@@ -87,14 +92,17 @@ public abstract class Personaje extends Entidad{
                         //mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
                         this.setMensajeCofreLooteado(mapa.getObjetos()[objIndex].lootCofre(this));
                         mapa.getObjetos()[objIndex] = null;
+                        this.notifyObservers();
                         break;
                     case "cofreDorado":
                         //mensajeCofreLooteado = mapa.getObjetos()[objIndex].lootCofre(this);
                         this.setMensajeCofreLooteado(mapa.getObjetos()[objIndex].lootCofre(this));
                         mapa.getObjetos()[objIndex] = null;
+                        this.notifyObservers();
                         break;
                 }
 
+                
             }
 
             int botIndex = mapa.getColisionChecker().checkBot(this, mapa.getBots());
@@ -196,6 +204,27 @@ public abstract class Personaje extends Entidad{
         
     }
 
+    // Observer Pattern
+    @Override
+    public void attach(ModelObserver modelObserver){
+        this.observers.add(modelObserver);
+    }
+
+    @Override
+    public void detach(ModelObserver modelObserver){
+        this.observers.remove(modelObserver);
+    }
+
+    @Override
+    public void notifyObservers(){
+        for(ModelObserver observer : this.observers){
+            while(((UI) observer).getContadorFramesMensajePantalla()<120){
+                observer.drawMensajePorPantalla(null, this.getMensajeCofreLooteado());
+            }
+                this.setMensajeCofreLooteado(null);
+                ((UI) observer).setContadorFramesMensajePantalla(0);
+        }
+    }
 }
 /* 
     //ATRIBUTOS
