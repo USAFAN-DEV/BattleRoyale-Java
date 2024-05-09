@@ -27,7 +27,6 @@ public class Mapa extends JPanel implements Runnable{
     //CONSTANTES
     private final int casillaSize = 16; // 16x16. Tamano personajes. Esto se usaba antes cuando las resoluciones eran mas pequenas. Tendremos que hacer escala de esto. 
     private final int escala = 3; 
-
     private final int casillaSizeEscalada = casillaSize * escala; //Asi los personajes son 48x48
     private final int maxScreenColumnas = 20;
     private final int maxScreenFilas = 15; //Ratio 4x3;
@@ -35,7 +34,6 @@ public class Mapa extends JPanel implements Runnable{
     private final int maxScreenHeight = casillaSizeEscalada * maxScreenFilas; //48 * 15 = 720pixels
     private final int maxMapaColumnas = 103;
     private final int maxMapaFilas = 82;
-
     private final int FPS = 60; //Frames per second
     private final int numeroDeObjetos = 20;
 
@@ -107,13 +105,21 @@ public class Mapa extends JPanel implements Runnable{
 
     //ABSTRACT FACTORY PATTERN
     public EntidadesCreator getQiqiCreator(){
+
         return this.qiqiCreator;
+
     }
+
     public EntidadesCreator getMeiCreator(){
+
         return this.meiCreator;
+
     }
+
     public EntidadesCreator getZhongliCreator(){
+
         return this.zhongliCreator;
+        
     }
 
     //CONSTANTES

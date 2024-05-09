@@ -4,9 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import Entidades.Personaje;
-import Entidades.AbstractFactoryPattern.Mei;
-import Entidades.AbstractFactoryPattern.Qiqi;
-import Entidades.AbstractFactoryPattern.Zhongli;
 import StatePatternMapa.*;
 import InterfazDeUsuario.StatePatternUI.*;
 

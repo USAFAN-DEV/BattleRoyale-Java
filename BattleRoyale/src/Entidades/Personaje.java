@@ -100,7 +100,7 @@ public abstract class Personaje {
         this.currentState = vivoState;
         this.muertoState = new MuertoState(this);
 
-        //ATRIBUTOS PARA EL MAPA
+        //ATRIBUTOS PARA EL MAPA  
         setMapaX(mapaX);
         setMapaY(mapaY);
         screenX = mapa.getMaxScreenWidth()/2 - mapa.getCasillaSizeEscalada()/2; //Pequeno ajuste para que este en el centro de la pantalla. Las coordenadas son la esquina izquierda superior por la cual se empieza a dibujar
