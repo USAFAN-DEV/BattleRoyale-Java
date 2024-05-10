@@ -16,7 +16,7 @@ import ObserverPattern.ModelObserver;
 public abstract class Personaje extends Entidad implements ModelObservable{
 
     private List<ModelObserver> observers;
-    private String mensajeCofreLooteado;
+    private String mensajeCofreLooteado; //VARIABLE DE ESTADO
 
     public Personaje(int vida,int vidaMaxima,int atk,int escudo,int escudoMaximo,double crit,double estadisticaHabilidad, String tipo,String nombre,String nombreHabilidad, int mapaX, int mapaY, Mapa mapa){
 
