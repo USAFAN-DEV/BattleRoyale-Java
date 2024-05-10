@@ -11,8 +11,6 @@ public abstract class Armas {
     String tipoStatSecundaria; //Tipo de atributo que da la stat secundaria
     int estrellasArma; //3, 4 o 5 estrellas
     String nombreArma; //Nombre del arma
-    
-    //Pasiva?
 
     //Constructor
     public Armas(int statPrincipal, double statSecundaria, String tipoStatSecundaria, int estrellasArma, String nombreArma){

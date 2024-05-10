@@ -54,24 +54,25 @@ public abstract class Bot extends Entidad{
         if(this.getContBotDirection() % 15 == 0){
 
             if(this.getPlayerImageEstado() == 1){
-                //playerImageEstado = 2;
+
                 this.setPlayerImageEstado(2);
+
             }
+
             else{
-                //playerImageEstado = 1;
+
                 this.setPlayerImageEstado(1);
+
             }
 
         }
 
-        //colisionEstado = false;
         this.setColisionEstado(false);
         mapa.getColisionChecker().checkCasilla(this);
         mapa.getColisionChecker().checkPlayer(this);
 
         if(mapa.getColisionChecker().checkObject(this) != -1){
 
-            //colisionEstado = true;
             this.setColisionEstado(true);
 
         }
@@ -79,16 +80,16 @@ public abstract class Bot extends Entidad{
         if(this.getColisionEstado() == false){
 
             switch (this.getDirection()/*direction*/) {
-                case "up": //mapaY -= speed; //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
+                case "up": //Restamos porque la esquina izquierda superior es el (0,0) y la derecha inferior es el (maxWidth, maxHeight). Si queremos ir hacia arriba hay que restarle a la coordenada Y
                     this.setMapaY(this.getMapaY()-speed);    
                 break;
-                case "down": //mapaY += speed;
+                case "down": 
                     this.setMapaY(this.getMapaY() + speed);
                 break;
-                case "left": //mapaX -= speed;
+                case "left": 
                     this.setMapaX(this.getMapaX() - speed);
                 break;
-                case "right": //mapaX += speed;
+                case "right": 
                     this.setMapaX(this.getMapaX() + speed);
                 break;
                 default:

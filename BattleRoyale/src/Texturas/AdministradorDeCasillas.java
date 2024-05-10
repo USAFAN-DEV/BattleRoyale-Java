@@ -69,7 +69,6 @@ public class AdministradorDeCasillas {
 
                 casillas[i] = new Casilla();
                 String imagePath = "./BattleRoyale-Java/BattleRoyale/images/textures/" + tiposDeCasillas[i];
-                //System.out.println(imagePath);
                 casillas[i].image = ImageIO.read(new File(imagePath));
 
             }
@@ -95,8 +94,6 @@ public class AdministradorDeCasillas {
                     casillas[i].setCasillaCollision(true);
                 }
 
-                //System.out.println(casillas[i].collision);
-
             }
 
             in.close();
@@ -115,7 +112,6 @@ public class AdministradorDeCasillas {
 
                 decorations[i] = new Casilla();
                 String imagePath = "./BattleRoyale-Java/BattleRoyale/images/decorations/" + tiposDeDecorations[i];
-                //System.out.println(imagePath);
                 decorations[i].image = ImageIO.read(new File(imagePath));
             }
 

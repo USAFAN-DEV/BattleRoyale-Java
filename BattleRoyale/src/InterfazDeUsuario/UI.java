@@ -20,15 +20,6 @@ public class UI implements ModelObserver{
     
     //ATRIBUTOS
 
-    /*
-    public final int pantallaTitulo = 0;
-    public final int seleccionDePersonaje = 1;
-    public final int datosPersonaje = 2;
-    public final int elegirCiudad = 3;
-    public final int elegirBots = 4;
-    public final int elegirDificultadBots = 5;
-    */
-
     private UIStates estadoUI;
     private String solicitudCambioEstado;
 
@@ -179,7 +170,6 @@ public class UI implements ModelObserver{
 
                 iconos[i] = new Icono();
                 String imagePath = "./BattleRoyale-Java/BattleRoyale/images/UI/" + tiposIconosUI[i];
-                //System.out.println(imagePath);
                 iconos[i].image = ImageIO.read(new File(imagePath));
             }
 
@@ -247,10 +237,6 @@ public class UI implements ModelObserver{
             //Background
             g2.setColor(Color.black);
             g2.fillRect(0,0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight());
-            /*try {
-                image = ImageIO.read(new File("./BattleRoyale-Java/BattleRoyale/images/UI/fondo.jpeg"));
-                g2.drawImage(image, 0, 0, mapa.getMaxScreenWidth(), mapa.getMaxScreenHeight(), null);
-            } catch (IOException e) { e.printStackTrace();}*/
 
             //Sombras
             g2.setColor(Color.gray);
@@ -658,13 +644,12 @@ public class UI implements ModelObserver{
 
     }
 
-    //public void drawEstadisticasPersonaje(int vida, int escudoMaximo, int )
-
     public void draw(Graphics2D g2){
 
-        this.g2 = g2; //Esta es la funcion que invocamos en el mapa y a la que le pasamos el g2 del mapa. nos guardamos este g2 en un atributo para poder usarlo en otros metodos
+        //Esta es la funcion que invocamos en el mapa y a la que le pasamos el g2 del mapa. nos guardamos este g2 en un atributo para poder usarlo en otros metodos
+
+        this.g2 = g2; 
         g2.setFont(fuenteTexto);
-        //g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
         g2.setColor(Color.black);
 
         if(mapa.getEstadoDelJuego() instanceof JugarConcreteState){ //Estado del juego: jugar
@@ -700,19 +685,19 @@ public class UI implements ModelObserver{
             drawPantallaInicio();
             
         }
-        else if(mapa.getEstadoDelJuego() instanceof PausaConcreteState){ //Estado del juego: pausado
+        else if(mapa.getEstadoDelJuego() instanceof PausaConcreteState){ 
 
             g2.setColor(Color.white);
             drawPantallaDePausa();
             
         }
 
-        else if(mapa.getEstadoDelJuego() instanceof CombateConcreteState){ //Estado del juego: combate
+        else if(mapa.getEstadoDelJuego() instanceof CombateConcreteState){ 
 
             drawPantallaDeCombate();
 
         }
-        else if(mapa.getEstadoDelJuego() instanceof MuerteConcreteState){ //Estado del juego: mensaje por pantalla
+        else if(mapa.getEstadoDelJuego() instanceof MuerteConcreteState){ 
 
            drawGameOver();
 

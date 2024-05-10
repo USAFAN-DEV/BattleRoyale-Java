@@ -3,22 +3,22 @@ package InterfazDeUsuario.StatePatternUI;
 public interface UIStatesTransition extends UIStates{
 
     public void crearPartida();
-    //pantallaDificultadBots -> pantallaTitulo
+    //DificultadBots ->Titulo
 
     public void elegirPersonaje(); 
-    //pantallaTitulo -> pantallaSeleccionPersonaje
-    //pantallaDatosPersonaje -> pantallaSeleccionPersonaje
+    //Titulo -> SeleccionPersonaje
+    //DatosPersonaje -> SeleccionPersonaje
 
     public void verDatosPersonaje();
-    //pantallaSeleccionPersonaje -> pantallaDatosPersonaje
+    //SeleccionPersonaje ->DatosPersonaje
 
     public void elegirCiudad();
-    //pantallaDatosPersonaje -> pantallaCiudad
+    //DatosPersonaje -> ElegirCiudad
 
     public void elegirNumeroBots();
-    //pantallaCiudad -> pantallaBots
+    //ElegirCiudad -> Bots
 
     public void elegirDificultadBots();
-    //pantallaBots -> pantallaDificultadBots;
+    //Bots -> DificultadBots;
     
 }

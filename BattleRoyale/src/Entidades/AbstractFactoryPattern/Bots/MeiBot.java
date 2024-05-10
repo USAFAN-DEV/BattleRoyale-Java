@@ -19,9 +19,6 @@ public class MeiBot extends Bot{
         getCharacterImage();
         this.setMapaX(mapaX);
         this.setMapaY(mapaY);
-        /*this.areaDeColisionDefaultX = mapa.casillaSizeEscalada;
-        this.areaDeColisionDefaultY = mapa.casillaSizeEscalada;
-        this.areaDeCollision = new Rectangle(0, 0, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada);*/
 
     }
 
@@ -34,16 +31,10 @@ public class MeiBot extends Bot{
     //declaracion de la habilidad y que estadisticas va a modificar
     public void usarHabilidad(Entidad jugador){
 
-        //Random random=new Random();
-        //int num=random.nextInt(10)+1;
         int damage=0;
-        //necesito mas clases porque tengo que cambiar sus estadisticas 
-        //if(super.getCrit()*10>=num){
-            damage=(int)((super.getAtk()*2)*super.getEstadisticaHabilidad());//le puse 1.5 para que tenga un daño original porque si no es igual que el critico asegurado //he quitado *super.estadisticahabilidad()
-       //}
-        //else{
-            //damage=(int)(super.getAtk()*super.getEstadisticaHabilidad());
-       //}
+        
+        damage=(int)((super.getAtk()*2)*super.getEstadisticaHabilidad());
+
         if(jugador.getEscudo()==0){
             //se actualiza la vida del jugador 2, recibiendo el daño del jugador 1
             jugador.setVida(jugador.getVida()-damage);
@@ -83,7 +74,6 @@ public class MeiBot extends Bot{
 
         try {
 
-            //System.out.println("Image loading started");
             String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/mei/";
             up1 = ImageIO.read(new File(imagePath + "mei-up-1.png")); 
             up2 = ImageIO.read(new File(imagePath + "mei-up-2.png"));
@@ -93,7 +83,6 @@ public class MeiBot extends Bot{
             left2 = ImageIO.read(new File(imagePath + "mei-left-2.png"));
             right1 = ImageIO.read(new File(imagePath + "mei-right-1.png"));
             right2 = ImageIO.read(new File(imagePath + "mei-right-2.png"));
-            //System.out.println("Image loading ended");
 
         } catch (IOException e) {
 

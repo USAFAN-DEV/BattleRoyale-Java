@@ -23,10 +23,6 @@ public class QiqiBot extends Bot{
         this.setMapaY(mapaY);
         setRevivir(0);
 
-        /*this.areaDeColisionDefaultX = mapa.casillaSizeEscalada;
-        this.areaDeColisionDefaultY = mapa.casillaSizeEscalada;
-        this.areaDeCollision = new Rectangle(0, 0, mapa.casillaSizeEscalada, mapa.casillaSizeEscalada);*/
-
     }
 
     //getters y setters del hijo
@@ -79,7 +75,6 @@ public class QiqiBot extends Bot{
     public void getCharacterImage() {
         try {
 
-            //System.out.println("Image loading started");
             String imagePath = "./BattleRoyale-Java/BattleRoyale/images/player/qiqi/";
             up1 = ImageIO.read(new File(imagePath + "qiqi-up-1.png")); 
             up2 = ImageIO.read(new File(imagePath + "qiqi-up-2.png"));
@@ -89,7 +84,6 @@ public class QiqiBot extends Bot{
             left2 = ImageIO.read(new File(imagePath + "qiqi-left-2.png"));
             right1 = ImageIO.read(new File(imagePath + "qiqi-right-1.png"));
             right2 = ImageIO.read(new File(imagePath + "qiqi-right-2.png"));
-            //System.out.println("Image loading ended");
 
         } catch (IOException e) {
 

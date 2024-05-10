@@ -301,19 +301,13 @@ public class Mapa extends JPanel implements Runnable{
     
     @Override
     public void run() {
-
-        // Funcion llamada cuando empieza gameThread. Core del juego
-        //TemplateMethod:
-        //  Crear clase GameCore que haga todo esto. Clase abstracta que tiene todos los metodos que se usan en el algoritmo mas el template method. 
-        //  Todo lo de los fps lo hace y luego el update y draw los delega
-
         
         double drawInterval = 1000000000/FPS; //Intervalo de dibujo. 1 segundo (1000000000 nanosegundos) / FPS (60) = 0.016666 segundos. Cada 0.016666 segundos dibujaremos el siguiente frame
         double delta = 0;
         long lastTime = System.nanoTime(); //En nanosegundos
         long currentTime;
         int timer = 0;
-        int contDraw = 0; //Se usa para mostrar los fps por consola
+        //int contDraw = 0; //Se usa para mostrar los fps por consola
 
         while(gameThread != null){ //Mientras gameThread exista
 
@@ -330,14 +324,14 @@ public class Mapa extends JPanel implements Runnable{
                 //Dibujar: dibujar la informacion actualizada
                 repaint();
                 delta--;
-                contDraw++;
+                //contDraw++;
 
             }
             if(timer >= 1000000000){ //Cuando timer llegue a un segundo (1000000000 nanosegundos). Timer es la resta entre current time y last time. Es decir, cuando el tiempo de ejecucion del programa llegue a un segundo
 
                 //System.out.println("FPS:" + contDraw);
                 timer = 0;
-                contDraw = 0;
+                //contDraw = 0;
 
             }
            

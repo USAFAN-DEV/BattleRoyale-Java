@@ -3,12 +3,12 @@ package InterfazDeUsuario.StatePatternUI;
 public interface UIStates {
 
     /*
-    pantallaTitulo
-    pantallaSeleccionPersonaje
-    pantallaDatosPersonaje
-    pantallaCiudad
-    pantallaBots
-    pantallaDificultadBots
+    Titulo
+    SeleccionPersonaje
+    DatosPersonaje
+    ElegirCiudad
+    Bots
+    DificultadBots
     */
 
     public void process();
